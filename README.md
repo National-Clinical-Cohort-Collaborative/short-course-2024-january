@@ -1,9 +1,13 @@
 # short-course-2024-january
 Educational material for the N3C short course, January 2024. (All assignments are contained in the secure Enclave.)
 
-
-Assets
+Assets For Students
 -------
 
-* *The Researcher's Guide to N3C* (for students): <https://covid.cd2h.org/guide-to-n3c>
-* Google Drive (for instructors): <https://drive.google.com/drive/u/0/folders/1ynC8lPbHi5FfK5JZy90yhDx6O9vCLBDE>
+* *The Researcher's Guide to N3C*: <https://covid.cd2h.org/guide-to-n3c>
+* 
+Assets For Instructors
+-------
+
+* Google Drive: <https://drive.google.com/drive/u/0/folders/1ynC8lPbHi5FfK5JZy90yhDx6O9vCLBDE>
+* 2022 short course: <https://github.com/National-COVID-Cohort-Collaborative/short-course-2022-june>
