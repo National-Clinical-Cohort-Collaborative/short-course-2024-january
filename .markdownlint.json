@@ -1,0 +1,20 @@
+{
+  "default": false,
+  "header-style": { "style": "setext_with_atx" }, 
+  "no-inline-html": {
+    "allowed_elements": [
+      "a",
+      "br",
+      "details",
+      "div",
+      "img",
+      "li",
+      "ol",
+      "span",
+      "sub",
+      "summary",
+      "sup",
+      "table"
+    ]
+  }
+}
