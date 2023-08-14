@@ -46,31 +46,31 @@ ds_rail  <- tibble::tribble(
   ~fx         , ~path,
 
   # Simulate observed data
-  "run_r"     , "manipulation/simulation/simulate-mlm-1.R",
-  # "run_r"   , "manipulation/simulation/simulate-te.R",
-
-  # ETL (extract-transform-load) the data from the outside world.
-  "run_r"     , "manipulation/ss-county-ellis.R",
-  "run_r"     , "manipulation/car-ellis.R",
-  "run_r"     , "manipulation/mlm-1-ellis.R",
-  "run_r"     , "manipulation/te-ellis.R",
-  "run_r"     , "manipulation/subject-1-ellis.R",
-  # "run_python", "manipulation/subject-2-ellis.py", # Uncomment to run a python version
-
-  # Second-level manipulation on data inside the warehouse.
-  # "run_sql" , "manipulation/inserts-to-normalized-tables.sql"
-  "run_r"     , "manipulation/randomization-block-simple.R",
-
-  # Scribes create analysis-ready rectangles.
-  "run_r"     , "manipulation/mlm-1-scribe.R",
-  "run_r"     , "manipulation/te-scribe.R",
-
-  # Reports for human consumers.
-  "run_rmd"   , "analysis/car-report-1/car-report-1.Rmd",
-  "run_rmd"   , "analysis/report-te-1/report-te-1.Rmd",
-
-  # Dashboards for human consumers.
-  "run_rmd" , "analysis/dashboard-1/dashboard-1.Rmd"
+  "run_r"     , "manipulation/db-create/db-create.R",
+  "run_r"     , "manipulation/simulate.R"
+#
+#   # ETL (extract-transform-load) the data from the outside world.
+#   "run_r"     , "manipulation/ss-county-ellis.R",
+#   "run_r"     , "manipulation/car-ellis.R",
+#   "run_r"     , "manipulation/mlm-1-ellis.R",
+#   "run_r"     , "manipulation/te-ellis.R",
+#   "run_r"     , "manipulation/subject-1-ellis.R",
+#   # "run_python", "manipulation/subject-2-ellis.py", # Uncomment to run a python version
+#
+#   # Second-level manipulation on data inside the warehouse.
+#   # "run_sql" , "manipulation/inserts-to-normalized-tables.sql"
+#   "run_r"     , "manipulation/randomization-block-simple.R",
+#
+#   # Scribes create analysis-ready rectangles.
+#   "run_r"     , "manipulation/mlm-1-scribe.R",
+#   "run_r"     , "manipulation/te-scribe.R",
+#
+#   # Reports for human consumers.
+#   "run_rmd"   , "analysis/car-report-1/car-report-1.Rmd",
+#   "run_rmd"   , "analysis/report-te-1/report-te-1.Rmd",
+#
+#   # Dashboards for human consumers.
+#   "run_rmd" , "analysis/dashboard-1/dashboard-1.Rmd"
 )
 
 run_r <- function(minion) {

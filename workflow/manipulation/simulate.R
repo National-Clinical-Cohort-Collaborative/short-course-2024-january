@@ -79,22 +79,21 @@ ds_person <-
   tibble::tibble(
     person_id         = factor(10*subject_count + seq_len(subject_count)),
     gender_concept_id = sample(names(p_gender), prob = p_gender, size = subject_count, replace = TRUE),
-    birth_date        = sample(u_birth_date, size = subject_count, replace = TRUE),
+    birth_date    = sample(u_birth_date, size = subject_count, replace = TRUE),
   ) |>
   dplyr::mutate(
     year_of_birth     = lubridate::year(birth_date),
     month_of_birth    = lubridate::month(birth_date),
     month_of_birth    = lubridate::day(birth_date),
-    birth_datetime    = birth_date
+    birth_date        = as.character(birth_date),
   ) |>
   dplyr::select(
     person_id,
     gender_concept_id,
-    birth_date    ,
     year_of_birth,
     month_of_birth,
     month_of_birth,
-    birth_datetime,
+    birth_datetime    = birth_date,
     # death_datetime,
     # race_concept_id,
     # ethnicity_concept_id,
@@ -275,35 +274,58 @@ ds_person <-
 #   cat(paste0("    ", colnames(ds), collapse=",\n"))
 #   cat(paste0("    ", colnames(ds_subject), collapse=",\n"))
 
-ds_slim <-
-  ds |>
-  # dplyr::slice(1:100) |>
-  dplyr::select(
-    subject_id,
-    wave_id,
-    # year,
-    date_at_visit,
-    age, county_id,
-    int_factor_1, slope_factor_1,
-    cog_1 , cog_2 , cog_3,
-    phys_1, phys_2, phys_3,
+# ds_slim <-
+#   ds |>
+#   # dplyr::slice(1:100) |>
+#   dplyr::select(
+#     subject_id,
+#     wave_id,
+#     # year,
+#     date_at_visit,
+#     age, county_id,
+#     int_factor_1, slope_factor_1,
+#     cog_1 , cog_2 , cog_3,
+#     phys_1, phys_2, phys_3,
+#   )
+# ds_slim
+#
+# ds_slim_subject <-
+#   ds_subject |>
+#   # dplyr::slice(1:100) |>
+#   dplyr::select(
+#     subject_id,
+#     county_id, # May intentionally exclude this from the output, to mimic what the ellis has to do sometimes.
+#     gender_id,
+#     race,
+#     ethnicity,
+#   )
+# ds_slim
+
+
+# # ---- save-to-disk ------------------------------------------------------------
+# # If there's no PHI, a rectangular CSV is usually adequate, and it's portable to other machines and software.
+# readr::write_csv(ds_slim        , config$path_mlm_1_raw)
+# readr::write_csv(ds_slim_subject, config$path_subject_1_raw)
+
+# ---- save-to-db --------------------------------------------------------------
+# If there's *NO* PHI, a local database like SQLite fits a nice niche if
+#   * the data is relational and
+#   * later, only portions need to be queried/retrieved at a time (b/c everything won't need to be loaded into R's memory)
+# SQLite data types work differently than most databases: https://www.sqlite.org/datatype3.html#type_affinity
+
+
+
+cnn <- DBI::dbConnect(RSQLite::SQLite(), dbname = config$path_database)
+ds_person |>
+  DBI::dbWriteTable(
+    conn      = cnn,
+    name      = "person",
+    append    = TRUE,
+    row.names = FALSE
   )
-ds_slim
 
-ds_slim_subject <-
-  ds_subject |>
-  # dplyr::slice(1:100) |>
-  dplyr::select(
-    subject_id,
-    county_id, # May intentionally exclude this from the output, to mimic what the ellis has to do sometimes.
-    gender_id,
-    race,
-    ethnicity,
-  )
-ds_slim
+# Allow database to optimize its internal arrangement
+DBI::dbExecute(cnn, "VACUUM;")
 
-
-# ---- save-to-disk ------------------------------------------------------------
-# If there's no PHI, a rectangular CSV is usually adequate, and it's portable to other machines and software.
-readr::write_csv(ds_slim        , config$path_mlm_1_raw)
-readr::write_csv(ds_slim_subject, config$path_subject_1_raw)
+# Close connection
+DBI::dbDisconnect(cnn)
