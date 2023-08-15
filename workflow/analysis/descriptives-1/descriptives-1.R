@@ -1,0 +1,243 @@
+rm(list = ls(all.names = TRUE)) # Clear the memory of variables from previous run. This is not called by knitr, because it's above the first chunk.
+
+# ---- load-sources ------------------------------------------------------------
+#Load any source files that contain/define functions, but that don't load any other types of variables
+#   into memory.  Avoid side effects and don't pollute the global environment.
+# source("SomethingSomething.R")
+
+# ---- load-packages -----------------------------------------------------------
+library(ggplot2) #For graphing
+# import::from("magrittr", "%>%")
+requireNamespace("dplyr")
+# requireNamespace("RColorBrewer")
+# requireNamespace("scales") #For formating values in graphs
+# requireNamespace("mgcv) #For the Generalized Additive Model that smooths the longitudinal graphs.
+# requireNamespace("TabularManifest") # remotes::install_github("Melinae/TabularManifest")
+
+# ---- declare-globals ---------------------------------------------------------
+options(show.signif.stars = FALSE) #Turn off the annotations on p-values
+config                      <- config::get()
+
+# The two graphing functions are copied from https://github.com/Melinae/TabularManifest.
+histogram_discrete <- function(
+    d_observed,
+    variable_name,
+    levels_to_exclude   = character(0),
+    main_title          = variable_name,
+    x_title             = NULL,
+    y_title             = "Number of Included Records",
+    text_size_percentage= 6,
+    bin_width           = 1L,
+    font_base_size      = 12
+) {
+
+  # Ungroup, in case it comes in grouped.
+  d_observed <-
+    d_observed |>
+    dplyr::ungroup()
+
+  if (!base::is.factor(d_observed[[variable_name]]))
+    d_observed[[variable_name]] <- base::factor(d_observed[[variable_name]])
+
+  d_observed$iv <- base::ordered(d_observed[[variable_name]], levels=rev(levels(d_observed[[variable_name]])))
+
+  d_count <- dplyr::count(d_observed, .data$iv)
+  # if( base::length(levels_to_exclude)>0 ) { }
+  d_count <- d_count[!(d_count$iv %in% levels_to_exclude), ]
+
+  d_summary <- d_count |>
+    dplyr::rename(
+      count    =  n
+    ) |>
+    dplyr::mutate(
+      proportion = .data$count / sum(.data$count)
+    )
+  d_summary$percentage <- base::paste0(base::round(d_summary$proportion*100), "%")
+
+  y_title <- base::paste0(y_title, " (n=", scales::comma(base::sum(d_summary$count)), ")")
+
+  g <-
+    ggplot(d_summary, aes(x=iv, y=count, fill=iv, label=percentage)) +
+    geom_bar(stat="identity") +
+    geom_text(stat="identity", size=text_size_percentage, hjust=.8, na.rm = TRUE) +
+    scale_y_continuous(labels=scales::comma_format()) +
+    labs(title=main_title, x=x_title, y=y_title) +
+    coord_flip()
+
+  theme <-
+    theme_light(base_size=font_base_size) +
+    theme(legend.position       =  "none") +
+    theme(panel.grid.major.y    =  element_blank()) +
+    theme(panel.grid.minor.y    =  element_blank()) +
+    theme(axis.text.y           =  element_text(size=font_base_size + 2L)) +
+    theme(axis.text.x           =  element_text(colour="gray40")) +
+    theme(axis.title.x          =  element_text(colour="gray40")) +
+    theme(panel.border          =  element_rect(colour="gray80")) +
+    theme(axis.ticks            =  element_blank())
+
+  return( g + theme )
+}
+histogram_continuous <- function(
+    d_observed,
+    variable_name,
+    bin_width               = NULL,
+    main_title              = base::gsub("_", " ", variable_name, perl=TRUE),
+    x_title                 = paste0(variable_name, "\n(each bin is ", scales::comma(bin_width), " units wide)"),
+    y_title                 = "Frequency",
+    rounded_digits          = 0L,
+    font_base_size          = 12
+) {
+
+  if (!inherits(d_observed, "data.frame"))
+    stop("`d_observed` should inherit from the data.frame class.")
+
+  d_observed <- tidyr::drop_na(d_observed, !! variable_name)
+
+  ds_mid_points               <- base::data.frame(label=c("italic(X)[50]", "bar(italic(X))"), stringsAsFactors=FALSE)
+  ds_mid_points$value         <- c(stats::median(d_observed[[variable_name]]), base::mean(d_observed[[variable_name]]))
+  ds_mid_points$value_rounded <- base::round(ds_mid_points$value, rounded_digits)
+
+  if (ds_mid_points$value[1] < ds_mid_points$value[2]) {
+    h_just <- c(1.1, -0.1)
+  } else {
+    h_just <- c(-0.1, 1.1)
+  }
+
+  g <-
+    d_observed |>
+    ggplot2::ggplot(ggplot2::aes(x= !!rlang::ensym(variable_name))) +
+    ggplot2::geom_histogram(binwidth=bin_width, position=ggplot2::position_identity(), fill="gray70", color="gray90", alpha=.7) +
+    ggplot2::geom_vline(xintercept=ds_mid_points$value, color="gray30") +
+    ggplot2::geom_text(data=ds_mid_points, ggplot2::aes(x=value, y=0, label=value_rounded), color="tomato", hjust=h_just, vjust=.5, na.rm=TRUE) +
+    ggplot2::scale_x_continuous(labels=scales::comma_format()) +
+    ggplot2::scale_y_continuous(labels=scales::comma_format()) +
+    ggplot2::labs(title=main_title, x=x_title, y=y_title)
+
+  g <- g +
+    ggplot2::theme_light(base_size = font_base_size) +
+    ggplot2::theme(axis.ticks             = ggplot2::element_blank())
+
+  g <- g + ggplot2::geom_text(data=ds_mid_points, ggplot2::aes(x=value, y=Inf, label=label), color="tomato", hjust=h_just, vjust=2, parse=TRUE)
+  return( g )
+}
+
+# ---- load-data ---------------------------------------------------------------
+ds <- readr::read_rds(config$path_person_derived) # 'ds' stands for 'datasets'
+
+# ---- tweak-data --------------------------------------------------------------
+ds <-
+  ds |>
+  dplyr::select(
+    person_id,
+    data_partner_id,
+    gender_concept_id,
+    year_of_birth,
+    month_of_birth,
+    day_of_birth,
+  )
+# ---- marginals ---------------------------------------------------------------
+TabularManifest::histogram_discrete(  ds, "person_id")
+TabularManifest::histogram_discrete(  ds, "data_partner_id")
+TabularManifest::histogram_discrete(  ds, "gender_concept_id")
+TabularManifest::histogram_continuous(ds, "year_of_birth")
+TabularManifest::histogram_continuous(ds, "month_of_birth")
+TabularManifest::histogram_continuous(ds, "day_of_birth")
+# TabularManifest::histogram_discrete(ds, "birth_datetime")
+# TabularManifest::histogram_discrete(ds, "race_concept_id")
+# TabularManifest::histogram_discrete(ds, "ethnicity_concept_id")
+# TabularManifest::histogram_discrete(ds, "location_id")
+# TabularManifest::histogram_discrete(ds, "provider_id")
+# TabularManifest::histogram_discrete(ds, "care_site_id")
+# TabularManifest::histogram_discrete(ds, "person_source_value")
+# TabularManifest::histogram_discrete(ds, "gender_source_value")
+# TabularManifest::histogram_discrete(ds, "gender_source_concept_id")
+# TabularManifest::histogram_discrete(ds, "race_source_value")
+# TabularManifest::histogram_discrete(ds, "race_source_concept_id")
+# TabularManifest::histogram_discrete(ds, "ethnicity_source_value")
+# TabularManifest::histogram_discrete(ds, "ethnicity_source_concept_id")
+
+# This helps start the code for graphing each variable.
+#   - Make sure you change it to `histogram_continuous()` for the appropriate variables.
+#   - Make sure the graph doesn't reveal PHI.
+#   - Don't graph the IDs (or other uinque values) of large datasets.  The graph will be worth and could take a long time on large datasets.
+# for(column in colnames(ds)) {
+#   cat('TabularManifest::histogram_discrete(ds, variable_name="', column,'")\n', sep="")
+# }
+
+# ---- scatterplots ------------------------------------------------------------
+# g1 <-
+#   ggplot(ds, aes(x=birth_year, y=quarter_mile_sec, color=forward_gear_count_f)) +
+#   geom_smooth(method="loess", span=2) +
+#   geom_point(shape=1) +
+#   theme_light() +
+#   theme(axis.ticks = element_blank())
+# g1
+#
+# g1 %+% aes(color=NULL)
+# g1 %+% aes(color=factor(cylinder_count))
+#
+# ggplot(ds, aes(x=weight_gear_z, color=forward_gear_count_f, fill=forward_gear_count_f)) +
+#   geom_density(alpha=.1) +
+#   theme_minimal() +
+#   labs(x=expression(z[gear]))
+
+# ---- correlation-matrixes ----------------------------------------------------
+# predictor_names <-
+#   c(
+#     "miles_per_gallon", "displacement_inches_cubed",
+#     "cylinder_count", "horsepower",
+#     "forward_gear_count"
+#   )
+#
+# cat("### Hyp 1: Prediction of quarter mile time\n\n")
+# ds_hyp <- ds[, c("quarter_mile_sec", predictor_names)]
+# colnames(ds_hyp) <- gsub("_", "\n", colnames(ds_hyp))
+# cor_matrix <- cor(ds_hyp)
+# corrplot::corrplot(cor_matrix, method="ellipse", addCoef.col="gray30", tl.col="gray20", diag=F)
+# pairs(x=ds_hyp, lower.panel=panel.smooth, upper.panel=panel.smooth)
+#
+# colnames(cor_matrix) <- gsub("\n", "<br>", colnames(cor_matrix))
+# rownames(cor_matrix) <- gsub("\n", "<br>", rownames(cor_matrix))
+# knitr::kable(cor_matrix, digits = 3)
+# rm(ds_hyp, cor_matrix)
+#
+# cat("### Hyp 2: Prediction of z-score of weight/gear\n\n")
+# ds_hyp <- ds[, c("weight_gear_z", predictor_names)]
+# colnames(ds_hyp) <- gsub("_", "\n", colnames(ds_hyp))
+# cor_matrix <- cor(ds_hyp)
+# corrplot::corrplot(cor_matrix, method="ellipse", addCoef.col="gray30", tl.col="gray20", diag=F)
+# pairs(x=ds_hyp, lower.panel=panel.smooth, upper.panel=panel.smooth)
+#
+# colnames(cor_matrix) <- gsub("\n", "<br>", colnames(cor_matrix))
+# rownames(cor_matrix) <- gsub("\n", "<br>", rownames(cor_matrix))
+# knitr::kable(cor_matrix, digits = 3)
+# rm(ds_hyp, cor_matrix)
+
+# ---- models ------------------------------------------------------------------
+# cat("============= Simple model that's just an intercept. =============")
+# m0 <- lm(quarter_mile_sec ~ 1, data=ds)
+# summary(m0)
+#
+# cat("============= Model includes one predictor. =============")
+# m1 <- lm(quarter_mile_sec ~ 1 + miles_per_gallon, data=ds)
+# summary(m1)
+#
+# cat("The one predictor is significantly tighter.")
+# anova(m0, m1)
+#
+# cat("============= Model includes two predictors. =============")
+# m2 <- lm(quarter_mile_sec ~ 1 + miles_per_gallon + forward_gear_count_f, data=ds)
+# summary(m2)
+#
+# cat("The two predictor is significantly tighter.")
+# anova(m1, m2)
+
+# ---- model-results-table  -----------------------------------------------
+# summary(m2)$coef |>
+#   knitr::kable(
+#     digits      = 2,
+#     format      = "markdown"
+#   )
+
+# Uncomment the next line for a dynamic, JavaScript [DataTables](https://datatables.net/) table.
+# DT::datatable(round(summary(m2)$coef, digits = 2), options = list(pageLength = 2))
