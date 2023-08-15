@@ -88,7 +88,11 @@ ds_person <-
     person_id         = factor(10*subject_count + seq_len(subject_count)),
     data_partner_id   = as.integer(sample(names(p_data_partner), prob = p_data_partner, size = subject_count, replace = TRUE)),
     gender_concept_id = as.integer(sample(names(p_gender      ), prob = p_gender      , size = subject_count, replace = TRUE)),
-    birth_date    = sample(u_birth_date, size = subject_count, replace = TRUE),
+  ) |>
+  dplyr::mutate(
+    latent_dob_lag    = rbeta(n = subject_count, shape1 = 1, shape2 = 1.9, ncp = 7/8),
+    birth_date        = config$boundary_date_max - 40000 * latent_dob_lag,
+    # birth_date      = sample(u_birth_date, size = subject_count, replace = TRUE),
   ) |>
   dplyr::mutate(
     year_of_birth     = as.integer(lubridate::year(birth_date)),
@@ -119,14 +123,18 @@ ds_person <-
     # ethnicity_source_concept_id,
   )
 
+# x <- rchisq(n = 100000, df = 12, ncp = 100)
+# x <- rt(n = 100000, df = 20, ncp = 0)
+# x <- rweibull(n = 100000, shape = 2)
+# x <- rgamma(n = 100000, shape = 500, rate = 2)
+# x <- rbeta(n = 100000, shape1 = 1, shape2 = 1.9, ncp = 7/8)
+# hist(x)
 #
-#
-#
-#
-#
-#
-#
-#
+# boundary_date_max <- as.Date("2022-12-31")
+# dob2 <- boundary_date - 40000 * x
+# hist(lubridate::year(dob2))
+
+
 #
 # |>
 #   dplyr::mutate(

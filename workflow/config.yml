@@ -1,5 +1,5 @@
 default:
-  # To be processed by Ellis lanes
+  # ---- To be processed by Ellis lanes
   # path_subject_1_raw:       "data-public/raw/subject-1.csv"
 
   # path_ss_county:           "data-public/metadata/ss-county.csv"
@@ -8,18 +8,19 @@ default:
   # Central Database (produced by Ellis lanes).
   path_database:              "data-public/derived/db.sqlite3"
 
-  # Derived Rectangles (produced by Ellis lanes).
+  # ---- Derived Rectangles (produced by Ellis lanes)
 
-  # Analysis-ready datasets (produced by scribes & consumed by analyses).
+  # ---- Analysis-ready datasets (produced by scribes & consumed by analyses).
   path_person_derived:        "data-public/derived/person.rds"
-
   # path_annotation:          "data-public/metadata/cqi-annotation.csv"
 
   path_log_flow:              !expr strftime(Sys.time(), "data-unshared/log/%Y/%Y-%m/flow-%Y-%m-%d--%H-%M-%S.log")
 
-# time_zone_local:          "America/Chicago"          # Force time calculations to be local, in case remotely run from another timezone.  See ?base::Sys.timezone()
+  # ---- Constants
+  boundary_date_max             : !expr as.Date("2022-12-31")
+  # time_zone_local:          "America/Chicago"          # Force time calculations to be local, in case remotely run from another timezone.  See ?base::Sys.timezone()
 
-  # ---- Validation Ranges & Patterns ----
+  # ---- Validation Ranges & Patterns
   range_person_id               : !expr c(1L, 999999L)
   # range_cpt4                    : !expr c(10000L, 99999L)
   omop_concept_min              : 0
