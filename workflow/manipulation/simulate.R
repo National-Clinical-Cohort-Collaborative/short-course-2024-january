@@ -140,6 +140,8 @@ ds_person <-
     # ethnicity_source_concept_id,
   )
 
+# https://www.npr.org/sections/health-shots/2020/09/01/816707182/map-tracking-the-spread-of-the-coronavirus-in-the-u-s
+
 # x <- rchisq(n = 100000, df = 12, ncp = 100)
 # x <- rt(n = 100000, df = 20, ncp = 0)
 # x <- rweibull(n = 100000, shape = 2)
