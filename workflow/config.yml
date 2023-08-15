@@ -3,17 +3,18 @@ default:
   # path_subject_1_raw:       "data-public/raw/subject-1.csv"
 
   # path_ss_county:           "data-public/metadata/ss-county.csv"
+  path_metadata_concept:      "data-public/metadata/concept.csv"
 
   # Central Database (produced by Ellis lanes).
-  path_database: "data-public/derived/db.sqlite3"
+  path_database:              "data-public/derived/db.sqlite3"
 
   # Derived Rectangles (produced by Ellis lanes).
 
   # Analysis-ready datasets (produced by scribes & consumed by analyses).
-  path_person_derived: "data-public/derived/person.rds"
+  path_person_derived:        "data-public/derived/person.rds"
 
   # path_annotation:          "data-public/metadata/cqi-annotation.csv"
 
-  path_log_flow: !expr strftime(Sys.time(), "data-unshared/log/%Y/%Y-%m/flow-%Y-%m-%d--%H-%M-%S.log")
+  path_log_flow:              !expr strftime(Sys.time(), "data-unshared/log/%Y/%Y-%m/flow-%Y-%m-%d--%H-%M-%S.log")
 
-  # time_zone_local:          "America/Chicago"          # Force time calculations to be local, in case remotely run from another timezone.  See ?base::Sys.timezone()
+# time_zone_local:          "America/Chicago"          # Force time calculations to be local, in case remotely run from another timezone.  See ?base::Sys.timezone()

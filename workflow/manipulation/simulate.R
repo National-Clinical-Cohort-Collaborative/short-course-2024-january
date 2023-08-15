@@ -303,11 +303,9 @@ ds_person <-
 #   )
 # ds_slim
 
-
 # # ---- save-to-disk ------------------------------------------------------------
 # # If there's no PHI, a rectangular CSV is usually adequate, and it's portable to other machines and software.
 # readr::write_csv(ds_slim        , config$path_mlm_1_raw)
-# readr::write_csv(ds_slim_subject, config$path_subject_1_raw)
 
 # ---- save-to-db --------------------------------------------------------------
 # If there's *NO* PHI, a local database like SQLite fits a nice niche if

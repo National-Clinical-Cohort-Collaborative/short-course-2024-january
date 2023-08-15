@@ -28,6 +28,8 @@ config                         <- config::get()
 
 path_ddl <-
   c(
+    "manipulation/db-create/concept-drop.sql",
+    "manipulation/db-create/concept-create.sql",
     "manipulation/db-create/person-drop.sql",
     "manipulation/db-create/person-create.sql"
   )
@@ -47,7 +49,7 @@ execute_sql <- function(path_sql) {
 
 # ---- tweak-data --------------------------------------------------------------
 # Remove old DB
-if( file.exists(config$path_database) ) file.remove(config$path_database)
+# if( file.exists(config$path_database) ) file.remove(config$path_database)
 
 cnn <- DBI::dbConnect(RSQLite::SQLite(), dbname = config$path_database)
 # result <- DBI::dbSendQuery(cnn, "PRAGMA foreign_keys=ON;") #This needs to be activated each time a connection is made. #http://stackoverflow.com/questions/15301643/sqlite3-forgets-to-use-foreign-keys

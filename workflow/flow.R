@@ -45,8 +45,9 @@ if (interactive()) {
 ds_rail  <- tibble::tribble(
   ~fx         , ~path,
 
-  # Simulate observed data
+  # Establish database & simulate observed data
   "run_r"     , "manipulation/db-create/db-create.R",
+  "run_r"     , "manipulation/db-create/concept-ellis.R",
   "run_r"     , "manipulation/simulate.R",
 
 #   # ETL (extract-transform-load) the data from the outside world.
