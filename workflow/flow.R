@@ -47,8 +47,8 @@ ds_rail  <- tibble::tribble(
 
   # Simulate observed data
   "run_r"     , "manipulation/db-create/db-create.R",
-  "run_r"     , "manipulation/simulate.R"
-#
+  "run_r"     , "manipulation/simulate.R",
+
 #   # ETL (extract-transform-load) the data from the outside world.
 #   "run_r"     , "manipulation/ss-county-ellis.R",
 #   "run_r"     , "manipulation/car-ellis.R",
@@ -62,7 +62,7 @@ ds_rail  <- tibble::tribble(
 #   "run_r"     , "manipulation/randomization-block-simple.R",
 #
 #   # Scribes create analysis-ready rectangles.
-#   "run_r"     , "manipulation/mlm-1-scribe.R",
+  "run_r"     , "manipulation/scribe.R"
 #   "run_r"     , "manipulation/te-scribe.R",
 #
 #   # Reports for human consumers.

@@ -78,6 +78,7 @@ u_birth_date <- seq.Date(as.Date("1930-01-01"), as.Date("2017-12-31"), by = "day
 ds_person <-
   tibble::tibble(
     person_id         = factor(10*subject_count + seq_len(subject_count)),
+    data_partner_id   = 1L,
     gender_concept_id = sample(names(p_gender), prob = p_gender, size = subject_count, replace = TRUE),
     birth_date    = sample(u_birth_date, size = subject_count, replace = TRUE),
   ) |>
@@ -89,6 +90,7 @@ ds_person <-
   ) |>
   dplyr::select(
     person_id,
+    data_partner_id,
     gender_concept_id,
     year_of_birth,
     month_of_birth,
@@ -312,8 +314,6 @@ ds_person <-
 #   * the data is relational and
 #   * later, only portions need to be queried/retrieved at a time (b/c everything won't need to be loaded into R's memory)
 # SQLite data types work differently than most databases: https://www.sqlite.org/datatype3.html#type_affinity
-
-
 
 cnn <- DBI::dbConnect(RSQLite::SQLite(), dbname = config$path_database)
 ds_person |>
