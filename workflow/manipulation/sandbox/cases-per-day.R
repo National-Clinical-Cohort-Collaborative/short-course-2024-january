@@ -19,6 +19,33 @@ d <-
   ) |>
   tibble::tibble(day = _)
 
+f <- function(center , amplitude, sd) {
+  # browser()
+  # tibble::tibble(
+  #
+  # )
+  # as.Date("2020-01-01") +
+  rnorm(n = base_size * amplitude, mean = center, sd = sd) |>
+    as.integer() #|>
+    # lubridate::days()
+}
+d <-
+  {
+    tibble::tribble(
+      ~center , ~amplitude, ~sd,
+      94L ,         1L,   10L,
+      186L ,        2L,   10L,
+      315L ,        2L,   10L,
+      330L ,        2L,   10L,
+      345L ,        4L,   10L,
+     ) |>
+    purrr::pmap(f) |>
+    unlist() +
+    as.Date("2020-01-01")
+  } |>
+    tibble::tibble(day = _)
+
+
 library(ggplot2)
 ggplot(d, aes(x = day)) +
-  geom_density()
+  geom_density(bw = 3)
