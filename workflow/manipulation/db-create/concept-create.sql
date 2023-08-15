@@ -1,3 +1,4 @@
+-- DDL adapted from "cdm.sqlite" from https://ohdsi.github.io/Eunomia/
 CREATE TABLE concept (
   concept_id           integer primary key,
   concept_name         text,
@@ -9,4 +10,4 @@ CREATE TABLE concept (
   valid_start_date     text, --SQLite doesn't have a native date type
   valid_end_date       text, --SQLite doesn't have a native date type
   invalid_reason       text
-)
+);
