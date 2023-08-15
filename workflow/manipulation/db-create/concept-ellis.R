@@ -3,6 +3,7 @@ rm(list = ls(all.names = TRUE)) # Clear the memory of variables from previous ru
 
 # ---- load-sources ------------------------------------------------------------
 # Call `base::source()` on any repo file that defines functions needed below.  Ideally, no real operations are performed.
+base::source("manipulation/common.R")
 
 # ---- load-packages -----------------------------------------------------------
 # Attach these packages so their functions don't need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
@@ -111,23 +112,4 @@ ds_slim
 # readr::write_rds(ds_slim, path_output, compress="gz")
 
 # ---- save-to-db --------------------------------------------------------------
-# If there's *NO* PHI, a local database like SQLite fits a nice niche if
-#   * the data is relational and
-#   * later, only portions need to be queried/retrieved at a time (b/c everything won't need to be loaded into R's memory)
-# SQLite data types work differently than most databases: https://www.sqlite.org/datatype3.html#type_affinity
-
-cnn <- DBI::dbConnect(RSQLite::SQLite(), dbname = config$path_database)
-DBI::dbExecute(cnn, "DELETE FROM concept;")
-ds_slim |>
-  DBI::dbWriteTable(
-    conn      = cnn,
-    name      = "concept",
-    append    = TRUE,
-    row.names = FALSE
-  )
-
-# Allow database to optimize its internal arrangement
-DBI::dbExecute(cnn, "VACUUM;")
-
-# Close connection
-DBI::dbDisconnect(cnn)
+truncate_and_load_table(ds_slim, "concept")
