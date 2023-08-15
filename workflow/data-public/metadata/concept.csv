@@ -1,0 +1,8 @@
+concept_id,concept_name,domain_id,vocabulary_id,concept_class_id,standard_concept,concept_code,valid_start_date,valid_end_date,invalid_reason
+8507,MALE,Gender,Gender,Gender,S,M,1970-01-01,2099-12-31,NULL
+8532,FEMALE,Gender,Gender,Gender,S,F,1970-01-01,2099-12-31,NULL
+702953,Emergency use of U07.1 | COVID-19,Condition,ICD10CM,4-char billing code,NULL,U07.1,2020-04-01,2099-12-31,NULL
+4152194,Systolic blood pressure,Measurement,SNOMED,Observable Entity,S,271649006,2002-01-31,2099-12-31,NULL
+4154790,Diastolic blood pressure,Measurement,SNOMED,Observable Entity,S,271650006,2002-01-31,2099-12-31,NULL
+37311061,COVID-19,Condition,SNOMED,Clinical Finding,S,840539006,2020-01-31,2099-12-31,NULL
+40762636,Body mass index (BMI) [Percentile],Measurement,LOINC,Clinical Observation,S,59574-4,1970-01-01,2099-12-31,NULL
