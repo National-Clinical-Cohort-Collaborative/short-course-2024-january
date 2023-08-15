@@ -55,12 +55,18 @@ subject_count       <- 100
 
 
 # "p" stands for probability
-p_data_partner    <- c("1" = .38, "2" = .62)
+# p_site   <- c("1" = .38, "2" = .62)
 p_gender <- c("8532" = .6, "8507" = .4) # male & female; https://athena.ohdsi.org/search-terms/terms?domain=Gender
 
 # "u" stands for universe
-u_birth_date <- seq.Date(as.Date("1930-01-01"), as.Date("2017-12-31"), by = "day")
+# u_birth_date <- seq.Date(as.Date("1930-01-01"), as.Date("2017-12-31"), by = "day")
 
+site_count <- 3L
+# # covid_start_site <-
+#   p_site |>
+#     names() |>
+#     as.integer() |>
+#     purrr::
 
 # int_county          <- c(2, 2.1, 4)
 # slope_county        <- c(-.04, -.06, -.2)
@@ -79,11 +85,26 @@ ds_concept <-
   ds_concept |>
   tibble::as_tibble()
 
+# ---- site --------------------------------------------------------------------
+ds_site <-
+  site_count |>
+  seq_len() |>
+  tibble::tibble(data_partner_id = _) |>
+  dplyr::mutate(
+    covid_start_site  = config$covid_start_nation + runif(site_count, min = 0, max = 45),
+    relative_size     = rchisq(site_count, 5)
+  )
+
+site_assignment <-
+  ds_site |>
+  dplyr::slice_sample(weight_by = relative_size, n = subject_count, replace = TRUE) |>
+  dplyr::pull(data_partner_id)
+
 # ---- person ----------------------------------------------------------------
 ds_person <-
   tibble::tibble(
     person_id         = factor(10*subject_count + seq_len(subject_count)),
-    data_partner_id   = as.integer(sample(names(p_data_partner), prob = p_data_partner, size = subject_count, replace = TRUE)),
+    data_partner_id   = site_assignment,
     gender_concept_id = as.integer(sample(names(p_gender      ), prob = p_gender      , size = subject_count, replace = TRUE)),
   ) |>
   dplyr::mutate(

@@ -17,6 +17,7 @@ default:
   path_log_flow:              !expr strftime(Sys.time(), "data-unshared/log/%Y/%Y-%m/flow-%Y-%m-%d--%H-%M-%S.log")
 
   # ---- Constants
+  covid_start_nation            : !expr as.Date("2020-02-01")
   boundary_date_max             : !expr as.Date("2022-12-31")
   # time_zone_local:          "America/Chicago"          # Force time calculations to be local, in case remotely run from another timezone.  See ?base::Sys.timezone()
 
