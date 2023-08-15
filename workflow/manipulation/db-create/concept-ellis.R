@@ -103,8 +103,7 @@ ds_slim <-
     valid_start_date,
     valid_end_date,
     invalid_reason,
-  ) |>
-  dplyr::mutate_if(lubridate::is.Date, as.character)       # SQLite doesn't support dates natively
+  )
 ds_slim
 
 # ---- save-to-disk ------------------------------------------------------------
@@ -112,4 +111,4 @@ ds_slim
 # readr::write_rds(ds_slim, path_output, compress="gz")
 
 # ---- save-to-db --------------------------------------------------------------
-truncate_and_load_table(ds_slim, "concept")
+truncate_and_load_table_sqlite(ds_slim, "concept")

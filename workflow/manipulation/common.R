@@ -1,4 +1,4 @@
-truncate_and_load_table <- function(d, table_name) {
+truncate_and_load_table_sqlite <- function(d, table_name) {
   # If there's *NO* PHI, a local database like SQLite fits a nice niche if
   #   * the data is relational and
   #   * later, only portions need to be queried/retrieved at a time (b/c everything won't need to be loaded into R's memory)
@@ -9,6 +9,7 @@ truncate_and_load_table <- function(d, table_name) {
   DBI::dbExecute(cnn, sql_delete)
 
   d |>
+    dplyr::mutate_if(lubridate::is.Date, as.character) |>     # SQLite doesn't support dates natively
     DBI::dbWriteTable(
       conn      = cnn,
       name      = table_name,

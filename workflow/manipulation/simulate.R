@@ -98,7 +98,6 @@ ds_person <-
     year_of_birth     = as.integer(lubridate::year(birth_date)),
     month_of_birth    = as.integer(lubridate::month(birth_date)),
     day_of_birth      = as.integer(lubridate::day(birth_date)),
-    birth_date        = as.character(birth_date),
   ) |>
   dplyr::select(
     person_id,
@@ -336,4 +335,4 @@ ds_person <-
 # readr::write_csv(ds_slim        , config$path_mlm_1_raw)
 
 # ---- save-to-db --------------------------------------------------------------
-truncate_and_load_table(ds_person, "person")
+truncate_and_load_table_sqlite(ds_person, "person")
