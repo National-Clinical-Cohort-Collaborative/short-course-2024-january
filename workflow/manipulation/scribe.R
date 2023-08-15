@@ -4,6 +4,7 @@ rm(list = ls(all.names = TRUE)) # Clear the memory of variables from previous ru
 # ---- load-sources ------------------------------------------------------------
 # source("manipulation/osdh/ellis/common-ellis.R")
 # base::source(file="Dal/Osdh/Arch/benchmark-client-program-arch.R") #Load retrieve_benchmark_client_program
+base::source("manipulation/common.R")
 
 # ---- load-packages -----------------------------------------------------------
 # import::from("magrittr", "%>%")
@@ -25,12 +26,10 @@ config                         <- config::get()
 sql <- readr::read_file("manipulation/scribe.sql")
 
 # ---- load-data ---------------------------------------------------------------
-cnn <- DBI::dbConnect(RSQLite::SQLite(), dbname = config$path_database)
-DBI::dbListTables(cnn)
-ds <- DBI::dbGetQuery(cnn, sql) #This needs to be activated each time a connection is made. #http://stackoverflow.com/questions/15301643/sqlite3-forgets-to-use-foreign-keys
-DBI::dbDisconnect(cnn); rm(cnn, sql)
+ds <- retrieve_sqlite(sql)
 
 checkmate::assert_data_frame(ds           , min.rows = 100)
+rm(sql)
 
 # ---- tweak-data --------------------------------------------------------------
 dim(ds)

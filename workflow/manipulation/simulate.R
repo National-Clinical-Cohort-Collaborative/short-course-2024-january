@@ -72,10 +72,7 @@ u_birth_date <- seq.Date(as.Date("1930-01-01"), as.Date("2017-12-31"), by = "day
 # sigma_factor_2      <- c(.2, .3, .5)
 
 # ---- load-data ---------------------------------------------------------------
-
-cnn <- DBI::dbConnect(RSQLite::SQLite(), dbname = config$path_database)
-ds_concept <- DBI::dbGetQuery(cnn, "SELECT * FROM concept")
-DBI::dbDisconnect(cnn); rm(cnn)
+ds_concept <- retrieve_sqlite("SELECT * FROM concept")
 
 # ---- tweak-data --------------------------------------------------------------
 ds_concept <-
