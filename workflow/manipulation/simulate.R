@@ -69,10 +69,16 @@ u_birth_date <- seq.Date(as.Date("1930-01-01"), as.Date("2017-12-31"), by = "day
 # sigma_factor_1      <- c(.1, .2, .1)
 # sigma_factor_2      <- c(.2, .3, .5)
 
-
 # ---- load-data ---------------------------------------------------------------
 
+cnn <- DBI::dbConnect(RSQLite::SQLite(), dbname = config$path_database)
+ds_concept <- DBI::dbGetQuery(cnn, "SELECT * FROM concept")
+DBI::dbDisconnect(cnn); rm(cnn)
+
 # ---- tweak-data --------------------------------------------------------------
+ds_concept <-
+  ds_concept |>
+  tibble::as_tibble()
 
 # ---- person ----------------------------------------------------------------
 ds_person <-
@@ -83,9 +89,9 @@ ds_person <-
     birth_date    = sample(u_birth_date, size = subject_count, replace = TRUE),
   ) |>
   dplyr::mutate(
-    year_of_birth     = lubridate::year(birth_date),
-    month_of_birth    = lubridate::month(birth_date),
-    month_of_birth    = lubridate::day(birth_date),
+    year_of_birth     = as.integer(lubridate::year(birth_date)),
+    month_of_birth    = as.integer(lubridate::month(birth_date)),
+    day_of_birth      = as.integer(lubridate::day(birth_date)),
     birth_date        = as.character(birth_date),
   ) |>
   dplyr::select(
@@ -94,7 +100,7 @@ ds_person <-
     gender_concept_id,
     year_of_birth,
     month_of_birth,
-    month_of_birth,
+    day_of_birth,
     birth_datetime    = birth_date,
     # death_datetime,
     # race_concept_id,
@@ -198,30 +204,42 @@ ds_person <-
 #   dplyr::select(-year_start)
 #
 # ds
-#
-# # ---- elongate --------------------------------------------------------------------
-# ds_long <-
-#   ds |>
-#   dplyr::select(
-#     subject_id,
-#     wave_id,
-#     year,
-#     date_at_visit,
-#     age,
-#     county_id,
-#     cog_1,
-#     cog_2,
-#     cog_3,
-#     phys_1,
-#     phys_2,
-#     phys_3
-#   ) |>
-#   tidyr::gather(
-#     key   = manifest,
-#     value = value, -subject_id, -wave_id, -year, -age, -county_id, -date_at_visit
-#   )
-#
-#
+
+# ---- join-concepts -----------------------------------------------------------
+
+sql_join <-
+  "
+    SELECT
+      p.person_id
+      ,p.data_partner_id
+      ,p.gender_concept_id
+      ,p.year_of_birth
+      ,p.month_of_birth
+      ,p.day_of_birth
+      ,p.birth_datetime
+      -- ,p.death_datetime
+      -- ,p.race_concept_id
+      -- ,p.ethnicity_concept_id
+      -- ,p.location_id
+      -- ,p.provider_id
+      -- ,p.care_site_id
+      -- ,p.person_source_value
+      ,lower(substr(cg.concept_name, 1, 1))  as gender_source_value
+      ,p.gender_concept_id                   as gender_source_concept_id
+      -- ,p.race_source_value
+      -- ,p.race_source_concept_id
+      -- ,p.ethnicity_source_value
+      -- ,p.ethnicity_source_concept_id
+    FROM ds_person p
+      left  join ds_concept cg on p.gender_concept_id = cg.concept_id
+  "
+
+ds_person <-
+  sql_join |>
+  sqldf::sqldf() |>
+  tibble::as_tibble()
+
+
 # # ---- inspect, fig.width=10, fig.height=6, fig.path=figure_path -----------------------------------------------------------------
 # library(ggplot2)
 #
@@ -314,6 +332,7 @@ ds_person <-
 # SQLite data types work differently than most databases: https://www.sqlite.org/datatype3.html#type_affinity
 
 cnn <- DBI::dbConnect(RSQLite::SQLite(), dbname = config$path_database)
+DBI::dbExecute(cnn, "DELETE FROM person;")
 ds_person |>
   DBI::dbWriteTable(
     conn      = cnn,

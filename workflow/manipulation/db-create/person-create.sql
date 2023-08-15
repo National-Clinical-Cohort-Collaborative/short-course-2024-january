@@ -5,7 +5,7 @@ CREATE TABLE person (
   year_of_birth                   integer,
   month_of_birth                  integer,
   day_of_birth                    integer,
-  birth_datetime                  text,
+  birth_datetime                  text, --SQLite doesn't have a native date type
   race_concept_id                 integer,
   ethnicity_concept_id            integer,
   location_id                     integer,
