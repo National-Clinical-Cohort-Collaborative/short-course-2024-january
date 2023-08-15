@@ -43,7 +43,7 @@ Summary {.tabset .tabset-fade .tabset-pills}
 Notes
 ---------------------------------------------------------------------------
 
-1. The current report covers 100 patients, with 1 unique values for `data_partner_id`.
+1. The current report covers 100 patients, with 2 unique values for `data_partner_id`.
 
 
 Unanswered Questions
@@ -209,4 +209,4 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 
-Report rendered by wibea at 2023-08-15, 12:32 -0500 in 1 seconds.
+Report rendered by wibea at 2023-08-15, 12:49 -0500 in 1 seconds.

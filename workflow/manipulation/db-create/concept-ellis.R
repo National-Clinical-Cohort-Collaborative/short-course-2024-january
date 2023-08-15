@@ -16,6 +16,7 @@ requireNamespace("readr"        )
 requireNamespace("tidyr"        )
 requireNamespace("dplyr"        ) # Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
 requireNamespace("rlang"        ) # Language constructs, like quosures
+requireNamespace("lubridate"    ) # Easier manipulation of dates
 requireNamespace("testit"       ) # For asserting conditions meet expected patterns/conditions.
 requireNamespace("checkmate"    ) # For asserting conditions meet expected patterns/conditions. # remotes::install_github("mllg/checkmate")
 requireNamespace("DBI"          ) # Database-agnostic interface
@@ -72,16 +73,16 @@ ds <-
 
 # ---- verify-values -----------------------------------------------------------
 # OuhscMunge::verify_value_headstart(ds) # Run this to line to start the checkmate asserts.
-checkmate::assert_integer(  ds$concept_id       , any.missing=F , lower=1, upper=2^31                               , unique=T)
-checkmate::assert_character(ds$concept_name     , any.missing=F , pattern="^.{2,255}$"                                      , unique=T)
-checkmate::assert_character(ds$domain_id        , any.missing=F , pattern="^.{2,20}$"                                      )
-checkmate::assert_character(ds$vocabulary_id    , any.missing=F , pattern="^.{2,20}$"                                       )
-checkmate::assert_character(ds$concept_class_id , any.missing=F , pattern="^.{2,20}$"                                      )
-checkmate::assert_character(ds$standard_concept , any.missing=T , pattern="^.{1}$"                                       )
-checkmate::assert_character(ds$concept_code     , any.missing=F , pattern="^.{1,50}$"                                       , unique=T)
-checkmate::assert_date(     ds$valid_start_date , any.missing=F , lower=as.Date("1970-01-01"), upper=as.Date("2099-12-31") )
-checkmate::assert_date(     ds$valid_end_date   , any.missing=F , lower=as.Date("1970-01-01"), upper=as.Date("2099-12-31") )
-checkmate::assert_character(ds$invalid_reason   , any.missing=T , pattern="^.{1}$"                                       )
+checkmate::assert_integer(  ds$concept_id       , any.missing=F , lower=config$omop_concept_min, upper=config$omop_concept_local       , unique=T)
+checkmate::assert_character(ds$concept_name     , any.missing=F , pattern="^.{2,255}$"                                        )
+checkmate::assert_character(ds$domain_id        , any.missing=F , pattern="^.{2,20}$"                                         )
+checkmate::assert_character(ds$vocabulary_id    , any.missing=F , pattern="^.{2,20}$"                                         )
+checkmate::assert_character(ds$concept_class_id , any.missing=F , pattern="^.{2,20}$"                                         )
+checkmate::assert_character(ds$standard_concept , any.missing=T , pattern="^.{1}$"                                            )
+checkmate::assert_character(ds$concept_code     , any.missing=F , pattern="^.{1,50}$"                                         )
+checkmate::assert_date(     ds$valid_start_date , any.missing=F , lower=as.Date("1970-01-01"), upper=as.Date("2099-12-31")    )
+checkmate::assert_date(     ds$valid_end_date   , any.missing=F , lower=as.Date("1970-01-01"), upper=as.Date("2099-12-31")    )
+checkmate::assert_character(ds$invalid_reason   , any.missing=T , pattern="^.{1}$"                                            )
 
 # ---- specify-columns-to-write ------------------------------------------------
 # Print colnames that `dplyr::select()`  should contain below:
@@ -102,7 +103,7 @@ ds_slim <-
     valid_end_date,
     invalid_reason,
   ) |>
-  dplyr::mutate_if(lubridate::is.Date, as.character)       # Some databases & drivers need 0/1 instead of FALSE/TRUE.
+  dplyr::mutate_if(lubridate::is.Date, as.character)       # SQLite doesn't support dates natively
 ds_slim
 
 # ---- save-to-disk ------------------------------------------------------------
@@ -116,6 +117,7 @@ ds_slim
 # SQLite data types work differently than most databases: https://www.sqlite.org/datatype3.html#type_affinity
 
 cnn <- DBI::dbConnect(RSQLite::SQLite(), dbname = config$path_database)
+DBI::dbExecute(cnn, "DELETE FROM concept;")
 ds_slim |>
   DBI::dbWriteTable(
     conn      = cnn,

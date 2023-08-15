@@ -54,6 +54,7 @@ subject_count       <- 100
 
 
 # "p" stands for probability
+p_data_partner    <- c("1" = .38, "2" = .62)
 p_gender <- c("8532" = .6, "8507" = .4) # male & female; https://athena.ohdsi.org/search-terms/terms?domain=Gender
 
 # "u" stands for universe
@@ -84,8 +85,8 @@ ds_concept <-
 ds_person <-
   tibble::tibble(
     person_id         = factor(10*subject_count + seq_len(subject_count)),
-    data_partner_id   = 1L,
-    gender_concept_id = sample(names(p_gender), prob = p_gender, size = subject_count, replace = TRUE),
+    data_partner_id   = as.integer(sample(names(p_data_partner), prob = p_data_partner, size = subject_count, replace = TRUE)),
+    gender_concept_id = as.integer(sample(names(p_gender      ), prob = p_gender      , size = subject_count, replace = TRUE)),
     birth_date    = sample(u_birth_date, size = subject_count, replace = TRUE),
   ) |>
   dplyr::mutate(
@@ -258,8 +259,8 @@ ds_person <-
 #   theme_minimal() +
 #   theme(legend.position="top")
 #
-# # ---- verify-values -----------------------------------------------------------
-# # OuhscMunge::verify_value_headstart(ds_subject)
+# ---- verify-values -----------------------------------------------------------
+# OuhscMunge::verify_value_headstart(ds_person)
 # checkmate::assert_factor(   ds_subject$subject_id     , any.missing=F                          , unique=T)
 # checkmate::assert_integer(  ds_subject$county_id      , any.missing=F , lower=51, upper=72     )
 # checkmate::assert_integer(  ds_subject$gender_id      , any.missing=F , lower=1, upper=255     )

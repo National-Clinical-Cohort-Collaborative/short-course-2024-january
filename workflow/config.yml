@@ -18,3 +18,10 @@ default:
   path_log_flow:              !expr strftime(Sys.time(), "data-unshared/log/%Y/%Y-%m/flow-%Y-%m-%d--%H-%M-%S.log")
 
 # time_zone_local:          "America/Chicago"          # Force time calculations to be local, in case remotely run from another timezone.  See ?base::Sys.timezone()
+
+  # ---- Validation Ranges & Patterns ----
+  range_person_id               : !expr c(1L, 999999L)
+  # range_cpt4                    : !expr c(10000L, 99999L)
+  omop_concept_min              : 0
+  omop_concept_local            : 2000000000
+  omop_concept_max              : 2147483647
