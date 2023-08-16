@@ -111,15 +111,22 @@ ds_person <-
   dplyr::mutate(
     latent_dob_lag    = rbeta(n = subject_count, shape1 = 1, shape2 = 1.9, ncp = 7/8),
     birth_date        = config$boundary_date_max - 40000 * latent_dob_lag,
-    # birth_date      = sample(u_birth_date, size = subject_count, replace = TRUE),
-  ) |>
-  dplyr::mutate(
     year_of_birth     = as.integer(lubridate::year(birth_date)),
     month_of_birth    = as.integer(lubridate::month(birth_date)),
     day_of_birth      = as.integer(lubridate::day(birth_date)),
   ) |>
   dplyr::mutate(
     covid_date      = sample(ds_nation_count$date, prob = ds_nation_count$pt_count, size = subject_count, replace = TRUE),
+    calc_outbreak_lag    = as.integer(difftime(config$covid_start_nation, covid_date, units = "days")),
+    calc_age_covid    = as.integer(difftime(birth_date, covid_date, units = "days")),
+  ) |>
+  dplyr::mutate(
+    latent_risk =
+      .2 +
+      (-0.78 * latent_dob_lag) +
+      (-0.002 * calc_outbreak_lag) +
+      (.04 * calc_age_covid) +
+      rnorm(subject_count, sd = 1.3),
   ) |>
   dplyr::select(
     person_id,
@@ -143,8 +150,15 @@ ds_person <-
     # ethnicity_source_value,
     # ethnicity_source_concept_id,
     covid_date,
+    latent_risk,
+    latent_dob_lag,
+    calc_outbreak_lag,
+    calc_age_covid,
   )
 
+summary(lm(latent_risk ~ 1 + latent_dob_lag + calc_outbreak_lag + calc_age_covid, data = ds_person))
+# summary(lm(latent_risk ~ 1 + latent_dob_lag + covid_date, data = ds_person))
+stop()
 # https://www.npr.org/sections/health-shots/2020/09/01/816707182/map-tracking-the-spread-of-the-coronavirus-in-the-u-s
 
 # x <- rchisq(n = 100000, df = 12, ncp = 100)
