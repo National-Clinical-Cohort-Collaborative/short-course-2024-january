@@ -30,8 +30,8 @@ path_ddl <-
   c(
     "manipulation/db-create/concept-drop.sql",
     "manipulation/db-create/concept-create.sql",
-    "manipulation/db-create/national-count-drop.sql",
-    "manipulation/db-create/national-count-create.sql",
+    "manipulation/db-create/nation-count-drop.sql",
+    "manipulation/db-create/nation-count-create.sql",
     "manipulation/db-create/person-drop.sql",
     "manipulation/db-create/person-create.sql"
   )

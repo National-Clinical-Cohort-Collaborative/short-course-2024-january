@@ -106,4 +106,4 @@ ds_slim <-
   )
 
 # ---- save-to-db --------------------------------------------------------------
-truncate_and_load_table_sqlite(ds_slim, "latent_national_count")
+truncate_and_load_table_sqlite(ds_slim, "latent_nation_count")

@@ -48,7 +48,7 @@ ds_rail  <- tibble::tribble(
   # Establish database & simulate observed data
   "run_r"     , "manipulation/db-create/db-create.R",
   "run_r"     , "manipulation/db-create/concept-ellis.R",
-  "run_r"     , "manipulation/simulate-national-trend.R",
+  "run_r"     , "manipulation/simulate-nation-trend.R",
   "run_r"     , "manipulation/simulate.R",
 
 #   # ETL (extract-transform-load) the data from the outside world.

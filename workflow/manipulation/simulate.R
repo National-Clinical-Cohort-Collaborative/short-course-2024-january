@@ -79,7 +79,7 @@ site_count <- 3L
 
 # ---- load-data ---------------------------------------------------------------
 ds_concept <- retrieve_sqlite("SELECT * FROM concept")
-ds_nation_count <- retrieve_sqlite("SELECT * FROM latent_national_count")
+ds_nation_count <- retrieve_sqlite("SELECT * FROM latent_nation_count")
 
 # ---- tweak-data --------------------------------------------------------------
 ds_concept <-
