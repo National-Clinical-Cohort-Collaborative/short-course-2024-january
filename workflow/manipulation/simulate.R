@@ -79,6 +79,7 @@ site_count <- 3L
 
 # ---- load-data ---------------------------------------------------------------
 ds_concept <- retrieve_sqlite("SELECT * FROM concept")
+ds_nation_count <- retrieve_sqlite("SELECT * FROM latent_national_count")
 
 # ---- tweak-data --------------------------------------------------------------
 ds_concept <-
@@ -117,6 +118,9 @@ ds_person <-
     month_of_birth    = as.integer(lubridate::month(birth_date)),
     day_of_birth      = as.integer(lubridate::day(birth_date)),
   ) |>
+  dplyr::mutate(
+    covid_date      = sample(ds_nation_count$date, prob = ds_nation_count$pt_count, size = subject_count, replace = TRUE),
+  ) |>
   dplyr::select(
     person_id,
     data_partner_id,
@@ -138,6 +142,7 @@ ds_person <-
     # race_source_concept_id,
     # ethnicity_source_value,
     # ethnicity_source_concept_id,
+    covid_date,
   )
 
 # https://www.npr.org/sections/health-shots/2020/09/01/816707182/map-tracking-the-spread-of-the-coronavirus-in-the-u-s
@@ -259,6 +264,7 @@ sql_join <-
       -- ,p.race_source_concept_id
       -- ,p.ethnicity_source_value
       -- ,p.ethnicity_source_concept_id
+      ,p.covid_date
     FROM ds_person p
       left  join ds_concept cg on p.gender_concept_id = cg.concept_id
   "

@@ -18,5 +18,6 @@ SELECT
   ,p.race_source_concept_id
   ,p.ethnicity_source_value
   ,p.ethnicity_source_concept_id
+  ,p.covid_date
 FROM person p
 ORDER BY person_id

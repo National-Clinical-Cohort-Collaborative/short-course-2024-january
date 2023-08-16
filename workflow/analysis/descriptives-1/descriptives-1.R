@@ -134,7 +134,10 @@ ds <-
     year_of_birth,
     month_of_birth,
     day_of_birth,
+    birth_datetime,
+    covid_date,
   )
+
 # ---- marginals ---------------------------------------------------------------
 TabularManifest::histogram_discrete(  ds, "person_id")
 TabularManifest::histogram_discrete(  ds, "data_partner_id")
@@ -142,7 +145,7 @@ TabularManifest::histogram_discrete(  ds, "gender_concept_id")
 TabularManifest::histogram_continuous(ds, "year_of_birth")
 TabularManifest::histogram_continuous(ds, "month_of_birth")
 TabularManifest::histogram_continuous(ds, "day_of_birth")
-# TabularManifest::histogram_discrete(ds, "birth_datetime")
+TabularManifest::histogram_date(      ds, "birth_datetime", bin_unit = "year")
 # TabularManifest::histogram_discrete(ds, "race_concept_id")
 # TabularManifest::histogram_discrete(ds, "ethnicity_concept_id")
 # TabularManifest::histogram_discrete(ds, "location_id")
@@ -155,6 +158,7 @@ TabularManifest::histogram_continuous(ds, "day_of_birth")
 # TabularManifest::histogram_discrete(ds, "race_source_concept_id")
 # TabularManifest::histogram_discrete(ds, "ethnicity_source_value")
 # TabularManifest::histogram_discrete(ds, "ethnicity_source_concept_id")
+TabularManifest::histogram_date(ds, "covid_date", bin_unit = "week")
 
 # This helps start the code for graphing each variable.
 #   - Make sure you change it to `histogram_continuous()` for the appropriate variables.

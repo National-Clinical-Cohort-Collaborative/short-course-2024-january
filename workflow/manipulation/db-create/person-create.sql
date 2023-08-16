@@ -18,5 +18,6 @@ CREATE TABLE person (
   race_source_value               text,
   race_source_concept_id          integer,
   ethnicity_source_value          text,
-  ethnicity_source_concept_id     integer
+  ethnicity_source_concept_id     integer,
+  covid_date                      text
 );
