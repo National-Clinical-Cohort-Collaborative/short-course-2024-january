@@ -8,11 +8,9 @@ default:
   # Central Database (produced by Ellis lanes).
   path_database:              "data-public/derived/db.sqlite3"
 
-  # ---- Derived Rectangles (produced by Ellis lanes)
-
   # ---- Analysis-ready datasets (produced by scribes & consumed by analyses).
-  path_person_derived:        "data-public/derived/person.rds"
-  # path_annotation:          "data-public/metadata/cqi-annotation.csv"
+  path_derived_person_csv:        "data-public/derived/person.csv"
+  path_derived_person_rds:        "data-public/derived/person.rds"
 
   path_log_flow:              !expr strftime(Sys.time(), "data-unshared/log/%Y/%Y-%m/flow-%Y-%m-%d--%H-%M-%S.log")
 

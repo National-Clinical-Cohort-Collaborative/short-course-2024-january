@@ -122,7 +122,7 @@ histogram_continuous <- function(
 }
 
 # ---- load-data ---------------------------------------------------------------
-ds <- readr::read_rds(config$path_person_derived) # 'ds' stands for 'datasets'
+ds <- readr::read_rds(config$path_derived_person_rds) # 'ds' stands for 'datasets'
 
 # ---- tweak-data --------------------------------------------------------------
 ds <-
