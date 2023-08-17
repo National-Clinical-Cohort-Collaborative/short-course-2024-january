@@ -84,14 +84,19 @@ Answered Questions
 ---------------------------------------------------------------------------
 
 
-Graphs
+Marginals
 ===========================================================================
 
-
-Marginals
+`person` table
 ---------------------------------------------------------------------------
 
-```{r marginals, echo=echo_chunks, message=message_chunks}
+```{r marginals-person, echo=echo_chunks, message=message_chunks}
+```
+
+`person_hidden` table
+---------------------------------------------------------------------------
+
+```{r marginals-person-hidden, echo=echo_chunks, message=message_chunks}
 ```
 
 

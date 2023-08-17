@@ -124,9 +124,12 @@ histogram_continuous <- function(
 # ---- load-data ---------------------------------------------------------------
 ds <- readr::read_rds(config$path_derived_person_rds) # 'ds' stands for 'datasets'
 
+ds_person_hidden <- readr::read_rds(config$path_simulated_person_hidden_rds)
+
 # ---- tweak-data --------------------------------------------------------------
 ds <-
   ds |>
+  dplyr::left_join(ds_person_hidden, by = "person_id") |>
   dplyr::select(
     person_id,
     data_partner_id,
@@ -136,9 +139,12 @@ ds <-
     day_of_birth,
     birth_datetime,
     covid_date,
+    latent_risk,
+    calc_outbreak_lag_years,
+    calc_age_covid,
   )
 
-# ---- marginals ---------------------------------------------------------------
+# ---- marginals-person ---------------------------------------------------------------
 TabularManifest::histogram_discrete(  ds, "person_id")
 TabularManifest::histogram_discrete(  ds, "data_partner_id")
 TabularManifest::histogram_discrete(  ds, "gender_concept_id")
@@ -159,6 +165,13 @@ TabularManifest::histogram_date(      ds, "birth_datetime", bin_unit = "year")
 # TabularManifest::histogram_discrete(ds, "ethnicity_source_value")
 # TabularManifest::histogram_discrete(ds, "ethnicity_source_concept_id")
 TabularManifest::histogram_date(ds, "covid_date", bin_unit = "week")
+
+# ---- marginals-person-hidden -------------------------------------------------
+
+TabularManifest::histogram_continuous(ds, "latent_risk"             , rounded_digits = 1)
+TabularManifest::histogram_continuous(ds, "calc_outbreak_lag_years" , rounded_digits = 1)
+TabularManifest::histogram_continuous(ds, "calc_age_covid"          , rounded_digits = 1)
+
 
 # This helps start the code for graphing each variable.
 #   - Make sure you change it to `histogram_continuous()` for the appropriate variables.

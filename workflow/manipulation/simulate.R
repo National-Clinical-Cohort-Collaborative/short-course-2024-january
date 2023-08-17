@@ -115,17 +115,18 @@ ds_person <-
     day_of_birth      = as.integer(lubridate::day(birth_date)),
   ) |>
   dplyr::mutate(
-    covid_date      = sample(ds_nation_count$date, prob = ds_nation_count$pt_count, size = subject_count, replace = TRUE),
-    calc_outbreak_lag    = as.integer(difftime(config$covid_start_nation, covid_date, units = "days")),
-    calc_age_covid    = as.integer(difftime(birth_date, covid_date, units = "days")),
+    covid_date              = sample(ds_nation_count$date, prob = ds_nation_count$pt_count, size = subject_count, replace = TRUE),
+    calc_outbreak_lag_years = round(as.integer(difftime(covid_date, config$covid_start_nation, units = "days")) / 365.25, 2),
+    calc_age_covid          = round(as.integer(difftime(covid_date, birth_date, units = "days")) / 365.25, 2),
   ) |>
   dplyr::mutate(
     latent_risk =
       .2 +
-      (-0.78 * latent_dob_lag) +
-      (-0.002 * calc_outbreak_lag) +
+      # (-0.78 * latent_dob_lag) +
+      (-0.5 * calc_outbreak_lag_years) +
       (.04 * calc_age_covid) +
       rnorm(subject_count, sd = 1.3),
+    latent_risk     = round(latent_risk, 3),
   ) |>
   dplyr::select(
     person_id,
@@ -150,12 +151,11 @@ ds_person <-
     # ethnicity_source_concept_id,
     covid_date,
     latent_risk,
-    latent_dob_lag,
-    calc_outbreak_lag,
+    calc_outbreak_lag_years,
     calc_age_covid,
   )
 
-summary(lm(latent_risk ~ 1 + latent_dob_lag + calc_outbreak_lag + calc_age_covid, data = ds_person))
+summary(lm(latent_risk ~ 1 + calc_outbreak_lag_years + calc_age_covid, data = ds_person))
 # summary(lm(latent_risk ~ 1 + latent_dob_lag + covid_date, data = ds_person))
 # stop()
 # https://www.npr.org/sections/health-shots/2020/09/01/816707182/map-tracking-the-spread-of-the-coronavirus-in-the-u-s
@@ -172,6 +172,7 @@ summary(lm(latent_risk ~ 1 + latent_dob_lag + calc_outbreak_lag + calc_age_covid
 # hist(lubridate::year(dob2))
 
 
+# ---- sem ---------------------------------------------------------------------
 #
 # |>
 #   dplyr::mutate(
@@ -254,7 +255,7 @@ summary(lm(latent_risk ~ 1 + latent_dob_lag + calc_outbreak_lag + calc_age_covid
 
 # ---- join-concepts -----------------------------------------------------------
 
-sql_join <-
+sql_person_slim <-
   "
     SELECT
       p.person_id
@@ -282,8 +283,8 @@ sql_join <-
       left  join ds_concept cg on p.gender_concept_id = cg.concept_id
   "
 
-ds_person <-
-  sql_join |>
+ds_person_slim <-
+  sql_person_slim |>
   sqldf::sqldf() |>
   tibble::as_tibble()
 
@@ -339,39 +340,24 @@ ds_person <-
 
 # ---- specify-columns-to-upload -----------------------------------------------
 # Print colnames that `dplyr::select()`  should contain below:
-#   cat(paste0("    ", colnames(ds), collapse=",\n"))
-#   cat(paste0("    ", colnames(ds_subject), collapse=",\n"))
+  cat(paste0("    ", colnames(ds_person), collapse=",\n"))
 
-# ds_slim <-
-#   ds |>
-#   # dplyr::slice(1:100) |>
-#   dplyr::select(
-#     subject_id,
-#     wave_id,
-#     # year,
-#     date_at_visit,
-#     age, county_id,
-#     int_factor_1, slope_factor_1,
-#     cog_1 , cog_2 , cog_3,
-#     phys_1, phys_2, phys_3,
-#   )
-# ds_slim
-#
-# ds_slim_subject <-
-#   ds_subject |>
-#   # dplyr::slice(1:100) |>
-#   dplyr::select(
-#     subject_id,
-#     county_id, # May intentionally exclude this from the output, to mimic what the ellis has to do sometimes.
-#     gender_id,
-#     race,
-#     ethnicity,
-#   )
-# ds_slim
+ds_person_hidden <-
+  ds_person |>
+  # dplyr::slice(1:100) |>
+  dplyr::select(
+    person_id,
+    latent_risk,
+    calc_outbreak_lag_years,
+    calc_age_covid,
+  )
 
 # # ---- save-to-disk ------------------------------------------------------------
 # # If there's no PHI, a rectangular CSV is usually adequate, and it's portable to other machines and software.
-readr::write_csv(ds_site        , config$path_simulated_site_csv)
+readr::write_csv(ds_site          , config$path_simulated_site_csv)
+readr::write_csv(ds_person_hidden , config$path_simulated_person_hidden_csv)
+readr::write_rds(ds_person_hidden , config$path_simulated_person_hidden_rds,    compress = "gz")
 
 # ---- save-to-db --------------------------------------------------------------
-truncate_and_load_table_sqlite(ds_person, "person")
+truncate_and_load_table_sqlite(ds_person_slim, "person")
+truncate_and_load_table_sqlite(ds_person_hidden, "person_hidden")

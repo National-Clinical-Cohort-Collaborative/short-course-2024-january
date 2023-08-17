@@ -9,7 +9,9 @@ default:
   path_database:              "data-public/derived/db.sqlite3"
 
   # ---- Simulated-ready datasets (consumed by scribes).
-  path_simulated_site_csv:        "data-public/simulated/site.csv"
+  path_simulated_site_csv:            "data-public/simulated/site.csv"
+  path_simulated_person_hidden_csv:   "data-public/simulated/person-hidden.csv"
+  path_simulated_person_hidden_rds:   "data-public/simulated/person-hidden.rds"
 
   # ---- Analysis-ready datasets (produced by scribes & consumed by analyses).
   path_derived_person_csv:        "data-public/derived/person.csv"

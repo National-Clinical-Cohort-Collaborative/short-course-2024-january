@@ -38,9 +38,10 @@ ds <-
   tibble::as_tibble() |>
   dplyr::mutate(
     # When reading from SQLite, there are some data types that need to be cast explicitly.  SQL Server and the 'odbc' package handles dates and bits/logicals naturally.
-    # age_80_plus       = as.logical(age_80_plus),
+    person_id           = factor(person_id),
     birth_datetime      = as.Date(birth_datetime),
     covid_date          = as.Date(covid_date),
+    # age_80_plus       = as.logical(age_80_plus),
   )
 dim(ds)
 

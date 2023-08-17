@@ -33,7 +33,9 @@ path_ddl <-
     "manipulation/db-create/nation-count-drop.sql",
     "manipulation/db-create/nation-count-create.sql",
     "manipulation/db-create/person-drop.sql",
-    "manipulation/db-create/person-create.sql"
+    "manipulation/db-create/person-create.sql",
+    "manipulation/db-create/person-hidden-drop.sql",
+    "manipulation/db-create/person-hidden-create.sql"
   )
 
 execute_sql <- function(path_sql) {

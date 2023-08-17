@@ -53,14 +53,18 @@ Answered Questions
 ---------------------------------------------------------------------------
 
 
-Graphs
+Marginals
 ===========================================================================
 
-
-Marginals
+`person` table
 ---------------------------------------------------------------------------
 
-![](figure-png/marginals-1.png)<!-- -->![](figure-png/marginals-2.png)<!-- -->![](figure-png/marginals-3.png)<!-- -->![](figure-png/marginals-4.png)<!-- -->![](figure-png/marginals-5.png)<!-- -->![](figure-png/marginals-6.png)<!-- -->![](figure-png/marginals-7.png)<!-- -->![](figure-png/marginals-8.png)<!-- -->
+![](figure-png/marginals-person-1.png)<!-- -->![](figure-png/marginals-person-2.png)<!-- -->![](figure-png/marginals-person-3.png)<!-- -->![](figure-png/marginals-person-4.png)<!-- -->![](figure-png/marginals-person-5.png)<!-- -->![](figure-png/marginals-person-6.png)<!-- -->![](figure-png/marginals-person-7.png)<!-- -->![](figure-png/marginals-person-8.png)<!-- -->
+
+`person_hidden` table
+---------------------------------------------------------------------------
+
+![](figure-png/marginals-person-hidden-1.png)<!-- -->![](figure-png/marginals-person-hidden-2.png)<!-- -->![](figure-png/marginals-person-hidden-3.png)<!-- -->
 
 
 Scatterplots
@@ -176,6 +180,7 @@ For the sake of documentation and reproducibility, the current report was render
      reticulate        1.31       2023-08-10 [1] CRAN (R 4.2.2)
      rlang             1.1.1      2023-04-28 [1] CRAN (R 4.2.2)
      rmarkdown         2.24       2023-08-14 [1] CRAN (R 4.2.2)
+     rsconnect         1.0.1      2023-07-20 [1] CRAN (R 4.2.2)
      RSQLite         * 2.3.1      2023-04-03 [1] CRAN (R 4.2.2)
      rstudioapi        0.15.0     2023-07-07 [1] CRAN (R 4.2.2)
      sass              0.4.7      2023-07-15 [1] CRAN (R 4.2.2)
@@ -211,4 +216,4 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 
-Report rendered by wibeasley at 2023-08-17, 09:41 -0500 in 3 seconds.
+Report rendered by wibeasley at 2023-08-17, 11:03 -0500 in 4 seconds.
