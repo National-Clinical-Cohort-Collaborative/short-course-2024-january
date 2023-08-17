@@ -19,13 +19,12 @@ options(show.signif.stars = FALSE) #Turn off the annotations on p-values
 config                      <- config::get()
 
 # ---- load-data ---------------------------------------------------------------
-ds <- readr::read_rds(config$path_derived_person_rds) # 'ds' stands for 'datasets'
-
-ds_person_hidden <- readr::read_rds(config$path_simulated_person_hidden_rds)
+ds_person         <- readr::read_rds(config$path_derived_person_rds) # 'ds' stands for 'datasets'
+ds_person_hidden  <- readr::read_rds(config$path_simulated_person_hidden_rds)
 
 # ---- tweak-data --------------------------------------------------------------
-ds <-
-  ds |>
+ds_person <-
+  ds_person |>
   dplyr::left_join(ds_person_hidden, by = "person_id") |>
   dplyr::select(
     person_id,
@@ -41,34 +40,34 @@ ds <-
     calc_age_covid,
   )
 
+rm(ds_person_hidden)
+
 # ---- marginals-person ---------------------------------------------------------------
-TabularManifest::histogram_discrete(  ds, "person_id")
-TabularManifest::histogram_discrete(  ds, "data_partner_id")
-TabularManifest::histogram_discrete(  ds, "gender_concept_id")
-TabularManifest::histogram_continuous(ds, "year_of_birth")
-TabularManifest::histogram_continuous(ds, "month_of_birth")
-TabularManifest::histogram_continuous(ds, "day_of_birth")
-TabularManifest::histogram_date(      ds, "birth_datetime", bin_unit = "year")
-# TabularManifest::histogram_discrete(ds, "race_concept_id")
-# TabularManifest::histogram_discrete(ds, "ethnicity_concept_id")
-# TabularManifest::histogram_discrete(ds, "location_id")
-# TabularManifest::histogram_discrete(ds, "provider_id")
-# TabularManifest::histogram_discrete(ds, "care_site_id")
-# TabularManifest::histogram_discrete(ds, "person_source_value")
-# TabularManifest::histogram_discrete(ds, "gender_source_value")
-# TabularManifest::histogram_discrete(ds, "gender_source_concept_id")
-# TabularManifest::histogram_discrete(ds, "race_source_value")
-# TabularManifest::histogram_discrete(ds, "race_source_concept_id")
-# TabularManifest::histogram_discrete(ds, "ethnicity_source_value")
-# TabularManifest::histogram_discrete(ds, "ethnicity_source_concept_id")
-TabularManifest::histogram_date(ds, "covid_date", bin_unit = "week")
+TabularManifest::histogram_discrete(  ds_person, "person_id")
+TabularManifest::histogram_discrete(  ds_person, "data_partner_id")
+TabularManifest::histogram_discrete(  ds_person, "gender_concept_id")
+TabularManifest::histogram_continuous(ds_person, "year_of_birth")
+TabularManifest::histogram_continuous(ds_person, "month_of_birth")
+TabularManifest::histogram_continuous(ds_person, "day_of_birth")
+TabularManifest::histogram_date(      ds_person, "birth_datetime", bin_unit = "year")
+# TabularManifest::histogram_discrete(ds_person, "race_concept_id")
+# TabularManifest::histogram_discrete(ds_person, "ethnicity_concept_id")
+# TabularManifest::histogram_discrete(ds_person, "location_id")
+# TabularManifest::histogram_discrete(ds_person, "provider_id")
+# TabularManifest::histogram_discrete(ds_person, "care_site_id")
+# TabularManifest::histogram_discrete(ds_person, "person_source_value")
+# TabularManifest::histogram_discrete(ds_person, "gender_source_value")
+# TabularManifest::histogram_discrete(ds_person, "gender_source_concept_id")
+# TabularManifest::histogram_discrete(ds_person, "race_source_value")
+# TabularManifest::histogram_discrete(ds_person, "race_source_concept_id")
+# TabularManifest::histogram_discrete(ds_person, "ethnicity_source_value")
+# TabularManifest::histogram_discrete(ds_person, "ethnicity_source_concept_id")
+TabularManifest::histogram_date(      ds_person, "covid_date", bin_unit = "week")
 
 # ---- marginals-person-hidden -------------------------------------------------
-
-TabularManifest::histogram_continuous(ds, "latent_risk"             , rounded_digits = 1)
-TabularManifest::histogram_continuous(ds, "calc_outbreak_lag_years" , rounded_digits = 1)
-TabularManifest::histogram_continuous(ds, "calc_age_covid"          , rounded_digits = 1)
-
+TabularManifest::histogram_continuous(ds_person, "latent_risk"             , rounded_digits = 1)
+TabularManifest::histogram_continuous(ds_person, "calc_outbreak_lag_years" , rounded_digits = 1)
+TabularManifest::histogram_continuous(ds_person, "calc_age_covid"          , rounded_digits = 1)
 
 # This helps start the code for graphing each variable.
 #   - Make sure you change it to `histogram_continuous()` for the appropriate variables.
