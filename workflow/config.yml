@@ -8,6 +8,9 @@ default:
   # Central Database (produced by Ellis lanes).
   path_database:              "data-public/derived/db.sqlite3"
 
+  # ---- Simulated-ready datasets (consumed by scribes).
+  path_simulated_site_csv:        "data-public/simulated/site.csv"
+
   # ---- Analysis-ready datasets (produced by scribes & consumed by analyses).
   path_derived_person_csv:        "data-public/derived/person.csv"
   path_derived_person_rds:        "data-public/derived/person.rds"

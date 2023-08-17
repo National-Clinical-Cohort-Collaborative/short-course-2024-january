@@ -53,7 +53,6 @@ subject_count       <- 100
 # )
 # possible_date_offset    <- 30:120   # Add between 30 & 120 days to Jan 1, to get the exact visit date.
 
-
 # "p" stands for probability
 # p_site   <- c("1" = .38, "2" = .62)
 p_gender <- c("8532" = .6, "8507" = .4) # male & female; https://athena.ohdsi.org/search-terms/terms?domain=Gender
@@ -372,7 +371,7 @@ ds_person <-
 
 # # ---- save-to-disk ------------------------------------------------------------
 # # If there's no PHI, a rectangular CSV is usually adequate, and it's portable to other machines and software.
-# readr::write_csv(ds_slim        , config$path_mlm_1_raw)
+readr::write_csv(ds_site        , config$path_simulated_site_csv)
 
 # ---- save-to-db --------------------------------------------------------------
 truncate_and_load_table_sqlite(ds_person, "person")
