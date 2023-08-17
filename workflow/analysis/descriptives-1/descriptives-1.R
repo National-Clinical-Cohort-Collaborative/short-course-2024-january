@@ -43,13 +43,17 @@ ds_person <-
 rm(ds_person_hidden)
 
 # ---- marginals-person ---------------------------------------------------------------
-TabularManifest::histogram_discrete(  ds_person, "person_id")
+ds_person |>
+  dplyr::mutate(
+    person_id = as.integer(as.character(person_id))
+    ) |>
+  TabularManifest::histogram_continuous(         "person_id"            , bin_width = 5)
 TabularManifest::histogram_discrete(  ds_person, "data_partner_id")
 TabularManifest::histogram_discrete(  ds_person, "gender_concept_id")
-TabularManifest::histogram_continuous(ds_person, "year_of_birth")
-TabularManifest::histogram_continuous(ds_person, "month_of_birth")
-TabularManifest::histogram_continuous(ds_person, "day_of_birth")
-TabularManifest::histogram_date(      ds_person, "birth_datetime", bin_unit = "year")
+TabularManifest::histogram_continuous(ds_person, "year_of_birth"        , bin_width = 5)
+TabularManifest::histogram_continuous(ds_person, "month_of_birth"       , bin_width = 1)
+TabularManifest::histogram_continuous(ds_person, "day_of_birth"         , bin_width = 1)
+TabularManifest::histogram_date(      ds_person, "birth_datetime"       , bin_unit = "year")
 # TabularManifest::histogram_discrete(ds_person, "race_concept_id")
 # TabularManifest::histogram_discrete(ds_person, "ethnicity_concept_id")
 # TabularManifest::histogram_discrete(ds_person, "location_id")
@@ -62,7 +66,7 @@ TabularManifest::histogram_date(      ds_person, "birth_datetime", bin_unit = "y
 # TabularManifest::histogram_discrete(ds_person, "race_source_concept_id")
 # TabularManifest::histogram_discrete(ds_person, "ethnicity_source_value")
 # TabularManifest::histogram_discrete(ds_person, "ethnicity_source_concept_id")
-TabularManifest::histogram_date(      ds_person, "covid_date", bin_unit = "week")
+TabularManifest::histogram_date(      ds_person, "covid_date"           , bin_unit = "week")
 
 # ---- marginals-person-hidden -------------------------------------------------
 TabularManifest::histogram_continuous(ds_person, "latent_risk"             , rounded_digits = 1)
