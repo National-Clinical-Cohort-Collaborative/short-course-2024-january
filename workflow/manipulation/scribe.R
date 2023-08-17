@@ -39,6 +39,7 @@ ds <-
   dplyr::mutate(
     # When reading from SQLite, there are some data types that need to be cast explicitly.  SQL Server and the 'odbc' package handles dates and bits/logicals naturally.
     person_id           = factor(person_id),
+    data_partner_id     = factor(data_partner_id),
     birth_datetime      = as.Date(birth_datetime),
     covid_date          = as.Date(covid_date),
     # age_80_plus       = as.logical(age_80_plus),

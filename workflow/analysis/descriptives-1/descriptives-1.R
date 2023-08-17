@@ -78,16 +78,36 @@ TabularManifest::histogram_continuous(ds_person, "calc_age_covid"          , rou
 # }
 
 # ---- scatterplots ------------------------------------------------------------
-# g1 <-
-#   ggplot(ds, aes(x=birth_year, y=quarter_mile_sec, color=forward_gear_count_f)) +
-#   geom_smooth(method="loess", span=2) +
-#   geom_point(shape=1) +
-#   theme_light() +
-#   theme(axis.ticks = element_blank())
-# g1
-#
+g1 <-
+  ds_person |>
+  ggplot(aes(
+    x = calc_age_covid,
+    y = latent_risk,
+    group = data_partner_id,
+    color = data_partner_id
+    # fill = data_partner_id
+  )) +
+  geom_smooth(
+    mapping = aes(group = NA, color = NULL, fill = NULL),
+    method = "loess",
+    span = 2,
+    color = "gray40",
+    linetype = "88"
+  ) +
+  geom_smooth(
+    method = "loess",
+    span = 2,
+    se = FALSE
+  ) +
+  geom_point(shape=1) +
+  theme_light() +
+  theme(axis.ticks = element_blank())
+g1
+
 # g1 %+% aes(color=NULL)
-# g1 %+% aes(color=factor(cylinder_count))
+g1 %+% aes(x = birth_datetime)
+g1 %+% aes(x = calc_outbreak_lag_years)
+g1 %+% aes(x = covid_date)
 #
 # ggplot(ds, aes(x=weight_gear_z, color=forward_gear_count_f, fill=forward_gear_count_f)) +
 #   geom_density(alpha=.1) +
@@ -95,24 +115,25 @@ TabularManifest::histogram_continuous(ds_person, "calc_age_covid"          , rou
 #   labs(x=expression(z[gear]))
 
 # ---- correlation-matrixes ----------------------------------------------------
-# predictor_names <-
-#   c(
-#     "miles_per_gallon", "displacement_inches_cubed",
-#     "cylinder_count", "horsepower",
-#     "forward_gear_count"
-#   )
-#
+predictor_names <-
+  c(
+    "calc_age_covid",
+    # "birth_datetime",
+    "calc_outbreak_lag_years"
+    # "covid_date"
+  )
+
 # cat("### Hyp 1: Prediction of quarter mile time\n\n")
-# ds_hyp <- ds[, c("quarter_mile_sec", predictor_names)]
-# colnames(ds_hyp) <- gsub("_", "\n", colnames(ds_hyp))
-# cor_matrix <- cor(ds_hyp)
-# corrplot::corrplot(cor_matrix, method="ellipse", addCoef.col="gray30", tl.col="gray20", diag=F)
-# pairs(x=ds_hyp, lower.panel=panel.smooth, upper.panel=panel.smooth)
-#
-# colnames(cor_matrix) <- gsub("\n", "<br>", colnames(cor_matrix))
-# rownames(cor_matrix) <- gsub("\n", "<br>", rownames(cor_matrix))
-# knitr::kable(cor_matrix, digits = 3)
-# rm(ds_hyp, cor_matrix)
+ds_hyp <- ds_person[, c("latent_risk", predictor_names)]
+colnames(ds_hyp) <- gsub("_", "\n", colnames(ds_hyp))
+cor_matrix <- cor(ds_hyp)
+corrplot::corrplot(cor_matrix, method="ellipse", addCoef.col="gray30", tl.col="gray20", diag=F)
+pairs(x=ds_hyp, lower.panel=panel.smooth, upper.panel=panel.smooth)
+
+colnames(cor_matrix) <- gsub("\n", "<br>", colnames(cor_matrix))
+rownames(cor_matrix) <- gsub("\n", "<br>", rownames(cor_matrix))
+knitr::kable(cor_matrix, digits = 3)
+rm(ds_hyp, cor_matrix)
 #
 # cat("### Hyp 2: Prediction of z-score of weight/gear\n\n")
 # ds_hyp <- ds[, c("weight_gear_z", predictor_names)]
