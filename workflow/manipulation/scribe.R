@@ -99,26 +99,8 @@ dim(ds)
 #   tidyr::pivot_longer(tidyselect::everything()) |>
 #   print(n = 200)
 
-# # ---- verify-values -----------------------------------------------------------
-# # OuhscMunge::verify_value_headstart(ds)
-# checkmate::assert_integer(  ds$subject_wave_id , any.missing=F , lower=1, upper=200   , unique=T)
-# checkmate::assert_integer(  ds$subject_id      , any.missing=F , lower=1001, upper=1200 )
-# checkmate::assert_integer(  ds$county_id       , any.missing=F , lower=51, upper=72     )
-# checkmate::assert_character(ds$county          , any.missing=F , pattern="^.{5,8}$"     )
-# checkmate::assert_integer(  ds$wave_id         , any.missing=F , lower=1, upper=10      )
-# checkmate::assert_integer(  ds$year            , any.missing=F , lower=2000, upper=2014 )
-# checkmate::assert_date(     ds$date_at_visit     , any.missing=F , lower=as.Date("2000-01-01"), upper=as.Date("2018-12-31") )
-# checkmate::assert_integer(  ds$age             , any.missing=F , lower=55, upper=84     )
-# checkmate::assert_character(ds$age_cut_4       , any.missing=F , pattern="^.{3,5}$"     )
-# checkmate::assert_logical(  ds$age_80_plus     , any.missing=F                          )
-# checkmate::assert_numeric(  ds$int_factor_1    , any.missing=F , lower=7, upper=20      )
-# checkmate::assert_numeric(  ds$slope_factor_1  , any.missing=F , lower=-1, upper=1      )
-# checkmate::assert_numeric(  ds$cog_1           , any.missing=F , lower=2, upper=8       )
-# checkmate::assert_numeric(  ds$cog_2           , any.missing=F , lower=3, upper=10      )
-# checkmate::assert_numeric(  ds$cog_3           , any.missing=F , lower=4, upper=12      )
-# checkmate::assert_numeric(  ds$phys_1          , any.missing=F , lower=1, upper=5       )
-# checkmate::assert_numeric(  ds$phys_2          , any.missing=F , lower=2, upper=7       )
-# checkmate::assert_numeric(  ds$phys_3          , any.missing=F , lower=0, upper=3       )
+# ---- verify-values -----------------------------------------------------------
+# OuhscMunge::verify_value_headstart(ds)
 
 # ---- specify-columns-to-upload -----------------------------------------------
 # Print colnames that `dplyr::select()`  should contain below:
@@ -146,9 +128,7 @@ ds_slim <-
     race_source_concept_id,
     ethnicity_source_value,
     ethnicity_source_concept_id,
-  ) |>
-  # dplyr::slice(1:100) |>
-  dplyr::mutate_if(is.logical, as.integer)       # Some databases & drivers need 0/1 instead of FALSE/TRUE.
+  )
 ds_slim
 
 # ---- save-to-disk ------------------------------------------------------------

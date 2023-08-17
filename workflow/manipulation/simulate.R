@@ -158,7 +158,7 @@ ds_person <-
 
 summary(lm(latent_risk ~ 1 + latent_dob_lag + calc_outbreak_lag + calc_age_covid, data = ds_person))
 # summary(lm(latent_risk ~ 1 + latent_dob_lag + covid_date, data = ds_person))
-stop()
+# stop()
 # https://www.npr.org/sections/health-shots/2020/09/01/816707182/map-tracking-the-spread-of-the-coronavirus-in-the-u-s
 
 # x <- rchisq(n = 100000, df = 12, ncp = 100)
