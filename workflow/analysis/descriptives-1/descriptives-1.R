@@ -152,30 +152,34 @@ rm(ds_hyp, cor_matrix)
 # rm(ds_hyp, cor_matrix)
 
 # ---- models ------------------------------------------------------------------
-# cat("============= Simple model that's just an intercept. =============")
-# m0 <- lm(quarter_mile_sec ~ 1, data=ds)
-# summary(m0)
-#
-# cat("============= Model includes one predictor. =============")
-# m1 <- lm(quarter_mile_sec ~ 1 + miles_per_gallon, data=ds)
-# summary(m1)
-#
+cat("============= Simple model that's just an intercept. =============")
+m0 <- lm(latent_risk ~ 1, data=ds_person)
+summary(m0)
+
+cat("============= Model includes one predictor: `outbreak_lag`. =============")
+m1a <- lm(latent_risk ~ 1  + calc_outbreak_lag_years, data=ds_person)
+summary(m1a)
+
+cat("============= Model includes one predictor: `calc_age_covid`. =============")
+m1b <- lm(latent_risk ~ 1  + calc_age_covid, data=ds_person)
+summary(m1b)
+
 # cat("The one predictor is significantly tighter.")
 # anova(m0, m1)
-#
-# cat("============= Model includes two predictors. =============")
-# m2 <- lm(quarter_mile_sec ~ 1 + miles_per_gallon + forward_gear_count_f, data=ds)
-# summary(m2)
-#
+
+cat("============= Model includes two predictors. =============")
+m2 <- lm(latent_risk ~ 1  + calc_outbreak_lag_years + calc_age_covid, data=ds_person)
+summary(m2)
+
 # cat("The two predictor is significantly tighter.")
 # anova(m1, m2)
 
 # ---- model-results-table  -----------------------------------------------
-# summary(m2)$coef |>
-#   knitr::kable(
-#     digits      = 2,
-#     format      = "markdown"
-#   )
+summary(m2)$coef |>
+  knitr::kable(
+    digits      = 2,
+    format      = "markdown"
+  )
 
 # Uncomment the next line for a dynamic, JavaScript [DataTables](https://datatables.net/) table.
 # DT::datatable(round(summary(m2)$coef, digits = 2), options = list(pageLength = 2))
