@@ -134,5 +134,5 @@ ds_slim <-
 ds_slim
 
 # ---- save-to-disk ------------------------------------------------------------
-readr::write_csv(ds       , config$path_derived_person_csv)
-readr::write_rds(ds       , config$path_derived_person_rds          , compress="gz")
+readr::write_csv(ds       , config$path_derived_patient_csv)
+readr::write_rds(ds       , config$path_derived_patient_rds          , compress="gz")

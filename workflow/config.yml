@@ -16,8 +16,8 @@ default:
   path_simulated_patient_hidden_rds:  "data-public/simulated/patient-hidden.rds"
 
   # ---- Analysis-ready datasets (produced by scribes & consumed by analyses).
-  path_derived_person_csv:        "data-public/derived/person.csv"
-  path_derived_person_rds:        "data-public/derived/person.rds"
+  path_derived_patient_csv:           "data-public/derived/patient.csv"
+  path_derived_patient_rds:           "data-public/derived/patient.rds"
 
   path_log_flow:              !expr strftime(Sys.time(), "data-unshared/log/%Y/%Y-%m/flow-%Y-%m-%d--%H-%M-%S.log")
 
