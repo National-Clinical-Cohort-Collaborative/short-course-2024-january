@@ -20,11 +20,13 @@ config                      <- config::get()
 
 # ---- load-data ---------------------------------------------------------------
 ds_person         <- readr::read_rds(config$path_derived_person_rds) # 'ds' stands for 'datasets'
+ds_patient        <- readr::read_rds(config$path_simulated_patient_rds)
 ds_person_hidden  <- readr::read_rds(config$path_simulated_person_hidden_rds)
 
 # ---- tweak-data --------------------------------------------------------------
 ds_person <-
   ds_person |>
+  dplyr::left_join(ds_patient       , by = "person_id") |>
   dplyr::left_join(ds_person_hidden, by = "person_id") |>
   dplyr::select(
     person_id,

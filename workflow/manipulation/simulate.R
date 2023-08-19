@@ -342,22 +342,32 @@ ds_person_slim <-
 # Print colnames that `dplyr::select()`  should contain below:
   cat(paste0("    ", colnames(ds_person), collapse=",\n"))
 
+ds_patient <-
+  ds_person |>
+  # dplyr::slice(1:100) |>
+  dplyr::select(
+    person_id,
+    calc_outbreak_lag_years,
+    calc_age_covid,
+  )
+
 ds_person_hidden <-
   ds_person |>
   # dplyr::slice(1:100) |>
   dplyr::select(
     person_id,
     latent_risk,
-    calc_outbreak_lag_years,
-    calc_age_covid,
   )
 
 # # ---- save-to-disk ------------------------------------------------------------
 # # If there's no PHI, a rectangular CSV is usually adequate, and it's portable to other machines and software.
 readr::write_csv(ds_site          , config$path_simulated_site_csv)
+readr::write_csv(ds_patient       , config$path_simulated_patient_csv)
+readr::write_rds(ds_patient       , config$path_simulated_patient_rds      ,    compress = "gz")
 readr::write_csv(ds_person_hidden , config$path_simulated_person_hidden_csv)
 readr::write_rds(ds_person_hidden , config$path_simulated_person_hidden_rds,    compress = "gz")
 
 # ---- save-to-db --------------------------------------------------------------
-truncate_and_load_table_sqlite(ds_person_slim, "person")
-truncate_and_load_table_sqlite(ds_person_hidden, "person_hidden")
+truncate_and_load_table_sqlite(ds_person_slim   , "person")
+truncate_and_load_table_sqlite(ds_patient       , "patient")
+truncate_and_load_table_sqlite(ds_person_hidden , "person_hidden")

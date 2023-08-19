@@ -34,11 +34,14 @@ path_ddl <-
     "manipulation/db-create/nation-count-create.sql",
     "manipulation/db-create/person-drop.sql",
     "manipulation/db-create/person-create.sql",
+    "manipulation/db-create/patient-drop.sql",
+    "manipulation/db-create/patient-create.sql",
     "manipulation/db-create/person-hidden-drop.sql",
     "manipulation/db-create/person-hidden-create.sql"
   )
 
 execute_sql <- function(path_sql) {
+  message("Executing ", path_sql)
   checkmate::assert_file_exists(path_sql)
 
   path_sql |>
