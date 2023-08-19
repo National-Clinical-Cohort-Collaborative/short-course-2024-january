@@ -36,6 +36,18 @@ ds_person <-
     month_of_birth,
     day_of_birth,
     birth_datetime,
+    # race_concept_id,
+    # ethnicity_concept_id,
+    # location_id,
+    # provider_id,
+    # care_site_id,
+    # person_source_value,
+    gender_source_value,
+    gender_source_concept_id,
+    # race_source_value,
+    # race_source_concept_id,
+    # ethnicity_source_value,
+    # ethnicity_source_concept_id,
     covid_date,
     latent_risk,
     calc_outbreak_lag_years,
@@ -50,7 +62,6 @@ ds_person |>
     person_id = as.integer(as.character(person_id))
     ) |>
   TabularManifest::histogram_continuous(         "person_id"            , bin_width = 5)
-TabularManifest::histogram_discrete(  ds_person, "data_partner_id")
 TabularManifest::histogram_discrete(  ds_person, "gender_concept_id")
 TabularManifest::histogram_continuous(ds_person, "year_of_birth"        , bin_width = 5)
 TabularManifest::histogram_continuous(ds_person, "month_of_birth"       , bin_width = 1)
@@ -62,8 +73,8 @@ TabularManifest::histogram_date(      ds_person, "birth_datetime"       , bin_un
 # TabularManifest::histogram_discrete(ds_person, "provider_id")
 # TabularManifest::histogram_discrete(ds_person, "care_site_id")
 # TabularManifest::histogram_discrete(ds_person, "person_source_value")
-# TabularManifest::histogram_discrete(ds_person, "gender_source_value")
-# TabularManifest::histogram_discrete(ds_person, "gender_source_concept_id")
+TabularManifest::histogram_discrete(ds_person, "gender_source_value")
+TabularManifest::histogram_discrete(ds_person, "gender_source_concept_id")
 # TabularManifest::histogram_discrete(ds_person, "race_source_value")
 # TabularManifest::histogram_discrete(ds_person, "race_source_concept_id")
 # TabularManifest::histogram_discrete(ds_person, "ethnicity_source_value")
@@ -71,6 +82,7 @@ TabularManifest::histogram_date(      ds_person, "birth_datetime"       , bin_un
 TabularManifest::histogram_date(      ds_person, "covid_date"           , bin_unit = "week")
 
 # ---- marginals-patient --------------------------------------------------------
+TabularManifest::histogram_discrete(  ds_person, "data_partner_id")
 TabularManifest::histogram_continuous(ds_person, "calc_outbreak_lag_years" , rounded_digits = 1)
 TabularManifest::histogram_continuous(ds_person, "calc_age_covid"          , rounded_digits = 1)
 

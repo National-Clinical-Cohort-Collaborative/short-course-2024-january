@@ -1,6 +1,6 @@
 SELECT
   p.person_id
-  ,p.data_partner_id
+  ,pt.data_partner_id
   ,p.gender_concept_id
   ,p.year_of_birth
   ,p.month_of_birth

@@ -1,7 +1,6 @@
 -- DDL adapted from "cdm.sqlite" from https://ohdsi.github.io/Eunomia/
 CREATE TABLE person (
   person_id                       integer   primary key,
-  data_partner_id                 integer,
   gender_concept_id               integer,
   year_of_birth                   integer,
   month_of_birth                  integer,

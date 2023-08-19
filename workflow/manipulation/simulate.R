@@ -259,7 +259,7 @@ sql_person_slim <-
   "
     SELECT
       p.person_id
-      ,p.data_partner_id
+      -- ,p.data_partner_id
       ,p.gender_concept_id
       ,p.year_of_birth
       ,p.month_of_birth
@@ -347,6 +347,7 @@ ds_patient <-
   # dplyr::slice(1:100) |>
   dplyr::select(
     person_id,
+    data_partner_id,
     calc_outbreak_lag_years,
     calc_age_covid,
   )
