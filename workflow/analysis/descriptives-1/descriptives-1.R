@@ -26,8 +26,8 @@ ds_patient_hidden <- readr::read_rds(config$path_simulated_patient_hidden_rds)
 # ---- tweak-data --------------------------------------------------------------
 ds_person <-
   ds_person |>
-  dplyr::left_join(ds_patient           , by = "person_id") |>
-  dplyr::left_join(ds_patient_hidden    , by = "person_id") |>
+  # dplyr::left_join(ds_patient           , by = "person_id") |>
+  # dplyr::left_join(ds_patient_hidden    , by = "person_id") |>
   dplyr::select(
     person_id,
     data_partner_id,

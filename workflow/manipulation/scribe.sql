@@ -19,5 +19,11 @@ SELECT
   ,p.ethnicity_source_value
   ,p.ethnicity_source_concept_id
   ,p.covid_date
+  ,pt.calc_outbreak_lag_years
+  ,pt.calc_age_covid
+  ,pth.latent_risk
 FROM person p
-ORDER BY person_id
+  left  join patient         pt   on p.person_id = pt.person_id
+  left  join patient_hidden  pth  on p.person_id = pth.person_id
+
+ORDER BY p.person_id
