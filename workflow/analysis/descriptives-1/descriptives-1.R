@@ -21,13 +21,13 @@ config                      <- config::get()
 # ---- load-data ---------------------------------------------------------------
 ds_person         <- readr::read_rds(config$path_derived_person_rds) # 'ds' stands for 'datasets'
 ds_patient        <- readr::read_rds(config$path_simulated_patient_rds)
-ds_person_hidden  <- readr::read_rds(config$path_simulated_person_hidden_rds)
+ds_patient_hidden <- readr::read_rds(config$path_simulated_patient_hidden_rds)
 
 # ---- tweak-data --------------------------------------------------------------
 ds_person <-
   ds_person |>
-  dplyr::left_join(ds_patient       , by = "person_id") |>
-  dplyr::left_join(ds_person_hidden, by = "person_id") |>
+  dplyr::left_join(ds_patient           , by = "person_id") |>
+  dplyr::left_join(ds_patient_hidden    , by = "person_id") |>
   dplyr::select(
     person_id,
     data_partner_id,
@@ -42,7 +42,7 @@ ds_person <-
     calc_age_covid,
   )
 
-rm(ds_person_hidden)
+rm(ds_patient_hidden)
 
 # ---- marginals-person ---------------------------------------------------------------
 ds_person |>
@@ -70,10 +70,12 @@ TabularManifest::histogram_date(      ds_person, "birth_datetime"       , bin_un
 # TabularManifest::histogram_discrete(ds_person, "ethnicity_source_concept_id")
 TabularManifest::histogram_date(      ds_person, "covid_date"           , bin_unit = "week")
 
-# ---- marginals-person-hidden -------------------------------------------------
-TabularManifest::histogram_continuous(ds_person, "latent_risk"             , rounded_digits = 1)
+# ---- marginals-patient --------------------------------------------------------
 TabularManifest::histogram_continuous(ds_person, "calc_outbreak_lag_years" , rounded_digits = 1)
 TabularManifest::histogram_continuous(ds_person, "calc_age_covid"          , rounded_digits = 1)
+
+# ---- marginals-patient-hidden -------------------------------------------------
+TabularManifest::histogram_continuous(ds_person, "latent_risk"             , rounded_digits = 1)
 
 # This helps start the code for graphing each variable.
 #   - Make sure you change it to `histogram_continuous()` for the appropriate variables.

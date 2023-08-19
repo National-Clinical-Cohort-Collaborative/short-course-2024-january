@@ -351,7 +351,7 @@ ds_patient <-
     calc_age_covid,
   )
 
-ds_person_hidden <-
+ds_patient_hidden <-
   ds_person |>
   # dplyr::slice(1:100) |>
   dplyr::select(
@@ -364,10 +364,10 @@ ds_person_hidden <-
 readr::write_csv(ds_site          , config$path_simulated_site_csv)
 readr::write_csv(ds_patient       , config$path_simulated_patient_csv)
 readr::write_rds(ds_patient       , config$path_simulated_patient_rds      ,    compress = "gz")
-readr::write_csv(ds_person_hidden , config$path_simulated_person_hidden_csv)
-readr::write_rds(ds_person_hidden , config$path_simulated_person_hidden_rds,    compress = "gz")
+readr::write_csv(ds_patient_hidden , config$path_simulated_patient_hidden_csv)
+readr::write_rds(ds_patient_hidden , config$path_simulated_patient_hidden_rds,    compress = "gz")
 
 # ---- save-to-db --------------------------------------------------------------
 truncate_and_load_table_sqlite(ds_person_slim   , "person")
 truncate_and_load_table_sqlite(ds_patient       , "patient")
-truncate_and_load_table_sqlite(ds_person_hidden , "person_hidden")
+truncate_and_load_table_sqlite(ds_patient_hidden , "patient_hidden")

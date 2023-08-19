@@ -61,10 +61,15 @@ Univariate
 
 ![](figure-png/marginals-person-1.png)<!-- -->![](figure-png/marginals-person-2.png)<!-- -->![](figure-png/marginals-person-3.png)<!-- -->![](figure-png/marginals-person-4.png)<!-- -->![](figure-png/marginals-person-5.png)<!-- -->![](figure-png/marginals-person-6.png)<!-- -->![](figure-png/marginals-person-7.png)<!-- -->![](figure-png/marginals-person-8.png)<!-- -->
 
-`person_hidden` table
+`patient` table
 ---------------------------------------------------------------------------
 
-![](figure-png/marginals-person-hidden-1.png)<!-- -->![](figure-png/marginals-person-hidden-2.png)<!-- -->![](figure-png/marginals-person-hidden-3.png)<!-- -->
+![](figure-png/marginals-patient-1.png)<!-- -->![](figure-png/marginals-patient-2.png)<!-- -->
+
+`patient_hidden` table
+---------------------------------------------------------------------------
+
+![](figure-png/marginals-patient-hidden-1.png)<!-- -->
 
 
 Multivariate
@@ -287,6 +292,7 @@ For the sake of documentation and reproducibility, the current report was render
      reticulate        1.31       2023-08-10 [1] CRAN (R 4.2.2)
      rlang             1.1.1      2023-04-28 [1] CRAN (R 4.2.2)
      rmarkdown         2.24       2023-08-14 [1] CRAN (R 4.2.2)
+     rsconnect         1.0.2      2023-08-17 [1] CRAN (R 4.2.2)
      RSQLite         * 2.3.1      2023-04-03 [1] CRAN (R 4.2.2)
      rstudioapi        0.15.0     2023-07-07 [1] CRAN (R 4.2.2)
      sass              0.4.7      2023-07-15 [1] CRAN (R 4.2.2)
@@ -323,4 +329,4 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 
-Report rendered by wibeasley at 2023-08-18, 19:28 -0500 in 7 seconds.
+Report rendered by wibeasley at 2023-08-18, 19:44 -0500 in 7 seconds.

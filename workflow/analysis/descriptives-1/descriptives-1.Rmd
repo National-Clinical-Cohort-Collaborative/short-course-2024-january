@@ -93,10 +93,16 @@ Univariate
 ```{r marginals-person, echo=echo_chunks, message=message_chunks}
 ```
 
-`person_hidden` table
+`patient` table
 ---------------------------------------------------------------------------
 
-```{r marginals-person-hidden, echo=echo_chunks, message=message_chunks}
+```{r marginals-patient, echo=echo_chunks, message=message_chunks}
+```
+
+`patient_hidden` table
+---------------------------------------------------------------------------
+
+```{r marginals-patient-hidden, echo=echo_chunks, message=message_chunks}
 ```
 
 
