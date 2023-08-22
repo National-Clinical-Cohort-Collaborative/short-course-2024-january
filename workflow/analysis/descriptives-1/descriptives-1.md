@@ -286,7 +286,6 @@ For the sake of documentation and reproducibility, the current report was render
        mgcv              1.8-42     2023-03-02 [3] CRAN (R 4.3.1)
        munsell           0.5.0      2018-06-12 [1] CRAN (R 4.3.0)
        nlme              3.1-162    2023-01-31 [3] CRAN (R 4.3.1)
-       odbc              1.3.5      2023-06-29 [1] CRAN (R 4.3.1)
        OuhscMunge        0.2.0.9015 2023-05-25 [1] Github (OuhscBbmc/OuhscMunge@497aa52)
      P parallel          4.3.1      2023-07-06 [3] local
        pillar            1.9.0      2023-03-22 [1] CRAN (R 4.3.0)
@@ -294,7 +293,6 @@ For the sake of documentation and reproducibility, the current report was render
        proto             1.0.0      2016-10-29 [1] CRAN (R 4.3.0)
        purrr             1.0.2      2023-08-10 [1] CRAN (R 4.3.1)
        R6                2.5.1      2021-08-19 [1] CRAN (R 4.3.0)
-       Rcpp              1.0.11     2023-07-06 [1] CRAN (R 4.3.1)
        readr             2.1.4      2023-02-10 [1] CRAN (R 4.3.0)
        rlang             1.1.1      2023-04-28 [1] CRAN (R 4.3.0)
        rmarkdown         2.23       2023-07-01 [1] CRAN (R 4.3.1)
@@ -336,4 +334,4 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 
-Report rendered by wibea at 2023-08-22, 17:43 -0500 in 2 seconds.
+Report rendered by wibea at 2023-08-22, 17:49 -0500 in 2 seconds.

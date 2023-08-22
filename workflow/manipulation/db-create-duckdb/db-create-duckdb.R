@@ -28,16 +28,9 @@ config                         <- config::get()
 
 path_ddl <-
   c(
-    "manipulation/db-create-duckdb/create.sql",
-    # "manipulation/db-create-sqlite/concept-create.sql",
+    "manipulation/db-create-duckdb/omop.sql",
     "manipulation/db-create-duckdb/patient.sql",
     "manipulation/db-create-duckdb/latent-nation-count.sql"
-    # "manipulation/db-create-sqlite/person-drop.sql",
-    # "manipulation/db-create-sqlite/person-create.sql",
-    # "manipulation/db-create-sqlite/patient-drop.sql",
-    # "manipulation/db-create-sqlite/patient-create.sql",
-    # "manipulation/db-create-sqlite/patient-hidden-drop.sql",
-    # "manipulation/db-create-sqlite/patient-hidden-create.sql"
   )
 
 execute_sql <- function(path_sql) {
