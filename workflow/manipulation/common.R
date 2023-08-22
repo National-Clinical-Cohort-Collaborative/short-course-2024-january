@@ -1,5 +1,7 @@
 # ---- duckdb ------------------------------------------------------------------
 truncate_and_load_table_duckdb <- function(d, table_name) {
+  requireNamespace("duckdb")
+
   checkmate::assert_data_frame(d)
   checkmate::assert_character( table_name, min.chars = 2, any.missing = FALSE)
 
@@ -38,6 +40,7 @@ truncate_and_load_table_duckdb <- function(d, table_name) {
 }
 
 retrieve_duckdb <- function(sql) {
+  requireNamespace("duckdb")
   checkmate::assert_character(sql, min.chars = 10, any.missing = FALSE)
 
   drv <-
@@ -61,10 +64,9 @@ retrieve_duckdb <- function(sql) {
     tibble::as_tibble()
 }
 
-
-
 # ---- sqlite ------------------------------------------------------------------
 truncate_and_load_table_sqlite <- function(d, table_name) {
+  requireNamespace("RSQLite")
   checkmate::assert_data_frame(d)
   checkmate::assert_character( table_name, min.chars = 2, any.missing = FALSE)
 
@@ -94,6 +96,7 @@ truncate_and_load_table_sqlite <- function(d, table_name) {
 }
 
 retrieve_sqlite <- function(sql) {
+  requireNamespace("RSQLite")
   checkmate::assert_character(sql, min.chars = 10, any.missing = FALSE)
 
   cnn <- DBI::dbConnect(RSQLite::SQLite(), dbname = config$path_database_sqlite)

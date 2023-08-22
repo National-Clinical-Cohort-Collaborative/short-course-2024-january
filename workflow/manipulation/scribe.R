@@ -8,8 +8,6 @@ base::source("manipulation/common.R")
 
 # ---- load-packages -----------------------------------------------------------
 # import::from("magrittr", "%>%")
-# requireNamespace("DBI")
-requireNamespace("odbc")
 requireNamespace("tibble")
 requireNamespace("readr"                      )  # remotes::install_github("tidyverse/readr")
 requireNamespace("dplyr"                      )
