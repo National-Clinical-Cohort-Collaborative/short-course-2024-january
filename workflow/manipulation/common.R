@@ -4,7 +4,7 @@ truncate_and_load_table_sqlite <- function(d, table_name) {
   #   * later, only portions need to be queried/retrieved at a time (b/c everything won't need to be loaded into R's memory)
   # SQLite data types work differently than most databases: https://www.sqlite.org/datatype3.html#type_affinity
 
-  cnn <- DBI::dbConnect(RSQLite::SQLite(), dbname = config$path_database)
+  cnn <- DBI::dbConnect(RSQLite::SQLite(), dbname = config$path_database_sqlite)
   sql_delete <- sprintf("DELETE FROM %s;", table_name)
   DBI::dbExecute(cnn, sql_delete)
 
@@ -25,7 +25,7 @@ truncate_and_load_table_sqlite <- function(d, table_name) {
 }
 
 retrieve_sqlite <- function(sql) {
-  cnn <- DBI::dbConnect(RSQLite::SQLite(), dbname = config$path_database)
+  cnn <- DBI::dbConnect(RSQLite::SQLite(), dbname = config$path_database_sqlite)
   # DBI::dbListTables(cnn)
   ds <- DBI::dbGetQuery(cnn, sql) # This needs to be activated each time a connection is made. #http://stackoverflow.com/questions/15301643/sqlite3-forgets-to-use-foreign-keys
   DBI::dbDisconnect(cnn); rm(cnn, sql)
