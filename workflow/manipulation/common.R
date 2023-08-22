@@ -1,3 +1,38 @@
+# ---- duckdb ------------------------------------------------------------------
+truncate_and_load_table_duckdb <- function(d, table_name) {
+  cnn <- DBI::dbConnect(duckdb::duckdb(), dbname = config$path_database_duckdb)
+  sql_delete <- sprintf("TRUNCATE TABLE %s;", table_name)
+  DBI::dbExecute(cnn, sql_delete)
+
+  d |>
+    dplyr::mutate_if(lubridate::is.Date, as.character) |>     # SQLite doesn't support dates natively
+    DBI::dbWriteTable(
+      conn      = cnn,
+      name      = table_name,
+      append    = TRUE,
+      row.names = FALSE
+    )
+
+  # Allow database to optimize its internal arrangement
+  DBI::dbExecute(cnn, "VACUUM ANALYZE;")
+
+  # Close connection
+  DBI::dbDisconnect(cnn, shutdown = TRUE)
+}
+
+retrieve_duckdb <- function(sql) {
+  cnn <- DBI::dbConnect(duckdb::duckdb(), dbname = config$path_database_duckdb)
+  # DBI::dbListTables(cnn)
+  ds <- DBI::dbGetQuery(cnn, sql) # This needs to be activated each time a connection is made. #http://stackoverflow.com/questions/15301643/sqlite3-forgets-to-use-foreign-keys
+  DBI::dbDisconnect(cnn); rm(cnn, sql)
+
+  ds |>
+    tibble::as_tibble()
+}
+
+
+
+# ---- sqlite ------------------------------------------------------------------
 truncate_and_load_table_sqlite <- function(d, table_name) {
   # If there's *NO* PHI, a local database like SQLite fits a nice niche if
   #   * the data is relational and

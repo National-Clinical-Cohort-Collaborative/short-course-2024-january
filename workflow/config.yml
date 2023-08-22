@@ -6,7 +6,8 @@ default:
   path_metadata_concept:      "data-public/metadata/concept.csv"
 
   # Central Database (produced by Ellis lanes).
-  path_database_sqlite:              "data-public/derived/db.sqlite3"
+  path_database_sqlite:               "data-public/derived/db.sqlite3"
+  path_database_duckdb:               "data-public/derived/db.duckdb"
 
   # ---- Simulated-ready datasets (consumed by scribes).
   path_simulated_site_csv:            "data-public/simulated/site.csv"

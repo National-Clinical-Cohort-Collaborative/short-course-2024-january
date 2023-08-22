@@ -21,7 +21,7 @@ requireNamespace("dplyr"        ) # Avoid attaching dplyr, b/c its function name
 # requireNamespace("testit"       ) # For asserting conditions meet expected patterns/conditions.
 requireNamespace("checkmate"    ) # For asserting conditions meet expected patterns/conditions. # remotes::install_github("mllg/checkmate")
 # requireNamespace("DBI"          ) # Database-agnostic interface
-requireNamespace("RSQLite"      ) # Lightweight database for non-PHI data.
+# requireNamespace("RSQLite"      ) # Lightweight database for non-PHI data.
 # requireNamespace("odbc"         ) # For communicating with SQL Server over a locally-configured DSN.  Uncomment if you use 'upload-to-db' chunk.
 # requireNamespace("OuhscMunge"   ) # remotes::install_github(repo="OuhscBbmc/OuhscMunge")
 
@@ -106,4 +106,5 @@ ds_slim <-
   )
 
 # ---- save-to-db --------------------------------------------------------------
+# truncate_and_load_table_duckdb(ds_slim, "latent_nation_count")
 truncate_and_load_table_sqlite(ds_slim, "latent_nation_count")
