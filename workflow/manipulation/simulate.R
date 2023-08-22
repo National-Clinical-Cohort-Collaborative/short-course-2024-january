@@ -355,7 +355,7 @@ ds_person_slim <-
 
 # ---- specify-columns-to-upload -----------------------------------------------
 # Print colnames that `dplyr::select()`  should contain below:
-  cat(paste0("    ", colnames(ds_person), collapse=",\n"))
+# cat(paste0("    ", colnames(ds_person), collapse=",\n"))
 
 ds_patient <-
   ds_person |>
@@ -377,19 +377,30 @@ ds_patient_hidden <-
     latent_risk,
   )
 
-# # ---- save-to-disk ------------------------------------------------------------
-# # If there's no PHI, a rectangular CSV is usually adequate, and it's portable to other machines and software.
-readr::write_csv(ds_site          , config$path_simulated_site_csv)
-readr::write_csv(ds_patient       , config$path_simulated_patient_csv)
-readr::write_rds(ds_patient       , config$path_simulated_patient_rds      ,    compress = "gz")
-readr::write_csv(ds_patient_hidden , config$path_simulated_patient_hidden_csv)
-readr::write_rds(ds_patient_hidden , config$path_simulated_patient_hidden_rds,    compress = "gz")
+# ---- save-to-disk ------------------------------------------------------------
+# If there's no PHI, a rectangular CSV is usually adequate, and it's portable to other machines and software.
+if (config$produce_csv) {
+  readr::write_csv(ds_site            , config$path_csv_site)
+  readr::write_csv(ds_person_slim     , config$path_csv_person)
+  readr::write_csv(ds_patient         , config$path_csv_patient)
+  readr::write_csv(ds_patient_hidden  , config$path_csv_patient_hidden)
+}
 
-# ---- save-to-db --------------------------------------------------------------
-truncate_and_load_table_sqlite(ds_person_slim   , "person")
-truncate_and_load_table_sqlite(ds_patient       , "patient")
-truncate_and_load_table_sqlite(ds_patient_hidden, "patient_hidden")
+if (config$produce_rds) {
+  readr::write_rds(ds_site            , config$path_rds_site              , compress = "gz")
+  readr::write_rds(ds_person_slim     , config$path_rds_person            , compress = "gz")
+  readr::write_rds(ds_patient         , config$path_rds_patient           , compress = "gz")
+  readr::write_rds(ds_patient_hidden  , config$path_rds_patient_hidden    , compress = "gz")
+}
 
-truncate_and_load_table_duckdb(ds_person_slim   , "person")
-truncate_and_load_table_duckdb(ds_patient       , "patient")
-truncate_and_load_table_duckdb(ds_patient_hidden, "patient_hidden")
+if (config$produce_duckdb) {
+  truncate_and_load_table_duckdb(ds_person_slim   , "person")
+  truncate_and_load_table_duckdb(ds_patient       , "patient")
+  truncate_and_load_table_duckdb(ds_patient_hidden, "patient_hidden")
+}
+
+if (config$produce_sqlite) {
+  truncate_and_load_table_sqlite(ds_person_slim   , "person")
+  truncate_and_load_table_sqlite(ds_patient       , "patient")
+  truncate_and_load_table_sqlite(ds_patient_hidden, "patient_hidden")
+}
