@@ -28,16 +28,16 @@ config                         <- config::get()
 
 path_ddl <-
   c(
-    "manipulation/db-create/concept-drop.sql",
-    "manipulation/db-create/concept-create.sql",
-    "manipulation/db-create/nation-count-drop.sql",
-    "manipulation/db-create/nation-count-create.sql",
-    "manipulation/db-create/person-drop.sql",
-    "manipulation/db-create/person-create.sql",
-    "manipulation/db-create/patient-drop.sql",
-    "manipulation/db-create/patient-create.sql",
-    "manipulation/db-create/patient-hidden-drop.sql",
-    "manipulation/db-create/patient-hidden-create.sql"
+    "manipulation/db-create-sqlite/concept-drop.sql",
+    "manipulation/db-create-sqlite/concept-create.sql",
+    "manipulation/db-create-sqlite/nation-count-drop.sql",
+    "manipulation/db-create-sqlite/nation-count-create.sql",
+    "manipulation/db-create-sqlite/person-drop.sql",
+    "manipulation/db-create-sqlite/person-create.sql",
+    "manipulation/db-create-sqlite/patient-drop.sql",
+    "manipulation/db-create-sqlite/patient-create.sql",
+    "manipulation/db-create-sqlite/patient-hidden-drop.sql",
+    "manipulation/db-create-sqlite/patient-hidden-create.sql"
   )
 
 execute_sql <- function(path_sql) {
