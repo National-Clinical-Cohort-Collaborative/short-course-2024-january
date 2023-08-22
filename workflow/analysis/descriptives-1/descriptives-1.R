@@ -35,7 +35,7 @@ ds_person <-
     year_of_birth,
     month_of_birth,
     day_of_birth,
-    birth_datetime,
+    birth_date,
     # race_concept_id,
     # ethnicity_concept_id,
     # location_id,
@@ -55,8 +55,6 @@ ds_person <-
     calc_age_covid,
   )
 
-# rm(ds_patient_hidden)
-
 # ---- marginals-person ---------------------------------------------------------------
 ds_person |>
   dplyr::mutate(
@@ -67,7 +65,7 @@ TabularManifest::histogram_discrete(  ds_person, "gender_concept_id")
 TabularManifest::histogram_continuous(ds_person, "year_of_birth"        , bin_width = 5)
 TabularManifest::histogram_continuous(ds_person, "month_of_birth"       , bin_width = 1)
 TabularManifest::histogram_continuous(ds_person, "day_of_birth"         , bin_width = 1)
-TabularManifest::histogram_date(      ds_person, "birth_datetime"       , bin_unit = "year")
+TabularManifest::histogram_date(      ds_person, "birth_date"           , bin_unit = "year")
 # TabularManifest::histogram_discrete(ds_person, "race_concept_id")
 # TabularManifest::histogram_discrete(ds_person, "ethnicity_concept_id")
 # TabularManifest::histogram_discrete(ds_person, "location_id")
@@ -126,7 +124,7 @@ g1 <-
 g1
 
 # g1 %+% aes(color=NULL)
-g1 %+% aes(x = birth_datetime)
+g1 %+% aes(x = birth_date)
 g1 %+% aes(x = calc_outbreak_lag_years)
 g1 %+% aes(x = covid_date)
 #
@@ -139,7 +137,7 @@ g1 %+% aes(x = covid_date)
 predictor_names <-
   c(
     "calc_age_covid",
-    # "birth_datetime",
+    # "birth_date",
     "calc_outbreak_lag_years"
     # "covid_date"
   )

@@ -1,3 +1,17 @@
+DROP TABLE if exists concept;
+CREATE TABLE concept (
+  concept_id          integer         primary key,
+  concept_name        varchar(255)    not null,
+  domain_id           varchar(20)     not null,
+  vocabulary_id       varchar(20)     not null,
+  concept_class_id    varchar(20)     not null,
+  standard_concept    varchar(1)          null,
+  concept_code        varchar(50)     not null,
+  valid_start_date    date            not null,
+  valid_end_date      date            not null,
+  invalid_reason      varchar(1)          null
+);
+
 DROP TABLE if exists person;
 CREATE TABLE person (
   person_id                    integer       primary key,

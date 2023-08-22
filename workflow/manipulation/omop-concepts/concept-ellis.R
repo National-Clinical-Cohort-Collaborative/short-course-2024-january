@@ -111,4 +111,5 @@ ds_slim
 # readr::write_rds(ds_slim, path_output, compress="gz")
 
 # ---- save-to-db --------------------------------------------------------------
+truncate_and_load_table_duckdb(ds_slim, "concept")
 truncate_and_load_table_sqlite(ds_slim, "concept")

@@ -85,8 +85,7 @@ site_count <- 3L
 # sigma_factor_2      <- c(.2, .3, .5)
 
 # ---- load-data ---------------------------------------------------------------
-ds_concept <- retrieve_sqlite("SELECT * FROM concept")
-# ds_nation_count <- retrieve_sqlite("SELECT * FROM latent_nation_count")
+ds_concept      <- retrieve_duckdb("SELECT * FROM concept")
 ds_nation_count <- retrieve_duckdb("SELECT * FROM latent_nation_count")
 
 checkmate::assert_tibble(ds_concept       , min.rows = 4)
