@@ -1,6 +1,6 @@
 DROP TABLE if exists person;
 CREATE TABLE person (
-			person_id integer NOT NULL,
+			person_id integer primary key,
 			gender_concept_id integer NOT NULL,
 			year_of_birth integer NOT NULL,
 			month_of_birth integer NULL,

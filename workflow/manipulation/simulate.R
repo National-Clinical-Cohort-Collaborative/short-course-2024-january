@@ -86,7 +86,8 @@ site_count <- 3L
 
 # ---- load-data ---------------------------------------------------------------
 ds_concept <- retrieve_sqlite("SELECT * FROM concept")
-ds_nation_count <- retrieve_sqlite("SELECT * FROM latent_nation_count")
+# ds_nation_count <- retrieve_sqlite("SELECT * FROM latent_nation_count")
+ds_nation_count <- retrieve_duckdb("SELECT * FROM latent_nation_count")
 
 checkmate::assert_tibble(ds_concept       , min.rows = 4)
 checkmate::assert_tibble(ds_nation_count  , min.rows = 4)
@@ -140,6 +141,10 @@ ds_person <-
     latent_risk     = round(latent_risk, 3),
     covid_severity  = manifest_severity(latent_risk),
   ) |>
+  dplyr::mutate(
+    race_concept_id           = 0L,
+    ethnicity_concept_id      = 0L,
+  ) |>
   dplyr::select(
     person_id,
     data_partner_id,
@@ -149,8 +154,8 @@ ds_person <-
     day_of_birth,
     birth_datetime    = birth_date,
     # death_datetime,
-    # race_concept_id,
-    # ethnicity_concept_id,
+    race_concept_id,
+    ethnicity_concept_id,
     # location_id,
     # provider_id,
     # care_site_id,
@@ -279,8 +284,8 @@ sql_person_slim <-
       ,p.day_of_birth
       ,p.birth_datetime
       -- ,p.death_datetime
-      -- ,p.race_concept_id
-      -- ,p.ethnicity_concept_id
+      ,p.race_concept_id
+      ,p.ethnicity_concept_id
       -- ,p.location_id
       -- ,p.provider_id
       -- ,p.care_site_id
@@ -387,3 +392,7 @@ readr::write_rds(ds_patient_hidden , config$path_simulated_patient_hidden_rds,  
 truncate_and_load_table_sqlite(ds_person_slim   , "person")
 truncate_and_load_table_sqlite(ds_patient       , "patient")
 truncate_and_load_table_sqlite(ds_patient_hidden, "patient_hidden")
+
+truncate_and_load_table_duckdb(ds_person_slim   , "person")
+# truncate_and_load_table_duckdb(ds_patient       , "patient")
+# truncate_and_load_table_duckdb(ds_patient_hidden, "patient_hidden")

@@ -1,10 +1,20 @@
 # ---- duckdb ------------------------------------------------------------------
 truncate_and_load_table_duckdb <- function(d, table_name) {
-  cnn <- DBI::dbConnect(duckdb::duckdb(), dbname = config$path_database_duckdb)
-  sql_delete <- sprintf("TRUNCATE TABLE %s;", table_name)
-  DBI::dbExecute(cnn, sql_delete)
+  # cnn <- DBI::dbConnect(duckdb::duckdb(), dbname = config$path_database_duckdb)
+  drv <-
+    duckdb::duckdb(
+      dbdir     = config$path_database_duckdb,
+      read_only = FALSE,
+      bigint    = "integer64"
+    )
 
-  d |>
+  sql_delete <- sprintf("TRUNCATE TABLE %s;", table_name)
+
+  tryCatch({
+    cnn <- DBI::dbConnect(drv)
+    # DBI::dbListTables(cnn)
+    DBI::dbExecute(cnn, sql_delete) # This needs to be activated each time a connection is made. #http://stackoverflow.com/questions/15301643/sqlite3-forgets-to-use-foreign-keys
+   d |>
     dplyr::mutate_if(lubridate::is.Date, as.character) |>     # SQLite doesn't support dates natively
     DBI::dbWriteTable(
       conn      = cnn,
@@ -14,17 +24,34 @@ truncate_and_load_table_duckdb <- function(d, table_name) {
     )
 
   # Allow database to optimize its internal arrangement
-  DBI::dbExecute(cnn, "VACUUM ANALYZE;")
+  r <- DBI::dbExecute(cnn, "VACUUM ANALYZE;")
+  },
+  finally = {
+    DBI::dbDisconnect(cnn, shutdown = TRUE)
+    rm(cnn)
+  })
+  # base::on.exit(DBI::dbDisconnect(cnn, shutdown = TRUE))
 
-  # Close connection
-  DBI::dbDisconnect(cnn, shutdown = TRUE)
+  invisible(r)
 }
 
 retrieve_duckdb <- function(sql) {
-  cnn <- DBI::dbConnect(duckdb::duckdb(), dbname = config$path_database_duckdb)
-  # DBI::dbListTables(cnn)
-  ds <- DBI::dbGetQuery(cnn, sql) # This needs to be activated each time a connection is made. #http://stackoverflow.com/questions/15301643/sqlite3-forgets-to-use-foreign-keys
-  DBI::dbDisconnect(cnn); rm(cnn, sql)
+  drv <-
+    duckdb::duckdb(
+      dbdir     = config$path_database_duckdb,
+      read_only = TRUE,
+      bigint    = "integer64"
+    )
+  # tryCatch({
+    cnn <- DBI::dbConnect(drv)
+    # DBI::dbListTables(cnn)
+    ds <- DBI::dbGetQuery(cnn, sql) # This needs to be activated each time a connection is made. #http://stackoverflow.com/questions/15301643/sqlite3-forgets-to-use-foreign-keys
+    base::on.exit(DBI::dbDisconnect(cnn, shutdown = TRUE))
+  # },
+  # finally = {
+  #   DBI::dbDisconnect(cnn, shutdown = TRUE)
+  #   rm(cnn, sql)
+  # })
 
   ds |>
     tibble::as_tibble()
@@ -63,7 +90,8 @@ retrieve_sqlite <- function(sql) {
   cnn <- DBI::dbConnect(RSQLite::SQLite(), dbname = config$path_database_sqlite)
   # DBI::dbListTables(cnn)
   ds <- DBI::dbGetQuery(cnn, sql) # This needs to be activated each time a connection is made. #http://stackoverflow.com/questions/15301643/sqlite3-forgets-to-use-foreign-keys
-  DBI::dbDisconnect(cnn); rm(cnn, sql)
+  DBI::dbDisconnect(cnn)
+  rm(cnn, sql)
 
   ds |>
     tibble::as_tibble()

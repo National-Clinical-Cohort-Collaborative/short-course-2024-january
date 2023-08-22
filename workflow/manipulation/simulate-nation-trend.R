@@ -106,5 +106,5 @@ ds_slim <-
   )
 
 # ---- save-to-db --------------------------------------------------------------
-# truncate_and_load_table_duckdb(ds_slim, "latent_nation_count")
+truncate_and_load_table_duckdb(ds_slim, "latent_nation_count")
 truncate_and_load_table_sqlite(ds_slim, "latent_nation_count")

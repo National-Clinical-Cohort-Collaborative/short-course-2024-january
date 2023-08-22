@@ -55,7 +55,7 @@ execute_sql <- function(path_sql) {
 
 # ---- tweak-data --------------------------------------------------------------
 # Remove old DB
-# if( file.exists(config$path_database_duckdb) ) file.remove(config$path_database_duckdb)
+if( file.exists(config$path_database_duckdb) ) file.remove(config$path_database_duckdb)
 
 cnn <- DBI::dbConnect(duckdb::duckdb(), dbdir = config$path_database_duckdb)
 # result <- DBI::dbSendQuery(cnn, "PRAGMA foreign_keys=ON;") #This needs to be activated each time a connection is made. #http://stackoverflow.com/questions/15301643/sqlite3-forgets-to-use-foreign-keys
