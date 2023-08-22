@@ -18,7 +18,6 @@ rm(list = ls(all.names = TRUE)) # Clear the memory of variables from previous ru
 # requireNamespace("rlang"        ) # Language constructs, like quosures
 # requireNamespace("testit"       ) # For asserting conditions meet expected patterns/conditions.
 requireNamespace("checkmate"    ) # For asserting conditions meet expected patterns/conditions. # remotes::install_github("mllg/checkmate")
-# requireNamespace("DBI"          ) # Database-agnostic interface
 requireNamespace("RSQLite"      ) # Lightweight database for non-PHI data.
 # requireNamespace("OuhscMunge"   ) # remotes::install_github(repo="OuhscBbmc/OuhscMunge")
 
@@ -32,6 +31,8 @@ path_ddl <-
     "manipulation/db-create-sqlite/concept-create.sql",
     "manipulation/db-create-sqlite/nation-count-drop.sql",
     "manipulation/db-create-sqlite/nation-count-create.sql",
+    "manipulation/db-create-sqlite/site-drop.sql",
+    "manipulation/db-create-sqlite/site-create.sql",
     "manipulation/db-create-sqlite/person-drop.sql",
     "manipulation/db-create-sqlite/person-create.sql",
     "manipulation/db-create-sqlite/patient-drop.sql",
