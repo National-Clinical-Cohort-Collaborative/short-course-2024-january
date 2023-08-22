@@ -394,5 +394,5 @@ truncate_and_load_table_sqlite(ds_patient       , "patient")
 truncate_and_load_table_sqlite(ds_patient_hidden, "patient_hidden")
 
 truncate_and_load_table_duckdb(ds_person_slim   , "person")
-# truncate_and_load_table_duckdb(ds_patient       , "patient")
-# truncate_and_load_table_duckdb(ds_patient_hidden, "patient_hidden")
+truncate_and_load_table_duckdb(ds_patient       , "patient")
+truncate_and_load_table_duckdb(ds_patient_hidden, "patient_hidden")

@@ -30,6 +30,7 @@ path_ddl <-
   c(
     "manipulation/db-create-duckdb/create.sql",
     # "manipulation/db-create-sqlite/concept-create.sql",
+    "manipulation/db-create-duckdb/patient.sql",
     "manipulation/db-create-duckdb/latent-nation-count.sql"
     # "manipulation/db-create-sqlite/person-drop.sql",
     # "manipulation/db-create-sqlite/person-create.sql",

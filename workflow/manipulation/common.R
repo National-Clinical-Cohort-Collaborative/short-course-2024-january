@@ -14,14 +14,14 @@ truncate_and_load_table_duckdb <- function(d, table_name) {
     cnn <- DBI::dbConnect(drv)
     # DBI::dbListTables(cnn)
     DBI::dbExecute(cnn, sql_delete) # This needs to be activated each time a connection is made. #http://stackoverflow.com/questions/15301643/sqlite3-forgets-to-use-foreign-keys
-   d |>
-    dplyr::mutate_if(lubridate::is.Date, as.character) |>     # SQLite doesn't support dates natively
-    DBI::dbWriteTable(
-      conn      = cnn,
-      name      = table_name,
-      append    = TRUE,
-      row.names = FALSE
-    )
+    d |>
+      dplyr::mutate_if(lubridate::is.Date, as.character) |>     # SQLite doesn't support dates natively
+      DBI::dbWriteTable(
+        conn      = cnn,
+        name      = table_name,
+        append    = TRUE,
+        row.names = FALSE
+      )
 
   # Allow database to optimize its internal arrangement
   r <- DBI::dbExecute(cnn, "VACUUM ANALYZE;")
