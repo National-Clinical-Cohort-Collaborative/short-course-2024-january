@@ -59,12 +59,12 @@ Univariate
 `person` table
 ---------------------------------------------------------------------------
 
-![](figure-png/marginals-person-1.png)<!-- -->![](figure-png/marginals-person-2.png)<!-- -->![](figure-png/marginals-person-3.png)<!-- -->![](figure-png/marginals-person-4.png)<!-- -->![](figure-png/marginals-person-5.png)<!-- -->![](figure-png/marginals-person-6.png)<!-- -->![](figure-png/marginals-person-7.png)<!-- -->![](figure-png/marginals-person-8.png)<!-- -->![](figure-png/marginals-person-9.png)<!-- -->
+![](figure-png/marginals-person-1.png)<!-- -->![](figure-png/marginals-person-2.png)<!-- -->![](figure-png/marginals-person-3.png)<!-- -->![](figure-png/marginals-person-4.png)<!-- -->![](figure-png/marginals-person-5.png)<!-- -->![](figure-png/marginals-person-6.png)<!-- -->![](figure-png/marginals-person-7.png)<!-- -->![](figure-png/marginals-person-8.png)<!-- -->
 
 `patient` table
 ---------------------------------------------------------------------------
 
-![](figure-png/marginals-patient-1.png)<!-- -->![](figure-png/marginals-patient-2.png)<!-- -->![](figure-png/marginals-patient-3.png)<!-- -->
+![](figure-png/marginals-patient-1.png)<!-- -->![](figure-png/marginals-patient-2.png)<!-- -->![](figure-png/marginals-patient-3.png)<!-- -->![](figure-png/marginals-patient-4.png)<!-- -->![](figure-png/marginals-patient-5.png)<!-- -->
 
 `patient_hidden` table
 ---------------------------------------------------------------------------
@@ -212,7 +212,7 @@ For the sake of documentation and reproducibility, the current report was render
     <summary>Environment <span class="glyphicon glyphicon-plus-sign"></span></summary>
     
     ```
-    ─ Session info ──────────────────────────────────────────────────
+    ─ Session info ─────────────────────────────────────────────────
      setting  value
      version  R version 4.2.2 Patched (2022-11-10 r83330)
      os       Ubuntu 23.04
@@ -226,7 +226,7 @@ For the sake of documentation and reproducibility, the current report was render
      rstudio  2023.06.1+524 Mountain Hydrangea (desktop)
      pandoc   3.1.5 @ /usr/bin/ (via rmarkdown)
     
-    ─ Packages ──────────────────────────────────────────────────────
+    ─ Packages ─────────────────────────────────────────────────────
      package         * version    date (UTC) lib source
      archive           1.1.5      2022-05-06 [1] CRAN (R 4.2.2)
      backports         1.4.1      2021-12-13 [1] CRAN (R 4.2.2)
@@ -245,9 +245,10 @@ For the sake of documentation and reproducibility, the current report was render
      corrplot          0.92       2021-11-18 [1] CRAN (R 4.2.2)
      crayon            1.5.2      2022-09-29 [1] CRAN (R 4.2.2)
      datasets        * 4.2.2      2023-02-04 [4] local
-     DBI               1.1.3      2022-06-18 [1] CRAN (R 4.2.2)
+     DBI             * 1.1.3      2022-06-18 [1] CRAN (R 4.2.2)
      digest            0.6.33     2023-07-07 [1] CRAN (R 4.2.2)
      dplyr             1.1.2      2023-04-20 [1] CRAN (R 4.2.2)
+     duckdb          * 0.8.1-1    2023-07-17 [1] CRAN (R 4.2.2)
      evaluate          0.21       2023-05-05 [1] CRAN (R 4.2.2)
      fansi             1.0.4      2023-01-22 [1] CRAN (R 4.2.2)
      farver            2.1.1      2022-07-06 [1] CRAN (R 4.2.2)
@@ -322,10 +323,10 @@ For the sake of documentation and reproducibility, the current report was render
      [3] /usr/lib/R/site-library
      [4] /usr/lib/R/library
     
-    ─────────────────────────────────────────────────────────────────
+    ────────────────────────────────────────────────────────────────
     ```
   </details>
 
 
 
-Report rendered by wibeasley at 2023-08-22, 09:10 -0500 in 7 seconds.
+Report rendered by wibeasley at 2023-08-22, 12:58 -0500 in 10 seconds.

@@ -20,8 +20,8 @@ config                      <- config::get()
 
 # ---- load-data ---------------------------------------------------------------
 ds_person         <- readr::read_rds(config$path_derived_patient_rds) # 'ds' stands for 'datasets'
-ds_patient        <- readr::read_rds(config$path_simulated_patient_rds)
-ds_patient_hidden <- readr::read_rds(config$path_simulated_patient_hidden_rds)
+# ds_patient        <- readr::read_rds(config$path_simulated_patient_rds)
+# ds_patient_hidden <- readr::read_rds(config$path_simulated_patient_hidden_rds)
 
 # ---- tweak-data --------------------------------------------------------------
 ds_person <-
@@ -55,7 +55,7 @@ ds_person <-
     calc_age_covid,
   )
 
-rm(ds_patient_hidden)
+# rm(ds_patient_hidden)
 
 # ---- marginals-person ---------------------------------------------------------------
 ds_person |>
@@ -81,9 +81,9 @@ TabularManifest::histogram_discrete(ds_person, "gender_source_concept_id")
 # TabularManifest::histogram_discrete(ds_person, "ethnicity_source_value")
 
 # ---- marginals-patient --------------------------------------------------------
-TabularManifest::histogram_discrete(  ds_person, "covid_severity")
-TabularManifest::histogram_date(      ds_person, "covid_date"           , bin_unit = "week")
 TabularManifest::histogram_discrete(  ds_person, "data_partner_id")
+TabularManifest::histogram_date(      ds_person, "covid_date"           , bin_unit = "week")
+TabularManifest::histogram_discrete(  ds_person, "covid_severity")
 TabularManifest::histogram_continuous(ds_person, "calc_outbreak_lag_years" , rounded_digits = 1)
 TabularManifest::histogram_continuous(ds_person, "calc_age_covid"          , rounded_digits = 1)
 
