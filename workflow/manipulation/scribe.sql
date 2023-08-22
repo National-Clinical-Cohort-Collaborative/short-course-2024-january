@@ -18,7 +18,8 @@ SELECT
   ,p.race_source_concept_id
   ,p.ethnicity_source_value
   ,p.ethnicity_source_concept_id
-  ,p.covid_date
+  ,pt.covid_date
+  ,pt.covid_severity
   ,pt.calc_outbreak_lag_years
   ,pt.calc_age_covid
   ,pth.latent_risk

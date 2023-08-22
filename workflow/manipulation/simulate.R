@@ -60,6 +60,14 @@ p_gender <- c("8532" = .6, "8507" = .4) # male & female; https://athena.ohdsi.or
 # "u" stands for universe
 # u_birth_date <- seq.Date(as.Date("1930-01-01"), as.Date("2017-12-31"), by = "day")
 
+manifest_severity <- function (x) {
+  cut(
+    x       = x,
+    breaks  = c(-Inf,  1.0,     2.0,       3.0,      4.0,     Inf),
+    labels  = c(  "none", "mild", "moderate", "severe", "dead")
+  )
+}
+
 site_count <- 3L
 # # covid_start_site <-
 #   p_site |>
@@ -79,6 +87,9 @@ site_count <- 3L
 # ---- load-data ---------------------------------------------------------------
 ds_concept <- retrieve_sqlite("SELECT * FROM concept")
 ds_nation_count <- retrieve_sqlite("SELECT * FROM latent_nation_count")
+
+checkmate::assert_tibble(ds_concept       , min.rows = 4)
+checkmate::assert_tibble(ds_nation_count  , min.rows = 4)
 
 # ---- tweak-data --------------------------------------------------------------
 ds_concept <-
@@ -127,6 +138,7 @@ ds_person <-
       (.04 * calc_age_covid) +
       rnorm(subject_count, sd = 1.3),
     latent_risk     = round(latent_risk, 3),
+    covid_severity  = manifest_severity(latent_risk),
   ) |>
   dplyr::select(
     person_id,
@@ -151,6 +163,7 @@ ds_person <-
     # ethnicity_source_concept_id,
     covid_date,
     latent_risk,
+    covid_severity,
     calc_outbreak_lag_years,
     calc_age_covid,
   )
@@ -278,7 +291,7 @@ sql_person_slim <-
       -- ,p.race_source_concept_id
       -- ,p.ethnicity_source_value
       -- ,p.ethnicity_source_concept_id
-      ,p.covid_date
+      -- ,p.covid_date
     FROM ds_person p
       left  join ds_concept cg on p.gender_concept_id = cg.concept_id
   "
@@ -348,6 +361,8 @@ ds_patient <-
   dplyr::select(
     person_id,
     data_partner_id,
+    covid_date,
+    covid_severity,
     calc_outbreak_lag_years,
     calc_age_covid,
   )
@@ -371,4 +386,4 @@ readr::write_rds(ds_patient_hidden , config$path_simulated_patient_hidden_rds,  
 # ---- save-to-db --------------------------------------------------------------
 truncate_and_load_table_sqlite(ds_person_slim   , "person")
 truncate_and_load_table_sqlite(ds_patient       , "patient")
-truncate_and_load_table_sqlite(ds_patient_hidden , "patient_hidden")
+truncate_and_load_table_sqlite(ds_patient_hidden, "patient_hidden")
