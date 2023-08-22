@@ -26,7 +26,8 @@ config                         <- config::get()
 sql <- readr::read_file("manipulation/scribe.sql")
 
 # ---- load-data ---------------------------------------------------------------
-ds <- retrieve_sqlite(sql)
+ds <- retrieve_duckdb(sql)
+# ds <- retrieve_sqlite(sql)
 
 checkmate::assert_data_frame(ds           , min.rows = 100)
 rm(sql)

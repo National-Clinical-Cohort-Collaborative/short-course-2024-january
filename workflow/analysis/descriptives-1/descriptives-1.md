@@ -110,11 +110,11 @@ lm(formula = latent_risk ~ 1, data = ds_person)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--4.1903 -1.2431  0.2282  1.2709  3.9047 
+-4.1903 -1.2430  0.2282  1.2710  3.9047 
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)
-(Intercept)   1.2213     0.1762    6.93 4.32e-10
+(Intercept)   1.2213     0.1762    6.93 4.33e-10
 
 Residual standard error: 1.762 on 99 degrees of freedom
 ```
@@ -130,19 +130,19 @@ lm(formula = latent_risk ~ 1 + calc_outbreak_lag_years, data = ds_person)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--3.8797 -1.0852  0.0576  1.1719  4.0449 
+-3.8797 -1.0852  0.0575  1.1719  4.0449 
 
 Coefficients:
                         Estimate Std. Error t value
-(Intercept)               2.1192     0.4927   4.301
+(Intercept)               2.1190     0.4927   4.300
 calc_outbreak_lag_years  -0.5190     0.2665  -1.947
                         Pr(>|t|)
 (Intercept)             4.03e-05
 calc_outbreak_lag_years   0.0544
 
 Residual standard error: 1.738 on 98 degrees of freedom
-Multiple R-squared:  0.03725,	Adjusted R-squared:  0.02743 
-F-statistic: 3.792 on 1 and 98 DF,  p-value: 0.05436
+Multiple R-squared:  0.03724,	Adjusted R-squared:  0.02742 
+F-statistic: 3.791 on 1 and 98 DF,  p-value: 0.05439
 ```
 
 ```
@@ -160,12 +160,12 @@ Residuals:
 
 Coefficients:
                Estimate Std. Error t value Pr(>|t|)
-(Intercept)    -0.44614    0.29124  -1.532    0.129
-calc_age_covid  0.03629    0.00547   6.635  1.8e-09
+(Intercept)    -0.44611    0.29124  -1.532    0.129
+calc_age_covid  0.03629    0.00547   6.634  1.8e-09
 
 Residual standard error: 1.471 on 98 degrees of freedom
 Multiple R-squared:  0.3099,	Adjusted R-squared:  0.3029 
-F-statistic: 44.02 on 1 and 98 DF,  p-value: 1.802e-09
+F-statistic: 44.01 on 1 and 98 DF,  p-value: 1.804e-09
 ```
 
 ```
@@ -180,21 +180,21 @@ lm(formula = latent_risk ~ 1 + calc_outbreak_lag_years + calc_age_covid,
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--4.3362 -0.8779  0.0876  0.9297  3.3405 
+-4.3362 -0.8781  0.0878  0.9298  3.3405 
 
 Coefficients:
                          Estimate Std. Error t value
-(Intercept)              0.528289   0.465615   1.135
-calc_outbreak_lag_years -0.577632   0.219273  -2.634
-calc_age_covid           0.036832   0.005315   6.929
+(Intercept)              0.528257   0.465615   1.135
+calc_outbreak_lag_years -0.577603   0.219275  -2.634
+calc_age_covid           0.036831   0.005316   6.929
                         Pr(>|t|)
-(Intercept)              0.25934
-calc_outbreak_lag_years  0.00981
+(Intercept)              0.25937
+calc_outbreak_lag_years  0.00982
 calc_age_covid          4.67e-10
 
 Residual standard error: 1.429 on 97 degrees of freedom
 Multiple R-squared:  0.356,	Adjusted R-squared:  0.3427 
-F-statistic: 26.81 on 2 and 97 DF,  p-value: 5.377e-10
+F-statistic: 26.81 on 2 and 97 DF,  p-value: 5.385e-10
 ```
 
 
@@ -336,4 +336,4 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 
-Report rendered by wibea at 2023-08-22, 17:05 -0500 in 3 seconds.
+Report rendered by wibea at 2023-08-22, 17:33 -0500 in 3 seconds.

@@ -1,5 +1,8 @@
 # ---- duckdb ------------------------------------------------------------------
 truncate_and_load_table_duckdb <- function(d, table_name) {
+  checkmate::assert_data_frame(d)
+  checkmate::assert_character( table_name, min.chars = 2, any.missing = FALSE)
+
   # cnn <- DBI::dbConnect(duckdb::duckdb(), dbname = config$path_database_duckdb)
   drv <-
     duckdb::duckdb(
@@ -15,7 +18,6 @@ truncate_and_load_table_duckdb <- function(d, table_name) {
     # DBI::dbListTables(cnn)
     DBI::dbExecute(cnn, sql_delete) # This needs to be activated each time a connection is made. #http://stackoverflow.com/questions/15301643/sqlite3-forgets-to-use-foreign-keys
     d |>
-      dplyr::mutate_if(lubridate::is.Date, as.character) |>     # SQLite doesn't support dates natively
       DBI::dbWriteTable(
         conn      = cnn,
         name      = table_name,
@@ -36,6 +38,8 @@ truncate_and_load_table_duckdb <- function(d, table_name) {
 }
 
 retrieve_duckdb <- function(sql) {
+  checkmate::assert_character(sql, min.chars = 10, any.missing = FALSE)
+
   drv <-
     duckdb::duckdb(
       dbdir     = config$path_database_duckdb,
@@ -61,6 +65,9 @@ retrieve_duckdb <- function(sql) {
 
 # ---- sqlite ------------------------------------------------------------------
 truncate_and_load_table_sqlite <- function(d, table_name) {
+  checkmate::assert_data_frame(d)
+  checkmate::assert_character( table_name, min.chars = 2, any.missing = FALSE)
+
   # If there's *NO* PHI, a local database like SQLite fits a nice niche if
   #   * the data is relational and
   #   * later, only portions need to be queried/retrieved at a time (b/c everything won't need to be loaded into R's memory)
@@ -87,6 +94,8 @@ truncate_and_load_table_sqlite <- function(d, table_name) {
 }
 
 retrieve_sqlite <- function(sql) {
+  checkmate::assert_character(sql, min.chars = 10, any.missing = FALSE)
+
   cnn <- DBI::dbConnect(RSQLite::SQLite(), dbname = config$path_database_sqlite)
   # DBI::dbListTables(cnn)
   ds <- DBI::dbGetQuery(cnn, sql) # This needs to be activated each time a connection is made. #http://stackoverflow.com/questions/15301643/sqlite3-forgets-to-use-foreign-keys
