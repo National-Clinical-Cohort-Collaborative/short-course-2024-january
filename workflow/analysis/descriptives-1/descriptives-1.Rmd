@@ -74,7 +74,7 @@ Summary {.tabset .tabset-fade .tabset-pills}
 Notes
 ---------------------------------------------------------------------------
 
-1. The current report covers `r nrow(ds_person)` patients, with `r dplyr::n_distinct(ds_person$data_partner_id)` unique values for `data_partner_id`.
+1. The current report covers `r nrow(ds_patient)` patients, with `r dplyr::n_distinct(ds_patient$data_partner_id)` unique values for `data_partner_id`.
 
 
 Unanswered Questions

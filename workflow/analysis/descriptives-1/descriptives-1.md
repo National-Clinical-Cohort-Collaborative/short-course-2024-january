@@ -106,7 +106,7 @@ Model Exploration
 ```
 
 Call:
-lm(formula = latent_risk ~ 1, data = ds_person)
+lm(formula = latent_risk ~ 1, data = ds_patient)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
@@ -126,7 +126,7 @@ Residual standard error: 1.762 on 99 degrees of freedom
 ```
 
 Call:
-lm(formula = latent_risk ~ 1 + calc_outbreak_lag_years, data = ds_person)
+lm(formula = latent_risk ~ 1 + calc_outbreak_lag_years, data = ds_patient)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
@@ -152,7 +152,7 @@ F-statistic: 3.791 on 1 and 98 DF,  p-value: 0.05439
 ```
 
 Call:
-lm(formula = latent_risk ~ 1 + calc_age_covid, data = ds_person)
+lm(formula = latent_risk ~ 1 + calc_age_covid, data = ds_patient)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
@@ -176,7 +176,7 @@ F-statistic: 44.01 on 1 and 98 DF,  p-value: 1.804e-09
 
 Call:
 lm(formula = latent_risk ~ 1 + calc_outbreak_lag_years + calc_age_covid, 
-    data = ds_person)
+    data = ds_patient)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
@@ -219,7 +219,7 @@ For the sake of documentation and reproducibility, the current report was render
     <summary>Environment <span class="glyphicon glyphicon-plus-sign"></span></summary>
     
     ```
-    ─ Session info ─────────────────────────────────────────
+    - Session info -----------------------------------------
      setting  value
      version  R version 4.3.1 Patched (2023-07-06 r84647 ucrt)
      os       Windows 11 x64 (build 22621)
@@ -227,13 +227,13 @@ For the sake of documentation and reproducibility, the current report was render
      ui       RStudio
      language (EN)
      collate  English_United States.utf8
-     ctype    English_United States.utf8
+     ctype    C
      tz       America/Chicago
      date     2023-08-22
      rstudio  2023.06.1+524 Mountain Hydrangea (desktop)
      pandoc   3.1.5 @ C:/PROGRA~1/Pandoc/ (via rmarkdown)
     
-    ─ Packages ─────────────────────────────────────────────
+    - Packages ---------------------------------------------
      ! package         * version    date (UTC) lib source
      D archive           1.1.5      2022-05-06 [1] CRAN (R 4.3.0)
        backports         1.4.1      2021-12-13 [1] CRAN (R 4.3.0)
@@ -296,6 +296,7 @@ For the sake of documentation and reproducibility, the current report was render
        readr             2.1.4      2023-02-10 [1] CRAN (R 4.3.0)
        rlang             1.1.1      2023-04-28 [1] CRAN (R 4.3.0)
        rmarkdown         2.23       2023-07-01 [1] CRAN (R 4.3.1)
+       rsconnect         1.0.1      2023-07-20 [1] CRAN (R 4.3.1)
        RSQLite         * 2.3.1      2023-04-03 [1] CRAN (R 4.3.0)
        rstudioapi        0.15.0     2023-07-07 [1] CRAN (R 4.3.1)
        sass              0.4.7      2023-07-15 [1] CRAN (R 4.3.1)
@@ -325,13 +326,13 @@ For the sake of documentation and reproducibility, the current report was render
      [2] C:/Users/wibea/AppData/Local/R/win-library/4.3
      [3] C:/Program Files/R/R-4.3.1patched/library
     
-     P ── Loaded and on-disk path mismatch.
-     D ── DLL MD5 mismatch, broken installation.
+     P -- Loaded and on-disk path mismatch.
+     D -- DLL MD5 mismatch, broken installation.
     
-    ────────────────────────────────────────────────────────
+    --------------------------------------------------------
     ```
   </details>
 
 
 
-Report rendered by wibea at 2023-08-22, 18:19 -0500 in 3 seconds.
+Report rendered by wibea at 2023-08-22, 18:21 -0500 in 3 seconds.

@@ -19,11 +19,11 @@ options(show.signif.stars = FALSE) #Turn off the annotations on p-values
 config                      <- config::get()
 
 # ---- load-data ---------------------------------------------------------------
-ds_person         <- readr::read_rds(config$path_analysis_patient_rds) # 'ds' stands for 'datasets'
+ds_patient        <- readr::read_rds(config$path_analysis_patient_rds) # 'ds' stands for 'datasets'
 
 # ---- tweak-data --------------------------------------------------------------
-ds_person <-
-  ds_person |>
+ds_patient <-
+  ds_patient |>
   # dplyr::left_join(ds_patient           , by = "person_id") |>
   # dplyr::left_join(ds_patient_hidden    , by = "person_id") |>
   dplyr::select(
@@ -54,37 +54,37 @@ ds_person <-
   )
 
 # ---- marginals-person ---------------------------------------------------------------
-ds_person |>
+ds_patient |>
   dplyr::mutate(
     person_id = as.integer(as.character(person_id))
     ) |>
   TabularManifest::histogram_continuous(         "person_id"            , bin_width = 5)
-TabularManifest::histogram_discrete(  ds_person, "gender_concept_id")
-TabularManifest::histogram_continuous(ds_person, "year_of_birth"        , bin_width = 5)
-TabularManifest::histogram_continuous(ds_person, "month_of_birth"       , bin_width = 1)
-TabularManifest::histogram_continuous(ds_person, "day_of_birth"         , bin_width = 1)
-TabularManifest::histogram_date(      ds_person, "birth_date"           , bin_unit = "year")
-# TabularManifest::histogram_discrete(ds_person, "race_concept_id")
-# TabularManifest::histogram_discrete(ds_person, "ethnicity_concept_id")
-# TabularManifest::histogram_discrete(ds_person, "location_id")
-# TabularManifest::histogram_discrete(ds_person, "provider_id")
-# TabularManifest::histogram_discrete(ds_person, "care_site_id")
-# TabularManifest::histogram_discrete(ds_person, "person_source_value")
-TabularManifest::histogram_discrete(ds_person, "gender_source_value")
-TabularManifest::histogram_discrete(ds_person, "gender_source_concept_id")
-# TabularManifest::histogram_discrete(ds_person, "race_source_value")
-# TabularManifest::histogram_discrete(ds_person, "race_source_concept_id")
-# TabularManifest::histogram_discrete(ds_person, "ethnicity_source_value")
+TabularManifest::histogram_discrete(  ds_patient, "gender_concept_id")
+TabularManifest::histogram_continuous(ds_patient, "year_of_birth"        , bin_width = 5)
+TabularManifest::histogram_continuous(ds_patient, "month_of_birth"       , bin_width = 1)
+TabularManifest::histogram_continuous(ds_patient, "day_of_birth"         , bin_width = 1)
+TabularManifest::histogram_date(      ds_patient, "birth_date"           , bin_unit = "year")
+# TabularManifest::histogram_discrete(ds_patient, "race_concept_id")
+# TabularManifest::histogram_discrete(ds_patient, "ethnicity_concept_id")
+# TabularManifest::histogram_discrete(ds_patient, "location_id")
+# TabularManifest::histogram_discrete(ds_patient, "provider_id")
+# TabularManifest::histogram_discrete(ds_patient, "care_site_id")
+# TabularManifest::histogram_discrete(ds_patient, "person_source_value")
+TabularManifest::histogram_discrete(ds_patient, "gender_source_value")
+TabularManifest::histogram_discrete(ds_patient, "gender_source_concept_id")
+# TabularManifest::histogram_discrete(ds_patient, "race_source_value")
+# TabularManifest::histogram_discrete(ds_patient, "race_source_concept_id")
+# TabularManifest::histogram_discrete(ds_patient, "ethnicity_source_value")
 
 # ---- marginals-patient --------------------------------------------------------
-TabularManifest::histogram_discrete(  ds_person, "data_partner_id")
-TabularManifest::histogram_date(      ds_person, "covid_date"           , bin_unit = "week")
-TabularManifest::histogram_discrete(  ds_person, "covid_severity")
-TabularManifest::histogram_continuous(ds_person, "calc_outbreak_lag_years" , rounded_digits = 1)
-TabularManifest::histogram_continuous(ds_person, "calc_age_covid"          , rounded_digits = 1)
+TabularManifest::histogram_discrete(  ds_patient, "data_partner_id")
+TabularManifest::histogram_date(      ds_patient, "covid_date"           , bin_unit = "week")
+TabularManifest::histogram_discrete(  ds_patient, "covid_severity")
+TabularManifest::histogram_continuous(ds_patient, "calc_outbreak_lag_years" , rounded_digits = 1)
+TabularManifest::histogram_continuous(ds_patient, "calc_age_covid"          , rounded_digits = 1)
 
 # ---- marginals-patient-hidden -------------------------------------------------
-TabularManifest::histogram_continuous(ds_person, "latent_risk"             , rounded_digits = 1)
+TabularManifest::histogram_continuous(ds_patient, "latent_risk"             , rounded_digits = 1)
 
 # This helps start the code for graphing each variable.
 #   - Make sure you change it to `histogram_continuous()` for the appropriate variables.
@@ -96,7 +96,7 @@ TabularManifest::histogram_continuous(ds_person, "latent_risk"             , rou
 
 # ---- scatterplots ------------------------------------------------------------
 g1 <-
-  ds_person |>
+  ds_patient |>
   ggplot(aes(
     x = calc_age_covid,
     y = latent_risk,
@@ -141,7 +141,7 @@ predictor_names <-
   )
 
 # cat("### Hyp 1: Prediction of quarter mile time\n\n")
-ds_hyp <- ds_person[, c("latent_risk", predictor_names)]
+ds_hyp <- ds_patient[, c("latent_risk", predictor_names)]
 colnames(ds_hyp) <- gsub("_", "\n", colnames(ds_hyp))
 cor_matrix <- cor(ds_hyp)
 corrplot::corrplot(cor_matrix, method="ellipse", addCoef.col="gray30", tl.col="gray20", diag=F)
@@ -166,22 +166,22 @@ rm(ds_hyp, cor_matrix)
 
 # ---- models ------------------------------------------------------------------
 cat("============= Simple model that's just an intercept. =============")
-m0 <- lm(latent_risk ~ 1, data=ds_person)
+m0 <- lm(latent_risk ~ 1, data=ds_patient)
 summary(m0)
 
 cat("============= Model includes one predictor: `outbreak_lag`. =============")
-m1a <- lm(latent_risk ~ 1  + calc_outbreak_lag_years, data=ds_person)
+m1a <- lm(latent_risk ~ 1  + calc_outbreak_lag_years, data=ds_patient)
 summary(m1a)
 
 cat("============= Model includes one predictor: `calc_age_covid`. =============")
-m1b <- lm(latent_risk ~ 1  + calc_age_covid, data=ds_person)
+m1b <- lm(latent_risk ~ 1  + calc_age_covid, data=ds_patient)
 summary(m1b)
 
 # cat("The one predictor is significantly tighter.")
 # anova(m0, m1)
 
 cat("============= Model includes two predictors. =============")
-m2 <- lm(latent_risk ~ 1  + calc_outbreak_lag_years + calc_age_covid, data=ds_person)
+m2 <- lm(latent_risk ~ 1  + calc_outbreak_lag_years + calc_age_covid, data=ds_patient)
 summary(m2)
 
 # cat("The two predictor is significantly tighter.")
