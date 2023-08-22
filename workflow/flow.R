@@ -46,6 +46,7 @@ ds_rail  <- tibble::tribble(
   ~fx         , ~path,
 
   # Establish database & simulate observed data
+  "run_r"     , "manipulation/db-create-duckdb/db-create-duckdb.R",
   "run_r"     , "manipulation/db-create-sqlite/db-create-sqlite.R",
   "run_r"     , "manipulation/omop-concepts/concept-ellis.R",
   "run_r"     , "manipulation/simulate-nation-trend.R",
