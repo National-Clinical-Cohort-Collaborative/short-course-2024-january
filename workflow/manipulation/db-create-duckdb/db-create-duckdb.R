@@ -31,7 +31,8 @@ path_ddl <-
     "manipulation/db-create-duckdb/omop.sql",
     "manipulation/db-create-duckdb/n3c.sql",
     "manipulation/db-create-duckdb/simulation.sql",
-    "manipulation/db-create-duckdb/latent-nation-count.sql"
+    "manipulation/db-create-duckdb/latent-nation-count.sql",
+    "manipulation/db-create-duckdb/analysis.sql"
   )
 
 execute_sql <- function(path_sql) {

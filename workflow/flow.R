@@ -2,6 +2,7 @@
 rm(list = ls(all.names = TRUE)) # Clear the memory of variables from previous run. This is not called by knitr, because it's above the first chunk.
 
 # ---- load-sources ------------------------------------------------------------
+base::source("manipulation/common.R")
 
 # ---- load-packages -----------------------------------------------------------
 # import::from("magrittr", "%>%")
@@ -45,19 +46,18 @@ if (interactive()) {
 ds_rail  <- tibble::tribble(
   ~fx         , ~path,
 
-  # Establish database & simulate observed data
+  # Establish database & lookup tables
   "run_r"     , "manipulation/db-create-duckdb/db-create-duckdb.R",
   "run_r"     , "manipulation/db-create-sqlite/db-create-sqlite.R",
   "run_r"     , "manipulation/omop-concepts/concept-ellis.R",
+
+  # Simulate data
   "run_r"     , "manipulation/simulate-nation-trend.R",
   "run_r"     , "manipulation/simulate.R",
-
-  # ETL (extract-transform-load) the data from the outside world.
-  # "run_r"     , "manipulation/ss-county-ellis.R",
   # "run_python", "manipulation/subject-2-ellis.py", # Uncomment to run a python version
 
   # Second-level manipulation on data inside the warehouse.
-  # "run_sql" , "manipulation/inserts-to-normalized-tables.sql"
+  "run_sql" , "manipulation/patient-ferry.sql",
 
   # Scribes create analysis-ready rectangles.
   "run_r"     , "manipulation/scribe.R",
@@ -74,7 +74,8 @@ run_r <- function(minion) {
 }
 run_sql <- function(minion) {
   message("\nStarting `", basename(minion), "` at ", Sys.time(), ".")
-  OuhscMunge::execute_sql_file(minion, config$dsn_staging)
+  execute_sql_duckdb(minion)
+  # OuhscMunge::execute_sql_file(minion, config$dsn_staging)
   message("Completed `", basename(minion), "`.")
   return( TRUE )
 }

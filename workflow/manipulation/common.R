@@ -64,6 +64,26 @@ retrieve_duckdb <- function(sql) {
     tibble::as_tibble()
 }
 
+execute_sql_duckdb <- function(path_sql) {
+  requireNamespace("duckdb")
+  checkmate::assert_character(path_sql, min.chars = 10, any.missing = FALSE)
+  checkmate::assert_file_exists(path_sql)
+
+
+  sql <- readr::read_file(path_sql)
+
+  drv <-
+    duckdb::duckdb(
+      dbdir     = config$path_database_duckdb,
+      read_only = FALSE,
+      bigint    = "integer64"
+    )
+
+  cnn <- DBI::dbConnect(drv)
+  DBI::dbExecute(cnn, sql)
+  base::on.exit(DBI::dbDisconnect(cnn, shutdown = TRUE))
+}
+
 # ---- sqlite ------------------------------------------------------------------
 truncate_and_load_table_sqlite <- function(d, table_name) {
   requireNamespace("RSQLite")
