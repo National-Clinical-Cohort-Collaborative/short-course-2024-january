@@ -15,6 +15,7 @@ base::source("manipulation/common.R")
 # Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
 requireNamespace("readr"        )
 requireNamespace("tidyr"        )
+requireNamespace("arrow"        ) # Writing/saving parquet files
 requireNamespace("dplyr"        ) # Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
 requireNamespace("rlang"        ) # Language constructs, like quosures
 requireNamespace("testit"       ) # For asserting conditions meet expected patterns/conditions.
@@ -398,6 +399,13 @@ if (config$produce_duckdb) {
   truncate_and_load_table_duckdb(ds_person_slim   , "person")
   truncate_and_load_table_duckdb(ds_patient       , "patient")
   truncate_and_load_table_duckdb(ds_patient_hidden, "patient_hidden")
+}
+
+if (config$produce_parquet) {
+  arrow::write_parquet(ds_site                    , config$path_parquet_site)
+  arrow::write_parquet(ds_person_slim             , config$path_parquet_person)
+  arrow::write_parquet(ds_patient                 , config$path_parquet_patient)
+  arrow::write_parquet(ds_patient_hidden          , config$path_parquet_patient_hidden)
 }
 
 if (config$produce_sqlite) {

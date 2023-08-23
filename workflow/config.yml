@@ -15,8 +15,13 @@ default:
   path_csv_patient                 : "data-public/derived/csv/patient.csv"
   path_csv_patient_hidden          : "data-public/derived/csv/patient-hidden.csv"
 
+  path_parquet_site                : "data-public/derived/parquet/site.parquet"
+  path_parquet_person              : "data-public/derived/parquet/person.parquet"
+  path_parquet_patient             : "data-public/derived/parquet/patient.parquet"
+  path_parquet_patient_hidden      : "data-public/derived/parquet/patient-hidden.parquet"
+
   path_rds_site                    : "data-public/derived/rds/site.rds"
-  path_rds_person                  : "data-public/derived/rds/person.csv"
+  path_rds_person                  : "data-public/derived/rds/person.rds"
   path_rds_patient                 : "data-public/derived/rds/patient.rds"
   path_rds_patient_hidden          : "data-public/derived/rds/patient-hidden.rds"
 
@@ -28,6 +33,7 @@ default:
 
   produce_csv                   : true
   produce_duckdb                : true
+  produce_parquet               : true
   produce_rds                   : true
   produce_sqlite                : true
 

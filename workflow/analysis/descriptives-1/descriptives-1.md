@@ -236,6 +236,8 @@ For the sake of documentation and reproducibility, the current report was render
     ─ Packages ─────────────────────────────────────────────
      ! package         * version    date (UTC) lib source
      D archive           1.1.5      2022-05-06 [1] CRAN (R 4.3.0)
+       arrow             12.0.1.1   2023-07-18 [1] CRAN (R 4.3.1)
+       assertthat        0.2.1      2019-03-21 [1] CRAN (R 4.3.0)
        backports         1.4.1      2021-12-13 [1] CRAN (R 4.3.0)
        base            * 4.3.1      2023-07-06 [?] local
        bit               4.0.5      2022-11-15 [1] CRAN (R 4.3.0)
@@ -334,4 +336,4 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 
-Report rendered by wibea at 2023-08-22, 18:38 -0500 in 3 seconds.
+Report rendered by wibea at 2023-08-22, 20:13 -0500 in 4 seconds.
