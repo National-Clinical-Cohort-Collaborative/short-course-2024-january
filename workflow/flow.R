@@ -52,17 +52,12 @@ ds_rail  <- tibble::tribble(
   "run_r"     , "manipulation/simulate-nation-trend.R",
   "run_r"     , "manipulation/simulate.R",
 
-#   # ETL (extract-transform-load) the data from the outside world.
-#   "run_r"     , "manipulation/ss-county-ellis.R",
-#   "run_r"     , "manipulation/car-ellis.R",
-#   "run_r"     , "manipulation/mlm-1-ellis.R",
-#   "run_r"     , "manipulation/te-ellis.R",
-#   "run_r"     , "manipulation/subject-1-ellis.R",
-#   # "run_python", "manipulation/subject-2-ellis.py", # Uncomment to run a python version
-#
-#   # Second-level manipulation on data inside the warehouse.
-#   # "run_sql" , "manipulation/inserts-to-normalized-tables.sql"
-#   "run_r"     , "manipulation/randomization-block-simple.R",
+  # ETL (extract-transform-load) the data from the outside world.
+  # "run_r"     , "manipulation/ss-county-ellis.R",
+  # "run_python", "manipulation/subject-2-ellis.py", # Uncomment to run a python version
+
+  # Second-level manipulation on data inside the warehouse.
+  # "run_sql" , "manipulation/inserts-to-normalized-tables.sql"
 
   # Scribes create analysis-ready rectangles.
   "run_r"     , "manipulation/scribe.R",

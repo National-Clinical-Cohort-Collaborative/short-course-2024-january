@@ -3,15 +3,15 @@ SELECT
   ,pt.data_partner_id
   ,p.gender_concept_id
   ,p.year_of_birth
-  ,p.month_of_birth
-  ,p.day_of_birth
-  ,p.birth_datetime
+  -- ,p.month_of_birth
+  -- ,p.day_of_birth
+  ,cast(p.birth_datetime as date)     as birth_date
   ,p.race_concept_id
   ,p.ethnicity_concept_id
   ,p.location_id
   ,p.provider_id
   ,p.care_site_id
-  ,p.person_source_value
+  -- ,p.person_source_value
   ,p.gender_source_value
   ,p.gender_source_concept_id
   ,p.race_source_value

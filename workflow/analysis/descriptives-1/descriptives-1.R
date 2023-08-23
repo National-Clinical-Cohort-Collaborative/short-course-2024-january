@@ -32,11 +32,11 @@ ds_patient <-
     data_partner_id,
     gender_concept_id,
     year_of_birth,
-    month_of_birth,
-    day_of_birth,
+    # month_of_birth,
+    # day_of_birth,
     birth_date,
-    # race_concept_id,
-    # ethnicity_concept_id,
+    race_concept_id,
+    ethnicity_concept_id,
     # location_id,
     # provider_id,
     # care_site_id,
@@ -62,11 +62,11 @@ ds_patient |>
   TabularManifest::histogram_continuous(         "person_id"            , bin_width = 5)
 TabularManifest::histogram_discrete(  ds_patient, "gender_concept_id")
 TabularManifest::histogram_continuous(ds_patient, "year_of_birth"        , bin_width = 5)
-TabularManifest::histogram_continuous(ds_patient, "month_of_birth"       , bin_width = 1)
-TabularManifest::histogram_continuous(ds_patient, "day_of_birth"         , bin_width = 1)
+# TabularManifest::histogram_continuous(ds_patient, "month_of_birth"       , bin_width = 1)
+# TabularManifest::histogram_continuous(ds_patient, "day_of_birth"         , bin_width = 1)
 TabularManifest::histogram_date(      ds_patient, "birth_date"           , bin_unit = "year")
-# TabularManifest::histogram_discrete(ds_patient, "race_concept_id")
-# TabularManifest::histogram_discrete(ds_patient, "ethnicity_concept_id")
+TabularManifest::histogram_discrete(ds_patient, "race_concept_id")
+TabularManifest::histogram_discrete(ds_patient, "ethnicity_concept_id")
 # TabularManifest::histogram_discrete(ds_patient, "location_id")
 # TabularManifest::histogram_discrete(ds_patient, "provider_id")
 # TabularManifest::histogram_discrete(ds_patient, "care_site_id")

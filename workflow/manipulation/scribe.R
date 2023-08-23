@@ -39,7 +39,7 @@ ds <-
     # When reading from SQLite, there are some data types that need to be cast explicitly.  SQL Server and the 'odbc' package handles dates and bits/logicals naturally.
     person_id           = factor(person_id),
     data_partner_id     = factor(data_partner_id),
-    birth_date          = as.Date(birth_datetime),
+    # birth_date          = as.Date(birth_datetime),
     # covid_date          = as.Date(covid_date),
     # age_80_plus       = as.logical(age_80_plus),
   )
@@ -114,25 +114,30 @@ ds_slim <-
     data_partner_id,
     gender_concept_id,
     year_of_birth,
-    month_of_birth,
-    day_of_birth,
+    # month_of_birth,
+    # day_of_birth,
     birth_date,
     race_concept_id,
     ethnicity_concept_id,
     location_id,
     provider_id,
     care_site_id,
-    person_source_value,
+    # person_source_value,
     gender_source_value,
     gender_source_concept_id,
     race_source_value,
     race_source_concept_id,
     ethnicity_source_value,
     ethnicity_source_concept_id,
+    covid_date,
+    covid_severity,
+    calc_outbreak_lag_years,
+    calc_age_covid,
+    latent_risk,
   )
 ds_slim
 
 # ---- save-to-disk ------------------------------------------------------------
-readr::write_csv(ds       , config$path_analysis_patient_csv)
-arrow::write_parquet(ds   , config$path_analysis_patient_parquet)
-#readr::write_rds(ds       , config$path_analysis_patient_rds          , compress = "gz")
+readr::write_csv(     ds_slim   , config$path_analysis_patient_csv)
+arrow::write_parquet( ds_slim   , config$path_analysis_patient_parquet)
+# readr::write_rds(     ds_slim   , config$path_analysis_patient_rds          , compress = "gz")
