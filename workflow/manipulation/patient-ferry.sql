@@ -28,5 +28,5 @@ SELECT
   ,pth.latent_risk
 FROM person p
   left  join patient         pt   on p.person_id = pt.person_id
-  left  join patient_hidden  pth  on p.person_id = pth.person_id
+  left  join patient_latent  pth  on p.person_id = pth.person_id
 ORDER BY p.person_id;

@@ -13,8 +13,8 @@ CREATE TABLE date_nation_latent (
   pt_count             integer   not null
 );
 
-DROP TABLE if exists patient_hidden;
-CREATE TABLE patient_hidden (
+DROP TABLE if exists patient_latent;
+CREATE TABLE patient_latent (
   person_id                       integer       primary key,
   latent_risk                     float         not null
 );

@@ -1,1 +1,1 @@
-DROP TABLE if exists patient_hidden;
+DROP TABLE if exists patient_latent;

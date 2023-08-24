@@ -66,7 +66,7 @@ Univariate
 
 ![](figure-png/marginals-patient-1.png)<!-- -->![](figure-png/marginals-patient-2.png)<!-- -->![](figure-png/marginals-patient-3.png)<!-- -->![](figure-png/marginals-patient-4.png)<!-- -->![](figure-png/marginals-patient-5.png)<!-- -->
 
-`patient_hidden` table
+`patient_latent` table
 ---------------------------------------------------------------------------
 
 ![](figure-png/marginals-patient_latent-1.png)<!-- -->
@@ -332,4 +332,4 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 
-Report rendered by wibeasley at 2023-08-23, 19:53 -0500 in 7 seconds.
+Report rendered by wibeasley at 2023-08-23, 19:57 -0500 in 7 seconds.
