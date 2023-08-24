@@ -10,3 +10,5 @@ CREATE TABLE patient (
   calc_outbreak_lag_years         float         not null,
   calc_age_covid                  float         not null
 );
+
+CREATE INDEX ix_patient_data_partner_id on patient (data_partner_id);

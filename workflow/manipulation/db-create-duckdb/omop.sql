@@ -11,6 +11,8 @@ CREATE TABLE concept (
   valid_end_date      date            not null,
   invalid_reason      varchar(1)          null
 );
+CREATE INDEX ix_concept_vocabulary_id      on concept (vocabulary_id);
+CREATE INDEX ix_concept_standard_concept   on concept (standard_concept);
 
 DROP TABLE if exists person;
 CREATE TABLE person (
