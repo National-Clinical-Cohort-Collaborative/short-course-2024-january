@@ -102,7 +102,7 @@ Univariate
 `patient_hidden` table
 ---------------------------------------------------------------------------
 
-```{r marginals-patient-hidden, echo=echo_chunks, message=message_chunks}
+```{r marginals-patient_latent, echo=echo_chunks, message=message_chunks}
 ```
 
 

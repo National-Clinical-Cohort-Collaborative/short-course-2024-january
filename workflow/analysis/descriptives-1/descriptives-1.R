@@ -84,7 +84,7 @@ TabularManifest::histogram_discrete(  ds_patient, "covid_severity")
 TabularManifest::histogram_continuous(ds_patient, "calc_outbreak_lag_years" , rounded_digits = 1)
 TabularManifest::histogram_continuous(ds_patient, "calc_age_covid"          , rounded_digits = 1)
 
-# ---- marginals-patient-hidden -------------------------------------------------
+# ---- marginals-patient_latent -------------------------------------------------
 TabularManifest::histogram_continuous(ds_patient, "latent_risk"             , rounded_digits = 1)
 
 # This helps start the code for graphing each variable.

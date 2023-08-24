@@ -69,7 +69,7 @@ Univariate
 `patient_hidden` table
 ---------------------------------------------------------------------------
 
-![](figure-png/marginals-patient-hidden-1.png)<!-- -->
+![](figure-png/marginals-patient_latent-1.png)<!-- -->
 
 
 Multivariate
@@ -332,4 +332,4 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 
-Report rendered by wibeasley at 2023-08-23, 19:49 -0500 in 9 seconds.
+Report rendered by wibeasley at 2023-08-23, 19:53 -0500 in 7 seconds.
