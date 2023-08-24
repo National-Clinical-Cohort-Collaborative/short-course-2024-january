@@ -14,7 +14,7 @@ requireNamespace("dplyr"                      )
 requireNamespace("checkmate"                  )
 requireNamespace("testit"                     )
 requireNamespace("config"                     )
-requireNamespace("OuhscMunge"                 )   # remotes::install_github("OuhscBbmc/OuhscMunge")
+# requireNamespace("OuhscMunge"                 )   # remotes::install_github("OuhscBbmc/OuhscMunge")
 # requireNamespace("RcppRoll")
 
 # ---- declare-globals ---------------------------------------------------------

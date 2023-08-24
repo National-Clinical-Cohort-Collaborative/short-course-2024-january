@@ -11,6 +11,31 @@ Description: The N3C Short Course use OMOP and N3C to teach
   research with observational medical data.
   N3C is the National COVID Cohort Collaborative.
   This package supports the course.
+Depends:
+  R(>= 4.1.0)
+Imports:
+  arrow,
+  checkmate (>= 2.0),
+  dplyr (>= 1.0),
+  duckdb,
+  fs,
+  ggplot2,
+  lubridate,
+  readr (>= 2.0),
+  rlang (>= 0.4),
+  RSQLite,
+  tibble (>= 2.0),
+  tidyr (>= 1.0)
+Suggests:
+  spelling,
+  covr (>= 3.4),
+  DBI (>= 1.1),
+  kableExtra (>= 1.0),
+  knitr (>= 1.18),
+  purrr (>= 0.3.4),
+  rmarkdown (>= 2.0),
+  sessioninfo (>= 1.1.1),
+  testthat (>= 3.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

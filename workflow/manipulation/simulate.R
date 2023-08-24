@@ -20,7 +20,7 @@ requireNamespace("dplyr"        ) # Avoid attaching dplyr, b/c its function name
 requireNamespace("rlang"        ) # Language constructs, like quosures
 requireNamespace("testit"       ) # For asserting conditions meet expected patterns/conditions.
 requireNamespace("checkmate"    ) # For asserting conditions meet expected patterns/conditions. # remotes::install_github("mllg/checkmate")
-requireNamespace("OuhscMunge"   ) # remotes::install_github(repo="OuhscBbmc/OuhscMunge")
+# requireNamespace("OuhscMunge"   ) # remotes::install_github(repo="OuhscBbmc/OuhscMunge")
 
 # ---- declare-globals ---------------------------------------------------------
 # Constant values that won't change.
