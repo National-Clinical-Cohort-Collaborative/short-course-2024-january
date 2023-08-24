@@ -31,7 +31,6 @@ set.seed(453)
 subject_count       <- 100
 # wave_count          <- 10
 #
-# possible_year_start <- 2000:2005
 # possible_age_start  <- 55:75
 # possible_county_id  <- c(51L, 55L, 72L)
 # possible_county_index  <- seq_along(possible_county_id)
@@ -85,7 +84,7 @@ site_count <- 3L
 
 # ---- load-data ---------------------------------------------------------------
 ds_concept      <- retrieve_duckdb("SELECT * FROM concept")
-ds_nation_count <- retrieve_duckdb("SELECT * FROM latent_nation_count")
+ds_nation_count <- retrieve_duckdb("SELECT * FROM date_nation_latent")
 
 checkmate::assert_tibble(ds_concept       , min.rows = 4)
 checkmate::assert_tibble(ds_nation_count  , min.rows = 4)
@@ -102,8 +101,12 @@ ds_site <-
   tibble::tibble(data_partner_id = _) |>
   dplyr::mutate(
     covid_start_site  = config$covid_start_nation + runif(site_count, min = 0, max = 45),
-    relative_size     = rchisq(site_count, 5)
+    relative_size     = rchisq(site_count, 5),
+    # site_int          = rbeta(site_count, 4.4, 4.4) - .5,
+    # site_slope        = rbeta(site_count, .4, 1.4) - .1,
   )
+
+# hist(rbeta(1000, 4.4, 4.4) - .5, breaks = 40)
 
 site_assignment <-
   ds_site |>
