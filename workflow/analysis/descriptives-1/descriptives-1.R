@@ -9,6 +9,7 @@ rm(list = ls(all.names = TRUE)) # Clear the memory of variables from previous ru
 library(ggplot2) #For graphing
 # import::from("magrittr", "%>%")
 requireNamespace("dplyr")
+requireNamespace("corrplot")
 # requireNamespace("RColorBrewer")
 # requireNamespace("scales") #For formating values in graphs
 # requireNamespace("mgcv) #For the Generalized Additive Model that smooths the longitudinal graphs.

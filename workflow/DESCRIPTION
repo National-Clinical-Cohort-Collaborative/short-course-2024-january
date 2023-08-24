@@ -17,6 +17,7 @@ Imports:
   arrow,
   checkmate (>= 2.0),
   config,
+  corrplot,
   dplyr (>= 1.0),
   duckdb,
   fs,
