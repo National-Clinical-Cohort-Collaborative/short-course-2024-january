@@ -1,0 +1,17 @@
+Package: n3cshortcourse
+Title: N3C Short Course
+Version: 0.0.0.9000
+Authors@R:
+  c(
+    person("Will", "Beasley", role = c("aut", "cre"), email =
+    "wibeasley@hotmail.com", comment = c(ORCID = "0000-0002-5613-5006")),
+    person("Caxton", "Muchono", role = c("aut"), email =
+    "caxymuchono@gmail.com", comment = c(ORCID = "0000-0002-8653-8834")))
+Description: The N3C Short Course use OMOP and N3C to teach 
+  research with observational medical data.
+  N3C is the National COVID Cohort Collaborative.
+  This package supports the course.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
