@@ -1,1 +1,1 @@
-DROP TABLE if exists site;
+DROP TABLE if exists site_latent;

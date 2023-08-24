@@ -398,7 +398,7 @@ if (config$produce_rds) {
 }
 
 if (config$produce_duckdb) {
-  truncate_and_load_table_duckdb(ds_site          , "site")
+  truncate_and_load_table_duckdb(ds_site          , "site_latent")
   truncate_and_load_table_duckdb(ds_person_slim   , "person")
   truncate_and_load_table_duckdb(ds_patient       , "patient")
   truncate_and_load_table_duckdb(ds_patient_hidden, "patient_hidden")
@@ -412,7 +412,7 @@ if (config$produce_parquet) {
 }
 
 if (config$produce_sqlite) {
-  truncate_and_load_table_sqlite(ds_site          , "site")
+  truncate_and_load_table_sqlite(ds_site          , "site_latent")
   truncate_and_load_table_sqlite(ds_person_slim   , "person")
   truncate_and_load_table_sqlite(ds_patient       , "patient")
   truncate_and_load_table_sqlite(ds_patient_hidden, "patient_hidden")

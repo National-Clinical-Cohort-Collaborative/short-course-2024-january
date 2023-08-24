@@ -1,7 +1,7 @@
 -- CREATE SCHEMA if not exists latent;
 
-DROP TABLE if exists site;
-CREATE TABLE site (
+DROP TABLE if exists site_latent;
+CREATE TABLE site_latent (
   data_partner_id                 integer       primary key,
   covid_start_site                date          not null,
   relative_size                   float         not null,
