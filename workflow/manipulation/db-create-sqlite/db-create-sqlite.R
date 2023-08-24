@@ -29,8 +29,8 @@ path_ddl <-
   c(
     "manipulation/db-create-sqlite/concept-drop.sql",
     "manipulation/db-create-sqlite/concept-create.sql",
-    "manipulation/db-create-sqlite/nation-count-drop.sql",
-    "manipulation/db-create-sqlite/nation-count-create.sql",
+    "manipulation/db-create-sqlite/date_nation_latent-drop.sql",
+    "manipulation/db-create-sqlite/date_nation_latent-create.sql",
     "manipulation/db-create-sqlite/site-drop.sql",
     "manipulation/db-create-sqlite/site-create.sql",
     "manipulation/db-create-sqlite/person-drop.sql",
