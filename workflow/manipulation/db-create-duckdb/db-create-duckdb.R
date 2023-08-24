@@ -30,7 +30,7 @@ path_ddl <-
   c(
     "manipulation/db-create-duckdb/omop.sql",
     "manipulation/db-create-duckdb/n3c.sql",
-    "manipulation/db-create-duckdb/simulation.sql",
+    # "manipulation/db-create-duckdb/simulation.sql",
     "manipulation/db-create-duckdb/latent.sql",
     "manipulation/db-create-duckdb/analysis.sql"
   )
