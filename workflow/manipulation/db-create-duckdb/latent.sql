@@ -4,7 +4,9 @@ DROP TABLE if exists site_latent;
 CREATE TABLE site_latent (
   data_partner_id                 integer       primary key,
   covid_start_site                date          not null,
-  relative_size                   float         not null,
+  site_relative_size              float         not null,
+  site_int                        float         not null,
+  site_slope                      float         not null,
 );
 
 DROP TABLE if exists date_nation_latent;

@@ -100,24 +100,31 @@ ds_site <-
   seq_len() |>
   tibble::tibble(data_partner_id = _) |>
   dplyr::mutate(
-    covid_start_site  = config$covid_start_nation + runif(site_count, min = 0, max = 45),
-    relative_size     = rchisq(site_count, 5),
-    # site_int          = rbeta(site_count, 4.4, 4.4) - .5,
-    # site_slope        = rbeta(site_count, .4, 1.4) - .1,
+    covid_start_site      = config$covid_start_nation + runif(site_count, min = 0, max = 45),
+    site_relative_size    = round(rchisq(site_count, 5)               , 4),
+    site_int              = round(rbeta(site_count, 4.4, 4.4) - .5    , 4),
+    site_slope            = round(rbeta(site_count, .4, 1.4) - .1     , 4),
   )
 
 # hist(rbeta(1000, 4.4, 4.4) - .5, breaks = 40)
 
-site_assignment <-
-  ds_site |>
-  dplyr::slice_sample(weight_by = relative_size, n = subject_count, replace = TRUE) |>
-  dplyr::pull(data_partner_id)
 
 # ---- person ----------------------------------------------------------------
+ds_person_site <-
+  ds_site |>
+  dplyr::slice_sample(weight_by = site_relative_size, n = subject_count, replace = TRUE) |>
+  dplyr::mutate(
+    person_id         = factor(10*subject_count + seq_len(subject_count))
+  ) |>
+  dplyr::select(
+    person_id,
+    data_partner_id,
+    tidyselect::everything()
+  )
+
 ds_person <-
-  tibble::tibble(
-    person_id         = factor(10*subject_count + seq_len(subject_count)),
-    data_partner_id   = site_assignment,
+  ds_person_site |>
+  dplyr::mutate(
     gender_concept_id = as.integer(sample(names(p_gender      ), prob = p_gender      , size = subject_count, replace = TRUE)),
   ) |>
   dplyr::mutate(
@@ -140,7 +147,7 @@ ds_person <-
       (.04 * calc_age_covid) +
       rnorm(subject_count, sd = 1.3),
     latent_risk     = round(latent_risk, 3),
-    covid_severity  = manifest_severity(latent_risk),
+    covid_severity  = manifest_severity(latent_risk + rnorm(subject_count, sd = .8)),
   ) |>
   dplyr::mutate(
     race_concept_id           = 0L,
@@ -175,7 +182,7 @@ ds_person <-
   )
 
 summary(lm(latent_risk ~ 1 + calc_outbreak_lag_years + calc_age_covid, data = ds_person))
-# summary(lm(latent_risk ~ 1 + latent_dob_lag + covid_date, data = ds_person))
+summary(glm(covid_severity ~ 1 + calc_outbreak_lag_years + calc_age_covid, family = binomial, data = ds_person))
 # stop()
 # https://www.npr.org/sections/health-shots/2020/09/01/816707182/map-tracking-the-spread-of-the-coronavirus-in-the-u-s
 
