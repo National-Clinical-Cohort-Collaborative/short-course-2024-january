@@ -16,6 +16,7 @@ Depends:
 Imports:
   arrow,
   checkmate (>= 2.0),
+  config,
   dplyr (>= 1.0),
   duckdb,
   fs,
@@ -24,6 +25,8 @@ Imports:
   readr (>= 2.0),
   rlang (>= 0.4),
   RSQLite,
+  sqldf,
+  testit,
   tibble (>= 2.0),
   tidyr (>= 1.0)
 Suggests:
@@ -36,6 +39,9 @@ Suggests:
   rmarkdown (>= 2.0),
   sessioninfo (>= 1.1.1),
   testthat (>= 3.0)
+Remotes:
+  github::OuhscBbmc/OuhscMunge,
+  github::Melinae/TabularManifest
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
