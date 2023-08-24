@@ -23,10 +23,12 @@ Imports:
   fs,
   ggplot2,
   lubridate,
+  OuhscMunge (>= 0.1.9.9009),
   readr (>= 2.0),
   rlang (>= 0.4),
   RSQLite,
   sqldf,
+  TabularManifest,
   testit,
   tibble (>= 2.0),
   tidyr (>= 1.0)
