@@ -88,9 +88,9 @@ Correlation Matrixes
 
 |                                 | latent<br>risk| calc<br>age<br>covid| calc<br>outbreak<br>lag<br>years|
 |:--------------------------------|--------------:|--------------------:|--------------------------------:|
-|latent<br>risk                   |          1.000|                0.639|                           -0.147|
-|calc<br>age<br>covid             |          0.639|                1.000|                            0.115|
-|calc<br>outbreak<br>lag<br>years |         -0.147|                0.115|                            1.000|
+|latent<br>risk                   |          1.000|                0.637|                           -0.151|
+|calc<br>age<br>covid             |          0.637|                1.000|                            0.115|
+|calc<br>outbreak<br>lag<br>years |         -0.151|                0.115|                            1.000|
 
 
 Models
@@ -110,13 +110,13 @@ lm(formula = latent_risk ~ 1, data = ds_patient)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--6.0088 -1.2523  0.1727  1.4595  4.4752 
+-6.0664 -1.3099  0.1101  1.5069  4.4186 
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)
-(Intercept)   1.2678     0.1899   6.677 1.43e-09
+(Intercept)   1.2214     0.1895   6.445 4.23e-09
 
-Residual standard error: 1.899 on 99 degrees of freedom
+Residual standard error: 1.895 on 99 degrees of freedom
 ```
 
 ```
@@ -130,16 +130,16 @@ lm(formula = latent_risk ~ 1 + calc_outbreak_lag_years, data = ds_patient)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--5.8964 -1.2171  0.1136  1.4524  4.1484 
+-5.9510 -1.2049  0.0603  1.4355  4.0833 
 
 Coefficients:
                         Estimate Std. Error t value Pr(>|t|)
-(Intercept)               1.9836     0.5234   3.790 0.000261
-calc_outbreak_lag_years  -0.4183     0.2853  -1.466 0.145771
+(Intercept)               1.9558     0.5221   3.746 0.000303
+calc_outbreak_lag_years  -0.4292     0.2845  -1.508 0.134693
 
-Residual standard error: 1.888 on 98 degrees of freedom
-Multiple R-squared:  0.02147,	Adjusted R-squared:  0.01148 
-F-statistic:  2.15 on 1 and 98 DF,  p-value: 0.1458
+Residual standard error: 1.883 on 98 degrees of freedom
+Multiple R-squared:  0.02269,	Adjusted R-squared:  0.01271 
+F-statistic: 2.275 on 1 and 98 DF,  p-value: 0.1347
 ```
 
 ```
@@ -153,16 +153,16 @@ lm(formula = latent_risk ~ 1 + calc_age_covid, data = ds_patient)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--4.5145 -0.8876 -0.0767  1.0186  3.8775 
+-4.5786 -0.8834 -0.0526  0.9609  3.8328 
 
 Coefficients:
                 Estimate Std. Error t value Pr(>|t|)
-(Intercept)    -0.667416   0.277398  -2.406    0.018
-calc_age_covid  0.042639   0.005186   8.222  8.5e-13
+(Intercept)    -0.705321   0.277327  -2.543   0.0125
+calc_age_covid  0.042451   0.005184   8.188 1.01e-12
 
 Residual standard error: 1.468 on 98 degrees of freedom
-Multiple R-squared:  0.4082,	Adjusted R-squared:  0.4022 
-F-statistic:  67.6 on 1 and 98 DF,  p-value: 8.498e-13
+Multiple R-squared:  0.4062,	Adjusted R-squared:  0.4002 
+F-statistic: 67.05 on 1 and 98 DF,  p-value: 1.005e-12
 ```
 
 ```
@@ -177,17 +177,17 @@ lm(formula = latent_risk ~ 1 + calc_outbreak_lag_years + calc_age_covid,
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--4.2834 -0.9356 -0.0870  0.9589  3.3669 
+-4.3439 -0.9266 -0.0575  0.9118  3.2998 
 
 Coefficients:
                          Estimate Std. Error t value Pr(>|t|)
-(Intercept)              0.344299   0.433603   0.794  0.42911
-calc_outbreak_lag_years -0.636610   0.214970  -2.961  0.00385
-calc_age_covid           0.044351   0.005025   8.826 4.58e-14
+(Intercept)              0.322437   0.432856   0.745  0.45813
+calc_outbreak_lag_years -0.646705   0.214600  -3.014  0.00329
+calc_age_covid           0.044191   0.005016   8.809 4.98e-14
 
-Residual standard error: 1.413 on 97 degrees of freedom
-Multiple R-squared:  0.4573,	Adjusted R-squared:  0.4461 
-F-statistic: 40.87 on 2 and 97 DF,  p-value: 1.338e-13
+Residual standard error: 1.411 on 97 degrees of freedom
+Multiple R-squared:  0.4571,	Adjusted R-squared:  0.4459 
+F-statistic: 40.83 on 2 and 97 DF,  p-value: 1.367e-13
 ```
 
 
@@ -197,9 +197,9 @@ Final Model
 
 |                        | Estimate| Std. Error| t value| Pr(>&#124;t&#124;)|
 |:-----------------------|--------:|----------:|-------:|------------------:|
-|(Intercept)             |     0.34|       0.43|    0.79|               0.43|
-|calc_outbreak_lag_years |    -0.64|       0.21|   -2.96|               0.00|
-|calc_age_covid          |     0.04|       0.01|    8.83|               0.00|
+|(Intercept)             |     0.32|       0.43|    0.74|               0.46|
+|calc_outbreak_lag_years |    -0.65|       0.21|   -3.01|               0.00|
+|calc_age_covid          |     0.04|       0.01|    8.81|               0.00|
 
 
 
@@ -331,4 +331,4 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 
-Report rendered by wibea at 2023-08-24, 13:35 -0500 in 3 seconds.
+Report rendered by wibea at 2023-08-24, 14:12 -0500 in 3 seconds.

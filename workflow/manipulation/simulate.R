@@ -142,7 +142,8 @@ ds_person <-
   dplyr::mutate(
     latent_risk =
       .2 +
-      # (-0.78 * latent_dob_lag) +
+      (1 * site_int) +
+      (.005 * site_slope * calc_outbreak_lag_years) +
       (-0.5 * calc_outbreak_lag_years) +
       (.04 * calc_age_covid) +
       rnorm(subject_count, sd = 1.3),
