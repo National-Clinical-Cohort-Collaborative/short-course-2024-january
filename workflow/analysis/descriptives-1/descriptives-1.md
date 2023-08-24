@@ -212,7 +212,7 @@ For the sake of documentation and reproducibility, the current report was render
     <summary>Environment <span class="glyphicon glyphicon-plus-sign"></span></summary>
     
     ```
-    ─ Session info ──────────────────────────────────────────────────
+    ─ Session info ──────────────────────────────────────────────
      setting  value
      version  R version 4.2.2 Patched (2022-11-10 r83330)
      os       Ubuntu 23.04
@@ -226,7 +226,7 @@ For the sake of documentation and reproducibility, the current report was render
      rstudio  2023.06.1+524 Mountain Hydrangea (desktop)
      pandoc   3.1.5 @ /usr/bin/ (via rmarkdown)
     
-    ─ Packages ──────────────────────────────────────────────────────
+    ─ Packages ──────────────────────────────────────────────────
      package         * version    date (UTC) lib source
      archive           1.1.5      2022-05-06 [1] CRAN (R 4.2.2)
      arrow             12.0.1.1   2023-07-18 [1] CRAN (R 4.2.2)
@@ -256,6 +256,7 @@ For the sake of documentation and reproducibility, the current report was render
      farver            2.1.1      2022-07-06 [1] CRAN (R 4.2.2)
      fastmap           1.1.1      2023-02-24 [1] CRAN (R 4.2.2)
      forcats           1.0.0      2023-01-29 [1] CRAN (R 4.2.2)
+     fs                1.6.3      2023-07-20 [1] CRAN (R 4.2.2)
      generics          0.1.3      2022-07-05 [1] CRAN (R 4.2.2)
      ggplot2         * 3.4.3      2023-08-14 [1] CRAN (R 4.2.2)
      glue              1.6.2      2022-02-24 [1] CRAN (R 4.2.2)
@@ -325,10 +326,10 @@ For the sake of documentation and reproducibility, the current report was render
      [3] /usr/lib/R/site-library
      [4] /usr/lib/R/library
     
-    ─────────────────────────────────────────────────────────────────
+    ─────────────────────────────────────────────────────────────
     ```
   </details>
 
 
 
-Report rendered by wibeasley at 2023-08-23, 00:32 -0500 in 8 seconds.
+Report rendered by wibeasley at 2023-08-23, 19:49 -0500 in 9 seconds.

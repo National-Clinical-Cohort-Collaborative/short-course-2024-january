@@ -47,6 +47,7 @@ ds_rail  <- tibble::tribble(
   ~fx         , ~path,
 
   # Establish database & lookup tables
+  "run_r"     , "manipulation/derived-files-clear.R",
   "run_r"     , "manipulation/db-create-duckdb/db-create-duckdb.R",
   "run_r"     , "manipulation/db-create-sqlite/db-create-sqlite.R",
   "run_r"     , "manipulation/omop-concepts/concept-ellis.R",
