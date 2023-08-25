@@ -26,6 +26,8 @@ SELECT
   ,pt.calc_outbreak_lag_years
   ,pt.calc_age_covid
   ,pth.latent_risk_1
+  ,pth.latent_risk_2_int
+  ,pth.latent_risk_2_slope
 FROM person p
   left  join patient         pt   on p.person_id = pt.person_id
   left  join patient_latent  pth  on p.person_id = pth.person_id

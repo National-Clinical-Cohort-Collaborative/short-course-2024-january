@@ -152,6 +152,10 @@ ds_person <-
     covid_severity  = manifest_severity(latent_risk_1 + rnorm(subject_count, sd = .8)),
   ) |>
   dplyr::mutate(
+    latent_risk_2_int   = rchisq(subject_count, 3.5) + 2,
+    latent_risk_2_slope = rnorm(subject_count, mean = 0, sd = .5),
+  ) |>
+  dplyr::mutate(
     race_concept_id           = 0L,
     ethnicity_concept_id      = 0L,
   ) |>
@@ -178,6 +182,8 @@ ds_person <-
     # ethnicity_source_concept_id,
     covid_date,
     latent_risk_1,
+    latent_risk_2_int,
+    latent_risk_2_slope,
     covid_severity,
     calc_outbreak_lag_years,
     calc_age_covid,
@@ -199,9 +205,7 @@ summary(glm(covid_severity ~ 1 + calc_outbreak_lag_years + calc_age_covid, famil
 # dob2 <- boundary_date - 40000 * x
 # hist(lubridate::year(dob2))
 
-
 # ---- sem ---------------------------------------------------------------------
-#
 # |>
 #   dplyr::mutate(
 #     int_factor_1    = int_county[county_index]   + rnorm(n=subject_count, mean=10.0 , sd=2.0),
@@ -282,7 +286,6 @@ summary(glm(covid_severity ~ 1 + calc_outbreak_lag_years + calc_age_covid, famil
 # ds
 
 # ---- join-concepts -----------------------------------------------------------
-
 sql_person_slim <-
   "
     SELECT
@@ -388,6 +391,8 @@ ds_patient_hidden <-
   dplyr::select(
     person_id,
     latent_risk_1,
+    latent_risk_2_int,
+    latent_risk_2_slope,
   )
 
 # ---- save-to-disk ------------------------------------------------------------

@@ -168,22 +168,22 @@ rm(ds_hyp, cor_matrix)
 
 # ---- models ------------------------------------------------------------------
 cat("============= Simple model that's just an intercept. =============")
-m0 <- lm(latent_risk ~ 1, data=ds_patient)
+m0 <- lm(latent_risk_1 ~ 1, data=ds_patient)
 summary(m0)
 
 cat("============= Model includes one predictor: `outbreak_lag`. =============")
-m1a <- lm(latent_risk ~ 1  + calc_outbreak_lag_years, data=ds_patient)
+m1a <- lm(latent_risk_1 ~ 1  + calc_outbreak_lag_years, data=ds_patient)
 summary(m1a)
 
 cat("============= Model includes one predictor: `calc_age_covid`. =============")
-m1b <- lm(latent_risk ~ 1  + calc_age_covid, data=ds_patient)
+m1b <- lm(latent_risk_1 ~ 1  + calc_age_covid, data=ds_patient)
 summary(m1b)
 
 # cat("The one predictor is significantly tighter.")
 # anova(m0, m1)
 
 cat("============= Model includes two predictors. =============")
-m2 <- lm(latent_risk ~ 1  + calc_outbreak_lag_years + calc_age_covid, data=ds_patient)
+m2 <- lm(latent_risk_1 ~ 1  + calc_outbreak_lag_years + calc_age_covid, data=ds_patient)
 summary(m2)
 
 # cat("The two predictor is significantly tighter.")
