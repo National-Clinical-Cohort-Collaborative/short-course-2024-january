@@ -7,6 +7,7 @@ CREATE TABLE site_latent (
   site_relative_size              float         not null,
   site_int                        float         not null,
   site_slope                      float         not null,
+  --TODO: add school_close, school_closed_duration, & school_reopen (date, integer, date)
 );
 
 DROP TABLE if exists date_nation_latent;

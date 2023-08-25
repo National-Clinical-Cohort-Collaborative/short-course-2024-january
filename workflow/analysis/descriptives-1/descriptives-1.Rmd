@@ -105,6 +105,12 @@ Univariate
 ```{r marginals-patient_latent, echo=echo_chunks, message=message_chunks}
 ```
 
+`site_latent` table
+---------------------------------------------------------------------------
+
+```{r marginals-site_latent, echo=echo_chunks, message=message_chunks}
+```
+
 
 Multivariate
 ===========================================================================

@@ -29,4 +29,6 @@ CREATE TABLE analysis_patient(
   latent_risk_1                   float            not null,
   latent_risk_2_int               float            not null,
   latent_risk_2_slope             float            not null
+  --TODO: add school_close, school_closed_duration, & school_reopen (date, integer, date)
+
 );
