@@ -77,7 +77,7 @@ dim(ds)
 # # ---- inspect -----------------------------------------------------------------
 # message(
 #   "Row Count          : ", scales::comma(nrow(ds)), "\n",
-#   "Unique subjects    : ", scales::comma(dplyr::n_distinct(ds$subject_id)), "\n",
+#   "Unique patients    : ", scales::comma(dplyr::n_distinct(ds$patient_id)), "\n",
 #   "Unique waves       : ", scales::comma(dplyr::n_distinct(ds$wave_id       )), "\n",
 #   "Unique counties    : ", scales::comma(dplyr::n_distinct(ds$county_id       )), "\n",
 #   "Unique years       : ", scales::comma(dplyr::n_distinct(ds$year    )), "\n",

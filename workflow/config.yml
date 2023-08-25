@@ -1,13 +1,13 @@
 default:
   # ---- To be processed by Ellis lanes
-  # path_subject_1_raw:       "data-public/raw/subject-1.csv"
+  # path_pt_1_raw                  :"data-public/raw/pt-1.csv"
 
-  # path_ss_county:           "data-public/metadata/ss-county.csv"
-  path_metadata_concept:      "data-public/metadata/concept.csv"
+  # path_ss_county                 : "data-public/metadata/ss-county.csv"
+  path_metadata_concept            : "data-public/metadata/concept.csv"
 
   # Central Database (produced by Ellis lanes).
-  path_database_duckdb:               "data-public/derived/duckdb/db.duckdb"
-  path_database_sqlite:               "data-public/derived/sqlite/db.sqlite3"
+  path_database_duckdb             : "data-public/derived/duckdb/db.duckdb"
+  path_database_sqlite             : "data-public/derived/sqlite/db.sqlite3"
 
   # ---- Simulated-ready datasets (consumed by scribes).
   path_csv_site                    : "data-public/derived/csv/site_latent.csv"

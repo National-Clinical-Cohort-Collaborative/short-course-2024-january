@@ -55,7 +55,7 @@ ds_rail  <- tibble::tribble(
   # Simulate data
   "run_r"     , "manipulation/simulate-nation-trend.R",
   "run_r"     , "manipulation/simulate.R",
-  # "run_python", "manipulation/subject-2-ellis.py", # Uncomment to run a python version
+  # "run_python", "manipulation/pt-2-ellis.py", # Uncomment to run a python version
 
   # Second-level manipulation on data inside the warehouse.
   "run_sql" , "manipulation/patient-ferry.sql",

@@ -28,7 +28,7 @@ config                         <- config::get()
 set.seed(453)
 # figure_path <- "stitched-output/manipulation/simulation/simulate-mlm-1/"
 
-subject_count       <- 100
+pt_count       <- 100
 # wave_count          <- 10
 #
 # possible_age_start  <- 55:75
@@ -113,9 +113,9 @@ ds_site <-
 # ---- person ----------------------------------------------------------------
 ds_person_site <-
   ds_site |>
-  dplyr::slice_sample(weight_by = site_relative_size, n = subject_count, replace = TRUE) |>
+  dplyr::slice_sample(weight_by = site_relative_size, n = pt_count, replace = TRUE) |>
   dplyr::mutate(
-    person_id         = factor(10*subject_count + seq_len(subject_count))
+    person_id         = factor(10*pt_count + seq_len(pt_count))
   ) |>
   dplyr::select(
     person_id,
@@ -126,17 +126,17 @@ ds_person_site <-
 ds_person <-
   ds_person_site |>
   dplyr::mutate(
-    gender_concept_id = as.integer(sample(names(p_gender      ), prob = p_gender      , size = subject_count, replace = TRUE)),
+    gender_concept_id = as.integer(sample(names(p_gender      ), prob = p_gender      , size = pt_count, replace = TRUE)),
   ) |>
   dplyr::mutate(
-    latent_dob_lag    = rbeta(n = subject_count, shape1 = 1, shape2 = 1.9, ncp = 7/8),
+    latent_dob_lag    = rbeta(n = pt_count, shape1 = 1, shape2 = 1.9, ncp = 7/8),
     birth_date        = config$boundary_date_max - 40000 * latent_dob_lag,
     year_of_birth     = as.integer(lubridate::year(birth_date)),
     month_of_birth    = as.integer(lubridate::month(birth_date)),
     day_of_birth      = as.integer(lubridate::day(birth_date)),
   ) |>
   dplyr::mutate(
-    covid_date              = sample(ds_nation_count$date, prob = ds_nation_count$pt_count, size = subject_count, replace = TRUE),
+    covid_date              = sample(ds_nation_count$date, prob = ds_nation_count$pt_count, size = pt_count, replace = TRUE),
     calc_outbreak_lag_years = round(as.integer(difftime(covid_date, config$covid_start_nation, units = "days")) / 365.25, 2),
     calc_age_covid          = round(as.integer(difftime(covid_date, birth_date, units = "days")) / 365.25, 2),
   ) |>
@@ -147,13 +147,13 @@ ds_person <-
       (.005 * site_slope * calc_outbreak_lag_years) +
       (-0.5 * calc_outbreak_lag_years) +
       (.04 * calc_age_covid) +
-      rnorm(subject_count, sd = 1.3),
+      rnorm(pt_count, sd = 1.3),
     latent_risk_1   = round(latent_risk_1, 3),
-    covid_severity  = manifest_severity(latent_risk_1 + rnorm(subject_count, sd = .8)),
+    covid_severity  = manifest_severity(latent_risk_1 + rnorm(pt_count, sd = .8)),
   ) |>
   dplyr::mutate(
-    latent_risk_2_int   = rchisq(subject_count, 3.5) + 2,
-    latent_risk_2_slope = rnorm(subject_count, mean = 0, sd = .5),
+    latent_risk_2_int   = rchisq(pt_count, 3.5) + 2,
+    latent_risk_2_slope = rnorm(pt_count, mean = 0, sd = .5),
   ) |>
   dplyr::mutate(
     race_concept_id           = 0L,
@@ -208,20 +208,20 @@ summary(glm(covid_severity ~ 1 + calc_outbreak_lag_years + calc_age_covid, famil
 # ---- sem ---------------------------------------------------------------------
 # |>
 #   dplyr::mutate(
-#     int_factor_1    = int_county[county_index]   + rnorm(n=subject_count, mean=10.0 , sd=2.0),
-#     slope_factor_1  = slope_county[county_index] + rnorm(n=subject_count, mean= 0.05, sd=0.04),
+#     int_factor_1    = int_county[county_index]   + rnorm(n=pt_count, mean=10.0 , sd=2.0),
+#     slope_factor_1  = slope_county[county_index] + rnorm(n=pt_count, mean= 0.05, sd=0.04),
 #
-#     int_factor_2    = rnorm(n = subject_count, mean = 5.0 , sd = 0.8 ) + (cor_factor_1_vs_2[1] * int_factor_1),
-#     slope_factor_2  = rnorm(n = subject_count, mean = 0.03, sd = 0.02) + (cor_factor_1_vs_2[2] * int_factor_1)
+#     int_factor_2    = rnorm(n = pt_count, mean = 5.0 , sd = 0.8 ) + (cor_factor_1_vs_2[1] * int_factor_1),
+#     slope_factor_2  = rnorm(n = pt_count, mean = 0.03, sd = 0.02) + (cor_factor_1_vs_2[2] * int_factor_1)
 #   )
-# ds_subject
+# ds_person
 #
 # ds <-
 #   tidyr::crossing(
-#     subject_id      = ds_subject$subject_id,
+#     pt_id           = ds_person$person_id,
 #     wave_id         = seq_len(wave_count)
 #   ) |>
-#   dplyr::right_join(ds_subject, by="subject_id") |>
+#   dplyr::right_join(ds_person, by="person_id") |>
 #   dplyr::mutate(
 #     year            = wave_id + year_start - 1L,
 #     age             = wave_id + age_start  - 1L,
@@ -323,7 +323,7 @@ ds_person_slim <-
 # # ---- inspect, fig.width=10, fig.height=6, fig.path=figure_path -----------------------------------------------------------------
 # library(ggplot2)
 #
-# ggplot(ds_long, aes(x=wave_id, y=value, color=subject_id)) + #, ymin=0
+# ggplot(ds_long, aes(x=wave_id, y=value, color=person_id)) + #, ymin=0
 #   geom_line() +
 #   facet_wrap("manifest", ncol=3, scales="free_y") +
 #   theme_minimal() +
@@ -333,21 +333,21 @@ ds_person_slim <-
 # last_plot() %+% aes(x=date_at_visit)
 # last_plot() %+% aes(x=age)
 #
-# ggplot(ds, aes(x=year, y=cog_1, color=factor(county_id), group=subject_id)) +
+# ggplot(ds, aes(x=year, y=cog_1, color=factor(county_id), group=person_id)) +
 #   geom_line() +
 #   theme_minimal() +
 #   theme(legend.position="top")
 #
 # ---- verify-values -----------------------------------------------------------
 # OuhscMunge::verify_value_headstart(ds_person)
-# checkmate::assert_factor(   ds_subject$subject_id     , any.missing=F                          , unique=T)
-# checkmate::assert_integer(  ds_subject$county_id      , any.missing=F , lower=51, upper=72     )
-# checkmate::assert_integer(  ds_subject$gender_id      , any.missing=F , lower=1, upper=255     )
-# checkmate::assert_character(ds_subject$race           , any.missing=F , pattern="^.{5,41}$"    )
-# checkmate::assert_character(ds_subject$ethnicity      , any.missing=F , pattern="^.{18,30}$"   )
+# checkmate::assert_factor(   ds_person$person_id       , any.missing=F                          , unique=T)
+# checkmate::assert_integer(  ds_person$county_id       , any.missing=F , lower=51, upper=72     )
+# checkmate::assert_integer(  ds_person$gender_id       , any.missing=F , lower=1, upper=255     )
+# checkmate::assert_character(ds_person$race            , any.missing=F , pattern="^.{5,41}$"    )
+# checkmate::assert_character(ds_person$ethnicity       , any.missing=F , pattern="^.{18,30}$"   )
 #
 # # OuhscMunge::verify_value_headstart(ds)
-# checkmate::assert_factor(  ds$subject_id        , any.missing=F                          )
+# checkmate::assert_factor(  ds$person_id         , any.missing=F                          )
 # checkmate::assert_integer( ds$wave_id           , any.missing=F , lower=1, upper=10      )
 # checkmate::assert_integer( ds$year              , any.missing=F , lower=2000, upper=2014 )
 # checkmate::assert_date(    ds$date_at_visit     , any.missing=F , lower=as.Date("2000-01-01"), upper=as.Date("2018-12-31") )
@@ -366,8 +366,8 @@ ds_person_slim <-
 # checkmate::assert_numeric( ds$phys_2            , any.missing=F , lower=0, upper=20      )
 # checkmate::assert_numeric( ds$phys_3            , any.missing=F , lower=0, upper=20      )
 #
-# subject_wave_combo   <- paste(ds$subject_id, ds$wave_id)
-# checkmate::assert_character(subject_wave_combo, pattern  ="^\\d{4} \\d{1,2}$"   , any.missing=F, unique=T)
+# person_wave_combo   <- paste(ds$person_id, ds$wave_id)
+# checkmate::assert_character(person_wave_combo, pattern  ="^\\d{4} \\d{1,2}$"   , any.missing=F, unique=T)
 
 # ---- specify-columns-to-upload -----------------------------------------------
 # Print colnames that `dplyr::select()`  should contain below:
