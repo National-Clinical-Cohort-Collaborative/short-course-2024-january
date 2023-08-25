@@ -25,6 +25,7 @@ CREATE TABLE analysis_patient(
   covid_severity                  covid_severity   not null,
   calc_outbreak_lag_years         float            not null,
   calc_age_covid                  float            not null,
+  length_of_stay                  integer          not null,
   latent_risk_1                   float            not null,
   latent_risk_2_int               float            not null,
   latent_risk_2_slope             float            not null

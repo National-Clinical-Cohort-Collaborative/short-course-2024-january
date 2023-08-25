@@ -150,6 +150,7 @@ ds_person <-
       rnorm(pt_count, sd = 1.3),
     latent_risk_1   = round(latent_risk_1, 3),
     covid_severity  = manifest_severity(latent_risk_1 + rnorm(pt_count, sd = .8)),
+    length_of_stay  = as.integer(latent_risk_1^2 + rchisq(pt_count, 4)) + 1L,
   ) |>
   dplyr::mutate(
     latent_risk_2_int   = rchisq(pt_count, 3.5) + 2,
@@ -187,6 +188,7 @@ ds_person <-
     covid_severity,
     calc_outbreak_lag_years,
     calc_age_covid,
+    length_of_stay,
   )
 
 summary(lm(latent_risk_1 ~ 1 + calc_outbreak_lag_years + calc_age_covid, data = ds_person))
@@ -383,6 +385,7 @@ ds_patient <-
     covid_severity,
     calc_outbreak_lag_years,
     calc_age_covid,
+    length_of_stay,
   )
 
 ds_patient_hidden <-

@@ -133,7 +133,10 @@ ds_slim <-
     covid_severity,
     calc_outbreak_lag_years,
     calc_age_covid,
+    length_of_stay,
     latent_risk_1,
+    latent_risk_2_int,
+    latent_risk_2_slope,
   )
 ds_slim
 

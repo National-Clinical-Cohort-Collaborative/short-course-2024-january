@@ -22,7 +22,10 @@ SELECT
   ,p.covid_severity
   ,p.calc_outbreak_lag_years
   ,p.calc_age_covid
+  ,p.length_of_stay
   ,p.latent_risk_1
+  ,p.latent_risk_2_int
+  ,p.latent_risk_2_slope
 FROM analysis_patient p
 
 ORDER BY p.person_id

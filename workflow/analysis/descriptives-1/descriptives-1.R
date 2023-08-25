@@ -50,9 +50,12 @@ ds_patient <-
     # ethnicity_source_concept_id,
     covid_date,
     covid_severity,
-    latent_risk_1,
     calc_outbreak_lag_years,
     calc_age_covid,
+    length_of_stay,
+    latent_risk_1,
+    latent_risk_2_int,
+    latent_risk_2_slope,
   )
 
 # ---- marginals-person ---------------------------------------------------------------
@@ -84,9 +87,12 @@ TabularManifest::histogram_date(      ds_patient, "covid_date"           , bin_u
 TabularManifest::histogram_discrete(  ds_patient, "covid_severity")
 TabularManifest::histogram_continuous(ds_patient, "calc_outbreak_lag_years" , rounded_digits = 1)
 TabularManifest::histogram_continuous(ds_patient, "calc_age_covid"          , rounded_digits = 1)
+TabularManifest::histogram_continuous(ds_patient, "length_of_stay"          , rounded_digits = 1)
 
 # ---- marginals-patient_latent -------------------------------------------------
 TabularManifest::histogram_continuous(ds_patient, "latent_risk_1"           , rounded_digits = 1)
+TabularManifest::histogram_continuous(ds_patient, "latent_risk_2_int"       , rounded_digits = 1)
+TabularManifest::histogram_continuous(ds_patient, "latent_risk_2_slope"     , rounded_digits = 1)
 
 # This helps start the code for graphing each variable.
 #   - Make sure you change it to `histogram_continuous()` for the appropriate variables.

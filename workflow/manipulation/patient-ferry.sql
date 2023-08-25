@@ -25,6 +25,7 @@ SELECT
   ,pt.covid_severity
   ,pt.calc_outbreak_lag_years
   ,pt.calc_age_covid
+  ,pt.length_of_stay
   ,pth.latent_risk_1
   ,pth.latent_risk_2_int
   ,pth.latent_risk_2_slope

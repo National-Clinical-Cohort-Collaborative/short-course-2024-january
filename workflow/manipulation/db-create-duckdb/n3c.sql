@@ -8,7 +8,8 @@ CREATE TABLE patient (
   covid_date                      date          not null,
   covid_severity                  covid_severity   not null,
   calc_outbreak_lag_years         float         not null,
-  calc_age_covid                  float         not null
+  calc_age_covid                  float         not null,
+  length_of_stay                  integer       not null
 );
 
 CREATE INDEX ix_patient_data_partner_id on patient (data_partner_id);
