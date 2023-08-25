@@ -1,4 +1,4 @@
-person_id,data_partner_id,gender_concept_id,year_of_birth,birth_date,race_concept_id,ethnicity_concept_id,location_id,provider_id,care_site_id,gender_source_value,gender_source_concept_id,race_source_value,race_source_concept_id,ethnicity_source_value,ethnicity_source_concept_id,covid_date,covid_severity,calc_outbreak_lag_years,calc_age_covid,latent_risk
+person_id,data_partner_id,gender_concept_id,year_of_birth,birth_date,race_concept_id,ethnicity_concept_id,location_id,provider_id,care_site_id,gender_source_value,gender_source_concept_id,race_source_value,race_source_concept_id,ethnicity_source_value,ethnicity_source_concept_id,covid_date,covid_severity,calc_outbreak_lag_years,calc_age_covid,latent_risk_1
 1001,1,8532,2005,2005-02-15,0,0,NA,NA,NA,f,8532,NA,NA,NA,NA,2021-12-27,none,1.9900000095367432,16.860000610351562,-1.8650000095367432
 1002,2,8507,2004,2004-07-26,0,0,NA,NA,NA,m,8507,NA,NA,NA,NA,2021-12-13,none,1.9500000476837158,17.3799991607666,0.06300000101327896
 1003,2,8507,1976,1976-02-05,0,0,NA,NA,NA,m,8507,NA,NA,NA,NA,2022-01-10,mild,2.0299999713897705,45.93000030517578,2.7980000972747803

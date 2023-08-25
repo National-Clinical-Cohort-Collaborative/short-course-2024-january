@@ -50,7 +50,7 @@ ds_patient <-
     # ethnicity_source_concept_id,
     covid_date,
     covid_severity,
-    latent_risk,
+    latent_risk_1,
     calc_outbreak_lag_years,
     calc_age_covid,
   )
@@ -86,7 +86,7 @@ TabularManifest::histogram_continuous(ds_patient, "calc_outbreak_lag_years" , ro
 TabularManifest::histogram_continuous(ds_patient, "calc_age_covid"          , rounded_digits = 1)
 
 # ---- marginals-patient_latent -------------------------------------------------
-TabularManifest::histogram_continuous(ds_patient, "latent_risk"             , rounded_digits = 1)
+TabularManifest::histogram_continuous(ds_patient, "latent_risk_1"           , rounded_digits = 1)
 
 # This helps start the code for graphing each variable.
 #   - Make sure you change it to `histogram_continuous()` for the appropriate variables.
@@ -101,7 +101,7 @@ g1 <-
   ds_patient |>
   ggplot(aes(
     x = calc_age_covid,
-    y = latent_risk,
+    y = latent_risk_1,
     group = data_partner_id,
     color = data_partner_id
     # fill = data_partner_id
@@ -143,7 +143,7 @@ predictor_names <-
   )
 
 # cat("### Hyp 1: Prediction of quarter mile time\n\n")
-ds_hyp <- ds_patient[, c("latent_risk", predictor_names)]
+ds_hyp <- ds_patient[, c("latent_risk_1", predictor_names)]
 colnames(ds_hyp) <- gsub("_", "\n", colnames(ds_hyp))
 cor_matrix <- cor(ds_hyp)
 corrplot::corrplot(cor_matrix, method="ellipse", addCoef.col="gray30", tl.col="gray20", diag=F)

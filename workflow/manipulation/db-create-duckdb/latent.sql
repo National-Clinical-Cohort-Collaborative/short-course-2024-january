@@ -18,5 +18,5 @@ CREATE TABLE date_nation_latent (
 DROP TABLE if exists patient_latent;
 CREATE TABLE patient_latent (
   person_id                       integer       primary key,
-  latent_risk                     float         not null
+  latent_risk_1                   float         not null
 );

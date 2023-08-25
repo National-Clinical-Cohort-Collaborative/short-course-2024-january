@@ -107,7 +107,8 @@ ds_site <-
   )
 
 # hist(rbeta(1000, 4.4, 4.4) - .5, breaks = 40)
-
+# hist(c(0, rchisq(1000, 3.5) + 2), breaks = 40)
+# mean(c(0, rchisq(1000, 3.5) + 2))
 
 # ---- person ----------------------------------------------------------------
 ds_person_site <-
@@ -140,15 +141,15 @@ ds_person <-
     calc_age_covid          = round(as.integer(difftime(covid_date, birth_date, units = "days")) / 365.25, 2),
   ) |>
   dplyr::mutate(
-    latent_risk =
+    latent_risk_1 =
       .2 +
       (1 * site_int) +
       (.005 * site_slope * calc_outbreak_lag_years) +
       (-0.5 * calc_outbreak_lag_years) +
       (.04 * calc_age_covid) +
       rnorm(subject_count, sd = 1.3),
-    latent_risk     = round(latent_risk, 3),
-    covid_severity  = manifest_severity(latent_risk + rnorm(subject_count, sd = .8)),
+    latent_risk_1   = round(latent_risk_1, 3),
+    covid_severity  = manifest_severity(latent_risk_1 + rnorm(subject_count, sd = .8)),
   ) |>
   dplyr::mutate(
     race_concept_id           = 0L,
@@ -176,13 +177,13 @@ ds_person <-
     # ethnicity_source_value,
     # ethnicity_source_concept_id,
     covid_date,
-    latent_risk,
+    latent_risk_1,
     covid_severity,
     calc_outbreak_lag_years,
     calc_age_covid,
   )
 
-summary(lm(latent_risk ~ 1 + calc_outbreak_lag_years + calc_age_covid, data = ds_person))
+summary(lm(latent_risk_1 ~ 1 + calc_outbreak_lag_years + calc_age_covid, data = ds_person))
 summary(glm(covid_severity ~ 1 + calc_outbreak_lag_years + calc_age_covid, family = binomial, data = ds_person))
 # stop()
 # https://www.npr.org/sections/health-shots/2020/09/01/816707182/map-tracking-the-spread-of-the-coronavirus-in-the-u-s
@@ -386,7 +387,7 @@ ds_patient_hidden <-
   # dplyr::slice(1:100) |>
   dplyr::select(
     person_id,
-    latent_risk,
+    latent_risk_1,
   )
 
 # ---- save-to-disk ------------------------------------------------------------
