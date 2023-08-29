@@ -45,12 +45,14 @@ execute_sql <- function(path_sql) {
   message("Executing ", path_sql)
   checkmate::assert_file_exists(path_sql)
 
-  path_sql |>
+  r <-
+    path_sql |>
     readr::read_file() |>
     DBI::dbExecute(
       conn        = cnn,
       statement   = _
     )
+  invisible(r)
 }
 
 # ---- load-data ---------------------------------------------------------------
@@ -65,7 +67,7 @@ cnn <- DBI::dbConnect(RSQLite::SQLite(), dbname = config$path_database_sqlite)
 DBI::dbListTables(cnn)
 
 path_ddl |>
-  purrr::walk(~execute_sql(.))
+  purrr::map_int(~execute_sql(.))
 
 # Allow database to optimize its internal arrangement
 DBI::dbExecute(cnn, "VACUUM;")
