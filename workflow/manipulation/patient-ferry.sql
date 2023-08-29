@@ -29,9 +29,13 @@ SELECT
   ,pth.latent_risk_1
   ,pth.latent_risk_2_int
   ,pth.latent_risk_2_slope
+  ,st.school_close
+  ,st.school_closed_duration
+  ,st.school_reopen
   --TODO: add school_close, school_closed_duration, & school_reopen
 FROM person p
   left  join patient         pt   on p.person_id = pt.person_id
   left  join patient_latent  pth  on p.person_id = pth.person_id
+  left  join site_latent     st   on pt.data_partner_id = st.data_partner_id
   --TODO: join on site_latent
 ORDER BY p.person_id;

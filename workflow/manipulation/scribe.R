@@ -137,6 +137,9 @@ ds_slim <-
     latent_risk_1,
     latent_risk_2_int,
     latent_risk_2_slope,
+    school_close, 
+    school_closed_duration,
+    school_reopen,
   )
 ds_slim
 

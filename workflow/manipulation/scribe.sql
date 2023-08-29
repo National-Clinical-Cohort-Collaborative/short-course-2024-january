@@ -26,6 +26,9 @@ SELECT
   ,p.latent_risk_1
   ,p.latent_risk_2_int
   ,p.latent_risk_2_slope
+  ,p.school_close
+  ,p.school_closed_duration
+  ,p.school_reopen
 FROM analysis_patient p
 
 ORDER BY p.person_id

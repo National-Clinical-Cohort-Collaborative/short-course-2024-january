@@ -56,6 +56,9 @@ ds_patient <-
     latent_risk_1,
     latent_risk_2_int,
     latent_risk_2_slope,
+    school_close,
+    school_closed_duration,
+    school_reopen,
   )
   #TODO: add school_close, school_closed_duration, & school_reopen (date, integer, date)
   # add to dplyr::select() above
@@ -98,6 +101,9 @@ TabularManifest::histogram_continuous(ds_patient, "latent_risk_2_int"       , ro
 TabularManifest::histogram_continuous(ds_patient, "latent_risk_2_slope"     , rounded_digits = 1)
 
 # ---- marginals-site_latent -------------------------------------------------
+TabularManifest::histogram_date(      ds_patient, "school_close"            , bin_unit = "week")
+TabularManifest::histogram_continuous(ds_patient, "school_closed_duration"  , rounded_digits = 0)
+TabularManifest::histogram_date(      ds_patient, "school_reopen"           , bin_unit = "week")
 
 # This helps start the code for graphing each variable.
 #   - Make sure you change it to `histogram_continuous()` for the appropriate variables.
