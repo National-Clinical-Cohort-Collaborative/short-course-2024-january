@@ -1,0 +1,3 @@
+category,concept_id,concept_name,probability_within_category
+gender,8532,female,.6
+gender,8507,male,.4
