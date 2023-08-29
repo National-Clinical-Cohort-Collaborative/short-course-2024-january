@@ -106,6 +106,7 @@ ds_slim
 # ---- save-to-disk ------------------------------------------------------------
 # Save as a compress, binary R dataset.  It's no longer readable with a text editor, but it saves metadata (eg, factor information).
 # readr::write_rds(ds_slim, path_output, compress="gz")
+# arrow::write_parquet(ds_slim, "---path-to-parquet-file---")
 
 # ---- save-to-db --------------------------------------------------------------
 truncate_and_load_table_duckdb(ds_slim, "concept")
