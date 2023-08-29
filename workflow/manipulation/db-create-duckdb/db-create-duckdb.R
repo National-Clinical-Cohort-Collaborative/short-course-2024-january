@@ -2,7 +2,7 @@
 rm(list = ls(all.names = TRUE)) # Clear the memory of variables from previous run. This is not called by knitr, because it's above the first chunk.
 
 # ---- load-sources ------------------------------------------------------------
-# Call `base::source()` on any repo file that defines functions needed below.  Ideally, no real operations are performed.
+base::source("manipulation/common.R")
 
 # ---- load-packages -----------------------------------------------------------
 # Attach these packages so their functions don't need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
@@ -35,34 +35,31 @@ path_ddl <-
     "manipulation/db-create-duckdb/analysis.sql"
   )
 
-execute_sql <- function(path_sql) {
-  message("Executing ", path_sql)
-  checkmate::assert_file_exists(path_sql)
-
-  path_sql |>
-    readr::read_file() |>
-    DBI::dbExecute(
-      conn        = cnn,
-      statement   = _
-    )
-}
-
 # ---- load-data ---------------------------------------------------------------
 
 # ---- tweak-data --------------------------------------------------------------
 # Remove old DB
 if( file.exists(config$path_database_duckdb) ) file.remove(config$path_database_duckdb)
 
-cnn <- DBI::dbConnect(duckdb::duckdb(), dbdir = config$path_database_duckdb)
-# result <- DBI::dbSendQuery(cnn, "PRAGMA foreign_keys=ON;") #This needs to be activated each time a connection is made. #http://stackoverflow.com/questions/15301643/sqlite3-forgets-to-use-foreign-keys
-# DBI::dbClearResult(result)
-DBI::dbListTables(cnn)
-
 path_ddl |>
-  purrr::walk(~execute_sql(.))
-
-# Allow database to optimize its internal arrangement
-DBI::dbExecute(cnn, "VACUUM ANALYZE;")
+  purrr::map_int(execute_sql_duckdb)
+# drv <-
+#   duckdb::duckdb(
+#     dbdir     = config$path_database_duckdb,
+#     read_only = FALSE,
+#     bigint    = "integer64"
+#   )
+# cnn <- DBI::dbConnect(duckdb::duckdb(), dbdir = config$path_database_duckdb)
+# # result <- DBI::dbSendQuery(cnn, "PRAGMA foreign_keys=ON;") #This needs to be activated each time a connection is made. #http://stackoverflow.com/questions/15301643/sqlite3-forgets-to-use-foreign-keys
+# # DBI::dbClearResult(result)
+# DBI::dbListTables(cnn)
+#
+# path_ddl |>
+#   purrr::walk(~execute_sql(.))
+#
+# # Allow database to optimize its internal arrangement
+# DBI::dbExecute(cnn, "VACUUM ANALYZE;")
 
 # Close connection
-DBI::dbDisconnect(cnn, shutdown = TRUE)
+# duckdb::duckdb_shutdown(cnn)
+# DBI::dbDisconnect(cnn, shutdown = TRUE)

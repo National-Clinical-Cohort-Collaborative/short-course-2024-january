@@ -1,5 +1,5 @@
 DROP TABLE if exists patient;
-DROP TYPE if exists covid_severity; -- patient table must be dropped first
+DROP TYPE if exists covid_severity cascade; -- patient table must be dropped first
 
 CREATE TYPE covid_severity as enum ('none', 'mild', 'moderate', 'severe', 'dead');
 CREATE TABLE patient (
