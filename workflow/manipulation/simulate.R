@@ -104,6 +104,10 @@ ds_site <-
     site_relative_size    = round(rchisq(site_count, 5)               , 4),
     site_int              = round(rbeta(site_count, 4.4, 4.4) - .5    , 4),
     site_slope            = round(rbeta(site_count, .4, 1.4) - .1     , 4),
+
+    school_close = covid_start_site + runif(site_count, min = 0, max = 45),
+    school_closed_duration = 104 + round(rchisq(site_count, 4)               , 0),
+    school_reopen          = school_close + school_closed_duration,
     # TODO: add `school_close`  date  --runif (similar to `covid_start_site`)
     # TODO: add `school_closed_duration`  (number of days closed) --rchisq(df = 4)
     # TODO: add `school_reopen` date
