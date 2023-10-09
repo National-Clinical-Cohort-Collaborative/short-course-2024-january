@@ -9,7 +9,7 @@ Assets For Students
 Assets For Instructors
 -------
 
-* Google Drive: <https://drive.google.com/drive/u/0/folders/1ynC8lPbHi5FfK5JZy90yhDx6O9vCLBDE>
+* Google Drive: <https://drive.google.com/drive/folders/1UNMwP97YAHPuK_RFB1ufU48SK5gx6C6r>
 * 2022 short course: <https://github.com/National-COVID-Cohort-Collaborative/short-course-2022-june>
 
 Installing package
