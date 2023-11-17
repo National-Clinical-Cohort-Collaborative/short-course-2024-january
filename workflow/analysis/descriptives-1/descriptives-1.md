@@ -1,6 +1,6 @@
 ---
 title: Descriptives Report 1
-date: "Date: 2023-11-06"
+date: "Date: 2023-11-17"
 output:
   # radix::radix_article: # radix is a newer alternative that has some advantages over `html_document`.
   html_document:
@@ -217,7 +217,7 @@ For the sake of documentation and reproducibility, the current report was render
     <summary>Environment <span class="glyphicon glyphicon-plus-sign"></span></summary>
     
     ```
-    ─ Session info ───────────────────────────────────────────────────────────────────────────────────────────────────────
+    ─ Session info ─────────────────────────────────────────────────────
      setting  value
      version  R version 4.3.2 Patched (2023-11-01 r85465 ucrt)
      os       Windows 11 x64 (build 22631)
@@ -227,14 +227,14 @@ For the sake of documentation and reproducibility, the current report was render
      collate  English_United States.utf8
      ctype    English_United States.utf8
      tz       America/Chicago
-     date     2023-11-06
+     date     2023-11-17
      rstudio  2023.06.1+524 Mountain Hydrangea (desktop)
      pandoc   3.1.5 @ C:/PROGRA~1/Pandoc/ (via rmarkdown)
     
-    ─ Packages ───────────────────────────────────────────────────────────────────────────────────────────────────────────
+    ─ Packages ─────────────────────────────────────────────────────────
      ! package         * version    date (UTC) lib source
      D archive           1.1.6      2023-09-18 [1] CRAN (R 4.3.1)
-       arrow             13.0.0.1   2023-09-22 [1] CRAN (R 4.3.1)
+       arrow             14.0.0     2023-11-16 [1] CRAN (R 4.3.2)
        assertthat        0.2.1      2019-03-21 [1] CRAN (R 4.3.0)
        backports         1.4.1      2021-12-13 [1] CRAN (R 4.3.0)
        base            * 4.3.2      2023-11-02 [?] local
@@ -243,7 +243,7 @@ For the sake of documentation and reproducibility, the current report was render
        blob              1.2.4      2023-03-17 [1] CRAN (R 4.3.0)
        bslib             0.5.1      2023-08-11 [1] CRAN (R 4.3.1)
        cachem            1.0.8      2023-05-01 [1] CRAN (R 4.3.0)
-       checkmate         2.2.0      2023-04-27 [1] CRAN (R 4.3.0)
+       checkmate         2.3.0      2023-10-25 [1] CRAN (R 4.3.2)
        chron             2.3-61     2023-05-02 [1] CRAN (R 4.3.0)
        cli               3.6.1      2023-03-23 [1] CRAN (R 4.3.0)
        colorspace        2.1-0      2023-01-23 [1] CRAN (R 4.3.0)
@@ -255,8 +255,8 @@ For the sake of documentation and reproducibility, the current report was render
        DBI               1.1.3      2022-06-18 [1] CRAN (R 4.3.0)
        digest            0.6.33     2023-07-07 [1] CRAN (R 4.3.1)
        dplyr             1.1.3      2023-09-03 [1] CRAN (R 4.3.1)
-       duckdb            0.9.1      2023-10-13 [1] CRAN (R 4.3.1)
-       evaluate          0.22       2023-09-29 [1] CRAN (R 4.3.1)
+       duckdb            0.9.2      2023-11-17 [1] CRAN (R 4.3.2)
+       evaluate          0.23       2023-11-01 [1] CRAN (R 4.3.2)
        fansi             1.0.5      2023-10-08 [1] CRAN (R 4.3.1)
        farver            2.1.1      2022-07-06 [1] CRAN (R 4.3.0)
        fastmap           1.1.1      2023-02-24 [1] CRAN (R 4.3.0)
@@ -270,17 +270,18 @@ For the sake of documentation and reproducibility, the current report was render
      P grid              4.3.2      2023-11-02 [3] local
        gsubfn            0.7        2018-03-16 [1] CRAN (R 4.3.0)
        gtable            0.3.4      2023-08-21 [1] CRAN (R 4.3.1)
+       highr             0.10       2022-12-22 [1] CRAN (R 4.3.0)
        hms               1.1.3      2023-03-21 [1] CRAN (R 4.3.0)
-       htmltools         0.5.6.1    2023-10-06 [1] CRAN (R 4.3.1)
+       htmltools         0.5.7      2023-11-03 [1] CRAN (R 4.3.2)
        jquerylib         0.1.4      2021-04-26 [1] CRAN (R 4.3.0)
        jsonlite          1.8.7      2023-06-29 [1] CRAN (R 4.3.1)
-       knitr           * 1.44       2023-09-11 [1] CRAN (R 4.3.1)
+       knitr           * 1.45       2023-10-30 [1] CRAN (R 4.3.2)
        labeling          0.4.3      2023-08-29 [1] CRAN (R 4.3.1)
        lattice           0.22-5     2023-10-24 [3] CRAN (R 4.3.2)
-       lifecycle         1.0.3      2022-10-07 [1] CRAN (R 4.3.0)
+       lifecycle         1.0.4      2023-11-07 [1] CRAN (R 4.3.2)
        lubridate         1.9.3      2023-09-27 [1] CRAN (R 4.3.1)
        magrittr          2.0.3      2022-03-30 [1] CRAN (R 4.3.0)
-       Matrix            1.6-1.1    2023-09-18 [1] CRAN (R 4.3.1)
+       Matrix            1.6-3      2023-11-14 [1] CRAN (R 4.3.2)
        memoise           2.0.1      2021-11-26 [1] CRAN (R 4.3.0)
      P methods         * 4.3.2      2023-11-02 [3] local
        mgcv              1.9-0      2023-07-11 [3] CRAN (R 4.3.2)
@@ -294,9 +295,9 @@ For the sake of documentation and reproducibility, the current report was render
        purrr             1.0.2      2023-08-10 [1] CRAN (R 4.3.1)
        R6                2.5.1      2021-08-19 [1] CRAN (R 4.3.0)
        readr             2.1.4      2023-02-10 [1] CRAN (R 4.3.0)
-       rlang             1.1.1      2023-04-28 [1] CRAN (R 4.3.0)
+       rlang             1.1.2      2023-11-04 [1] CRAN (R 4.3.2)
        rmarkdown         2.25       2023-09-18 [1] CRAN (R 4.3.1)
-       RSQLite         * 2.3.1      2023-04-03 [1] CRAN (R 4.3.0)
+       RSQLite         * 2.3.3      2023-11-04 [1] CRAN (R 4.3.2)
        rstudioapi        0.15.0     2023-07-07 [1] CRAN (R 4.3.1)
        sass              0.4.7      2023-07-15 [1] CRAN (R 4.3.1)
        scales            1.2.1      2022-08-20 [1] CRAN (R 4.3.0)
@@ -313,12 +314,12 @@ For the sake of documentation and reproducibility, the current report was render
        timechange        0.2.0      2023-01-11 [1] CRAN (R 4.3.0)
      P tools             4.3.2      2023-11-02 [3] local
        tzdb              0.4.0      2023-05-12 [1] CRAN (R 4.3.0)
-       utf8              1.2.3      2023-01-31 [1] CRAN (R 4.3.0)
+       utf8              1.2.4      2023-10-22 [1] CRAN (R 4.3.2)
      P utils           * 4.3.2      2023-11-02 [3] local
        vctrs             0.6.4      2023-10-12 [1] CRAN (R 4.3.1)
        vroom             1.6.4      2023-10-02 [1] CRAN (R 4.3.1)
-       withr             2.5.1      2023-09-26 [1] CRAN (R 4.3.1)
-       xfun              0.40       2023-08-09 [1] CRAN (R 4.3.1)
+       withr             2.5.2      2023-10-30 [1] CRAN (R 4.3.2)
+       xfun              0.41       2023-11-01 [1] CRAN (R 4.3.2)
        yaml              2.3.7      2023-01-23 [1] CRAN (R 4.3.0)
     
      [1] D:/projects/r-libraries
@@ -328,10 +329,10 @@ For the sake of documentation and reproducibility, the current report was render
      P ── Loaded and on-disk path mismatch.
      D ── DLL MD5 mismatch, broken installation.
     
-    ──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+    ────────────────────────────────────────────────────────────────────
     ```
   </details>
 
 
 
-Report rendered by wibea at 2023-11-06, 11:38 -0600 in 5 seconds.
+Report rendered by wibea at 2023-11-17, 11:45 -0600 in 4 seconds.

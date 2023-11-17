@@ -5,6 +5,7 @@ Assets For Students
 -------
 
 * *The Researcher's Guide to N3C*: <https://covid.cd2h.org/guide-to-n3c>
+* [Level 0 Workspace](https://unite.nih.gov/workspace/compass/view/ri.compass.main.folder.86a7020f-db30-4fd1-b735-bbaf53512365) (that can be shared to anyone with an Enclave account)
 
 Assets For Instructors
 -------
