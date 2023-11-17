@@ -37,7 +37,7 @@ opts_chunk$set(
 
 echo_chunks    <- FALSE # Toggle for debugging.
 message_chunks <- FALSE # Toggle for debugging.
-# options(width=100) # So the output is 25% wider than the default.
+options(width=100) # So the output is 25% wider than the default.
 read_chunk("./analysis/descriptives-1/descriptives-1.R") # This allows knitr to call chunks tagged in the underlying *.R file.
 ```
 
@@ -115,12 +115,17 @@ Univariate
 Multivariate
 ===========================================================================
 
-Scatterplots
+latent risk 1
 ---------------------------------------------------------------------------
 
-```{r scatterplots, echo=echo_chunks, message=message_chunks, fig.width=7}
+```{r latent-risk-1, echo=echo_chunks, message=message_chunks, fig.width=7}
 ```
 
+COVID Severity
+---------------------------------------------------------------------------
+
+```{r covid-severity, echo=echo_chunks, message=message_chunks, fig.width=7}
+```
 
 Correlation Matrixes
 ---------------------------------------------------------------------------

@@ -113,7 +113,7 @@ TabularManifest::histogram_date(      ds_patient, "school_reopen"           , bi
 #   cat('TabularManifest::histogram_discrete(ds, variable_name="', column,'")\n', sep="")
 # }
 
-# ---- scatterplots ------------------------------------------------------------
+# ---- latent-risk-1 ------------------------------------------------------------
 g1 <-
   ds_patient |>
   ggplot(aes(
@@ -149,6 +149,28 @@ g1 %+% aes(x = covid_date)
 #   geom_density(alpha=.1) +
 #   theme_minimal() +
 #   labs(x=expression(z[gear]))
+
+# ---- covid-severity ----------------------------------------------------
+ggplot(ds_patient, aes(x = latent_risk_1, y = covid_severity, group = factor(gender_concept_id), color = factor(gender_concept_id))) +
+  geom_point(shape = 21, position = position_jitter(width = .1, height = .1)) +
+  geom_smooth() +
+  theme_minimal() +
+  labs(
+    y     = "covid severity",
+    color = "gender"
+  )
+
+last_plot() %+% aes(x = calc_age_covid)   + labs(x = "age")
+last_plot() %+% aes(x = covid_date)       + labs(x = "covid_date")
+
+ggplot(ds_patient, aes(x = latent_risk_1, y = covid_severity, group = data_partner_id, color = data_partner_id )) +
+  geom_point(shape = 21, position = position_jitter(width = .1, height = .1)) +
+  geom_smooth() +
+  theme_minimal() +
+  labs(
+    y     = "covid severity",
+    color = "site"
+  )
 
 # ---- correlation-matrixes ----------------------------------------------------
 predictor_names <-
