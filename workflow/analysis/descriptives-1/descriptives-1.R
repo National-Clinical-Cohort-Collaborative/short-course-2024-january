@@ -205,7 +205,7 @@ rm(ds_hyp, cor_matrix)
 # knitr::kable(cor_matrix, digits = 3)
 # rm(ds_hyp, cor_matrix)
 
-# ---- models ------------------------------------------------------------------
+# ---- model-latent-risk-1 ------------------------------------------------------------------
 cat("============= Simple model that's just an intercept. =============")
 m0 <- lm(latent_risk_1 ~ 1, data=ds_patient)
 summary(m0)
@@ -228,7 +228,7 @@ summary(m2)
 # cat("The two predictor is significantly tighter.")
 # anova(m1, m2)
 
-# ---- model-results-table  -----------------------------------------------
+# ---- model-latent-risk-1-final  -----------------------------------------------
 summary(m2)$coef |>
   knitr::kable(
     digits      = 2,

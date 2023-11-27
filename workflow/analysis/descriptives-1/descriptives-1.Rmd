@@ -137,16 +137,17 @@ Correlation Matrixes
 Models
 ===========================================================================
 
-Model Exploration
+latent risk 1
 ---------------------------------------------------------------------------
-```{r models, echo=echo_chunks, message=message_chunks}
+
+### latent risk 1 -exploration
+
+```{r model-latent-risk-1, echo=echo_chunks, message=message_chunks}
 ```
 
+### latent risk 1 -final
 
-Final Model
----------------------------------------------------------------------------
-
-```{r model-results-table, echo=echo_chunks, message=message_chunks, warning=TRUE}
+```{r model-latent-risk-1-final, echo=echo_chunks, message=message_chunks, warning=TRUE}
 ```
 
 

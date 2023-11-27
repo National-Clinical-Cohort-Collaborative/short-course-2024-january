@@ -1,6 +1,6 @@
 ---
 title: Descriptives Report 1
-date: "Date: 2023-11-17"
+date: "Date: 2023-11-27"
 output:
   # radix::radix_article: # radix is a newer alternative that has some advantages over `html_document`.
   html_document:
@@ -90,9 +90,6 @@ COVID Severity
 
 ![](figure-png/covid-severity-1.png)<!-- -->![](figure-png/covid-severity-2.png)<!-- -->![](figure-png/covid-severity-3.png)<!-- -->![](figure-png/covid-severity-4.png)<!-- -->
 
-
-
-
 Correlation Matrixes
 ---------------------------------------------------------------------------
 
@@ -108,8 +105,11 @@ Correlation Matrixes
 Models
 ===========================================================================
 
-Model Exploration
+latent risk 1
 ---------------------------------------------------------------------------
+
+### latent risk 1 -exploration
+
 
 ```
 ============= Simple model that's just an intercept. =============
@@ -202,9 +202,7 @@ Multiple R-squared:  0.3839,	Adjusted R-squared:  0.3712
 F-statistic: 30.22 on 2 and 97 DF,  p-value: 6.273e-11
 ```
 
-
-Final Model
----------------------------------------------------------------------------
+### latent risk 1 -final
 
 
 |                        | Estimate| Std. Error| t value| Pr(>&#124;t&#124;)|
@@ -234,7 +232,7 @@ For the sake of documentation and reproducibility, the current report was render
      collate  English_United States.utf8
      ctype    English_United States.utf8
      tz       America/Chicago
-     date     2023-11-17
+     date     2023-11-27
      pandoc   3.1.5 @ C:/PROGRA~1/Pandoc/ (via rmarkdown)
     
     ─ Packages ───────────────────────────────────────────────────────────────────────────────────────
@@ -316,4 +314,4 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 
-Report rendered by wibea at 2023-11-17, 13:04 -0600 in 5 seconds.
+Report rendered by wibea at 2023-11-27, 15:49 -0600 in 5 seconds.
