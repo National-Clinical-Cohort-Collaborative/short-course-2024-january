@@ -238,7 +238,7 @@ For the sake of documentation and reproducibility, the current report was render
     
     ─ Packages ───────────────────────────────────────────────────────────────────────────────────────
      ! package         * version    date (UTC) lib source
-     D archive           1.1.7      2023-12-11 [1] CRAN (R 4.3.2)
+       archive           1.1.7.9000 2024-01-05 [1] Github (r-lib/archive@e07a493)
        arrow             14.0.0.2   2023-12-02 [1] CRAN (R 4.3.2)
        assertthat        0.2.1      2019-03-21 [1] CRAN (R 4.3.0)
        backports         1.4.1      2021-12-13 [1] CRAN (R 4.3.0)
@@ -289,9 +289,9 @@ For the sake of documentation and reproducibility, the current report was render
        Matrix            1.6-4      2023-11-30 [1] CRAN (R 4.3.2)
        memoise           2.0.1      2021-11-26 [1] CRAN (R 4.3.0)
      P methods         * 4.3.2      2023-11-02 [3] local
-       mgcv              1.9-0      2023-07-11 [3] CRAN (R 4.3.2)
+       mgcv              1.9-1      2023-12-21 [2] CRAN (R 4.3.2)
        munsell           0.5.0      2018-06-12 [1] CRAN (R 4.3.0)
-       nlme              3.1-163    2023-08-09 [3] CRAN (R 4.3.2)
+       nlme              3.1-164    2023-11-27 [2] CRAN (R 4.3.2)
        OuhscMunge        0.2.0.9016 2023-12-14 [1] local
      P parallel          4.3.2      2023-11-02 [3] local
        pillar            1.9.0      2023-03-22 [1] CRAN (R 4.3.0)
@@ -332,7 +332,6 @@ For the sake of documentation and reproducibility, the current report was render
      [3] C:/Program Files/R/R-4.3.2patched/library
     
      P ── Loaded and on-disk path mismatch.
-     D ── DLL MD5 mismatch, broken installation.
     
     ──────────────────────────────────────────────────────────────────────────────────────────────────
     ```
@@ -340,4 +339,4 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 
-Report rendered by wibea at 2024-01-05, 13:46 -0600 in 6 seconds.
+Report rendered by wibea at 2024-01-05, 15:29 -0600 in 5 seconds.
