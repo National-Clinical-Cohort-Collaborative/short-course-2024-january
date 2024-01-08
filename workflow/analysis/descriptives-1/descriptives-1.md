@@ -1,6 +1,6 @@
 ---
 title: Descriptives Report 1
-date: "Date: 2024-01-05"
+date: "Date: 2024-01-08"
 output:
   # radix::radix_article: # radix is a newer alternative that has some advantages over `html_document`.
   html_document:
@@ -232,7 +232,7 @@ For the sake of documentation and reproducibility, the current report was render
      collate  English_United States.utf8
      ctype    English_United States.utf8
      tz       America/Chicago
-     date     2024-01-05
+     date     2024-01-08
      rstudio  2023.06.1+524 Mountain Hydrangea (desktop)
      pandoc   3.1.5 @ C:/PROGRA~1/Pandoc/ (via rmarkdown)
     
@@ -339,4 +339,4 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 
-Report rendered by wibea at 2024-01-05, 15:29 -0600 in 5 seconds.
+Report rendered by wibea at 2024-01-08, 10:48 -0600 in 5 seconds.
