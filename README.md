@@ -11,6 +11,15 @@ Assets For Students
 * [Level 0 Workspace](https://unite.nih.gov/workspace/compass/view/ri.compass.main.folder.86a7020f-db30-4fd1-b735-bbaf53512365) (that can be shared to anyone with an Enclave account)
 * [Level 2 Workspace]() (that is open only to students of this course)
 
+| Session                                                    | Assignments           | Slides         | Recordings           |
+| :--------------------------------------------------------- | :-------------------- | :------------- | :---------           |
+| 1. Introduction to N3C                                     |                       |                | to be released       |
+| 2. Observational Research, OHDSI Tool, and N3C             |                       |                | to be released       |
+| 3. Analysis Using Synthetic Data                           |                       |                | to be released       |
+| 4. Building an Analytic Dataset Using Shared N3C Resources |                       |                | not available b/c L2 |
+| 5. Analyzing Data Curated from N3C: A Replication Study    |                       |                | not available b/c L2 |
+| 6. N3C Policies and Procedures: From Access to Publication |                       |                | to be released       |
+
 Assets For Instructors
 -------
 
