@@ -1,4 +1,4 @@
-Data Analysis with Synthetic Data
+Analysis with Synthetic Data
 ============
 
 This session uses synthetic data and is composed of several segments:
