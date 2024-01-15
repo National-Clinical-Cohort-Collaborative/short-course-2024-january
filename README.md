@@ -1,4 +1,4 @@
-Introduction to Analyzing Real-World Data Using the National COVID Cohort Collaborative (N3C)
+Introduction to Analyzing Real-World Data<br>Using the National COVID Cohort Collaborative<br>(N3C)
 =======
 
 Educational material for the N3C short course, January 2024. (All assignments are contained in the secure Enclave.)
@@ -6,7 +6,7 @@ Educational material for the N3C short course, January 2024. (All assignments ar
 Assets For Students
 -------
 
-* This GitHub public repo: <https://github.com/National-COVID-Cohort-Collaborative/short-course-2024-january>
+* This GitHub public repo:<br><https://github.com/National-COVID-Cohort-Collaborative/short-course-2024-january>
 * [Syllabus](/background/syllabus/)
 * *The Researcher's Guide to N3C*: <https://covid.cd2h.org/guide-to-n3c>
 * *The Book of OHDSI*: <https://ohdsi.github.io/TheBookOfOhdsic>
@@ -25,8 +25,8 @@ Assets For Students
 Assets For Instructors
 -------
 
-* Google Drive in the ETDT: <https://drive.google.com/drive/folders/1UNMwP97YAHPuK_RFB1ufU48SK5gx6C6r>
-* 2022 short course: <https://github.com/National-COVID-Cohort-Collaborative/short-course-2022-june>
+* Google Drive in the ETDT:<br><https://drive.google.com/drive/folders/1UNMwP97YAHPuK_RFB1ufU48SK5gx6C6r>
+* 2022 short course:<br><https://github.com/National-COVID-Cohort-Collaborative/short-course-2022-june>
 
 Installing package
 
