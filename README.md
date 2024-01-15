@@ -18,9 +18,9 @@ Assets For Students
 | [1. Introduction to N3C](sessions/session-1/)                                       |                       |                | to be released       |
 | [2. Observational Research, OHDSI Tool, and N3C](sessions/session-3/)               |                       |                | to be released       |
 | [3. Analysis Using Synthetic Data](sessions/session-2/)                             |                       |                | to be released       |
-| [4. Building an Analytic Dataset Using Shared N3C Resources](sessions/session-4/)   |                       |                | not available b/c L2 |
-| [5. Analyzing Data Curated from N3C: A Replication Study](sessions/session-5/)      |                       |                | not available b/c L2 |
-| [6. N3C Policies and Procedures: From Access to Publication](sessions/session-6/)   |                       |                | to be released       |
+| [4. Building an Analytic Dataset<br>Using Shared N3C Resources](sessions/session-4/)|                       |                | not available<br>b/c L2 |
+| [5. Analyzing Data Curated from N3C:<br>A Replication Study](sessions/session-5/)   |                       |                | not available<br>b/c L2 |
+| [6. N3C Policies and Procedures:<br>From Access to Publication](sessions/session-6/)|                       |                | to be released       |
 
 Assets For Instructors
 -------
@@ -31,5 +31,8 @@ Assets For Instructors
 Installing package
 
 ```r
-remotes::install_github("National-COVID-Cohort-Collaborative/short-course-2024-january", subdir = "workflow")
+remotes::install_github(
+  "National-COVID-Cohort-Collaborative/short-course-2024-january",
+  subdir = "workflow"
+)
 ```
