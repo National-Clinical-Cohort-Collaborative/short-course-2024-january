@@ -1,16 +1,9 @@
----
-title: Data Extraction & Assembly with Synthetic Data
-date: Feb 1, 2024
-output:
-  html_document:
-    keep_md: yes
-    toc: 4
-    toc_float: true
-    number_sections: true
----
 
+# Data Extraction & Assembly with Synthetic Data
 
+Feb 1, 2024
 
-Combining multiple OMOP tables into a single R data frame that can be analyzed.
+Combining multiple OMOP tables into a single R data frame that can be
+analyzed.
 
 This is part of the [Analysis with Synthetic Data](../) session.
