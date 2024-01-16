@@ -7,3 +7,11 @@ Combining multiple OMOP tables into a single R data frame that can be
 analyzed.
 
 This is part of the [Analysis with Synthetic Data](../) session.
+
+## Identify Source Tables & their Relationships
+
+## Sketch Plan
+
+## Create SQL Transforms and write SQL Code
+
+## Save as Rds File
