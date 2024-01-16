@@ -16,8 +16,8 @@ Assets For Students
 | Session                                                                             | Assignments           | Slides         | Recordings           |
 | :---------------------------------------------------------------------------------- | :-------------------- | :------------- | :---------           |
 | [1. Introduction to N3C](sessions/session-1/)                                       |                       |                | to be released       |
-| [2. Observational Research, OHDSI Tool, and N3C](sessions/session-3/)               |                       |                | to be released       |
-| [3. Analysis Using Synthetic Data](sessions/session-2/)                             |                       |                | to be released       |
+| [2. Observational Research, OHDSI Tool, and N3C](sessions/session-2/)               |                       |                | to be released       |
+| [3. Analysis Using Synthetic Data](sessions/session-3/)                             |                       |                | to be released       |
 | [4. Building an Analytic Dataset<br>Using Shared N3C Resources](sessions/session-4/)|                       |                | not available<br>b/c L2 |
 | [5. Analyzing Data Curated from N3C:<br>A Replication Study](sessions/session-5/)   |                       |                | not available<br>b/c L2 |
 | [6. N3C Policies and Procedures:<br>From Access to Publication](sessions/session-6/)|                       |                | to be released       |
