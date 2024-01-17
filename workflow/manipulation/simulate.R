@@ -58,7 +58,7 @@ p_gender <- c("8532" = .6, "8507" = .4) # male & female; https://athena.ohdsi.or
 # u_birth_date <- seq.Date(as.Date("1930-01-01"), as.Date("2017-12-31"), by = "day")
 
 # OuhscMunge::readr_spec_aligned(config$path_metadata_concept_simulate) #remotes::install_github("OuhscBbmc/OuhscMunge")
-col_types_concept <- readr::cols_only(
+col_types_concept_simulate <- readr::cols_only(
   `category`                      = readr::col_character(),
   `concept_id`                    = readr::col_integer(),
   `concept_name`                  = readr::col_character(),
@@ -102,6 +102,8 @@ ds_nation_count <- retrieve_duckdb("SELECT * FROM date_nation_latent")
 
 checkmate::assert_tibble(ds_concept       , min.rows = 4)
 checkmate::assert_tibble(ds_nation_count  , min.rows = 4)
+
+# ds_concept_simulate <
 
 # ---- tweak-data --------------------------------------------------------------
 ds_concept <-

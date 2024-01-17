@@ -49,7 +49,7 @@ This is part of the [Analysis with Synthetic Data](../) session.
   - [Section 8.4.3 Code
     Workbooks](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/chapters/tools.html#sec-tools-apps-workbook)
 
-## Challenge for Today’s Session
+## Challenge for Today’s Session –1st Try
 
 - Investigate the observational relationship between covid outcomes and
 
@@ -68,11 +68,24 @@ This is part of the [Analysis with Synthetic Data](../) session.
 - In OMOP, ICD codes are translated to SNOMED codes, and can lose some
   granularity.
 
-  | ICD<br>Description    | SNOMED<br>Description     |                                             OMOP<br>Concept ID |
-  |:----------------------|:--------------------------|---------------------------------------------------------------:|
-  | “pecked by chicken”   | “Peck by bird”            | [4314097](https://athena.ohdsi.org/search-terms/terms/4314097) |
-  | “struck by a chicken” | “Contact with chicken”    | [1575676](https://athena.ohdsi.org/search-terms/terms/1575676) |
-  | “struck by a duck”    | “Injury caused by animal” |   [438039](https://athena.ohdsi.org/search-terms/terms/438039) |
+  | ICD<br>Description    | SNOMED<br>Description     |                                                OMOP Concept ID<br>(OMOP Domain) |
+  |:----------------------|:--------------------------|--------------------------------------------------------------------------------:|
+  | “pecked by chicken”   | “Peck by bird”            | [4314097](https://athena.ohdsi.org/search-terms/terms/4314097)<br>(Observation) |
+  | “struck by a chicken” | “Contact with chicken”    | [1575676](https://athena.ohdsi.org/search-terms/terms/1575676)<br>(Observation) |
+  | “struck by a duck”    | “Injury caused by animal” |     [438039](https://athena.ohdsi.org/search-terms/terms/438039)<br>(Condition) |
+
+## Challenge for Today’s Session –2nd Try
+
+- Talk to PI and revise hypothesis so it can be addressed by an OMOP
+  dataset.
+
+- The group decides to step back and address the associations of being
+  pecked or buttened
+
+  | SNOMED<br>Description |                                                OMOP Concept ID<br>(OMOP Domain) |
+  |:----------------------|--------------------------------------------------------------------------------:|
+  | “Peck by bird”        | [4314097](https://athena.ohdsi.org/search-terms/terms/4314097)<br>(Observation) |
+  | “Butted by animal”    | [4314094](https://athena.ohdsi.org/search-terms/terms/4314094)<br>(Observation) |
 
 **Resources**
 
