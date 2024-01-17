@@ -26,7 +26,6 @@ requireNamespace("checkmate"    ) # For asserting conditions meet expected patte
 # Constant values that won't change.
 config                         <- config::get()
 set.seed(453)
-# figure_path <- "stitched-output/manipulation/simulation/simulate-mlm-1/"
 
 pt_count       <- 100
 # wave_count          <- 10
@@ -57,6 +56,14 @@ p_gender <- c("8532" = .6, "8507" = .4) # male & female; https://athena.ohdsi.or
 
 # "u" stands for universe
 # u_birth_date <- seq.Date(as.Date("1930-01-01"), as.Date("2017-12-31"), by = "day")
+
+# OuhscMunge::readr_spec_aligned(config$path_metadata_concept_simulate) #remotes::install_github("OuhscBbmc/OuhscMunge")
+col_types_concept <- readr::cols_only(
+  `category`                      = readr::col_character(),
+  `concept_id`                    = readr::col_integer(),
+  `concept_name`                  = readr::col_character(),
+  `probability_within_category`   = readr::col_double()
+)
 
 manifest_severity_covid <- function (x) {
   cut(
@@ -231,6 +238,17 @@ summary(glm(covid_severity ~ 1 + calc_outbreak_lag_years + calc_age_covid, famil
 # boundary_date_max <- as.Date("2022-12-31")
 # dob2 <- boundary_date - 40000 * x
 # hist(lubridate::year(dob2))
+
+
+# ---- dx ----------------------------------------------------------------------
+
+
+ds_person |>
+  dplyr::select(
+    person_id,
+    covid_date,
+    dx_bird,
+  )
 
 
 # ---- join-concepts -----------------------------------------------------------

@@ -6,3 +6,10 @@ concept_id,concept_name,domain_id,vocabulary_id,concept_class_id,standard_concep
 4154790,Diastolic blood pressure,Measurement,SNOMED,Observable Entity,S,271650006,2002-01-31,2099-12-31,NULL
 37311061,COVID-19,Condition,SNOMED,Clinical Finding,S,840539006,2020-01-31,2099-12-31,NULL
 40762636,Body mass index (BMI) [Percentile],Measurement,LOINC,Clinical Observation,S,59574-4,1970-01-01,2099-12-31,NULL
+chicken,4314097,peck,NA
+chicken,1575676,struck,NA
+duck,438039,struck,NA
+
+438039,Injury caused by animal,Condition,SNOMED,Clinical Finding,S,242651001,2002-01-31,2099-12-31,NULL
+1575676,Contact with chicken,Observation,ICD10CM,4-char nonbill code,NULL,W61.3,2012-01-01,2099-12-31,NULL
+4314097,Peck by bird,Observation,SNOMED,Event,S,217716004,2002-01-31,2099-12-31,NULL

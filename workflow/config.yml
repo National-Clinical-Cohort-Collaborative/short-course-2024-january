@@ -4,6 +4,7 @@ default:
 
   # path_ss_county                 : "data-public/metadata/ss-county.csv"
   path_metadata_concept            : "data-public/metadata/concept.csv"
+  path_metadata_concept_simulate   : "data-public/metadata/concept-to-simulate.csv"
 
   # Central Database (produced by Ellis lanes).
   path_database_duckdb             : "data-public/derived/duckdb/db.duckdb"

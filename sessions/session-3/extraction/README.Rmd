@@ -56,6 +56,14 @@ Challenge for Today's Session
   <img src="assets/image-from-rawpixel-id-8929027-svg.svg" alt="chicken" height="200">
   <img src="assets/image-from-rawpixel-id-6770236-svg.svg" alt="duck" height="200">
 
+* In OMOP, ICD codes are translated to SNOMED codes, and can lose some granularity.
+
+  | ICD<br>Description    | SNOMED<br>Description     | OMOP<br>Concept ID                                             |
+  | :-------------------- | :------------------------ | -------------------------------------------------------------: |
+  | "pecked by chicken"   | "Peck by bird"            | [4314097](https://athena.ohdsi.org/search-terms/terms/4314097) |
+  | "struck by a chicken" | "Contact with chicken"    | [1575676](https://athena.ohdsi.org/search-terms/terms/1575676) |
+  | "struck by a duck"    | "Injury caused by animal" | [438039](https://athena.ohdsi.org/search-terms/terms/438039)   |
+
 **Resources**
 
 * [ICD10CM codes for Contact with birds (domestic) (wild)](https://www.icd10data.com/ICD10CM/Codes/V00-Y99/W50-W64/W61-#W61.33)
