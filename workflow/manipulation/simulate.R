@@ -257,13 +257,11 @@ summary(glm(covid_severity ~ 1 + calc_outbreak_lag_years + calc_age_covid, famil
 
 
 # ---- obs ----------------------------------------------------------------------
-
-
 ds_person |>
   dplyr::select(
     person_id,
     covid_date,
-    dx_bird,
+    obs_animal,
   )
 
 
