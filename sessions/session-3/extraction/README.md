@@ -49,14 +49,36 @@ This is part of the [Analysis with Synthetic Data](../) session.
   - [Section 8.4.3 Code
     Workbooks](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/chapters/tools.html#sec-tools-apps-workbook)
 
+## Challenge for Today’s Session
+
+- Investigate the observational relationship between covid outcomes and
+  - pecked by chicken, initial encounter
+    ([W61.33XA](https://www.icd10data.com/ICD10CM/Codes/V00-Y99/W50-W64/W61-/W61.33XA))
+  - pecked by chicken, subsequent encounter
+    ([W61.33XD](https://www.icd10data.com/ICD10CM/Codes/V00-Y99/W50-W64/W61-/W61.33XD))
+  - struck by a duck, initial encounter
+    ([W61.62XA](https://www.icd10data.com/ICD10CM/Codes/V00-Y99/W50-W64/W61-/W61.62XA))
+  - struck by a duck, subsequent encounter
+    ([W61.62XD](https://www.icd10data.com/ICD10CM/Codes/V00-Y99/W50-W64/W61-/W61.62XD))
+
+  <img src="assets/image-from-rawpixel-id-8929027-svg.svg" alt="chicken" height="200">
+  <img src="assets/image-from-rawpixel-id-6770236-svg.svg" alt="duck" height="200">
+
+**Resources**
+
+- [ICD10CM codes for Contact with birds (domestic)
+  (wild)](https://www.icd10data.com/ICD10CM/Codes/V00-Y99/W50-W64/W61-#W61.33)
+
 ## Identify Source Tables & their Relationships
 
 - In most EHR research, conceputally start with the database’s patient.
   With OMOP, this table is called
   [`person`](https://ohdsi.github.io/CommonDataModel/cdm60.html#PERSON).
 
-- But with N3C, a talented group of peopled have Almost always start
-  with a patient-grained
+- But with N3C, a talented group of people have faced and addressed many
+  of the problems we’ll face. So let’s leverage the [Logic
+  Liaisons’](https://covid.cd2h.org/liaisons/) contributions to the N3C
+  Knowledge Store.
 
 **Resources**
 
