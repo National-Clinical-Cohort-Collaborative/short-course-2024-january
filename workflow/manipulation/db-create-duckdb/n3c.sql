@@ -3,7 +3,7 @@ DROP TYPE if exists covid_severity cascade; -- patient table must be dropped fir
 DROP TYPE if exists dx_bird cascade; -- patient table must be dropped first
 
 CREATE TYPE covid_severity as enum ('none', 'mild', 'moderate', 'severe', 'dead');
-CREATE TYPE dx_bird as enum ('duck_1', 'duck_2', 'chicken_1', 'chicken_2');
+CREATE TYPE dx_bird as enum ('duck_struck', 'chicken_struck', 'chicken_peck');
 
 CREATE TABLE patient (
   person_id                       integer       primary key,

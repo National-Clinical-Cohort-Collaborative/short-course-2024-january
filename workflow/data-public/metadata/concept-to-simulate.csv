@@ -1,3 +1,6 @@
 category,concept_id,concept_name,probability_within_category
 gender,8532,female,.6
 gender,8507,male,.4
+chicken,4314097,peck,NA
+chicken,1575676,struck,NA
+duck,438039,struck,NA

@@ -68,8 +68,8 @@ manifest_severity_covid <- function (x) {
 manifest_severity_dx_bird <- function (x) {
   cut(
     x       = x,
-    breaks  = c(-Inf,     -2,           0,       2,        Inf),
-    labels  = c(  "duck_2", "chicken_1", "duck_1", "chicken_2")
+    breaks  = c(-Inf,           -2,               0,             Inf),
+    labels  = c(  "chicken_peck", "chicken_struck", "duck_struck")
   )
 }
 
