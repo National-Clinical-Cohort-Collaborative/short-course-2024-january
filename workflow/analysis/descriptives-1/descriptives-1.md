@@ -302,7 +302,6 @@ For the sake of documentation and reproducibility, the current report was render
        R6                2.5.1      2021-08-19 [1] CRAN (R 4.3.0)
        Rcpp              1.0.12     2024-01-09 [1] CRAN (R 4.3.2)
        readr             2.1.5      2024-01-10 [1] CRAN (R 4.3.2)
-       remotes           2.4.2.1    2023-07-18 [1] CRAN (R 4.3.1)
        reticulate        1.34.0     2023-10-12 [1] CRAN (R 4.3.1)
        rlang             1.1.3      2024-01-10 [1] CRAN (R 4.3.2)
        rmarkdown         2.25       2023-09-18 [1] CRAN (R 4.3.1)
@@ -342,4 +341,4 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 
-Report rendered by WBEASLEY at 2024-01-17, 11:15 -0600 in 12 seconds.
+Report rendered by WBEASLEY at 2024-01-17, 11:37 -0600 in 14 seconds.

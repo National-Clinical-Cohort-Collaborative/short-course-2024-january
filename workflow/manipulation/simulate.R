@@ -79,6 +79,13 @@ manifest_severity_dx_bird <- function (x) {
     labels  = c(  "chicken_peck", "chicken_struck", "duck_struck")
   )
 }
+manifest_obs_animal <- function (x) {
+  cut(
+    x       = x,
+    breaks  = c(-Inf,     0,       Inf),
+    labels  = c(  "pecked", "butted")
+  )
+}
 
 site_count <- 3L
 # # covid_start_site <-
@@ -185,6 +192,11 @@ ds_person <-
     dx_bird         = manifest_severity_dx_bird(latent_risk_3 + rnorm(pt_count, sd = .8)),
   ) |>
   dplyr::mutate(
+    latent_risk_4   = latent_risk_1 + rnorm(pt_count, sd = .3),
+    latent_risk_4   = round(latent_risk_4, 3),
+    obs_animal         = manifest_obs_animal(latent_risk_4 + rnorm(pt_count, sd = .8)),
+  ) |>
+  dplyr::mutate(
     race_concept_id           = 0L,
     ethnicity_concept_id      = 0L,
   ) |>
@@ -214,8 +226,10 @@ ds_person <-
     latent_risk_2_int,
     latent_risk_2_slope,
     latent_risk_3,
+    latent_risk_4,
     covid_severity,
     dx_bird,
+    obs_animal,
     calc_outbreak_lag_years,
     calc_age_covid,
     length_of_stay,
@@ -242,7 +256,7 @@ summary(glm(covid_severity ~ 1 + calc_outbreak_lag_years + calc_age_covid, famil
 # hist(lubridate::year(dob2))
 
 
-# ---- dx ----------------------------------------------------------------------
+# ---- obs ----------------------------------------------------------------------
 
 
 ds_person |>
@@ -364,6 +378,8 @@ ds_patient_hidden <-
     latent_risk_2_int,
     latent_risk_2_slope,
     latent_risk_3,
+    latent_risk_4,
+    obs_animal,
   )
 
 # ---- save-to-disk ------------------------------------------------------------
