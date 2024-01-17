@@ -59,6 +59,7 @@ ds_rail  <- tibble::tribble(
 
   # Second-level manipulation on data inside the warehouse.
   "run_sql" , "manipulation/patient-ferry.sql",
+  # "run_sql" , "manipulation/ferry.sql",
 
   # Scribes create analysis-ready rectangles.
   "run_r"     , "manipulation/scribe.R",

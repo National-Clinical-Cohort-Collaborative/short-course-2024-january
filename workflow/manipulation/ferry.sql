@@ -1,0 +1,3 @@
+--TODO
+-- 1. create (maybe temp) table that's the last animal observation before covid DX
+-- 2. join to LL patient table
