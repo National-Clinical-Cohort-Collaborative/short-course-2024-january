@@ -7,7 +7,7 @@ CREATE TABLE site_latent (
   site_relative_size              float         not null,
   site_int                        float         not null,
   site_slope                      float         not null,
-  school_close                    date          not null, 
+  school_close                    date          not null,
   school_closed_duration          integer       not null,
   school_reopen                   date          not null,
   --TODO: add school_close, school_closed_duration, & school_reopen (date, integer, date)
@@ -24,5 +24,6 @@ CREATE TABLE patient_latent (
   person_id                       integer          primary key,
   latent_risk_1                   float            not null,
   latent_risk_2_int               float            not null,
-  latent_risk_2_slope             float            not null
+  latent_risk_2_slope             float            not null,
+  latent_risk_3                   float            not null
 );

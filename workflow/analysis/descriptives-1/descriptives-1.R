@@ -50,12 +50,14 @@ ds_patient <-
     # ethnicity_source_concept_id,
     covid_date,
     covid_severity,
+    dx_bird,
     calc_outbreak_lag_years,
     calc_age_covid,
     length_of_stay,
     latent_risk_1,
     latent_risk_2_int,
     latent_risk_2_slope,
+    latent_risk_3,
     school_close,
     school_closed_duration,
     school_reopen,
@@ -91,6 +93,7 @@ TabularManifest::histogram_discrete(ds_patient, "gender_source_concept_id")
 TabularManifest::histogram_discrete(  ds_patient, "data_partner_id")
 TabularManifest::histogram_date(      ds_patient, "covid_date"           , bin_unit = "week")
 TabularManifest::histogram_discrete(  ds_patient, "covid_severity")
+TabularManifest::histogram_discrete(  ds_patient, "dx_bird")
 TabularManifest::histogram_continuous(ds_patient, "calc_outbreak_lag_years" , rounded_digits = 1)
 TabularManifest::histogram_continuous(ds_patient, "calc_age_covid"          , rounded_digits = 1)
 TabularManifest::histogram_continuous(ds_patient, "length_of_stay"          , rounded_digits = 1)
@@ -99,6 +102,7 @@ TabularManifest::histogram_continuous(ds_patient, "length_of_stay"          , ro
 TabularManifest::histogram_continuous(ds_patient, "latent_risk_1"           , rounded_digits = 1)
 TabularManifest::histogram_continuous(ds_patient, "latent_risk_2_int"       , rounded_digits = 1)
 TabularManifest::histogram_continuous(ds_patient, "latent_risk_2_slope"     , rounded_digits = 1)
+TabularManifest::histogram_continuous(ds_patient, "latent_risk_3"           , rounded_digits = 1)
 
 # ---- marginals-site_latent -------------------------------------------------
 TabularManifest::histogram_date(      ds_patient, "school_close"            , bin_unit = "week")
@@ -162,6 +166,7 @@ ggplot(ds_patient, aes(x = latent_risk_1, y = covid_severity, group = factor(gen
 
 last_plot() %+% aes(x = calc_age_covid)   + labs(x = "age")
 last_plot() %+% aes(x = covid_date)       + labs(x = "covid_date")
+last_plot() %+% aes(x = latent_risk_3)       + labs(x = "latent_risk_3")
 
 ggplot(ds_patient, aes(x = latent_risk_1, y = covid_severity, group = data_partner_id, color = data_partner_id )) +
   geom_point(shape = 21, position = position_jitter(width = .1, height = .1)) +

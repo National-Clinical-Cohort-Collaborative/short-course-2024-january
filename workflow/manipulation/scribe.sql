@@ -20,12 +20,14 @@ SELECT
   ,p.ethnicity_source_concept_id
   ,p.covid_date
   ,p.covid_severity
+  ,p.dx_bird
   ,p.calc_outbreak_lag_years
   ,p.calc_age_covid
   ,p.length_of_stay
   ,p.latent_risk_1
   ,p.latent_risk_2_int
   ,p.latent_risk_2_slope
+  ,p.latent_risk_3
   ,p.school_close
   ,p.school_closed_duration
   ,p.school_reopen

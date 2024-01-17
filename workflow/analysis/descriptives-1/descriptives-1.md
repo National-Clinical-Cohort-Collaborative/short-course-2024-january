@@ -1,6 +1,6 @@
 ---
 title: Descriptives Report 1
-date: "Date: 2024-01-08"
+date: "Date: 2024-01-16"
 output:
   # radix::radix_article: # radix is a newer alternative that has some advantages over `html_document`.
   html_document:
@@ -64,12 +64,12 @@ Univariate
 `patient` table
 ---------------------------------------------------------------------------
 
-![](figure-png/marginals-patient-1.png)<!-- -->![](figure-png/marginals-patient-2.png)<!-- -->![](figure-png/marginals-patient-3.png)<!-- -->![](figure-png/marginals-patient-4.png)<!-- -->![](figure-png/marginals-patient-5.png)<!-- -->![](figure-png/marginals-patient-6.png)<!-- -->
+![](figure-png/marginals-patient-1.png)<!-- -->![](figure-png/marginals-patient-2.png)<!-- -->![](figure-png/marginals-patient-3.png)<!-- -->![](figure-png/marginals-patient-4.png)<!-- -->![](figure-png/marginals-patient-5.png)<!-- -->![](figure-png/marginals-patient-6.png)<!-- -->![](figure-png/marginals-patient-7.png)<!-- -->
 
 `patient_latent` table
 ---------------------------------------------------------------------------
 
-![](figure-png/marginals-patient_latent-1.png)<!-- -->![](figure-png/marginals-patient_latent-2.png)<!-- -->![](figure-png/marginals-patient_latent-3.png)<!-- -->
+![](figure-png/marginals-patient_latent-1.png)<!-- -->![](figure-png/marginals-patient_latent-2.png)<!-- -->![](figure-png/marginals-patient_latent-3.png)<!-- -->![](figure-png/marginals-patient_latent-4.png)<!-- -->
 
 `site_latent` table
 ---------------------------------------------------------------------------
@@ -88,7 +88,7 @@ latent risk 1
 COVID Severity
 ---------------------------------------------------------------------------
 
-![](figure-png/covid-severity-1.png)<!-- -->![](figure-png/covid-severity-2.png)<!-- -->![](figure-png/covid-severity-3.png)<!-- -->![](figure-png/covid-severity-4.png)<!-- -->
+![](figure-png/covid-severity-1.png)<!-- -->![](figure-png/covid-severity-2.png)<!-- -->![](figure-png/covid-severity-3.png)<!-- -->![](figure-png/covid-severity-4.png)<!-- -->![](figure-png/covid-severity-5.png)<!-- -->
 
 Correlation Matrixes
 ---------------------------------------------------------------------------
@@ -232,7 +232,7 @@ For the sake of documentation and reproducibility, the current report was render
      collate  English_United States.utf8
      ctype    English_United States.utf8
      tz       America/Chicago
-     date     2024-01-08
+     date     2024-01-16
      rstudio  2023.06.1+524 Mountain Hydrangea (desktop)
      pandoc   3.1.5 @ C:/PROGRA~1/Pandoc/ (via rmarkdown)
     
@@ -257,8 +257,8 @@ For the sake of documentation and reproducibility, the current report was render
        corrplot          0.92       2021-11-18 [1] CRAN (R 4.3.0)
        crayon            1.5.2      2022-09-29 [1] CRAN (R 4.3.0)
      P datasets        * 4.3.2      2023-11-02 [3] local
-       DBI               1.2.0      2023-12-21 [1] CRAN (R 4.3.2)
-       digest            0.6.33     2023-07-07 [1] CRAN (R 4.3.1)
+       DBI               1.2.1      2024-01-12 [1] CRAN (R 4.3.2)
+       digest            0.6.34     2024-01-11 [1] CRAN (R 4.3.2)
        dplyr             1.1.4      2023-11-17 [1] CRAN (R 4.3.2)
        duckdb            0.9.2-1    2023-11-28 [1] CRAN (R 4.3.2)
        evaluate          0.23       2023-11-01 [1] CRAN (R 4.3.2)
@@ -269,7 +269,7 @@ For the sake of documentation and reproducibility, the current report was render
        fs                1.6.3      2023-07-20 [1] CRAN (R 4.3.1)
        generics          0.1.3      2022-07-05 [1] CRAN (R 4.3.0)
        ggplot2         * 3.4.4      2023-10-12 [1] CRAN (R 4.3.1)
-       glue              1.6.2      2022-02-24 [1] CRAN (R 4.3.0)
+       glue              1.7.0      2024-01-09 [1] CRAN (R 4.3.2)
      P graphics        * 4.3.2      2023-11-02 [3] local
      P grDevices       * 4.3.2      2023-11-02 [3] local
      P grid              4.3.2      2023-11-02 [3] local
@@ -286,7 +286,7 @@ For the sake of documentation and reproducibility, the current report was render
        lifecycle         1.0.4      2023-11-07 [1] CRAN (R 4.3.2)
        lubridate         1.9.3      2023-09-27 [1] CRAN (R 4.3.1)
        magrittr          2.0.3      2022-03-30 [1] CRAN (R 4.3.0)
-       Matrix            1.6-4      2023-11-30 [1] CRAN (R 4.3.2)
+       Matrix            1.6-5      2024-01-11 [1] CRAN (R 4.3.2)
        memoise           2.0.1      2021-11-26 [1] CRAN (R 4.3.0)
      P methods         * 4.3.2      2023-11-02 [3] local
        mgcv              1.9-1      2023-12-21 [2] CRAN (R 4.3.2)
@@ -299,8 +299,8 @@ For the sake of documentation and reproducibility, the current report was render
        proto             1.0.0      2016-10-29 [1] CRAN (R 4.3.0)
        purrr             1.0.2      2023-08-10 [1] CRAN (R 4.3.1)
        R6                2.5.1      2021-08-19 [1] CRAN (R 4.3.0)
-       readr             2.1.4      2023-02-10 [1] CRAN (R 4.3.0)
-       rlang             1.1.2      2023-11-04 [1] CRAN (R 4.3.2)
+       readr             2.1.5      2024-01-10 [1] CRAN (R 4.3.2)
+       rlang             1.1.3      2024-01-10 [1] CRAN (R 4.3.2)
        rmarkdown         2.25       2023-09-18 [1] CRAN (R 4.3.1)
        RSQLite         * 2.3.4      2023-12-08 [1] CRAN (R 4.3.2)
        rstudioapi        0.15.0     2023-07-07 [1] CRAN (R 4.3.1)
@@ -323,7 +323,7 @@ For the sake of documentation and reproducibility, the current report was render
      P utils           * 4.3.2      2023-11-02 [3] local
        vctrs             0.6.5      2023-12-01 [1] CRAN (R 4.3.2)
        vroom             1.6.5      2023-12-05 [1] CRAN (R 4.3.2)
-       withr             2.5.2      2023-10-30 [1] CRAN (R 4.3.2)
+       withr             3.0.0      2024-01-16 [1] CRAN (R 4.3.2)
        xfun              0.41       2023-11-01 [1] CRAN (R 4.3.2)
        yaml              2.3.8      2023-12-11 [1] CRAN (R 4.3.2)
     
@@ -339,4 +339,4 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 
-Report rendered by wibea at 2024-01-08, 10:48 -0600 in 5 seconds.
+Report rendered by wibea at 2024-01-16, 18:35 -0600 in 5 seconds.

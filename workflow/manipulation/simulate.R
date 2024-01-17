@@ -58,11 +58,18 @@ p_gender <- c("8532" = .6, "8507" = .4) # male & female; https://athena.ohdsi.or
 # "u" stands for universe
 # u_birth_date <- seq.Date(as.Date("1930-01-01"), as.Date("2017-12-31"), by = "day")
 
-manifest_severity <- function (x) {
+manifest_severity_covid <- function (x) {
   cut(
     x       = x,
     breaks  = c(-Inf,  1.0,     2.0,       3.0,      4.0,     Inf),
     labels  = c(  "none", "mild", "moderate", "severe", "dead")
+  )
+}
+manifest_severity_dx_bird <- function (x) {
+  cut(
+    x       = x,
+    breaks  = c(-Inf,     -2,           0,       2,        Inf),
+    labels  = c(  "duck_2", "chicken_1", "duck_1", "chicken_2")
   )
 }
 
@@ -156,12 +163,17 @@ ds_person <-
       (.04 * calc_age_covid) +
       rnorm(pt_count, sd = 1.3),
     latent_risk_1   = round(latent_risk_1, 3),
-    covid_severity  = manifest_severity(latent_risk_1 + rnorm(pt_count, sd = .8)),
+    covid_severity  = manifest_severity_covid(latent_risk_1 + rnorm(pt_count, sd = .8)),
     length_of_stay  = as.integer(latent_risk_1^2 + rchisq(pt_count, 4)) + 1L,
   ) |>
   dplyr::mutate(
     latent_risk_2_int   = rchisq(pt_count, 3.5) + 2,
     latent_risk_2_slope = rnorm(pt_count, mean = 0, sd = .5),
+  ) |>
+  dplyr::mutate(
+    latent_risk_3   = latent_risk_1 + rnorm(pt_count, sd = .4),
+    latent_risk_3   = round(latent_risk_3, 3),
+    dx_bird         = manifest_severity_dx_bird(latent_risk_3 + rnorm(pt_count, sd = .8)),
   ) |>
   dplyr::mutate(
     race_concept_id           = 0L,
@@ -192,11 +204,17 @@ ds_person <-
     latent_risk_1,
     latent_risk_2_int,
     latent_risk_2_slope,
+    latent_risk_3,
     covid_severity,
+    dx_bird,
     calc_outbreak_lag_years,
     calc_age_covid,
     length_of_stay,
   )
+hist(ds_person$latent_risk_3)
+
+# plot(ds_person$dx_bird, ds_person$latent_risk_3)
+# plot(ds_person$dx_bird, ds_person$covid_severity)
 
 summary(lm(latent_risk_1 ~ 1 + calc_outbreak_lag_years + calc_age_covid, data = ds_person))
 summary(glm(covid_severity ~ 1 + calc_outbreak_lag_years + calc_age_covid, family = binomial, data = ds_person))
@@ -390,6 +408,7 @@ ds_patient <-
     data_partner_id,
     covid_date,
     covid_severity,
+    dx_bird,
     calc_outbreak_lag_years,
     calc_age_covid,
     length_of_stay,
@@ -403,6 +422,7 @@ ds_patient_hidden <-
     latent_risk_1,
     latent_risk_2_int,
     latent_risk_2_slope,
+    latent_risk_3,
   )
 
 # ---- save-to-disk ------------------------------------------------------------
