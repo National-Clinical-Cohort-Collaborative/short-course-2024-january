@@ -16,7 +16,7 @@ Important Terminology for this Lesson
 
 * *table grain*: what one row in a table represents.
   For example, the grain of the [`person`](https://ohdsi.github.io/CommonDataModel/cdm60.html#PERSON) table is "person";
-  each row represents one distinct person/patient..
+  each row represents one distinct person/patient.
   Similarly, the grain of the [`visit_occurrence`](https://ohdsi.github.io/CommonDataModel/cdm60.html#VISIT_OCCURRENCE) table is "visit";
   each row represents one distinct visit/encounter the patient had with the health system..
 
@@ -26,7 +26,7 @@ Start a "Code Workbook" in the Foundry Enclave
 1. In our class's [L0 workspace](https://unite.nih.gov/workspace/compass/view/ri.compass.main.folder.86a7020f-db30-4fd1-b735-bbaf53512365),
    open to the "Users/" directory and create your personal folder.
    I like [kebab case](https://www.freecodecamp.org/news/snake-case-vs-camel-case-vs-pascal-case-vs-kebab-case-whats-the-difference/#kebab-case)
-   for directory & file names (eg, "will-beasley" or "jerrod-anzalone").
+   for directory & file names (eg, "will-beasley", "jerrod-anzalone", "james-cheng").
 1. Create a new "Code Workbook".
 1. Once the workbook opens, rename it to "manipulation-1".
    (Rename it once it's open, so some behdin-the-scenes files are approrpiately adjusted.)

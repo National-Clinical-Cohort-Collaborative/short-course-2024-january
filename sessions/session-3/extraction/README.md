@@ -13,7 +13,7 @@ This is part of the [Analysis with Synthetic Data](../) session.
 - *table grain*: what one row in a table represents. For example, the
   grain of the
   [`person`](https://ohdsi.github.io/CommonDataModel/cdm60.html#PERSON)
-  table is “person”; each row represents one distinct person/patient..
+  table is “person”; each row represents one distinct person/patient.
   Similarly, the grain of the
   [`visit_occurrence`](https://ohdsi.github.io/CommonDataModel/cdm60.html#VISIT_OCCURRENCE)
   table is “visit”; each row represents one distinct visit/encounter the
@@ -26,8 +26,8 @@ This is part of the [Analysis with Synthetic Data](../) session.
     open to the “Users/” directory and create your personal folder. I
     like [kebab
     case](https://www.freecodecamp.org/news/snake-case-vs-camel-case-vs-pascal-case-vs-kebab-case-whats-the-difference/#kebab-case)
-    for directory & file names (eg, “will-beasley” or
-    “jerrod-anzalone”).
+    for directory & file names (eg, “will-beasley”, “jerrod-anzalone”,
+    “james-cheng”).
 2.  Create a new “Code Workbook”.
 3.  Once the workbook opens, rename it to “manipulation-1”. (Rename it
     once it’s open, so some behdin-the-scenes files are approrpiately
@@ -54,12 +54,12 @@ This is part of the [Analysis with Synthetic Data](../) session.
 - Investigate the observational relationship between covid outcomes and
   - pecked by chicken, initial encounter
     ([W61.33XA](https://www.icd10data.com/ICD10CM/Codes/V00-Y99/W50-W64/W61-/W61.33XA))
-  - pecked by chicken, subsequent encounter
-    ([W61.33XD](https://www.icd10data.com/ICD10CM/Codes/V00-Y99/W50-W64/W61-/W61.33XD))
+    <!--* pecked by chicken, subsequent encounter ([W61.33XD](https://www.icd10data.com/ICD10CM/Codes/V00-Y99/W50-W64/W61-/W61.33XD))-->
+  - struck by a chicken, initial encounter
+    ([W61.32XA](https://www.icd10data.com/ICD10CM/Codes/V00-Y99/W50-W64/W61-/W61.32XA))
   - struck by a duck, initial encounter
     ([W61.62XA](https://www.icd10data.com/ICD10CM/Codes/V00-Y99/W50-W64/W61-/W61.62XA))
-  - struck by a duck, subsequent encounter
-    ([W61.62XD](https://www.icd10data.com/ICD10CM/Codes/V00-Y99/W50-W64/W61-/W61.62XD))
+    <!--* struck by a duck, subsequent encounter ([W61.62XD](https://www.icd10data.com/ICD10CM/Codes/V00-Y99/W50-W64/W61-/W61.62XD))-->
 
   <img src="assets/image-from-rawpixel-id-8929027-svg.svg" alt="chicken" height="200">
   <img src="assets/image-from-rawpixel-id-6770236-svg.svg" alt="duck" height="200">
