@@ -22,7 +22,7 @@ CREATE TABLE date_nation_latent (
 DROP TABLE if exists patient_latent;
 DROP TYPE if exists obs_animal cascade; -- patient_latent table must be dropped first
 
-CREATE TYPE obs_animal as enum ('pecked', 'butted');
+CREATE TYPE obs_animal as enum ('Peck by bird', 'Butted by animal', 'No Event');
 CREATE TABLE patient_latent (
   person_id                       integer          primary key,
   latent_risk_1                   float            not null,

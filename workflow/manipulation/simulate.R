@@ -58,12 +58,12 @@ p_gender <- c("8532" = .6, "8507" = .4) # male & female; https://athena.ohdsi.or
 # u_birth_date <- seq.Date(as.Date("1930-01-01"), as.Date("2017-12-31"), by = "day")
 
 # OuhscMunge::readr_spec_aligned(config$path_metadata_concept_simulate) #remotes::install_github("OuhscBbmc/OuhscMunge")
-col_types_concept_simulate <- readr::cols_only(
-  `category`                      = readr::col_character(),
-  `concept_id`                    = readr::col_integer(),
-  `concept_name`                  = readr::col_character(),
-  `probability_within_category`   = readr::col_double()
-)
+# col_types_concept_simulate <- readr::cols_only(
+#   `category`                      = readr::col_character(),
+#   `concept_id`                    = readr::col_integer(),
+#   `concept_name`                  = readr::col_character(),
+#   `probability_within_category`   = readr::col_double()
+# )
 
 manifest_severity_covid <- function (x) {
   cut(
@@ -82,8 +82,8 @@ manifest_severity_dx_bird <- function (x) {
 manifest_obs_animal <- function (x) {
   cut(
     x       = x,
-    breaks  = c(-Inf,     0,       Inf),
-    labels  = c(  "pecked", "butted")
+    breaks  = c(-Inf,     0,     2,   Inf),
+    labels  = c(  "Peck by bird", "Butted by animal", "No Event")
   )
 }
 
@@ -110,7 +110,7 @@ ds_nation_count <- retrieve_duckdb("SELECT * FROM date_nation_latent")
 checkmate::assert_tibble(ds_concept       , min.rows = 4)
 checkmate::assert_tibble(ds_nation_count  , min.rows = 4)
 
-# ds_concept_simulate <
+# ds_concept_simulate <- readr::read_csv(config$path_metadata_concept_simulate, col_types = col_types_concept_simulate)
 
 # ---- tweak-data --------------------------------------------------------------
 ds_concept <-
@@ -257,12 +257,26 @@ summary(glm(covid_severity ~ 1 + calc_outbreak_lag_years + calc_age_covid, famil
 
 
 # ---- obs ----------------------------------------------------------------------
-ds_person |>
+ds_observation <-
+  ds_person |>
   dplyr::select(
     person_id,
     covid_date,
     obs_animal,
+  ) |>
+  tibble::rowid_to_column("observation_id") |>
+  dplyr::inner_join(ds_concept, by = c("obs_animal" = "concept_name")) |>
+  dplyr::mutate(
+    lag               = as.integer(rchisq(dplyr::n(), 4)),
+    observation_date  = covid_date - lubridate::days(lag)
+  ) |>
+  dplyr::select(
+    observation_id,
+    person_id,
+    observation_concept_id  = concept_id,
+    observation_date,
   )
+
 
 
 # ---- join-concepts -----------------------------------------------------------
@@ -384,6 +398,7 @@ ds_patient_hidden <-
 # If there's no PHI, a rectangular CSV is usually adequate, and it's portable to other machines and software.
 if (config$produce_csv) {
   readr::write_csv(ds_site            , config$path_csv_site)
+  readr::write_csv(ds_observation     , config$path_csv_observation)
   readr::write_csv(ds_person_slim     , config$path_csv_person)
   readr::write_csv(ds_patient         , config$path_csv_patient)
   readr::write_csv(ds_patient_hidden  , config$path_csv_patient_hidden)
@@ -391,6 +406,7 @@ if (config$produce_csv) {
 
 if (config$produce_rds) {
   readr::write_rds(ds_site            , config$path_rds_site              , compress = "gz")
+  readr::write_rds(ds_observation     , config$path_rds_observation       , compress = "gz")
   readr::write_rds(ds_person_slim     , config$path_rds_person            , compress = "gz")
   readr::write_rds(ds_patient         , config$path_rds_patient           , compress = "gz")
   readr::write_rds(ds_patient_hidden  , config$path_rds_patient_hidden    , compress = "gz")
@@ -398,6 +414,7 @@ if (config$produce_rds) {
 
 if (config$produce_duckdb) {
   truncate_and_load_table_duckdb(ds_site          , "site_latent")
+  truncate_and_load_table_duckdb(ds_observation   , "observation")
   truncate_and_load_table_duckdb(ds_person_slim   , "person")
   truncate_and_load_table_duckdb(ds_patient       , "patient")
   truncate_and_load_table_duckdb(ds_patient_hidden, "patient_latent")
@@ -405,6 +422,7 @@ if (config$produce_duckdb) {
 
 if (config$produce_parquet) {
   arrow::write_parquet(ds_site                    , config$path_parquet_site)
+  arrow::write_parquet(ds_observation             , config$path_parquet_observation)
   arrow::write_parquet(ds_person_slim             , config$path_parquet_person)
   arrow::write_parquet(ds_patient                 , config$path_parquet_patient)
   arrow::write_parquet(ds_patient_hidden          , config$path_parquet_patient_hidden)
@@ -412,6 +430,7 @@ if (config$produce_parquet) {
 
 if (config$produce_sqlite) {
   truncate_and_load_table_sqlite(ds_site          , "site_latent")
+  truncate_and_load_table_sqlite(ds_observation   , "observation")
   truncate_and_load_table_sqlite(ds_person_slim   , "person")
   truncate_and_load_table_sqlite(ds_patient       , "patient")
   truncate_and_load_table_sqlite(ds_patient_hidden, "patient_latent")
