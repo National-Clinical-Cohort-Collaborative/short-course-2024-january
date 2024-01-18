@@ -14,19 +14,19 @@ default:
   path_csv_site                    : "data-public/derived/csv/site_latent.csv"
   path_csv_observation             : "data-public/derived/csv/observation.csv"
   path_csv_person                  : "data-public/derived/csv/person.csv"
-  path_csv_patient                 : "data-public/derived/csv/patient.csv"
+  path_csv_patient_ll              : "data-public/derived/csv/patient_ll.csv"
   path_csv_patient_hidden          : "data-public/derived/csv/patient_latent.csv"
 
   path_parquet_site                : "data-public/derived/parquet/site_latent.parquet"
   path_parquet_observation         : "data-public/derived/parquet/observation.parquet"
   path_parquet_person              : "data-public/derived/parquet/person.parquet"
-  path_parquet_patient             : "data-public/derived/parquet/patient.parquet"
+  path_parquet_patient_ll          : "data-public/derived/parquet/patient_ll.parquet"
   path_parquet_patient_hidden      : "data-public/derived/parquet/patient_latent.parquet"
 
   path_rds_site                    : "data-public/derived/rds/site_latent.rds"
   path_rds_observation             : "data-public/derived/rds/observation.rds"
   path_rds_person                  : "data-public/derived/rds/person.rds"
-  path_rds_patient                 : "data-public/derived/rds/patient.rds"
+  path_rds_patient_ll              : "data-public/derived/rds/patient_ll.rds"
   path_rds_patient_hidden          : "data-public/derived/rds/patient_latent.rds"
 
   # ---- Analysis-ready datasets (produced by scribes & consumed by analyses).

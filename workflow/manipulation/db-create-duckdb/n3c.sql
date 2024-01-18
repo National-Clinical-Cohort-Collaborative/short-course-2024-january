@@ -1,11 +1,9 @@
-DROP TABLE if exists patient;
-DROP TYPE if exists covid_severity cascade; -- patient table must be dropped first
-DROP TYPE if exists dx_bird cascade; -- patient table must be dropped first
+DROP TABLE if exists patient_ll;
+DROP TYPE if exists covid_severity cascade; -- patient_ll table must be dropped first
 
 CREATE TYPE covid_severity as enum ('none', 'mild', 'moderate', 'severe', 'dead');
-CREATE TYPE dx_bird as enum ('duck_struck', 'chicken_struck', 'chicken_peck');
 
-CREATE TABLE patient (
+CREATE TABLE patient_ll (
   person_id                       integer       primary key,
   data_partner_id                 integer       not null,
   covid_date                      date          not null,
@@ -15,4 +13,4 @@ CREATE TABLE patient (
   length_of_stay                  integer       not null
 );
 
-CREATE INDEX ix_patient_data_partner_id on patient (data_partner_id);
+CREATE INDEX ix_patient_data_partner_id on patient_ll (data_partner_id);

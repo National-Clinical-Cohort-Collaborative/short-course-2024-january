@@ -20,7 +20,7 @@ CREATE TABLE date_nation_latent (
 );
 
 DROP TABLE if exists patient_latent;
-DROP TYPE if exists dx_bird cascade; -- patient table must be dropped first
+DROP TYPE if exists dx_bird cascade; -- patient_latent table must be dropped first
 DROP TYPE if exists obs_animal cascade; -- patient_latent table must be dropped first
 
 CREATE TYPE dx_bird as enum ('duck_struck', 'chicken_struck', 'chicken_peck');

@@ -367,7 +367,7 @@ ds_person_slim <-
 # Print colnames that `dplyr::select()`  should contain below:
 # cat(paste0("    ", colnames(ds_person), collapse=",\n"))
 
-ds_patient <-
+ds_patient_ll <-
   ds_person |>
   # dplyr::slice(1:100) |>
   dplyr::select(
@@ -400,7 +400,7 @@ if (config$produce_csv) {
   readr::write_csv(ds_site            , config$path_csv_site)
   readr::write_csv(ds_observation     , config$path_csv_observation)
   readr::write_csv(ds_person_slim     , config$path_csv_person)
-  readr::write_csv(ds_patient         , config$path_csv_patient)
+  readr::write_csv(ds_patient_ll      , config$path_csv_patient_ll)
   readr::write_csv(ds_patient_hidden  , config$path_csv_patient_hidden)
 }
 
@@ -408,7 +408,7 @@ if (config$produce_rds) {
   readr::write_rds(ds_site            , config$path_rds_site              , compress = "gz")
   readr::write_rds(ds_observation     , config$path_rds_observation       , compress = "gz")
   readr::write_rds(ds_person_slim     , config$path_rds_person            , compress = "gz")
-  readr::write_rds(ds_patient         , config$path_rds_patient           , compress = "gz")
+  readr::write_rds(ds_patient_ll      , config$path_rds_patient_ll        , compress = "gz")
   readr::write_rds(ds_patient_hidden  , config$path_rds_patient_hidden    , compress = "gz")
 }
 
@@ -416,7 +416,7 @@ if (config$produce_duckdb) {
   truncate_and_load_table_duckdb(ds_site          , "site_latent")
   truncate_and_load_table_duckdb(ds_observation   , "observation")
   truncate_and_load_table_duckdb(ds_person_slim   , "person")
-  truncate_and_load_table_duckdb(ds_patient       , "patient")
+  truncate_and_load_table_duckdb(ds_patient_ll    , "patient_ll")
   truncate_and_load_table_duckdb(ds_patient_hidden, "patient_latent")
 }
 
@@ -424,7 +424,7 @@ if (config$produce_parquet) {
   arrow::write_parquet(ds_site                    , config$path_parquet_site)
   arrow::write_parquet(ds_observation             , config$path_parquet_observation)
   arrow::write_parquet(ds_person_slim             , config$path_parquet_person)
-  arrow::write_parquet(ds_patient                 , config$path_parquet_patient)
+  arrow::write_parquet(ds_patient_ll              , config$path_parquet_patient_ll)
   arrow::write_parquet(ds_patient_hidden          , config$path_parquet_patient_hidden)
 }
 
@@ -432,6 +432,6 @@ if (config$produce_sqlite) {
   truncate_and_load_table_sqlite(ds_site          , "site_latent")
   truncate_and_load_table_sqlite(ds_observation   , "observation")
   truncate_and_load_table_sqlite(ds_person_slim   , "person")
-  truncate_and_load_table_sqlite(ds_patient       , "patient")
+  truncate_and_load_table_sqlite(ds_patient_ll    , "patient_ll")
   truncate_and_load_table_sqlite(ds_patient_hidden, "patient_latent")
 }

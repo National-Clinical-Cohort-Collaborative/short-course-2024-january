@@ -130,19 +130,57 @@ This is part of the [Analysis with Synthetic Data](../) session.
 4.  Hold \[shift\], click `observation` and `patient`, and click the
     blue “Select” button.
 
-## Create SQL Transforms and Write SQL Code
+## Create Initial SQL Transforms and Write SQL Code
 
 1.  Click the `patient` transform, then click the blue plus button, then
     select “SQL code”.
+
 2.  Click the gray plus button (above the code), and click the
     `observation` transform.
+
 3.  Change the new transform’s name from “unnamed” to
     “pt_observation_preceding”.
+
 4.  Click “Save as dataset”, so it’s toggled blue.
+
 5.  Verify that you have two inputs: `patient` & `observation`. The
     colors are orange & purple, but the order doesn’t matter.
+
 6.  Replace the code with
-    `sql     WITH obs_before as (       SELECT         o.observation_id         ,o.person_id         ,o.observation_concept_id         ,o.observation_date         ,datediff(o.observation_date, p.covid_date) as dx_days_before_covid  -- SparkSQL syntax         --,datediff('day', o.observation_date, p.covid_date) as dx_days_before_covid -- most other SQL flavors         ,row_number() over (partition by p.person_id order by o.observation_date desc) as index_within_pt       FROM patient p         inner join observation o on p.person_id = o.person_id       WHERE         o.observation_date < p.covid_date         and         o.observation_concept_id in (           4314094,           4314097         )     )     SELECT       *     FROM obs_before     WHERE index_within_pt = 1`
-7.  Verify resulting table has 6 columns & 64 rows.
+
+    ``` sql
+     WITH obs_before as (
+       SELECT
+         o.observation_id
+         ,o.person_id
+         ,o.observation_concept_id
+         ,o.observation_date
+         ,datediff(o.observation_date, p.covid_date) as dx_days_before_covid  -- SparkSQL syntax
+         --,datediff('day', o.observation_date, p.covid_date) as dx_days_before_covid -- most other SQL flavors
+         ,row_number() over (partition by p.person_id order by o.observation_date desc) as index_within_pt
+       FROM patient p
+         inner join observation o on p.person_id = o.person_id
+       WHERE
+         o.observation_date < p.covid_date
+         and
+         o.observation_concept_id in (
+           4314094,
+           4314097
+         )
+     )
+     SELECT
+       *
+     FROM obs_before
+     WHERE index_within_pt = 1
+    ```
+
+7.  Verify resulting table has 6 columns & 64 rows.  
+
+8.  Notice `pt_observation` has fewer rows than `patient`.
+
+    - Q1: Why?  
+    - Q2: Can we use `pt_observation` directly in the analysis? Why not?
+    - Q3: What rows are missing from `pt_observation`, and how can we
+      fill in those rows?
 
 ## Save as Rds File

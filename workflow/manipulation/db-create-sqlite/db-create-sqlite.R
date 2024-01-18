@@ -37,8 +37,8 @@ path_ddl <-
     "manipulation/db-create-sqlite/observation-create.sql",
     "manipulation/db-create-sqlite/person-drop.sql",
     "manipulation/db-create-sqlite/person-create.sql",
-    "manipulation/db-create-sqlite/patient-drop.sql",
-    "manipulation/db-create-sqlite/patient-create.sql",
+    "manipulation/db-create-sqlite/patient_ll-drop.sql",
+    "manipulation/db-create-sqlite/patient_ll-create.sql",
     "manipulation/db-create-sqlite/patient_latent-drop.sql",
     "manipulation/db-create-sqlite/patient_latent-create.sql"
   )
