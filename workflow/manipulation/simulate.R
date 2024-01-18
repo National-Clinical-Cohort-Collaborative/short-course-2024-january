@@ -28,26 +28,6 @@ config                         <- config::get()
 set.seed(453)
 
 pt_count       <- 100
-# wave_count          <- 10
-#
-# possible_age_start  <- 55:75
-# possible_county_id  <- c(51L, 55L, 72L)
-# possible_county_index  <- seq_along(possible_county_id)
-# possible_gender_id     <- c(1L, 2L, 255L)
-# possible_race          <- c(
-#   "American Indian/Alaska Native",
-#   "Asian",
-#   "Native Hawaiian or Other Pacific Islander",
-#   "Black or African American",
-#   "White",
-#   "More than One Race",
-#   "Unknown or Not Reported"
-# )
-# possible_ethnicity <- c(
-#   "Not Hispanic or Latino",
-#   "Hispanic or Latino",
-#   "Unknown/Not Reported Ethnicity"
-# )
 # possible_date_offset    <- 30:120   # Add between 30 & 120 days to Jan 1, to get the exact visit date.
 
 # "p" stands for probability
