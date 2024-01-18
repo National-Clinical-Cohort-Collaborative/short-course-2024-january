@@ -14,6 +14,11 @@ WITH obs_before as (
     o.observation_id
     ,o.person_id
     ,o.observation_concept_id
+    ,case
+      when o.observation_concept_id = 4314094 then 'Butted by animal'
+      when o.observation_concept_id = 4314097 then 'Peck by bird'
+      else                                         'Error: concept not classified'
+    end                                         as event_animal
     ,o.observation_date
     -- ,datediff(o.observation_date, p.covid_date) as dx_days_before_covid  -- SparkSQL syntax
     ,datediff('day', o.observation_date, p.covid_date) as dx_days_before_covid -- most other SQL flavors

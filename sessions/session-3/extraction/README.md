@@ -80,7 +80,7 @@ This is part of the [Analysis with Synthetic Data](../) session.
   dataset.
 
 - The group decides to step back and address the associations of being
-  pecked or buttened
+  pecked or butted
 
   | SNOMED<br>Description |                                                OMOP Concept ID<br>(OMOP Domain) |
   |:----------------------|--------------------------------------------------------------------------------:|
@@ -127,60 +127,172 @@ This is part of the [Analysis with Synthetic Data](../) session.
     Data Analysis for COVID-19 Research, Spring 2024”
 3.  Go to the directory that has the simulated for today’s session:
     “analysis-with-synthetic-data”
-4.  Hold \[shift\], click `observation` and `patient`, and click the
+4.  Hold \[shift\], click `observation` and `patient_ll`, and click the
     blue “Select” button.
 
-## Create Initial SQL Transforms and Write SQL Code
+## First SQL Transform: Isolate Relevant Animal Event
 
-1.  Click the `patient` transform, then click the blue plus button, then
-    select “SQL code”.
+1.  Click the `patient_ll` transform, then click the blue plus button,
+    then select “SQL code”.
 
 2.  Click the gray plus button (above the code), and click the
     `observation` transform.
 
 3.  Change the new transform’s name from “unnamed” to
-    “pt_observation_preceding”.
+    `pt_observation_preceding`.
 
 4.  Click “Save as dataset”, so it’s toggled blue.
 
-5.  Verify that you have two inputs: `patient` & `observation`. The
+5.  Verify that you have two inputs: `patient_ll` & `observation`. The
     colors are orange & purple, but the order doesn’t matter.
 
 6.  Replace the code with
 
     ``` sql
-     WITH obs_before as (
-       SELECT
-         o.observation_id
-         ,o.person_id
-         ,o.observation_concept_id
-         ,o.observation_date
-         ,datediff(o.observation_date, p.covid_date) as dx_days_before_covid  -- SparkSQL syntax
-         --,datediff('day', o.observation_date, p.covid_date) as dx_days_before_covid -- most other SQL flavors
-         ,row_number() over (partition by p.person_id order by o.observation_date desc) as index_within_pt
-       FROM patient p
-         inner join observation o on p.person_id = o.person_id
-       WHERE
-         o.observation_date < p.covid_date
-         and
-         o.observation_concept_id in (
-           4314094,
-           4314097
-         )
-     )
-     SELECT
-       *
-     FROM obs_before
-     WHERE index_within_pt = 1
+    WITH obs_before as (
+      SELECT
+        o.observation_id
+        ,o.person_id
+        ,o.observation_concept_id
+        ,o.observation_date
+        ,datediff(o.observation_date, p.covid_date) as dx_days_before_covid  -- SparkSQL syntax
+        --,datediff('day', p.covid_date, o.observation_date) as dx_days_before_covid -- most other SQL flavors
+        ,row_number() over (partition by p.person_id order by o.observation_date desc) as index_within_pt_rev
+      FROM patient_ll p
+        inner join observation o on p.person_id = o.person_id
+      WHERE
+        o.observation_date < p.covid_date
+        and
+        o.observation_concept_id in (
+          4314094,
+          4314097
+        )
+    )
+
+    SELECT
+      *
+    FROM obs_before
+    WHERE index_within_pt_rev = 1
     ```
 
-7.  Verify resulting table has 6 columns & 64 rows.  
+7.  Verify resulting table has 6 columns & 64 rows.
 
-8.  Notice `pt_observation` has fewer rows than `patient`.
+8.  Notice `pt_observation_preceding` has fewer rows than `patient_ll`.
 
-    - Q1: Why?  
-    - Q2: Can we use `pt_observation` directly in the analysis? Why not?
-    - Q3: What rows are missing from `pt_observation`, and how can we
-      fill in those rows?
+    - Q1: Why?
+    - Q2: Can we use `pt_observation_preceding` directly in the
+      analysis? Why not?
+    - Q3: What rows are missing from `pt_observation_preceding`, and how
+      can we fill in those rows?
+
+## Second SQL Transform: Rejoin with `patient_ll`
+
+1.  Go back to this table to get
+
+    1.  …patients that didn’t have a documented animal event.
+    2.  …useful variables the logic liaisons calculated for us.
+
+2.  Click the `patient_ll` transform, then click the blue plus button,
+    then select “SQL code” (again).
+
+3.  Click the gray plus button (above the code), and click the
+    `observation` transform.
+
+4.  Change the new transform’s name from “unnamed” to `patient`.
+
+5.  Click “Save as dataset”, so it’s toggled blue.
+
+6.  Verify that you have two inputs: `patient_ll` & `patient`. The
+    colors are orange & purple, but the order doesn’t matter.
+
+7.  Replace the code with
+
+    ``` sql
+    SELECT
+      p.person_id
+      ,p.data_partner_id
+      ,p.covid_date
+      ,p.covid_severity
+      -- ,p.calc_outbreak_lag_years -- There will be some LL columns that won't be relevant to us
+      ,p.calc_age_covid
+      ,p.length_of_stay
+      ,po.event_animal
+      ,po.dx_days_before_covid
+    FROM patient_ll p
+      left  join pt_observation_preceding po on p.person_id = po.person_id
+    ```
+
+8.  Verify resulting table has 8 columns & 100 rows.
+
+9.  Notice `patient` and `patient_ll` have the same record count.
+
+    - Q1: Why?
+    - Q2: If `patient` had *more* records than `patient_ll`, what went
+      wrong?
+    - Q3: If `patient` had *fewer* records than `patient_ll`, what went
+      wrong?
+
+## Improve `patient` transform
+
+1.  Writing code can be hard. Starting with complex code is almost
+    always slower.
+
+2.  Instead start simple, and gradually add complexity.
+
+3.  Replace the code with
+
+    ``` sql
+    SELECT
+      p.person_id
+      ,p.data_partner_id
+      ,p.covid_date
+      ,p.calc_age_covid
+      ,p.length_of_stay
+      ,po.event_animal
+      ,po.dx_days_before_covid
+      ,case
+        when p.calc_age_covid is null then 'Unknown'
+        when p.calc_age_covid < 0     then 'Unknown'
+        when p.calc_age_covid < 19    then '0-18'
+        when p.calc_age_covid < 51    then '19-50'
+        when p.calc_age_covid < 76    then '51-75'
+        else                               '76+'
+      end                                                      as age_cut5
+      ,p.covid_severity
+      ,case
+        when p.covid_severity = 'none'      then false
+        when p.covid_severity = 'mild'      then true
+        when p.covid_severity = 'moderate'  then true
+        when p.covid_severity = 'severe'    then true
+        when p.covid_severity = 'death'     then true
+        else                                     null
+      end                                                      as covid_mild_plus
+      ,case
+        when p.covid_severity = 'none'      then false
+        when p.covid_severity = 'mild'      then false
+        when p.covid_severity = 'moderate'  then true
+        when p.covid_severity = 'severe'    then true
+        when p.covid_severity = 'death'     then true
+        else                                     null
+      end                                                      as covid_moderate_plus
+      ,case
+        when p.covid_severity = 'none'      then false
+        when p.covid_severity = 'mild'      then false
+        when p.covid_severity = 'moderate'  then false
+        when p.covid_severity = 'severe'    then true
+        when p.covid_severity = 'death'     then true
+        else                                     null
+      end                                                      as covid_severe_plus
+      ,case
+        when p.covid_severity = 'none'      then false
+        when p.covid_severity = 'mild'      then false
+        when p.covid_severity = 'moderate'  then false
+        when p.covid_severity = 'severe'    then false
+        when p.covid_severity = 'death'     then true
+        else                                     null
+      end                                                      as covid_dead
+    FROM patient_ll p
+      left  join pt_observation_preceding po on p.person_id = po.person_id
+    ```
 
 ## Save as Rds File
