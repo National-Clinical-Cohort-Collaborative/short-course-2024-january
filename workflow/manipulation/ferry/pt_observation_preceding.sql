@@ -1,3 +1,14 @@
+-- In the Enclave, delete this DELETE & CREATE blocks
+DROP TABLE if exists pt_observation_preceding;
+CREATE TABLE pt_observation_preceding (
+  observation_id            int        primary key,
+  person_id                 int        not null,
+  observation_concept_id    int        not null,
+  observation_date          date       not null,
+  dx_days_before_covid      int        not null,
+  -- index_within_pt_rev       int        not null,
+);
+
 WITH obs_before as (
   SELECT
     o.observation_id
@@ -18,7 +29,12 @@ WITH obs_before as (
     )
 )
 
+INSERT INTO pt_observation_preceding -- In the Enclave, delete this line
 SELECT
-  *
+  observation_id
+  ,person_id
+  ,observation_concept_id
+  ,observation_date
+  ,dx_days_before_covid
 FROM obs_before
 WHERE index_within_pt_rev = 1
