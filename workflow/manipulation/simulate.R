@@ -237,27 +237,47 @@ summary(glm(covid_severity ~ 1 + calc_outbreak_lag_years + calc_age_covid, famil
 
 
 # ---- obs ----------------------------------------------------------------------
-ds_observation <-
+ds_observation_signal <-
   ds_person |>
   dplyr::select(
     person_id,
     covid_date,
     obs_animal,
   ) |>
-  tibble::rowid_to_column("observation_id") |>
   dplyr::inner_join(ds_concept, by = c("obs_animal" = "concept_name")) |>
   dplyr::mutate(
     lag               = as.integer(rchisq(dplyr::n(), 4)),
     observation_date  = covid_date - lubridate::days(lag)
   ) |>
   dplyr::select(
-    observation_id,
+    # observation_id,
     person_id,
     observation_concept_id  = concept_id,
     observation_date,
   )
 
+noise_per_pt  <- 3L
+noise_count <- noise_per_pt * nrow(ds_person)
+concept_noise <- c(
+  4055405L, # Accident caused by dodgem car
+  4313543L, # Accident caused by explosion of car tire
+  4054697L, # Accident caused by file
+  4053929L  # Accident caused by fire in standing farm crops
+)
+date_possible <- seq.Date(as.Date("2018-01-01"), as.Date("2023-12-31"), by = "day")
 
+ds_observation_noise <-
+  tibble::tibble(
+    person_id                 = sample(ds_person$person_id, noise_count, replace = TRUE),
+    observation_concept_id    = sample(concept_noise      , noise_count, replace = TRUE),
+    observation_date          = sample(date_possible      , noise_count, replace = TRUE)
+  )
+
+ds_observation <-
+  ds_observation_signal |>
+  dplyr::union_all(ds_observation_noise) |>
+  dplyr::arrange(person_id, observation_date) |>
+  tibble::rowid_to_column("observation_id")
 
 # ---- join-concepts -----------------------------------------------------------
 sql_person_slim <-
