@@ -23,7 +23,7 @@ SELECT
   ,p.ethnicity_source_concept_id
   ,pt.covid_date
   ,pt.covid_severity
-  ,pt.dx_bird
+  ,pth.dx_bird
   ,pt.calc_outbreak_lag_years
   ,pt.calc_age_covid
   ,pt.length_of_stay

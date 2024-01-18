@@ -10,7 +10,6 @@ CREATE TABLE patient (
   data_partner_id                 integer       not null,
   covid_date                      date          not null,
   covid_severity                  covid_severity   not null,
-  dx_bird                         dx_bird       not null,
   calc_outbreak_lag_years         float         not null,
   calc_age_covid                  float         not null,
   length_of_stay                  integer       not null

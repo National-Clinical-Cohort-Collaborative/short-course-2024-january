@@ -375,7 +375,6 @@ ds_patient <-
     data_partner_id,
     covid_date,
     covid_severity,
-    dx_bird,
     calc_outbreak_lag_years,
     calc_age_covid,
     length_of_stay,
@@ -391,6 +390,7 @@ ds_patient_hidden <-
     latent_risk_2_slope,
     latent_risk_3,
     latent_risk_4,
+    dx_bird,
     obs_animal,
   )
 

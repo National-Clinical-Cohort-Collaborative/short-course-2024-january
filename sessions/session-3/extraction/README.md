@@ -94,7 +94,7 @@ This is part of the [Analysis with Synthetic Data](../) session.
 
 ## Identify Source Tables & their Relationships
 
-- In most EHR research, conceputally start with the database’s patient.
+- In most EHR research, conceptually start with the database’s patient.
   With OMOP, this table is called
   [`person`](https://ohdsi.github.io/CommonDataModel/cdm60.html#PERSON).
 
@@ -119,6 +119,30 @@ This is part of the [Analysis with Synthetic Data](../) session.
 
 ## Sketch Plan
 
-## Create SQL Transforms and write SQL Code
+## Select Input Datasets
+
+1.  Click the blue “Import dataset” button.
+2.  Go to the directory for this class’s L0 DUR: “All \> All projects \>
+    N3C Training Area \> Group Exercises \> Introduction to Real World
+    Data Analysis for COVID-19 Research, Spring 2024”
+3.  Go to the directory that has the simulated for today’s session:
+    “analysis-with-synthetic-data”
+4.  Hold \[shift\], click `observation` and `patient`, and click the
+    blue “Select” button.
+
+## Create SQL Transforms and Write SQL Code
+
+1.  Click the `patient` transform, then click the blue plus button, then
+    select “SQL code”.
+2.  Click the gray plus button (above the code), and click the
+    `observation` transform.
+3.  Change the new transform’s name from “unnamed” to
+    “pt_observation_preceding”.
+4.  Click “Save as dataset”, so it’s toggled blue.
+5.  Verify that you have two inputs: `patient` & `observation`. The
+    colors are orange & purple, but the order doesn’t matter.
+6.  Replace the code with
+    `sql     WITH obs_before as (       SELECT         o.observation_id         ,o.person_id         ,o.observation_concept_id         ,o.observation_date         ,datediff(o.observation_date, p.covid_date) as dx_days_before_covid  -- SparkSQL syntax         --,datediff('day', o.observation_date, p.covid_date) as dx_days_before_covid -- most other SQL flavors         ,row_number() over (partition by p.person_id order by o.observation_date desc) as index_within_pt       FROM patient p         inner join observation o on p.person_id = o.person_id       WHERE         o.observation_date < p.covid_date         and         o.observation_concept_id in (           4314094,           4314097         )     )     SELECT       *     FROM obs_before     WHERE index_within_pt = 1`
+7.  Verify resulting table has 6 columns & 64 rows.
 
 ## Save as Rds File

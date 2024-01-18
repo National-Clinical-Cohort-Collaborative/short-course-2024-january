@@ -20,8 +20,10 @@ CREATE TABLE date_nation_latent (
 );
 
 DROP TABLE if exists patient_latent;
+DROP TYPE if exists dx_bird cascade; -- patient table must be dropped first
 DROP TYPE if exists obs_animal cascade; -- patient_latent table must be dropped first
 
+CREATE TYPE dx_bird as enum ('duck_struck', 'chicken_struck', 'chicken_peck');
 CREATE TYPE obs_animal as enum ('Peck by bird', 'Butted by animal', 'No Event');
 CREATE TABLE patient_latent (
   person_id                       integer          primary key,
@@ -30,5 +32,6 @@ CREATE TABLE patient_latent (
   latent_risk_2_slope             float            not null,
   latent_risk_3                   float            not null,
   latent_risk_4                   float            not null,
+  dx_bird                         dx_bird          not null,
   obs_animal                      obs_animal       not null,
 );
