@@ -76,7 +76,6 @@ Challenge for Today's Session --2nd Try
   | "Peck by bird"              | [4314097](https://athena.ohdsi.org/search-terms/terms/4314097)<br>(Observation) |
   | "Butted by animal"          | [4314094](https://athena.ohdsi.org/search-terms/terms/4314094)<br>(Observation) |
 
-
 **Resources**
 
 * [ICD10CM codes for Contact with birds (domestic) (wild)](https://www.icd10data.com/ICD10CM/Codes/V00-Y99/W50-W64/W61-#W61.33)
@@ -109,17 +108,17 @@ Select Input Datasets
 1. Click the blue "Import dataset" button.
 1. Go to the directory for this class's L0 DUR: "All > All projects > N3C Training Area > Group Exercises > Introduction to Real World Data Analysis for COVID-19 Research, Spring 2024"
 1. Go to the directory that has the simulated for today's session: "analysis-with-synthetic-data"
-1. Hold [shift], click `observation` and `patient`, and click the blue "Select" button.
+1. Hold [shift], click `observation` and `patient_ll`, and click the blue "Select" button.
 
 
-Create Initial SQL Transforms and Write SQL Code
+First SQL Transform: Isolate Relevant Animal Event
 --------------------
 
-1. Click the `patient` transform, then  click the blue plus button, then select "SQL code".
+1. Click the `patient_ll` transform, then  click the blue plus button, then select "SQL code".
 1. Click the gray plus button (above the code), and click the `observation` transform.
 1. Change the new transform's name from "unnamed" to "pt_observation_preceding".
 1. Click "Save as dataset", so it's toggled blue.
-1. Verify that you have two inputs: `patient` & `observation`. The colors are orange & purple, but the order doesn't matter.
+1. Verify that you have two inputs: `patient_ll` & `observation`. The colors are orange & purple, but the order doesn't matter.
 1. Replace the code with
 
    ```sql
@@ -131,8 +130,8 @@ Create Initial SQL Transforms and Write SQL Code
         ,o.observation_date
         ,datediff(o.observation_date, p.covid_date) as dx_days_before_covid  -- SparkSQL syntax
         --,datediff('day', o.observation_date, p.covid_date) as dx_days_before_covid -- most other SQL flavors
-        ,row_number() over (partition by p.person_id order by o.observation_date desc) as index_within_pt
-      FROM patient p
+        ,row_number() over (partition by p.person_id order by o.observation_date desc) as index_within_pt_rev
+      FROM patient_ll p
         inner join observation o on p.person_id = o.person_id
       WHERE
         o.observation_date < p.covid_date
@@ -142,17 +141,26 @@ Create Initial SQL Transforms and Write SQL Code
           4314097
         )
     )
+    
     SELECT
       *
     FROM obs_before
-    WHERE index_within_pt = 1
+    WHERE index_within_pt_rev = 1
     ```
+    
 1. Verify resulting table has 6 columns & 64 rows.    
-1. Notice `pt_observation` has fewer rows than `patient`.  
+1. Notice `pt_observation` has fewer rows than `patient_ll`.  
    * Q1: Why?  
    * Q2: Can we use `pt_observation` directly in the analysis?  Why not?
    * Q3: What rows are missing from `pt_observation`, and how can we fill in those rows?
    
+
+Second SQL Transform: Rejoin with `patient_ll`
+--------------------
+
+1. Go back to this table to get
+   1. ...patients that didn't have a documented animal event.
+   1. ...useful variables the logic liaisons calculated for us.
 
 Save as Rds File
 --------------------

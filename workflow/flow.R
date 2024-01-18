@@ -58,8 +58,8 @@ ds_rail  <- tibble::tribble(
   # "run_python", "manipulation/pt-2-ellis.py", # Uncomment to run a python version
 
   # Second-level manipulation on data inside the warehouse.
-  "run_sql" , "manipulation/patient-ferry.sql",
-  # "run_sql" , "manipulation/ferry.sql",
+  "run_sql" , "manipulation/ferry/analysis_patient.sql",
+  "run_sql" , "manipulation/ferry/pt_observation_preceding.sql", # This just makes sure the query runs without error.
 
   # Scribes create analysis-ready rectangles.
   "run_r"     , "manipulation/scribe.R",

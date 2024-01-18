@@ -6,7 +6,7 @@ WITH obs_before as (
     ,o.observation_date
     -- ,datediff(o.observation_date, p.covid_date) as dx_days_before_covid  -- SparkSQL syntax
     ,datediff('day', o.observation_date, p.covid_date) as dx_days_before_covid -- most other SQL flavors
-    ,row_number() over (partition by p.person_id order by o.observation_date desc) as index_within_pt
+    ,row_number() over (partition by p.person_id order by o.observation_date desc) as index_within_pt_rev
   FROM patient_ll p
     inner join observation o on p.person_id = o.person_id
   WHERE
@@ -17,7 +17,8 @@ WITH obs_before as (
       4314097
     )
 )
+
 SELECT
   *
 FROM obs_before
-WHERE index_within_pt = 1
+WHERE index_within_pt_rev = 1
