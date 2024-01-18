@@ -11,7 +11,7 @@ Assets For Students
 * *The Researcher's Guide to N3C*: <https://covid.cd2h.org/guide-to-n3c>
 * *The Book of OHDSI*: <https://ohdsi.github.io/TheBookOfOhdsic>
 * [Level 0 Workspace](https://unite.nih.gov/workspace/compass/view/ri.compass.main.folder.86a7020f-db30-4fd1-b735-bbaf53512365) (that can be shared to anyone with an Enclave account)
-* [Level 2 Workspace]() (that is open only to students of this course)
+* [Level 2 Workspace](https://unite.nih.gov/workspace/compass/view/ri.compass.main.folder.713d3259-a7b4-43f4-bbac-d1db215aff8b) (that is open only to students of this course)
 
 | Session                                                                             | Assignments           | Slides         | Recordings           |
 | :---------------------------------------------------------------------------------- | :-------------------- | :------------- | :---------           |
