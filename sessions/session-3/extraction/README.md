@@ -19,27 +19,43 @@ This is part of the [Analysis with Synthetic Data](../) session.
   table is “visit”; each row represents one distinct visit/encounter the
   patient had with the health system..
 
+## Session’s Expectations
+
+1.  Try to follow along, but not everyone can finish at the speed of the
+    lecture.
+2.  If you have questions, please ask them in the chat.
+3.  For questions that are generalizable to the group, the instructors
+    will elevate it and I’ll address it directly.
+4.  When I’m done today, we’ll answer your questions as long as we have
+    time.
+5.  Finish on your own time after today’s session.
+6.  Come to office hours for remaining obstacles or more detailed
+    questions.
+
 ## Start a “Code Workbook” in the Foundry Enclave
 
-1.  In our class’s [L0
+Assignment at the end of week 2:
+
+1.  Log in to the Enclave, with MFA.
+2.  In our class’s [L0
     workspace](https://unite.nih.gov/workspace/compass/view/ri.compass.main.folder.86a7020f-db30-4fd1-b735-bbaf53512365),
     open to the “Users/” directory and create your personal folder. I
     like [kebab
     case](https://www.freecodecamp.org/news/snake-case-vs-camel-case-vs-pascal-case-vs-kebab-case-whats-the-difference/#kebab-case)
     for directory & file names (eg, “will-beasley”, “jerrod-anzalone”,
     “james-cheng”).
-2.  Create a new “Code Workbook”.
-3.  Once the workbook opens, rename it to “manipulation-1”. (Rename it
+3.  Create a new “Code Workbook”.
+4.  Once the workbook opens, rename it to “manipulation-1”. (Rename it
     once it’s open, so some behdin-the-scenes files are approrpiately
     adjusted.)
-4.  Change the environment.
+5.  Change the environment.
     1.  In the top center of the screen, click the lightning bolt near
         “Enviroment (default-r-3.5)”
     2.  Click “Configure Environment”
     3.  In the left-hand Profiles panel, click “r4-high-driver-memory”
     4.  Click the blue “Update Environment” button and wait a few
         minutes.
-5.  It will take the servers a few minutes to create environments for
+6.  It will take the servers a few minutes to create environments for
     all of us. So let’s talk concepts next.
 
 **Resources**
@@ -184,7 +200,7 @@ This is part of the [Analysis with Synthetic Data](../) session.
     WHERE index_within_pt_rev = 1
     ```
 
-7.  Click blue “Run” button.  
+7.  Click blue “Run” button.
 
 8.  Verify resulting table has 6 columns & 64 rows.
 
@@ -245,7 +261,7 @@ This is part of the [Analysis with Synthetic Data](../) session.
       left  join pt_observation_preceding po on p.person_id = po.person_id
     ```
 
-8.  Click blue “Run” button.  
+8.  Click blue “Run” button.
 
 9.  Verify resulting table has 8 columns & 100 rows.
 
@@ -328,9 +344,8 @@ This is part of the [Analysis with Synthetic Data](../) session.
 2.  Pros for splitting into well-designed segments that are eventually
     assembled.
     1.  Human mind is better an reasoning through one focused piece at a
-        time.  
-        Development is easier. Communication to teammates is easier
-        (especially if different grains are involved).
+        time. Development is easier. Communication to teammates is
+        easier (especially if different grains are involved).
     2.  Easier to modify later.
     3.  Database engines can better optimize. This is particularly true
         for non-N3C databases you might use, like SQL Server, Oracle,
@@ -396,7 +411,7 @@ load_packages <- function () {
   library(magrittr)
   requireNamespace("arrow")
   requireNamespace("dplyr")
-  requireNamespace("tidyr") 
+  requireNamespace("tidyr")
 }
 ```
 
@@ -407,12 +422,14 @@ load_packages <- function () {
 ## Assignments
 
 1.  Add a new variable to `pt` from an existing input table.
-2.  Improve the definition of the `event_animal` variable by using a
-    look up table.
-3.  Incorporate a new input table into `pt`.
-4.  List three areas outside software development where it’s
+2.  ~~Improve the definition of the `event_animal` variable by using a
+    look up table.~~
+3.  Upgrade the `event_animal` code to use codeset qqq.
+    1.  Replace the WHERE clause …qqq
+4.  Incorporate a new input table into `pt`.
+5.  List three areas outside software development where it’s
     advantageous to breakup bigger challenges into smaller ones.
-5.  Color code the workbooks transforms. Think which parts belong to
+6.  Color code the workbooks transforms. Think which parts belong to
     what category.
     1.  “omop source”: dark purple (#7B64FF)
     2.  “n3c derived”: light purple (#AEA1FF)
