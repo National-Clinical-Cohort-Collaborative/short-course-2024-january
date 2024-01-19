@@ -412,3 +412,11 @@ load_packages <- function () {
 3.  Incorporate a new input table into `pt`.
 4.  List three areas outside software development where it’s
     advantageous to breakup bigger challenges into smaller ones.
+5.  Color code the workbooks transforms. Think which parts belong to
+    what category.
+    1.  “omop source”: dark purple (#7B64FF)
+    2.  “n3c derived”: light purple (#AEA1FF)
+    3.  “metadata”: olive green (#B0BC00)
+    4.  “intermediate”: gray (#999999)
+    5.  “outcome”: orange (#FB9E00)
+    6.  “diagnostic”: cyan (#73D8FF)
