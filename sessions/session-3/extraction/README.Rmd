@@ -20,9 +20,23 @@ Important Terminology for this Lesson
   Similarly, the grain of the [`visit_occurrence`](https://ohdsi.github.io/CommonDataModel/cdm60.html#VISIT_OCCURRENCE) table is "visit";
   each row represents one distinct visit/encounter the patient had with the health system..
 
+Session's Expectations
+--------------------
+
+1. Try to follow along, but not everyone can finish at the speed of the lecture.
+1. If you have questions, please ask them in the chat.
+1. For questions that are generalizable to the group,
+   the instructors will elevate it and I'll address it directly.
+1. When I'm done today, we'll answer your questions as long as we have time.
+1. Finish on your own time after today's session.
+1. Come to office hours for remaining obstacles or more detailed questions.
+
 Start a "Code Workbook" in the Foundry Enclave
 --------------------
 
+Assignment at the end of week 2:
+
+1. Log in to the Enclave, with MFA.
 1. In our class's [L0 workspace](https://unite.nih.gov/workspace/compass/view/ri.compass.main.folder.86a7020f-db30-4fd1-b735-bbaf53512365),
    open to the "Users/" directory and create your personal folder.
    I like [kebab case](https://www.freecodecamp.org/news/snake-case-vs-camel-case-vs-pascal-case-vs-kebab-case-whats-the-difference/#kebab-case)
@@ -157,7 +171,7 @@ First SQL Transform: Isolate Relevant Animal Event
     WHERE index_within_pt_rev = 1
     ```
 
-1. Click blue "Run" button.    
+1. Click blue "Run" button.
 1. Verify resulting table has 6 columns & 64 rows.
 1. Notice `pt_observation_preceding` has fewer rows than `patient_ll`.
    * Q1: Why?
@@ -206,7 +220,7 @@ Second SQL Transform: Rejoin with `patient_ll`
       left  join pt_observation_preceding po on p.person_id = po.person_id
     ```
 
-1. Click blue "Run" button.    
+1. Click blue "Run" button.
 1. Verify resulting table has 8 columns & 100 rows.
 1. Notice `pt` and `patient_ll` have the same record count.
    * Q1: Why?
@@ -274,15 +288,15 @@ Improve `pt` transform
       left  join pt_observation_preceding po on p.person_id = po.person_id
 
     ```
-  
-1. Click blue "Run" button.    
+
+1. Click blue "Run" button.
 
 Strategies for Organizing Transforms
 --------------------
 
 1. The `pt_observation_preceding` and `pt` transforms could be combined into one transform
 1. Pros for splitting into well-designed segments that are eventually assembled.
-   1. Human mind is better an reasoning through one focused piece at a time.  
+   1. Human mind is better an reasoning through one focused piece at a time.
       Development is easier.
       Communication to teammates is easier (especially if different grains are involved).
    1. Easier to modify later.
@@ -298,9 +312,9 @@ Beauty of CTES
 
 1. A [Common Table Expression](https://www.atlassian.com/data/sql/using-common-table-expressions) (CTE)
   allows you to write  sql code that's mode top-to-bottom, and less inside-out.
-  
+
 1. Similar cognitive as breaking up complicated monolithic transforms/queries into smaller ones.
-  
+
 1. "Subquery style"
    ```sql
    SELECT
@@ -315,7 +329,7 @@ Beauty of CTES
    ) obs_before
    WHERE index_within_pt_rev = 1
    ```
-  
+
 1. "CTE style":
 
    ```sql
@@ -338,23 +352,23 @@ Global Code
 
 1. The [Global Code](https://www.palantir.com/docs/foundry/code-workbook/workbooks-global-code/)
   (in a right-hand pane),
-  lets us define variables and functions that are available in all code transforms *in the workbook* (not the workspace). 
+  lets us define variables and functions that are available in all code transforms *in the workbook* (not the workspace).
   In today's "manipulation-1" workbook, we'll define constants that will be used in multiple transforms or define helper functions you want to use repeatedly.
-  
+
   ```r
   load_packages <- function () {
     library(magrittr)
     requireNamespace("arrow")
     requireNamespace("dplyr")
-    requireNamespace("tidyr") 
+    requireNamespace("tidyr")
   }
   ```
 
 R Transform
 --------------------
-  
-  
-  
+
+
+
 Save as Rds File
 --------------------
 
@@ -363,7 +377,9 @@ Assignments
 --------------------
 
 1. Add a new variable to `pt` from an existing input table.
-1. Improve the definition of the `event_animal` variable by using a look up table.
+1. ~~Improve the definition of the `event_animal` variable by using a look up table.~~
+1. Upgrade the `event_animal` code to use codeset qqq.
+   1. Replace the WHERE clause ...qqq
 1. Incorporate a new input table into `pt`.
 1. List three areas outside software development where it's advantageous to breakup bigger challenges into smaller ones.
 1. Color code the workbooks transforms.  Think which parts belong to what category.
@@ -373,6 +389,3 @@ Assignments
    1. "intermediate": gray (#999999)
    1. "outcome": orange (#FB9E00)
    1. "diagnostic": cyan (#73D8FF)
-  
-  
-  
