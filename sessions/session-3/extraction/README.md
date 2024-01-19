@@ -154,9 +154,14 @@ This is part of the [Analysis with Synthetic Data](../) session.
         o.observation_id
         ,o.person_id
         ,o.observation_concept_id
+        ,case
+          when o.observation_concept_id = 4314094 then 'Butted by animal'
+          when o.observation_concept_id = 4314097 then 'Peck by bird'
+          else                                         'Error: concept not classified'
+        end                                         as event_animal
         ,o.observation_date
-        ,datediff(o.observation_date, p.covid_date) as dx_days_before_covid  -- SparkSQL syntax
-        --,datediff('day', p.covid_date, o.observation_date) as dx_days_before_covid -- most other SQL flavors
+        ,p.covid_date
+        ,datediff(p.covid_date, o.observation_date) as dx_days_before_covid
         ,row_number() over (partition by p.person_id order by o.observation_date desc) as index_within_pt_rev
       FROM patient_ll p
         inner join observation o on p.person_id = o.person_id
@@ -168,22 +173,40 @@ This is part of the [Analysis with Synthetic Data](../) session.
           4314097
         )
     )
-
     SELECT
-      *
+      observation_id
+      ,person_id
+      ,observation_concept_id
+      ,event_animal
+      ,observation_date
+      ,dx_days_before_covid
     FROM obs_before
     WHERE index_within_pt_rev = 1
     ```
 
-7.  Verify resulting table has 6 columns & 64 rows.
+7.  Click blue “Run” button.  
 
-8.  Notice `pt_observation_preceding` has fewer rows than `patient_ll`.
+8.  Verify resulting table has 6 columns & 64 rows.
+
+9.  Notice `pt_observation_preceding` has fewer rows than `patient_ll`.
 
     - Q1: Why?
     - Q2: Can we use `pt_observation_preceding` directly in the
       analysis? Why not?
     - Q3: What rows are missing from `pt_observation_preceding`, and how
       can we fill in those rows?
+
+## Dissecting Previous SQL Code
+
+1.  `SELECT` clause
+2.  `FROM` clause
+3.  `inner join` operator
+4.  `case when` statement
+5.  `row_number()` function
+6.  `o.observation_concept_id` in `WHERE` clause
+7.  `obs_before` CTE
+8.  Second `SELECT` & `FROM` statements
+9.  `WHERE index_within_pt_rev = 1`
 
 ## Second SQL Transform: Rejoin with `patient_ll`
 
@@ -222,17 +245,18 @@ This is part of the [Analysis with Synthetic Data](../) session.
       left  join pt_observation_preceding po on p.person_id = po.person_id
     ```
 
-8.  Verify resulting table has 8 columns & 100 rows.
+8.  Click blue “Run” button.  
 
-9.  Notice `patient` and `patient_ll` have the same record count.
+9.  Verify resulting table has 8 columns & 100 rows.
+
+10. Notice `pt` and `patient_ll` have the same record count.
 
     - Q1: Why?
-    - Q2: If `patient` had *more* records than `patient_ll`, what went
-      wrong?
-    - Q3: If `patient` had *fewer* records than `patient_ll`, what went
+    - Q2: If `pt` had *more* records than `patient_ll`, what went wrong?
+    - Q3: If `pt` had *fewer* records than `patient_ll`, what went
       wrong?
 
-## Improve `patient` transform
+## Improve `pt` transform
 
 1.  Writing code can be hard. Starting with complex code is almost
     always slower.
@@ -295,4 +319,96 @@ This is part of the [Analysis with Synthetic Data](../) session.
       left  join pt_observation_preceding po on p.person_id = po.person_id
     ```
 
+4.  Click blue “Run” button.
+
+## Strategies for Organizing Transforms
+
+1.  The `pt_observation_preceding` and `pt` transforms could be combined
+    into one transform
+2.  Pros for splitting into well-designed segments that are eventually
+    assembled.
+    1.  Human mind is better an reasoning through one focused piece at a
+        time.  
+        Development is easier. Communication to teammates is easier
+        (especially if different grains are involved).
+    2.  Easier to modify later.
+    3.  Database engines can better optimize. This is particularly true
+        for non-N3C databases you might use, like SQL Server, Oracle,
+        Postgres, DuckDB.
+3.  Cons for splitting
+    1.  Requires more time if you copy & paste code somewhere.
+
+## Beauty of CTES
+
+1.  A [Common Table
+    Expression](https://www.atlassian.com/data/sql/using-common-table-expressions)
+    (CTE) allows you to write sql code that’s mode top-to-bottom, and
+    less inside-out.
+
+2.  Similar cognitive as breaking up complicated monolithic
+    transforms/queries into smaller ones.
+
+3.  “Subquery style”
+
+    ``` sql
+    SELECT
+      observation_id
+      ,person_id
+      ,observation_concept_id
+      ,event_animal
+      ,observation_date
+      ,dx_days_before_covid
+    FROM (
+      ...(contents of CTE)...
+    ) obs_before
+    WHERE index_within_pt_rev = 1
+    ```
+
+4.  “CTE style”:
+
+    ``` sql
+    WITH obs_before as (
+      ...(contents of CTE)...
+    )
+    SELECT
+      observation_id
+      ,person_id
+      ,observation_concept_id
+      ,event_animal
+      ,observation_date
+      ,dx_days_before_covid
+    FROM obs_before
+    WHERE index_within_pt_rev = 1
+    ```
+
+## Global Code
+
+1.  The [Global
+    Code](https://www.palantir.com/docs/foundry/code-workbook/workbooks-global-code/)
+    (in a right-hand pane), lets us define variables and functions that
+    are available in all code transforms *in the workbook* (not the
+    workspace). In today’s “manipulation-1” workbook, we’ll define
+    constants that will be used in multiple transforms or define helper
+    functions you want to use repeatedly.
+
+``` r
+load_packages <- function () {
+  library(magrittr)
+  requireNamespace("arrow")
+  requireNamespace("dplyr")
+  requireNamespace("tidyr") 
+}
+```
+
+## R Transform
+
 ## Save as Rds File
+
+## Assignments
+
+1.  Add a new variable to `pt` from an existing input table.
+2.  Improve the definition of the `event_animal` variable by using a
+    look up table.
+3.  Incorporate a new input table into `pt`.
+4.  List three areas outside software development where it’s
+    advantageous to breakup bigger challenges into smaller ones.
