@@ -1,5 +1,5 @@
 ---
-title: Descriptives Report 1
+title: (Latent) Descriptives Report 1
 date: "Date: 2024-01-20"
 output:
   # radix::radix_article: # radix is a newer alternative that has some advantages over `html_document`.
@@ -341,4 +341,4 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 
-Report rendered by wibeasley at 2024-01-20, 13:02 -0600 in 12 seconds.
+Report rendered by wibeasley at 2024-01-20, 13:22 -0600 in 22 seconds.

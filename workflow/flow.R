@@ -66,7 +66,7 @@ ds_rail  <- tibble::tribble(
   "run_r"     , "manipulation/scribe/pt-2.R",
 
   # Reports for human consumers.
-  "run_rmd"   , "analysis/descriptives-1/descriptives-1.Rmd"
+  "run_rmd"   , "analysis/descriptives-latent-1/descriptives-latent-1.Rmd"
 )
 
 run_r <- function(minion) {
