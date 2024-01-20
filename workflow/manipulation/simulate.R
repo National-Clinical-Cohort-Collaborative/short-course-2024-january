@@ -397,6 +397,7 @@ ds_patient_hidden <-
 # ---- save-to-disk ------------------------------------------------------------
 # If there's no PHI, a rectangular CSV is usually adequate, and it's portable to other machines and software.
 if (config$produce_csv) {
+  fs::dir_create(fs::path_dir(config$path_csv_site))                            # Ensure containing directory exists
   readr::write_csv(ds_site            , config$path_csv_site)
   readr::write_csv(ds_observation     , config$path_csv_observation)
   readr::write_csv(ds_person_slim     , config$path_csv_person)
@@ -405,6 +406,7 @@ if (config$produce_csv) {
 }
 
 if (config$produce_rds) {
+  fs::dir_create(fs::path_dir(config$path_rds_site))                            # Ensure containing directory exists
   readr::write_rds(ds_site            , config$path_rds_site              , compress = "gz")
   readr::write_rds(ds_observation     , config$path_rds_observation       , compress = "gz")
   readr::write_rds(ds_person_slim     , config$path_rds_person            , compress = "gz")
@@ -421,6 +423,7 @@ if (config$produce_duckdb) {
 }
 
 if (config$produce_parquet) {
+  fs::dir_create(fs::path_dir(config$path_parquet_site))                        # Ensure containing directory exists
   arrow::write_parquet(ds_site                    , config$path_parquet_site)
   arrow::write_parquet(ds_observation             , config$path_parquet_observation)
   arrow::write_parquet(ds_person_slim             , config$path_parquet_person)

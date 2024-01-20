@@ -61,7 +61,12 @@ execute_sql <- function(path_sql) {
 
 # ---- tweak-data --------------------------------------------------------------
 # Remove old DB
-if( file.exists(config$path_database_sqlite) ) file.remove(config$path_database_sqlite)
+if (fs::file_exists(config$path_database_sqlite)) {
+  fs::file_delete(config$path_database_sqlite)
+}
+
+# Ensure containing directory exists
+fs::dir_create(fs::path_dir(config$path_database_sqlite))
 
 cnn <- DBI::dbConnect(RSQLite::SQLite(), dbname = config$path_database_sqlite)
 # result <- DBI::dbSendQuery(cnn, "PRAGMA foreign_keys=ON;") #This needs to be activated each time a connection is made. #http://stackoverflow.com/questions/15301643/sqlite3-forgets-to-use-foreign-keys

@@ -21,7 +21,7 @@ requireNamespace("config"                     )
 # Constant values that won't change.
 config                         <- config::get()
 
-sql <- readr::read_file("manipulation/scribe.sql")
+sql <- readr::read_file("manipulation/scribe/pt-2.sql")
 
 # ---- load-data ---------------------------------------------------------------
 ds <- retrieve_duckdb(sql)
@@ -146,6 +146,9 @@ ds_slim <-
 ds_slim
 
 # ---- save-to-disk ------------------------------------------------------------
-readr::write_csv(     ds_slim   , config$path_analysis_patient_csv)
-arrow::write_parquet( ds_slim   , config$path_analysis_patient_parquet)
-# readr::write_rds(     ds_slim   , config$path_analysis_patient_rds          , compress = "gz")
+fs::dir_create(fs::path_dir(config$path_analysis_pt_2_csv     ))  # Ensure containing directory exists
+fs::dir_create(fs::path_dir(config$path_analysis_pt_2_parquet ))  # Ensure containing directory exists
+
+readr::write_csv(     ds_slim   , config$path_analysis_pt_2_csv)
+arrow::write_parquet( ds_slim   , config$path_analysis_pt_2_parquet)
+# readr::write_rds(     ds_slim   , config$path_analysis_pt_2_rds          , compress = "gz")

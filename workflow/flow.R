@@ -62,7 +62,7 @@ ds_rail  <- tibble::tribble(
   "run_sql" , "manipulation/ferry/pt_observation_preceding.sql", # This just makes sure the query runs without error.
 
   # Scribes create analysis-ready rectangles.
-  "run_r"     , "manipulation/scribe.R",
+  "run_r"     , "manipulation/scribe/pt-2.R",
 
   # Reports for human consumers.
   "run_rmd"   , "analysis/descriptives-1/descriptives-1.Rmd"

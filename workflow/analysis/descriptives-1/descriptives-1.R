@@ -20,8 +20,8 @@ options(show.signif.stars = FALSE) #Turn off the annotations on p-values
 config                      <- config::get()
 
 # ---- load-data ---------------------------------------------------------------
-ds_patient        <- arrow::read_parquet(config$path_analysis_patient_parquet) # 'ds' stands for 'datasets'
-# ds_patient        <- readr::read_rds(config$path_analysis_patient_rds) # 'ds' stands for 'datasets'
+ds_patient        <- arrow::read_parquet(config$path_analysis_pt_2_parquet) # 'ds' stands for 'datasets'
+# ds_patient        <- readr::read_rds(config$path_analysis_pt_2_rds) # 'ds' stands for 'datasets'
 
 # ---- tweak-data --------------------------------------------------------------
 ds_patient <-
