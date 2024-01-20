@@ -46,13 +46,18 @@ Assignment at the end of week 2:
     “james-cheng”).
 3.  Create a new “Code Workbook”.
 4.  Once the workbook opens, rename it to “manipulation-1”. (Rename it
-    once it’s open, so some behdin-the-scenes files are approrpiately
+    once it’s open, so some behind-the-scenes files are appropriately
     adjusted.)
 5.  Change the environment.
     1.  In the top center of the screen, click the lightning bolt near
-        “Enviroment (default-r-3.5)”
+        “Environment (default-r-3.5)”
     2.  Click “Configure Environment”
-    3.  In the left-hand Profiles panel, click “r4-high-driver-memory”
+    3.  In the left-hand Profiles panel, click
+        “profile-high-driver-cores-and-memory-*limited*”. (Remarks that
+        will make sense later: \#1 For workbooks that rely on R, we’ll
+        chose “r4-high-driver-memory”. \#2 We’re using small datasets
+        this session; use more memory for real projects, such as
+        ““profile-high-driver-cores-and-memory”.)
     4.  Click the blue “Update Environment” button and wait a few
         minutes.
 6.  It will take the servers a few minutes to create environments for
@@ -64,6 +69,8 @@ Assignment at the end of week 2:
   N3C*](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/)
   - [Section 8.4.3 Code
     Workbooks](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/chapters/tools.html#sec-tools-apps-workbook)
+- [N3C Office Hours](https://covid.cd2h.org/support/) on Tuesdays &
+  Thursdays
 
 ## Challenge for Today’s Session –1st Try
 
@@ -107,6 +114,26 @@ Assignment at the end of week 2:
 
 - [ICD10CM codes for Contact with birds (domestic)
   (wild)](https://www.icd10data.com/ICD10CM/Codes/V00-Y99/W50-W64/W61-#W61.33)
+
+## Inclusion & Exclusion Criteria
+
+1.  Work with the investigators to keep an updated list of the
+    characteristics that make a patient eligible to be included in the
+    analysis.
+
+2.  For today, we’ll specify two:
+
+    1.  Include patients only if 2+ years old at the time of covid
+        onset. (Or if age is unknown.)
+    2.  Exclude patients if they first develop covid before February
+        1, 2020. (Or if onset date is unknown.)
+
+3.  I like to include the criteria in the `pt` transform, which will be
+    one of the final steps in the workbook. Basically calculate the
+    picture for everyone, and then make the decision at the end.
+
+4.  It may be less computationally efficient in some cases, but I think
+    this approach makes it easier to spot mispecfications.
 
 ## Identify Source Tables & their Relationships
 
@@ -283,7 +310,8 @@ Assignment at the end of week 2:
 
     ``` sql
     SELECT
-      p.person_id
+      cast(row_number() over (order by p.person_id) as int)     as pt_index
+      --,p.person_id
       ,p.data_partner_id
       ,p.covid_date
       ,p.calc_age_covid
@@ -291,9 +319,23 @@ Assignment at the end of week 2:
       ,po.event_animal
       ,po.dx_days_before_covid
       ,case
+        when p.covid_date is null         then null
+        when p.covid_date <= '2019-12-31' then 'too early'
+        when p.covid_date <= '2020-06-30' then '2020H1'
+        when p.covid_date <= '2020-12-31' then '2020H2'
+        when p.covid_date <= '2021-06-30' then '2021H1'
+        when p.covid_date <= '2021-12-31' then '2021H2'
+        when p.covid_date <= '2022-06-30' then '2022H1'
+        when p.covid_date <= '2022-12-31' then '2022H2'
+        when p.covid_date <= '2023-06-30' then '2023H1'
+        when p.covid_date <= '2023-12-31' then '2023H2'
+        else                                   'error'
+      end                                                      as period_first_covid_dx  
+      ,case
         when p.calc_age_covid is null then 'Unknown'
         when p.calc_age_covid < 0     then 'Unknown'
-        when p.calc_age_covid < 19    then '0-18'
+        when p.calc_age_covid < 2     then 'Too Young'
+        when p.calc_age_covid < 19    then '2-18'
         when p.calc_age_covid < 51    then '19-50'
         when p.calc_age_covid < 76    then '51-75'
         else                               '76+'
@@ -333,9 +375,23 @@ Assignment at the end of week 2:
       end                                                      as covid_dead
     FROM patient_ll p
       left  join pt_observation_preceding po on p.person_id = po.person_id
+    WHERE
+      2 <= p.calc_age_covid
+      and
+      '2020-07-01' <= p.covid_date
     ```
 
 4.  Click blue “Run” button.
+
+5.  Notice we added inclusion criteria (in the WHERE clause) and more
+    variables (in the SELECT clause).
+
+6.  Why do we have fewer records than in the previous iteration of this
+    transform? Is this drop reasonable?
+
+7.  Even if the drop seems reasonable and the cause seems obvious to
+    you, please make a note of this and notify the investigators at the
+    next meeting. They need to feel their decisions as much as possible.
 
 ## Strategies for Organizing Transforms
 
@@ -400,24 +456,126 @@ Assignment at the end of week 2:
 
 1.  The [Global
     Code](https://www.palantir.com/docs/foundry/code-workbook/workbooks-global-code/)
-    (in a right-hand pane), lets us define variables and functions that
+    (in a right-hand panel), lets us define variables and functions that
     are available in all code transforms *in the workbook* (not the
     workspace). In today’s “manipulation-1” workbook, we’ll define
-    constants that will be used in multiple transforms or define helper
-    functions you want to use repeatedly.
+    constants and define helper functions.
 
-``` r
-load_packages <- function () {
-  library(magrittr)
-  requireNamespace("arrow")
-  requireNamespace("dplyr")
-  requireNamespace("tidyr")
-}
-```
+2.  Global Code is essentially copy and pasted before each R transform
+    is executed.
+
+3.  We recommend that Global Code *defines* functions, but does not
+    *call/execute* functions. In other words, define functions that R
+    transforms can later execute.
+
+4.  Paste following into the R tab of the Global Code panel.
+
+    ``` r
+    load_packages <- function () {
+      library(magrittr)
+      requireNamespace("arrow")
+      requireNamespace("dplyr")
+      requireNamespace("tidyr")
+    }
+
+    # ---- Asserts -----------
+    assert_r_data_frame <- function(x) {
+      if (!inherits(x, "data.frame")) {
+        stop("The dataset is not an 'R data.frame`; convert it.")
+      }
+    }
+    assert_spark_data_frame <- function(x) {
+      if (!inherits(x, "SparkDataFrame")) {
+        stop("The dataset is not a 'SparkDataFrame`; convert it.")
+      }
+    }
+    assert_transform_object <- function(x) {
+      if (!inherits(x, "FoundryTransformInput")) {
+        stop("The dataset is not a 'FoundryTransformInput`; convert it.")
+      }
+    }
+
+    # ---- IO --------------
+    to_rds <- function(d, assert_data_frame = TRUE) {
+      if (assert_data_frame) assert_r_data_frame(d)
+      output    <- new.output()
+      output_fs <- output$fileSystem()
+      saveRDS(d, output_fs$get_path("data.rds", 'w'))
+
+      if (assert_data_frame) {
+        stat <- 
+          sprintf(
+            "%i_cols-by-%.1f_krows",
+            ncol(d),
+            nrow(d) / 1000
+          )
+        # Write a dummy dataset with a meaningful file name.
+        write.csv(mtcars, output_fs$get_path(stat, 'w'))
+      }
+    }
+    from_rds <- function(data) {
+      fs   <- data$fileSystem()
+      path <- fs$get_path("data.rds", 'r')
+      readRDS(path)
+    }
+
+    to_parquet <- function(d, assert_data_frame = TRUE) {
+      if (assert_data_frame) assert_r_data_frame(d)
+      output    <- new.output()
+      output_fs <- output$fileSystem()
+      arrow::write_parquet(
+        x    = d, 
+        sink = output_fs$get_path("parquet", 'w')
+      )
+
+      stat <- 
+        sprintf(
+          "%i_cols-by-%.1f_krows",
+          ncol(d),
+          nrow(d) / 1000
+        )
+      # Write a dummy dataset with a meaningful file name.
+      write.csv(mtcars, output_fs$get_path(stat, 'w'))
+    }
+    from_parquet <- function(node) {
+      fs   <- node$fileSystem()
+      path <- fs$get_path("parquet", 'r')
+      arrow::read_parquet(path)
+    }
+    ```
+
+5.  Some broad-strokes remarks:
+
+    1.  `load_packages()` has two purposes: (a) concisely document to
+        humans what packages should be available in the environment
+        and (b) produce clear error messages if an R package isn’t
+        available.
 
 ## R Transform
 
+1.  We’ll cover R code later in the session. For now, just copy some
+    code into a new R transform to make things easier later.
+
 ## Save as Rds File
+
+1.  The `pt` transform has one row per patient and will be the dataset
+    used in all downstream analyses in this session. (Hint, code it as
+    an “outcome” node in tonight’s assignment.)
+2.  We’ll later benefit if we spend some time now to create an
+    R-flavored dataset.
+3.  A few analysis tasks benefit by adding decorations to a Spark table.
+    that has two benefits:
+    1.  
+
+**References**
+
+- [Specify Reference Factor Level in Linear Regression in
+  R](https://statisticsglobe.com/specify-reference-factor-level-in-linear-regression-in-r)
+- 
+
+## Remarks on Architecture
+
+1.  SQL/PySpark vs R/Python vs
 
 ## Assignments
 
