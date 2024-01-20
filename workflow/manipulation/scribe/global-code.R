@@ -7,7 +7,7 @@ prepare_dataset <- function(d) {
     tibble::as_tibble() |>
     dplyr::mutate(
       data_partner_id        = factor(data_partner_id),
-      period_first_covid_dx  = factor_period(covid_date),
+      period_first_covid_dx  = factor_period(period_first_covid_dx),
       covid_severity         = factor_severity(covid_severity),
       age_cut5               = factor_age(age_cut5),
     ) |>
