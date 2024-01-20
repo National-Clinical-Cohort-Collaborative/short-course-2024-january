@@ -36,6 +36,10 @@ This is part of the [Analysis with Synthetic Data](../) session.
 
 Assignment at the end of week 2:
 
+The first three steps resemble the
+[Week 1 Assignment](https://github.com/National-COVID-Cohort-Collaborative/short-course-2024-january/blob/main/sessions/session-1/session-1-assignment.pdf)
+so refer to that if you forgot some steps.
+
 1.  Log in to the Enclave, with MFA.
 2.  In our class’s [L0
     workspace](https://unite.nih.gov/workspace/compass/view/ri.compass.main.folder.86a7020f-db30-4fd1-b735-bbaf53512365),
@@ -340,7 +344,7 @@ Notes:
         when p.covid_date <= '2023-06-30' then '2023H1'
         when p.covid_date <= '2023-12-31' then '2023H2'
         else                                   'error'
-      end                                                      as period_first_covid_dx  
+      end                                                      as period_first_covid_dx
       ,case
         when p.calc_age_covid is null then 'Unknown'
         when p.calc_age_covid < 0     then 'Unknown'
@@ -513,7 +517,7 @@ Notes:
       saveRDS(d, output_fs$get_path("data.rds", 'w'))
 
       if (assert_data_frame) {
-        stat <- 
+        stat <-
           sprintf(
             "%i_cols-by-%.1f_krows",
             ncol(d),
@@ -534,11 +538,11 @@ Notes:
       output    <- new.output()
       output_fs <- output$fileSystem()
       arrow::write_parquet(
-        x    = d, 
+        x    = d,
         sink = output_fs$get_path("parquet", 'w')
       )
 
-      stat <- 
+      stat <-
         sprintf(
           "%i_cols-by-%.1f_krows",
           ncol(d),
@@ -582,7 +586,7 @@ Notes:
 
     ``` r
     pt_rds <- function(pt) {
-      load_packages() 
+      load_packages()
       assert_spark_data_frame(pt)
 
       # ---- retrieve -----------------
@@ -597,10 +601,10 @@ Notes:
       nrow(ds)
       dplyr::n_distinct(ds$pt_index)
 
-      # ---- persist -----------------    
+      # ---- persist -----------------
       ds %>%
         to_rds()
-    }   
+    }
     ```
 
 7.  Toggle the “Save as dataset” on.
@@ -644,7 +648,7 @@ Notes:
       assert_transform_object(pt_rds)
 
       pt_rds |>
-        from_rds() 
+        from_rds()
     }
     ```
 
@@ -691,7 +695,7 @@ Notes:
 1.  This error probably means you need to remind the Enclave what type
     of data frame
 
-        >  Error in (function (classes, fdef, mtable) : 
+        >  Error in (function (classes, fdef, mtable) :
         unable to find an inherited method for function ‘arrange’ for signature ‘"data.frame", "character"’
 
         >  traceback:
