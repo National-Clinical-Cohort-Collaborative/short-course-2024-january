@@ -39,6 +39,7 @@ SELECT
   observation_id
   ,person_id
   ,observation_concept_id
+  ,event_animal
   ,observation_date
   ,dx_days_before_covid
 FROM obs_before
