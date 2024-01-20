@@ -125,8 +125,9 @@ Assignment at the end of week 2:
 
     1.  Include patients only if 2+ years old at the time of covid
         onset. (Or if age is unknown.)
-    2.  Exclude patients if they first develop covid before February
+    2.  Exclude patients if they first develop covid before July
         1, 2020. (Or if onset date is unknown.)
+    3.  Exclude patients if they first develop covid after Dec 31, 2022.
 
 3.  I like to include the criteria in the `pt` transform, which will be
     one of the final steps in the workbook. Basically calculate the
@@ -172,6 +173,15 @@ Assignment at the end of week 2:
     “analysis-with-synthetic-data”
 4.  Hold \[shift\], click `observation` and `patient_ll`, and click the
     blue “Select” button.
+
+Notes:
+
+1.  The simulated `observation` table mimics OMOP’s
+    [`observation`](https://ohdsi.github.io/CommonDataModel/cdm60.html#OBSERVATION)
+    table.
+2.  The simulated `patient_ll` table mimics the Logic Liaison’s
+    [`LOGIC_LIAISON_Covid_19_Patient_Summary_Facts_Table_LDS_`](https://unite.nih.gov/workspace/module/view/latest/ri.workshop.main.module.3ab34203-d7f3-482e-adbd-f4113bfd1a2b?id=KO-BE5C652&view=focus)
+    table.
 
 ## First SQL Transform: Isolate Relevant Animal Event
 
@@ -378,7 +388,7 @@ Assignment at the end of week 2:
     WHERE
       2 <= p.calc_age_covid
       and
-      '2020-07-01' <= p.covid_date
+      p.covid_date between '2020-07-01' and '2022-12-31'
     ```
 
 4.  Click blue “Run” button.
@@ -556,7 +566,95 @@ Assignment at the end of week 2:
 1.  We’ll cover R code later in the session. For now, just copy some
     code into a new R transform to make things easier later.
 
-## Save as Rds File
+2.  Click the `pt` transform, then click the blue plus button, then
+    select “R code”
+
+3.  In the input list, select `pt` and change it from “R data.frame” to
+    “Spark dataframe”. We’ll explicitly convert it with code.
+
+4.  Find a collapsed panel in the lower right corner called “Variables”.
+    Change `pt` from “R data.frame” to “Spark dataframe”.
+
+5.  Periodically check that these last two settings don’t revert back to
+    their original settings. Especially if something is weird later.
+
+6.  Paste in the following code:
+
+    ``` r
+    pt_rds <- function(pt) {
+      load_packages() 
+      assert_spark_data_frame(pt)
+
+      # ---- retrieve -----------------
+      ds <-
+        pt %>%
+        SparkR::arrange("pt_index") %>%
+        SparkR::collect() %>%
+        tibble::as_tibble() %>%
+        prepare_dataset()
+
+      # ---- verify-values -----------------
+      nrow(ds)
+      dplyr::n_distinct(ds$pt_index)
+
+      # ---- persist -----------------    
+      ds %>%
+        to_rds()
+    }   
+    ```
+
+7.  Toggle the “Save as dataset” on.
+
+8.  Click blue “Run” button.
+
+## Two Ways to Run a Transform
+
+1.  Click the blue Run/Preview like we have.
+
+    This is the real way of doing it, and the resulting product is
+    saved.
+
+2.  Select the code you want to execute, and click click \[ctrl +
+    shift + enter\].
+
+    This is how you can debug small sections of code and iteratively
+    developed focused sections faster.
+
+    This runs code in the “Console” panel, which is acts kinda
+    independently.
+
+    Note that the first time you run something in the console, execute
+    `load_packages()` by itself.
+
+## Peek at Retrieved rds
+
+1.  Create an R transform downstream of `pt_rds`.
+
+2.  Follow the previous steps, but:
+
+    1.  Change the type to “R transform” (instead of “Spark dataframe”).
+    2.  Don’t save the dataset. The Preview mode is adequate for our
+        diagnostic needs.
+
+3.  Paste in the following code:
+
+    ``` r
+    pt_rds_peek <- function(pt_rds) {
+      load_packages()
+      assert_transform_object(pt_rds)
+
+      pt_rds |>
+        from_rds() 
+    }
+    ```
+
+4.  Click blue “Preview” button.
+
+5.  Verify the operation was successful and the columns look right.
+
+6.  In the preview mode, only the top 50 records are returned.
+
+## Benefits of an Rds File
 
 1.  The `pt` transform has one row per patient and will be the dataset
     used in all downstream analyses in this session. (Hint, code it as
@@ -565,17 +663,49 @@ Assignment at the end of week 2:
     R-flavored dataset.
 3.  A few analysis tasks benefit by adding decorations to a Spark table.
     that has two benefits:
-    1.  
+    1.  [R Factors](https://r4ds.hadley.nz/factors.html) are important
+        when the analysis models include categorical variables.
+    2.  It’s kinda expensive to translating a Spark
+        [DataFrame](https://spark.apache.org/docs/latest/sql-programming-guide.html)
+        into an [R
+        data.frame](https://www.r-tutor.com/r-introduction/data-frame).
+        Do this once, and recall the saved data.frame in later
+        workbooks.
+4.  A saved/serialized/persisted data.frame is called an \[rds
+    file\](<https://stat.ethz.ch/R-manual/R-devel/library/base/html/readRDS.html>.
+5.  One line of code restores the data.frame exactly as it was saved.
+    You don’t have to specify the variables’ data types or the factor
+    levels.
 
 **References**
 
 - [Specify Reference Factor Level in Linear Regression in
   R](https://statisticsglobe.com/specify-reference-factor-level-in-linear-regression-in-r)
-- 
 
 ## Remarks on Architecture
 
 1.  SQL/PySpark vs R/Python vs
+
+## Troubleshooting Tips
+
+1.  This error probably means you need to remind the Enclave what type
+    of data frame
+
+        >  Error in (function (classes, fdef, mtable) : 
+        unable to find an inherited method for function ‘arrange’ for signature ‘"data.frame", "character"’
+
+        >  traceback:
+        >  pt %>% SparkR::arrange("pt_index")
+        >  ...
+
+2.  This error probably means you didn’t execute `library(magrittr)`.
+    Remember when you’re debugging code in the console,
+    `load_packages()` needs to be run separately.
+
+3.  If you modify the Global Code, either
+
+    1.  Click the “Reset console” button or
+    2.  Paste it in the console so it’s available to your code.
 
 ## Assignments
 
