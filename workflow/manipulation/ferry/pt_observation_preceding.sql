@@ -4,6 +4,7 @@ CREATE TABLE pt_observation_preceding (
   observation_id            int        primary key,
   person_id                 int        not null,
   observation_concept_id    int        not null,
+  event_animal              obs_animal not null,
   observation_date          date       not null,
   dx_days_before_covid      int        not null,
   -- index_within_pt_rev       int        not null,

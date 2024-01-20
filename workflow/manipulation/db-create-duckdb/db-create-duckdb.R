@@ -15,7 +15,7 @@ base::source("manipulation/common.R")
 # requireNamespace("readr"        )
 # requireNamespace("tidyr"        )
 # requireNamespace("dplyr"        ) # Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
-# requireNamespace("rlang"        ) # Language constructs, like quosures
+requireNamespace("fs"           ) # file system operations
 # requireNamespace("testit"       ) # For asserting conditions meet expected patterns/conditions.
 requireNamespace("checkmate"    ) # For asserting conditions meet expected patterns/conditions. # remotes::install_github("mllg/checkmate")
 # requireNamespace("DBI"          ) # Database-agnostic interface
@@ -39,7 +39,12 @@ path_ddl <-
 
 # ---- tweak-data --------------------------------------------------------------
 # Remove old DB
-if( file.exists(config$path_database_duckdb) ) file.remove(config$path_database_duckdb)
+if (fs::file_exists(config$path_database_duckdb)) {
+  fs::file_delete(config$path_database_duckdb)
+}
+
+# Ensure containing directory exists
+fs::dir_create(fs::path_dir(config$path_database_duckdb))
 
 path_ddl |>
   purrr::map_int(execute_sql_duckdb)

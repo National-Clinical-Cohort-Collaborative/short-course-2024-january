@@ -74,7 +74,7 @@ Summary {.tabset .tabset-fade .tabset-pills}
 Notes
 ---------------------------------------------------------------------------
 
-1. The current report covers `r nrow(ds_patient)` patients, with `r dplyr::n_distinct(ds_patient$data_partner_id)` unique values for `data_partner_id`.
+1. The current report covers `r nrow(ds)` patients, with `r dplyr::n_distinct(ds$data_partner_id)` unique values for `data_partner_id`.
 
 
 Unanswered Questions
@@ -87,28 +87,7 @@ Answered Questions
 Univariate
 ===========================================================================
 
-`person` table
----------------------------------------------------------------------------
-
-```{r marginals-person, echo=echo_chunks, message=message_chunks}
-```
-
-`patient` table
----------------------------------------------------------------------------
-
-```{r marginals-patient, echo=echo_chunks, message=message_chunks}
-```
-
-`patient_latent` table
----------------------------------------------------------------------------
-
-```{r marginals-patient_latent, echo=echo_chunks, message=message_chunks}
-```
-
-`site_latent` table
----------------------------------------------------------------------------
-
-```{r marginals-site_latent, echo=echo_chunks, message=message_chunks}
+```{r marginals, echo=echo_chunks, message=message_chunks}
 ```
 
 

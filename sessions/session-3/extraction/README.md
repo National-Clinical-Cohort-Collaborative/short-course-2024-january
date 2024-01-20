@@ -13,66 +13,70 @@ This is part of the [Analysis with Synthetic Data](../) session.
 - *table grain*: what one row in a table represents. For example, the
   grain of the
   [`person`](https://ohdsi.github.io/CommonDataModel/cdm60.html#PERSON)
-  table is “person”; each row represents one distinct person/patient.
+  table is "person"; each row represents one distinct person/patient.
   Similarly, the grain of the
   [`visit_occurrence`](https://ohdsi.github.io/CommonDataModel/cdm60.html#VISIT_OCCURRENCE)
-  table is “visit”; each row represents one distinct visit/encounter the
+  table is "visit"; each row represents one distinct visit/encounter the
   patient had with the health system..
 
-## Session’s Expectations
+## Session's Expectations
 
 1.  Try to follow along, but not everyone can finish at the speed of the
     lecture.
-2.  If you have questions, please ask them in the chat.
-3.  For questions that are generalizable to the group, the instructors
-    will elevate it and I’ll address it directly.
-4.  When I’m done today, we’ll answer your questions as long as we have
+1.  If you have questions, please ask them in the chat.
+1.  For questions that are generalizable to the group, the instructors
+    will elevate it and I'll address it directly.
+1.  When I'm done today, we'll answer your questions as long as we have
     time.
-5.  Finish on your own time after today’s session.
-6.  Come to office hours for remaining obstacles or more detailed
+1.  Finish on your own time after today's session.
+1.  Come to office hours for remaining obstacles or more detailed
     questions.
 
-## Start a “Code Workbook” in the Foundry Enclave
+## Start a "Code Workbook" in the Foundry Enclave
 
 Assignment at the end of week 2:
 
+The first three steps resemble the
+[Week 1 Assignment](https://github.com/National-COVID-Cohort-Collaborative/short-course-2024-january/blob/main/sessions/session-1/session-1-assignment.pdf)
+so refer to that if you forgot some steps.
+
 1.  Log in to the Enclave, with MFA.
-2.  In our class’s [L0
+1.  In our class's [L0
     workspace](https://unite.nih.gov/workspace/compass/view/ri.compass.main.folder.86a7020f-db30-4fd1-b735-bbaf53512365),
-    open to the “Users/” directory and create your personal folder. I
+    open to the "Users/" directory and create your personal folder. I
     like [kebab
     case](https://www.freecodecamp.org/news/snake-case-vs-camel-case-vs-pascal-case-vs-kebab-case-whats-the-difference/#kebab-case)
-    for directory & file names (eg, “will-beasley”, “jerrod-anzalone”,
-    “james-cheng”).
-3.  Create a new “Code Workbook”.
-4.  Once the workbook opens, rename it to “manipulation-1”. (Rename it
-    once it’s open, so some behind-the-scenes files are appropriately
+    for directory & file names (eg, "will-beasley", "jerrod-anzalone",
+    "james-cheng").
+1.  Create a new "Code Workbook".
+1.  Once the workbook opens, rename it to "manipulation-1". (Rename it
+    once it's open, so some behind-the-scenes files are appropriately
     adjusted.)
-5.  Change the environment.
+1.  Change the environment.
     1.  In the top center of the screen, click the lightning bolt near
-        “Environment (default-r-3.5)”
-    2.  Click “Configure Environment”
-    3.  In the left-hand Profiles panel, click
-        “profile-high-driver-cores-and-memory-*limited*”. (Remarks that
-        will make sense later: \#1 For workbooks that rely on R, we’ll
-        chose “r4-high-driver-memory”. \#2 We’re using small datasets
+        "Environment (default-r-3.5)"
+    1.  Click "Configure Environment"
+    1.  In the left-hand Profiles panel, click
+        "profile-high-driver-cores-and-memory-*limited*". (Remarks that
+        will make sense later: \#1 For workbooks that rely on R, we'll
+        chose "r4-high-driver-memory". \#2 We're using small datasets
         this session; use more memory for real projects, such as
-        ““profile-high-driver-cores-and-memory”.)
-    4.  Click the blue “Update Environment” button and wait a few
+        "profile-high-driver-cores-and-memory".)
+    1.  Click the blue "Update Environment" button and wait a few
         minutes.
-6.  It will take the servers a few minutes to create environments for
-    all of us. So let’s talk concepts next.
+1.  It will take the servers a few minutes to create environments for
+    all of us. So let's talk concepts next.
 
 **Resources**
 
-- [*The Researcher’s Guide to
+- [*The Researcher's Guide to
   N3C*](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/)
   - [Section 8.4.3 Code
     Workbooks](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/chapters/tools.html#sec-tools-apps-workbook)
 - [N3C Office Hours](https://covid.cd2h.org/support/) on Tuesdays &
   Thursdays
 
-## Challenge for Today’s Session –1st Try
+## Challenge for Today's Session –1st Try
 
 - Investigate the observational relationship between covid outcomes and
 
@@ -93,11 +97,11 @@ Assignment at the end of week 2:
 
   | ICD<br>Description    | SNOMED<br>Description     |                                                OMOP Concept ID<br>(OMOP Domain) |
   |:----------------------|:--------------------------|--------------------------------------------------------------------------------:|
-  | “pecked by chicken”   | “Peck by bird”            | [4314097](https://athena.ohdsi.org/search-terms/terms/4314097)<br>(Observation) |
-  | “struck by a chicken” | “Contact with chicken”    | [1575676](https://athena.ohdsi.org/search-terms/terms/1575676)<br>(Observation) |
-  | “struck by a duck”    | “Injury caused by animal” |     [438039](https://athena.ohdsi.org/search-terms/terms/438039)<br>(Condition) |
+  | "pecked by chicken"   | "Peck by bird"            | [4314097](https://athena.ohdsi.org/search-terms/terms/4314097)<br>(Observation) |
+  | "struck by a chicken" | "Contact with chicken"    | [1575676](https://athena.ohdsi.org/search-terms/terms/1575676)<br>(Observation) |
+  | "struck by a duck"    | "Injury caused by animal" |     [438039](https://athena.ohdsi.org/search-terms/terms/438039)<br>(Condition) |
 
-## Challenge for Today’s Session –2nd Try
+## Challenge for Today's Session –2nd Try
 
 - Talk to PI and revise hypothesis so it can be addressed by an OMOP
   dataset.
@@ -107,8 +111,8 @@ Assignment at the end of week 2:
 
   | SNOMED<br>Description |                                                OMOP Concept ID<br>(OMOP Domain) |
   |:----------------------|--------------------------------------------------------------------------------:|
-  | “Peck by bird”        | [4314097](https://athena.ohdsi.org/search-terms/terms/4314097)<br>(Observation) |
-  | “Butted by animal”    | [4314094](https://athena.ohdsi.org/search-terms/terms/4314094)<br>(Observation) |
+  | "Peck by bird"        | [4314097](https://athena.ohdsi.org/search-terms/terms/4314097)<br>(Observation) |
+  | "Butted by animal"    | [4314094](https://athena.ohdsi.org/search-terms/terms/4314094)<br>(Observation) |
 
 **Resources**
 
@@ -121,30 +125,30 @@ Assignment at the end of week 2:
     characteristics that make a patient eligible to be included in the
     analysis.
 
-2.  For today, we’ll specify two:
+1.  For today, we'll specify two:
 
     1.  Include patients only if 2+ years old at the time of covid
         onset. (Or if age is unknown.)
-    2.  Exclude patients if they first develop covid before July
+    1.  Exclude patients if they first develop covid before July
         1, 2020. (Or if onset date is unknown.)
-    3.  Exclude patients if they first develop covid after Dec 31, 2022.
+    1.  Exclude patients if they first develop covid after Dec 31, 2022.
 
-3.  I like to include the criteria in the `pt` transform, which will be
+1.  I like to include the criteria in the `pt` transform, which will be
     one of the final steps in the workbook. Basically calculate the
     picture for everyone, and then make the decision at the end.
 
-4.  It may be less computationally efficient in some cases, but I think
+1.  It may be less computationally efficient in some cases, but I think
     this approach makes it easier to spot mispecfications.
 
 ## Identify Source Tables & their Relationships
 
-- In most EHR research, conceptually start with the database’s patient.
+- In most EHR research, conceptually start with the database's patient.
   With OMOP, this table is called
   [`person`](https://ohdsi.github.io/CommonDataModel/cdm60.html#PERSON).
 
 - But with N3C, a talented group of people have faced and addressed many
-  of the problems we’ll face. So let’s leverage the [Logic
-  Liaisons’](https://covid.cd2h.org/liaisons/) contributions to the N3C
+  of the problems we'll face. So let's leverage the [Logic
+  Liaisons'](https://covid.cd2h.org/liaisons/) contributions to the N3C
   Knowledge Store.
 
 **Resources**
@@ -156,7 +160,7 @@ Assignment at the end of week 2:
     Patients](https://unite.nih.gov/workspace/module/view/latest/ri.workshop.main.module.3ab34203-d7f3-482e-adbd-f4113bfd1a2b?id=KO-BE5C652&view=focus)
   - [Combined Variables ALL
     PATIENTS](https://unite.nih.gov/workspace/module/view/latest/ri.workshop.main.module.3ab34203-d7f3-482e-adbd-f4113bfd1a2b?id=KO-DE908D4&view=focus)
-- [*The Researcher’s Guide to
+- [*The Researcher's Guide to
   N3C*](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/)
   - [Section 8.3.3 Logic Liaison Fact Tables and
     Templates](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/chapters/tools.html#sec-tools-store-ll0)
@@ -165,41 +169,41 @@ Assignment at the end of week 2:
 
 ## Select Input Datasets
 
-1.  Click the blue “Import dataset” button.
-2.  Go to the directory for this class’s L0 DUR: “All \> All projects \>
+1.  Click the blue "Import dataset" button.
+1.  Go to the directory for this class's L0 DUR: "All \> All projects \>
     N3C Training Area \> Group Exercises \> Introduction to Real World
-    Data Analysis for COVID-19 Research, Spring 2024”
-3.  Go to the directory that has the simulated for today’s session:
-    “analysis-with-synthetic-data”
-4.  Hold \[shift\], click `observation` and `patient_ll`, and click the
-    blue “Select” button.
+    Data Analysis for COVID-19 Research, Spring 2024"
+1.  Go to the directory that has the simulated for today's session:
+    "analysis-with-synthetic-data"
+1.  Hold \[shift\], click `observation` and `patient_ll`, and click the
+    blue "Select" button.
 
 Notes:
 
-1.  The simulated `observation` table mimics OMOP’s
+1.  The simulated `observation` table mimics OMOP's
     [`observation`](https://ohdsi.github.io/CommonDataModel/cdm60.html#OBSERVATION)
     table.
-2.  The simulated `patient_ll` table mimics the Logic Liaison’s
+1.  The simulated `patient_ll` table mimics the Logic Liaison's
     [`LOGIC_LIAISON_Covid_19_Patient_Summary_Facts_Table_LDS_`](https://unite.nih.gov/workspace/module/view/latest/ri.workshop.main.module.3ab34203-d7f3-482e-adbd-f4113bfd1a2b?id=KO-BE5C652&view=focus)
     table.
 
 ## First SQL Transform: Isolate Relevant Animal Event
 
 1.  Click the `patient_ll` transform, then click the blue plus button,
-    then select “SQL code”.
+    then select "SQL code".
 
-2.  Click the gray plus button (above the code), and click the
+1.  Click the gray plus button (above the code), and click the
     `observation` transform.
 
-3.  Change the new transform’s name from “unnamed” to
+1.  Change the new transform's name from "unnamed" to
     `pt_observation_preceding`.
 
-4.  Click “Save as dataset”, so it’s toggled blue.
+1.  Click "Save as dataset", so it's toggled blue.
 
-5.  Verify that you have two inputs: `patient_ll` & `observation`. The
-    colors are orange & purple, but the order doesn’t matter.
+1.  Verify that you have two inputs: `patient_ll` & `observation`. The
+    colors are orange & purple, but the order doesn't matter.
 
-6.  Replace the code with
+1.  Replace the code with
 
     ``` sql
     WITH obs_before as (
@@ -237,11 +241,11 @@ Notes:
     WHERE index_within_pt_rev = 1
     ```
 
-7.  Click blue “Run” button.
+1.  Click blue "Run" button.
 
-8.  Verify resulting table has 6 columns & 64 rows.
+1.  Verify resulting table has 6 columns & 64 rows.
 
-9.  Notice `pt_observation_preceding` has fewer rows than `patient_ll`.
+1.  Notice `pt_observation_preceding` has fewer rows than `patient_ll`.
 
     - Q1: Why?
     - Q2: Can we use `pt_observation_preceding` directly in the
@@ -252,36 +256,36 @@ Notes:
 ## Dissecting Previous SQL Code
 
 1.  `SELECT` clause
-2.  `FROM` clause
-3.  `inner join` operator
-4.  `case when` statement
-5.  `row_number()` function
-6.  `o.observation_concept_id` in `WHERE` clause
-7.  `obs_before` CTE
-8.  Second `SELECT` & `FROM` statements
-9.  `WHERE index_within_pt_rev = 1`
+1.  `FROM` clause
+1.  `inner join` operator
+1.  `case when` statement
+1.  `row_number()` function
+1.  `o.observation_concept_id` in `WHERE` clause
+1.  `obs_before` CTE
+1.  Second `SELECT` & `FROM` statements
+1.  `WHERE index_within_pt_rev = 1`
 
 ## Second SQL Transform: Rejoin with `patient_ll`
 
 1.  Go back to this table to get
 
-    1.  …patients that didn’t have a documented animal event.
-    2.  …useful variables the logic liaisons calculated for us.
+    1.  …patients that didn't have a documented animal event.
+    1.  …useful variables the logic liaisons calculated for us.
 
-2.  Click the `patient_ll` transform, then click the blue plus button,
-    then select “SQL code” (again).
+1.  Click the `patient_ll` transform, then click the blue plus button,
+    then select "SQL code" (again).
 
-3.  Click the gray plus button (above the code), and click the
+1.  Click the gray plus button (above the code), and click the
     `observation` transform.
 
-4.  Change the new transform’s name from “unnamed” to `patient`.
+1.  Change the new transform's name from "unnamed" to `patient`.
 
-5.  Click “Save as dataset”, so it’s toggled blue.
+1.  Click "Save as dataset", so it's toggled blue.
 
-6.  Verify that you have two inputs: `patient_ll` & `patient`. The
-    colors are orange & purple, but the order doesn’t matter.
+1.  Verify that you have two inputs: `patient_ll` & `patient`. The
+    colors are orange & purple, but the order doesn't matter.
 
-7.  Replace the code with
+1.  Replace the code with
 
     ``` sql
     SELECT
@@ -298,11 +302,11 @@ Notes:
       left  join pt_observation_preceding po on p.person_id = po.person_id
     ```
 
-8.  Click blue “Run” button.
+1.  Click blue "Run" button.
 
-9.  Verify resulting table has 8 columns & 100 rows.
+1.  Verify resulting table has 8 columns & 100 rows.
 
-10. Notice `pt` and `patient_ll` have the same record count.
+1.  Notice `pt` and `patient_ll` have the same record count.
 
     - Q1: Why?
     - Q2: If `pt` had *more* records than `patient_ll`, what went wrong?
@@ -314,9 +318,9 @@ Notes:
 1.  Writing code can be hard. Starting with complex code is almost
     always slower.
 
-2.  Instead start simple, and gradually add complexity.
+1.  Instead start simple, and gradually add complexity.
 
-3.  Replace the code with
+1.  Replace the code with
 
     ``` sql
     SELECT
@@ -340,7 +344,7 @@ Notes:
         when p.covid_date <= '2023-06-30' then '2023H1'
         when p.covid_date <= '2023-12-31' then '2023H2'
         else                                   'error'
-      end                                                      as period_first_covid_dx  
+      end                                                      as period_first_covid_dx
       ,case
         when p.calc_age_covid is null then 'Unknown'
         when p.calc_age_covid < 0     then 'Unknown'
@@ -391,15 +395,15 @@ Notes:
       p.covid_date between '2020-07-01' and '2022-12-31'
     ```
 
-4.  Click blue “Run” button.
+1.  Click blue "Run" button.
 
-5.  Notice we added inclusion criteria (in the WHERE clause) and more
+1.  Notice we added inclusion criteria (in the WHERE clause) and more
     variables (in the SELECT clause).
 
-6.  Why do we have fewer records than in the previous iteration of this
+1.  Why do we have fewer records than in the previous iteration of this
     transform? Is this drop reasonable?
 
-7.  Even if the drop seems reasonable and the cause seems obvious to
+1.  Even if the drop seems reasonable and the cause seems obvious to
     you, please make a note of this and notify the investigators at the
     next meeting. They need to feel their decisions as much as possible.
 
@@ -407,29 +411,29 @@ Notes:
 
 1.  The `pt_observation_preceding` and `pt` transforms could be combined
     into one transform
-2.  Pros for splitting into well-designed segments that are eventually
+1.  Pros for splitting into well-designed segments that are eventually
     assembled.
     1.  Human mind is better an reasoning through one focused piece at a
         time. Development is easier. Communication to teammates is
         easier (especially if different grains are involved).
-    2.  Easier to modify later.
-    3.  Database engines can better optimize. This is particularly true
+    1.  Easier to modify later.
+    1.  Database engines can better optimize. This is particularly true
         for non-N3C databases you might use, like SQL Server, Oracle,
         Postgres, DuckDB.
-3.  Cons for splitting
+1.  Cons for splitting
     1.  Requires more time if you copy & paste code somewhere.
 
 ## Beauty of CTES
 
 1.  A [Common Table
     Expression](https://www.atlassian.com/data/sql/using-common-table-expressions)
-    (CTE) allows you to write sql code that’s mode top-to-bottom, and
+    (CTE) allows you to write sql code that's mode top-to-bottom, and
     less inside-out.
 
-2.  Similar cognitive as breaking up complicated monolithic
+1.  Similar cognitive as breaking up complicated monolithic
     transforms/queries into smaller ones.
 
-3.  “Subquery style”
+1.  "Subquery style"
 
     ``` sql
     SELECT
@@ -445,7 +449,7 @@ Notes:
     WHERE index_within_pt_rev = 1
     ```
 
-4.  “CTE style”:
+1.  "CTE style":
 
     ``` sql
     WITH obs_before as (
@@ -468,17 +472,17 @@ Notes:
     Code](https://www.palantir.com/docs/foundry/code-workbook/workbooks-global-code/)
     (in a right-hand panel), lets us define variables and functions that
     are available in all code transforms *in the workbook* (not the
-    workspace). In today’s “manipulation-1” workbook, we’ll define
+    workspace). In today's "manipulation-1" workbook, we'll define
     constants and define helper functions.
 
-2.  Global Code is essentially copy and pasted before each R transform
+1.  Global Code is essentially copy and pasted before each R transform
     is executed.
 
-3.  We recommend that Global Code *defines* functions, but does not
+1.  We recommend that Global Code *defines* functions, but does not
     *call/execute* functions. In other words, define functions that R
     transforms can later execute.
 
-4.  Paste following into the R tab of the Global Code panel.
+1.  Paste following into the R tab of the Global Code panel.
 
     ``` r
     load_packages <- function () {
@@ -513,7 +517,7 @@ Notes:
       saveRDS(d, output_fs$get_path("data.rds", 'w'))
 
       if (assert_data_frame) {
-        stat <- 
+        stat <-
           sprintf(
             "%i_cols-by-%.1f_krows",
             ncol(d),
@@ -534,11 +538,11 @@ Notes:
       output    <- new.output()
       output_fs <- output$fileSystem()
       arrow::write_parquet(
-        x    = d, 
+        x    = d,
         sink = output_fs$get_path("parquet", 'w')
       )
 
-      stat <- 
+      stat <-
         sprintf(
           "%i_cols-by-%.1f_krows",
           ncol(d),
@@ -554,35 +558,35 @@ Notes:
     }
     ```
 
-5.  Some broad-strokes remarks:
+1.  Some broad-strokes remarks:
 
     1.  `load_packages()` has two purposes: (a) concisely document to
         humans what packages should be available in the environment
-        and (b) produce clear error messages if an R package isn’t
+        and (b) produce clear error messages if an R package isn't
         available.
 
 ## R Transform
 
-1.  We’ll cover R code later in the session. For now, just copy some
+1.  We'll cover R code later in the session. For now, just copy some
     code into a new R transform to make things easier later.
 
-2.  Click the `pt` transform, then click the blue plus button, then
-    select “R code”
+1.  Click the `pt` transform, then click the blue plus button, then
+    select "R code"
 
-3.  In the input list, select `pt` and change it from “R data.frame” to
-    “Spark dataframe”. We’ll explicitly convert it with code.
+1.  In the input list, select `pt` and change it from "R data.frame" to
+    "Spark dataframe". We'll explicitly convert it with code.
 
-4.  Find a collapsed panel in the lower right corner called “Variables”.
-    Change `pt` from “R data.frame” to “Spark dataframe”.
+1.  Find a collapsed panel in the lower right corner called "Variables".
+    Change `pt` from "R data.frame" to "Spark dataframe".
 
-5.  Periodically check that these last two settings don’t revert back to
+1.  Periodically check that these last two settings don't revert back to
     their original settings. Especially if something is weird later.
 
-6.  Paste in the following code:
+1.  Paste in the following code:
 
     ``` r
     pt_rds <- function(pt) {
-      load_packages() 
+      load_packages()
       assert_spark_data_frame(pt)
 
       # ---- retrieve -----------------
@@ -597,15 +601,15 @@ Notes:
       nrow(ds)
       dplyr::n_distinct(ds$pt_index)
 
-      # ---- persist -----------------    
+      # ---- persist -----------------
       ds %>%
         to_rds()
-    }   
+    }
     ```
 
-7.  Toggle the “Save as dataset” on.
+1.  Toggle the "Save as dataset" on.
 
-8.  Click blue “Run” button.
+1.  Click blue "Run" button.
 
 ## Two Ways to Run a Transform
 
@@ -614,13 +618,13 @@ Notes:
     This is the real way of doing it, and the resulting product is
     saved.
 
-2.  Select the code you want to execute, and click click \[ctrl +
+1.  Select the code you want to execute, and click click \[ctrl +
     shift + enter\].
 
     This is how you can debug small sections of code and iteratively
     developed focused sections faster.
 
-    This runs code in the “Console” panel, which is acts kinda
+    This runs code in the "Console" panel, which is acts kinda
     independently.
 
     Note that the first time you run something in the console, execute
@@ -630,13 +634,13 @@ Notes:
 
 1.  Create an R transform downstream of `pt_rds`.
 
-2.  Follow the previous steps, but:
+1.  Follow the previous steps, but:
 
-    1.  Change the type to “R transform” (instead of “Spark dataframe”).
-    2.  Don’t save the dataset. The Preview mode is adequate for our
+    1.  Change the type to "R transform" (instead of "Spark dataframe").
+    1.  Don't save the dataset. The Preview mode is adequate for our
         diagnostic needs.
 
-3.  Paste in the following code:
+1.  Paste in the following code:
 
     ``` r
     pt_rds_peek <- function(pt_rds) {
@@ -644,37 +648,37 @@ Notes:
       assert_transform_object(pt_rds)
 
       pt_rds |>
-        from_rds() 
+        from_rds()
     }
     ```
 
-4.  Click blue “Preview” button.
+1.  Click blue "Preview" button.
 
-5.  Verify the operation was successful and the columns look right.
+1.  Verify the operation was successful and the columns look right.
 
-6.  In the preview mode, only the top 50 records are returned.
+1.  In the preview mode, only the top 50 records are returned.
 
 ## Benefits of an Rds File
 
 1.  The `pt` transform has one row per patient and will be the dataset
     used in all downstream analyses in this session. (Hint, code it as
-    an “outcome” node in tonight’s assignment.)
-2.  We’ll later benefit if we spend some time now to create an
+    an "outcome" node in tonight's assignment.)
+1.  We'll later benefit if we spend some time now to create an
     R-flavored dataset.
-3.  A few analysis tasks benefit by adding decorations to a Spark table.
+1.  A few analysis tasks benefit by adding decorations to a Spark table.
     that has two benefits:
     1.  [R Factors](https://r4ds.hadley.nz/factors.html) are important
         when the analysis models include categorical variables.
-    2.  It’s kinda expensive to translating a Spark
+    1.  It's kinda expensive to translating a Spark
         [DataFrame](https://spark.apache.org/docs/latest/sql-programming-guide.html)
         into an [R
         data.frame](https://www.r-tutor.com/r-introduction/data-frame).
         Do this once, and recall the saved data.frame in later
         workbooks.
-4.  A saved/serialized/persisted data.frame is called an \[rds
+1.  A saved/serialized/persisted data.frame is called an \[rds
     file\](<https://stat.ethz.ch/R-manual/R-devel/library/base/html/readRDS.html>.
-5.  One line of code restores the data.frame exactly as it was saved.
-    You don’t have to specify the variables’ data types or the factor
+1.  One line of code restores the data.frame exactly as it was saved.
+    You don't have to specify the variables' data types or the factor
     levels.
 
 **References**
@@ -691,37 +695,41 @@ Notes:
 1.  This error probably means you need to remind the Enclave what type
     of data frame
 
-        >  Error in (function (classes, fdef, mtable) : 
-        unable to find an inherited method for function ‘arrange’ for signature ‘"data.frame", "character"’
+        >  Error in (function (classes, fdef, mtable) :
+        unable to find an inherited method for function 'arrange' for signature '"data.frame", "character"'
 
         >  traceback:
         >  pt %>% SparkR::arrange("pt_index")
         >  ...
 
-2.  This error probably means you didn’t execute `library(magrittr)`.
-    Remember when you’re debugging code in the console,
+1.  This error probably means you didn't execute `library(magrittr)`.
+    Remember when you're debugging code in the console,
     `load_packages()` needs to be run separately.
 
-3.  If you modify the Global Code, either
+1.  If you modify the Global Code, either
 
-    1.  Click the “Reset console” button or
-    2.  Paste it in the console so it’s available to your code.
+    1.  Click the "Reset console" button or
+    1.  Paste it in the console so it's available to your code.
+
+1.  If you aren't on R 4.1+ (specified in the Environment),
+    you'll need to replace use magrittr pipes instead of native pipes
+    (ie, change `|>` to `%>%` and execute `library(magrittr)` in `load_packages()`.)
 
 ## Assignments
 
 1.  Add a new variable to `pt` from an existing input table.
-2.  ~~Improve the definition of the `event_animal` variable by using a
+1.  ~~Improve the definition of the `event_animal` variable by using a
     look up table.~~
-3.  Upgrade the `event_animal` code to use codeset qqq.
+1.  Upgrade the `event_animal` code to use codeset qqq.
     1.  Replace the WHERE clause …qqq
-4.  Incorporate a new input table into `pt`.
-5.  List three areas outside software development where it’s
+1.  Incorporate a new input table into `pt`.
+1.  List three areas outside software development where it's
     advantageous to breakup bigger challenges into smaller ones.
-6.  Color code the workbooks transforms. Think which parts belong to
+1.  Color code the workbooks transforms. Think which parts belong to
     what category.
-    1.  “omop source”: dark purple (#7B64FF)
-    2.  “n3c derived”: light purple (#AEA1FF)
-    3.  “metadata”: olive green (#B0BC00)
-    4.  “intermediate”: gray (#999999)
-    5.  “outcome”: orange (#FB9E00)
-    6.  “diagnostic”: cyan (#73D8FF)
+    1.  "omop source": dark purple (#7B64FF)
+    2.  "n3c derived": light purple (#AEA1FF)
+    3.  "metadata": olive green (#B0BC00)
+    4.  "intermediate": gray (#999999)
+    5.  "outcome": orange (#FB9E00)
+    6.  "diagnostic": cyan (#73D8FF)
