@@ -55,14 +55,14 @@ so refer to that if you forgot some steps.
 1.  Change the environment.
     1.  In the top center of the screen, click the lightning bolt near
         "Environment (default-r-3.5)"
-    2.  Click "Configure Environment"
-    3.  In the left-hand Profiles panel, click
+    1.  Click "Configure Environment"
+    1.  In the left-hand Profiles panel, click
         "profile-high-driver-cores-and-memory-*limited*". (Remarks that
         will make sense later: \#1 For workbooks that rely on R, we'll
         chose "r4-high-driver-memory". \#2 We're using small datasets
         this session; use more memory for real projects, such as
-        ""profile-high-driver-cores-and-memory".)
-    4.  Click the blue "Update Environment" button and wait a few
+        "profile-high-driver-cores-and-memory".)
+    1.  Click the blue "Update Environment" button and wait a few
         minutes.
 1.  It will take the servers a few minutes to create environments for
     all of us. So let's talk concepts next.
@@ -709,7 +709,11 @@ Notes:
 1.  If you modify the Global Code, either
 
     1.  Click the "Reset console" button or
-    2.  Paste it in the console so it's available to your code.
+    1.  Paste it in the console so it's available to your code.
+
+1.  If you aren't on R 4.1+ (specified in the Environment),
+    you'll need to replace use magrittr pipes instead of native pipes
+    (ie, change `|>` to `%>%` and execute `library(magrittr)` in `load_packages()`.)
 
 ## Assignments
 
