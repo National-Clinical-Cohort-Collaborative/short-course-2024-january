@@ -2,8 +2,8 @@ Session 3 Homework
 ==============================
 
 Session 3 has two assignments:
-1. Before Session 3 Starts
-1. After Session 3 Ends
+1. [Before Session 3 Starts](#before-session-3-starts)
+1. [After Session 3 Ends](#after-session-3-ends)
 
 
 Before Session 3 Starts
