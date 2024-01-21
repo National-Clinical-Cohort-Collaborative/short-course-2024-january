@@ -1,6 +1,6 @@
 ---
 title: (Latent) Descriptives Report 1
-date: "Date: 2024-01-20"
+date: "Date: 2024-01-21"
 output:
   # radix::radix_article: # radix is a newer alternative that has some advantages over `html_document`.
   html_document:
@@ -232,7 +232,7 @@ For the sake of documentation and reproducibility, the current report was render
      collate  en_US.UTF-8
      ctype    en_US.UTF-8
      tz       America/Chicago
-     date     2024-01-20
+     date     2024-01-21
      rstudio  2023.12.0+369 Ocean Storm (desktop)
      pandoc   3.1.11 @ /usr/bin/ (via rmarkdown)
     
@@ -296,13 +296,10 @@ For the sake of documentation and reproducibility, the current report was render
      parallel          4.3.1      2023-08-02 [4] local
      pillar            1.9.0      2023-03-22 [1] CRAN (R 4.3.1)
      pkgconfig         2.0.3      2019-09-22 [1] CRAN (R 4.3.1)
-     png               0.1-8      2022-11-29 [1] CRAN (R 4.3.1)
      proto             1.0.0      2016-10-29 [1] CRAN (R 4.3.1)
      purrr             1.0.2      2023-08-10 [1] CRAN (R 4.3.1)
      R6                2.5.1      2021-08-19 [1] CRAN (R 4.3.1)
-     Rcpp              1.0.12     2024-01-09 [1] CRAN (R 4.3.1)
      readr             2.1.5      2024-01-10 [1] CRAN (R 4.3.1)
-     reticulate        1.34.0     2023-10-12 [1] CRAN (R 4.3.1)
      rlang             1.1.3      2024-01-10 [1] CRAN (R 4.3.1)
      rmarkdown         2.25       2023-09-18 [1] CRAN (R 4.3.1)
      RSQLite         * 2.3.4      2023-12-08 [1] CRAN (R 4.3.1)
@@ -341,4 +338,4 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 
-Report rendered by wibeasley at 2024-01-20, 13:22 -0600 in 22 seconds.
+Report rendered by wibeasley at 2024-01-21, 13:53 -0600 in 16 seconds.
