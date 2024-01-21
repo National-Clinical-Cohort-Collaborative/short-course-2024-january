@@ -45,19 +45,19 @@ ds <-
 
 # ---- marginals ---------------------------------------------------------------
 TabularManifest::histogram_continuous(ds, variable_name="pt_index")
-TabularManifest::histogram_discrete(ds, variable_name="data_partner_id")
-TabularManifest::histogram_date(ds, variable_name="covid_date", bin_unit = "month")
+TabularManifest::histogram_discrete(  ds, variable_name="data_partner_id")
+TabularManifest::histogram_date(      ds, variable_name="covid_date", bin_unit = "month")
 TabularManifest::histogram_continuous(ds, variable_name="calc_age_covid")
 TabularManifest::histogram_continuous(ds, variable_name="length_of_stay")
-TabularManifest::histogram_discrete(ds, variable_name="event_animal")
+TabularManifest::histogram_discrete(  ds, variable_name="event_animal")
 TabularManifest::histogram_continuous(ds, variable_name="dx_days_before_covid", bin_width = 1)
-TabularManifest::histogram_discrete(ds, variable_name="period_first_covid_dx")
-TabularManifest::histogram_discrete(ds, variable_name="age_cut5")
-TabularManifest::histogram_discrete(ds, variable_name="covid_severity")
-TabularManifest::histogram_discrete(ds, variable_name="covid_mild_plus")
-TabularManifest::histogram_discrete(ds, variable_name="covid_moderate_plus")
-TabularManifest::histogram_discrete(ds, variable_name="covid_severe_plus")
-TabularManifest::histogram_discrete(ds, variable_name="covid_dead")
+TabularManifest::histogram_discrete(  ds, variable_name="period_first_covid_dx")
+TabularManifest::histogram_discrete(  ds, variable_name="age_cut5")
+TabularManifest::histogram_discrete(  ds, variable_name="covid_severity")
+TabularManifest::histogram_discrete(  ds, variable_name="covid_mild_plus")
+TabularManifest::histogram_discrete(  ds, variable_name="covid_moderate_plus")
+TabularManifest::histogram_discrete(  ds, variable_name="covid_severe_plus")
+TabularManifest::histogram_discrete(  ds, variable_name="covid_dead")
 
 # This helps start the code for graphing each variable.
 #   - Make sure you change it to `histogram_continuous()` for the appropriate variables.

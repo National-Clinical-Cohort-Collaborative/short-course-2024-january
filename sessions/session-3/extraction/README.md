@@ -21,56 +21,17 @@ This is part of the [Analysis with Synthetic Data](../) session.
 
 ## Session's Expectations
 
-1.  Try to follow along, but not everyone can finish at the speed of the
-    lecture.
+1.  Try to follow along, but not everyone can finish at the speed of the lecture.
 1.  If you have questions, please ask them in the chat.
-1.  For questions that are generalizable to the group, the instructors
-    will elevate it and I'll address it directly.
-1.  When I'm done today, we'll answer your questions as long as we have
-    time.
+1.  For questions that are generalizable to the group,
+    the instructors will elevate it and I'll address it directly.
+1.  When I'm done today, we'll answer your questions as long as we have time.
 1.  Finish on your own time after today's session.
-1.  Come to office hours for remaining obstacles or more detailed
-    questions.
+1.  Come to office hours for remaining obstacles or more detailed questions.
 
-## Start a "Code Workbook" in the Foundry Enclave
+## Open the "manipulation-1" Code Workbook in the Foundry Enclave
 
-Assignment at the end of week 2:
-
-The first three steps resemble the [Week 1 Assignment](https://github.com/National-COVID-Cohort-Collaborative/short-course-2024-january/blob/main/sessions/session-1/session-1-assignment.pdf)
-so refer to that if you forgot some steps.
-
-1.  Log in to the Enclave, with MFA.
-1.  In our class's [L0
-    workspace](https://unite.nih.gov/workspace/compass/view/ri.compass.main.folder.86a7020f-db30-4fd1-b735-bbaf53512365),
-    open to the "Users/" directory and create your personal folder. I like [kebab
-    case](https://www.freecodecamp.org/news/snake-case-vs-camel-case-vs-pascal-case-vs-kebab-case-whats-the-difference/#kebab-case)
-    for directory & file names (eg, "will-beasley", jerrod-anzalone", "james-cheng").
-1.  Create a new "Code Workbook".
-1.  Once the workbook opens, rename it to "manipulation-1". (Rename it
-    once it's open, so some behind-the-scenes files are appropriately adjusted.)
-1.  Change the environment.
-    1.  In the top center of the screen, click the lightning bolt near
-        "Environment (default-r-3.5)"
-    1.  Click "Configure Environment"
-    1.  In the left-hand Profiles panel, click
-        "profile-high-driver-cores-and-memory-*limited*". (Remarks that
-        will make sense later: \#1 For workbooks that rely on R, we'll
-        chose "r4-high-driver-memory". \#2 We're using small datasets
-        this session; use more memory for real projects, such as
-        "profile-high-driver-cores-and-memory".)
-    1.  Click the blue "Update Environment" button and wait a few
-        minutes.
-1.  It will take the servers a few minutes to create environments for
-    all of us. So let's talk concepts next.
-
-**Resources**
-
-- [*The Researcher's Guide to
-  N3C*](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/)
-  - [Section 8.4.3 Code
-    Workbooks](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/chapters/tools.html#sec-tools-apps-workbook)
-- [N3C Office Hours](https://covid.cd2h.org/support/) on Tuesdays &
-  Thursdays
+That you created already in the [assignments leading into Session 3](../homework#readme).
 
 ## Challenge for Today's Session –1st Try
 
