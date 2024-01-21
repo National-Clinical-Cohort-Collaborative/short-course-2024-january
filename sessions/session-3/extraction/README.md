@@ -36,22 +36,18 @@ This is part of the [Analysis with Synthetic Data](../) session.
 
 Assignment at the end of week 2:
 
-The first three steps resemble the
-[Week 1 Assignment](https://github.com/National-COVID-Cohort-Collaborative/short-course-2024-january/blob/main/sessions/session-1/session-1-assignment.pdf)
+The first three steps resemble the [Week 1 Assignment](https://github.com/National-COVID-Cohort-Collaborative/short-course-2024-january/blob/main/sessions/session-1/session-1-assignment.pdf)
 so refer to that if you forgot some steps.
 
 1.  Log in to the Enclave, with MFA.
 1.  In our class's [L0
     workspace](https://unite.nih.gov/workspace/compass/view/ri.compass.main.folder.86a7020f-db30-4fd1-b735-bbaf53512365),
-    open to the "Users/" directory and create your personal folder. I
-    like [kebab
+    open to the "Users/" directory and create your personal folder. I like [kebab
     case](https://www.freecodecamp.org/news/snake-case-vs-camel-case-vs-pascal-case-vs-kebab-case-whats-the-difference/#kebab-case)
-    for directory & file names (eg, "will-beasley", "jerrod-anzalone",
-    "james-cheng").
+    for directory & file names (eg, "will-beasley", jerrod-anzalone", "james-cheng").
 1.  Create a new "Code Workbook".
 1.  Once the workbook opens, rename it to "manipulation-1". (Rename it
-    once it's open, so some behind-the-scenes files are appropriately
-    adjusted.)
+    once it's open, so some behind-the-scenes files are appropriately adjusted.)
 1.  Change the environment.
     1.  In the top center of the screen, click the lightning bolt near
         "Environment (default-r-3.5)"
@@ -618,8 +614,8 @@ Notes:
     This is the real way of doing it, and the resulting product is
     saved.
 
-1.  Select the code you want to execute, and click click \[ctrl +
-    shift + enter\].
+1.  Select the code you want to execute, and click click [ctrl +
+    shift + enter].
 
     This is how you can debug small sections of code and iteratively
     developed focused sections faster.
@@ -666,20 +662,22 @@ Notes:
 1.  We'll later benefit if we spend some time now to create an
     R-flavored dataset.
 1.  A few analysis tasks benefit by adding decorations to a Spark table.
-    that has two benefits:
-    1.  [R Factors](https://r4ds.hadley.nz/factors.html) are important
-        when the analysis models include categorical variables.
-    1.  It's kinda expensive to translating a Spark
+    that has several benefits:
+    1.  [R factors](https://r4ds.hadley.nz/factors.html) are important
+        when the analysis models include categorical variables
+        (eg, `covid_severity`).
+    1.  R factors designate when a number should be treated like a category
+        (eg, `data_partner_id`)
+    1.  It's kinda expensive translating a Spark
         [DataFrame](https://spark.apache.org/docs/latest/sql-programming-guide.html)
         into an [R
         data.frame](https://www.r-tutor.com/r-introduction/data-frame).
         Do this once, and recall the saved data.frame in later
         workbooks.
-1.  A saved/serialized/persisted data.frame is called an \[rds
-    file\](<https://stat.ethz.ch/R-manual/R-devel/library/base/html/readRDS.html>.
+1.  A saved/serialized/persisted data.frame is called an [rds
+    file](https://stat.ethz.ch/R-manual/R-devel/library/base/html/readRDS.html).
 1.  One line of code restores the data.frame exactly as it was saved.
-    You don't have to specify the variables' data types or the factor
-    levels.
+    You don't have to specify the variables' data types or the factor levels.
 
 **References**
 
@@ -692,10 +690,9 @@ Notes:
 
 ## Troubleshooting Tips
 
-1.  This error probably means you need to remind the Enclave what type
-    of data frame
+1.  This error probably means you need to remind the Enclave that input data frame is a Spark DataFrame:
 
-        >  Error in (function (classes, fdef, mtable) :
+        >  Error in function (classes, fdef, mtable) :
         unable to find an inherited method for function 'arrange' for signature '"data.frame", "character"'
 
         >  traceback:
@@ -728,8 +725,8 @@ Notes:
 1.  Color code the workbooks transforms. Think which parts belong to
     what category.
     1.  "omop source": dark purple (#7B64FF)
-    2.  "n3c derived": light purple (#AEA1FF)
-    3.  "metadata": olive green (#B0BC00)
-    4.  "intermediate": gray (#999999)
-    5.  "outcome": orange (#FB9E00)
-    6.  "diagnostic": cyan (#73D8FF)
+    1.  "n3c derived": light purple (#AEA1FF)
+    1.  "metadata": olive green (#B0BC00)
+    1.  "intermediate": gray (#999999)
+    1.  "outcome": orange (#FB9E00)
+    1.  "diagnostic": cyan (#73D8FF)
