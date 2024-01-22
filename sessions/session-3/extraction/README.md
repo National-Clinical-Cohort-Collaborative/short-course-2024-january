@@ -31,7 +31,8 @@ This is part of the [Analysis with Synthetic Data](../) session.
 
 ## Open the "manipulation-1" Code Workbook in the Foundry Enclave
 
-That you created already in the [assignments leading into Session 3](../homework#readme).
+That you created already in the [assignments leading into
+Session 3](../homework#create-the-manipulation-1-code-workbook).
 
 ## Challenge for Today's Session –1st Try
 
@@ -157,6 +158,9 @@ Notes:
 
 1.  Click "Save as dataset", so it's toggled blue.
 
+1.  A 2nd name pops up for the transform.
+    Keep the pair of names consistent (eg, `pt_observation_preceding` also).
+
 1.  Verify that you have two inputs: `patient_ll` & `observation`. The
     colors are orange & purple, but the order doesn't matter.
 
@@ -235,11 +239,14 @@ Notes:
 1.  Click the gray plus button (above the code), and click the
     `observation` transform.
 
-1.  Change the new transform's name from "unnamed" to `patient`.
+1.  Change the new transform's name from "unnamed" to `pt`.
 
 1.  Click "Save as dataset", so it's toggled blue.
 
-1.  Verify that you have two inputs: `patient_ll` & `patient`. The
+1.  A 2nd name pops up for the transform.
+    Keep the pair of names consistent (eg, `pt` also).
+
+1.  Verify that you have two inputs: `patient_ll` & `pt`. The
     colors are orange & purple, but the order doesn't matter.
 
 1.  Replace the code with
@@ -380,7 +387,7 @@ Notes:
 1.  Cons for splitting
     1.  Requires more time if you copy & paste code somewhere.
 
-## Beauty of CTES
+## Beauty of CTEs
 
 1.  A [Common Table
     Expression](https://www.atlassian.com/data/sql/using-common-table-expressions)
@@ -522,7 +529,7 @@ Notes:
         and (b) produce clear error messages if an R package isn't
         available.
 
-## R Transform
+## Create R Transform `pt_rds`
 
 1.  We'll cover R code later in the session. For now, just copy some
     code into a new R transform to make things easier later.
@@ -565,6 +572,9 @@ Notes:
     ```
 
 1.  Toggle the "Save as dataset" on.
+
+1.  A 2nd name pops up for the transform.
+    Keep the pair of names consistent (eg, `pt_rds` also).
 
 1.  Click blue "Run" button.
 

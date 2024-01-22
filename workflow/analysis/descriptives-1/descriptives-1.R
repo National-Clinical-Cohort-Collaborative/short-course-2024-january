@@ -69,40 +69,52 @@ TabularManifest::histogram_discrete(  ds, variable_name="covid_dead")
 
 # # ---- latent-risk-1 ------------------------------------------------------------
 # g1 <-
-#   ds_patient |>
-#   ggplot(aes(
-#     x = calc_age_covid,
-#     y = latent_risk_1,
-#     group = data_partner_id,
-#     color = data_partner_id
-#     # fill = data_partner_id
-#   )) +
-#   geom_smooth(
-#     mapping = aes(group = NA, color = NULL, fill = NULL),
-#     method = "loess",
-#     span = 2,
-#     color = "gray40",
-#     linetype = "88"
-#   ) +
-#   geom_smooth(
-#     method = "loess",
-#     span = 2,
-#     se = FALSE
-#   ) +
-#   geom_point(shape=1) +
-#   theme_light() +
-#   theme(axis.ticks = element_blank())
-# g1
+  ds |>
+  ggplot(aes(
+    x = calc_age_covid,
+    y = covid_moderate_plus,
+    group = data_partner_id,
+    color = data_partner_id
+    # fill = data_partner_id
+  )) +
+  geom_smooth(
+    mapping = aes(group = NA, color = NULL, fill = NULL),
+    method = "loess",
+    span = 2,
+    color = "gray40",
+    linetype = "88",
+    na.rm    = TRUE
+  ) +
+  geom_smooth(
+    method = "loess",
+    span = 2,
+    se = FALSE,
+    na.rm    = TRUE
+  ) +
+  geom_point(
+    shape     = 1,
+    position  = position_jitter(height = .08),
+    na.rm     = TRUE
+  ) +
+  scale_y_continuous(labels = scales::label_percent()) +
+  # scale_y_continuous(labels = scales::percent_format()) +
+  coord_cartesian(ylim = c(-.1, 1.1), expand = F) +
+  theme_light() +
+  theme(axis.ticks = element_blank()) +
+  labs(
+    y = "Probability of Developing\nModerate COVID or Worse"
+  )
+g1
+
+# g1 %+% aes(color=NULL)
+g1 %+% aes(x = birth_date)
+g1 %+% aes(x = calc_outbreak_lag_years)
+g1 %+% aes(x = covid_date)
 #
-# # g1 %+% aes(color=NULL)
-# g1 %+% aes(x = birth_date)
-# g1 %+% aes(x = calc_outbreak_lag_years)
-# g1 %+% aes(x = covid_date)
-# #
-# # ggplot(ds, aes(x=weight_gear_z, color=forward_gear_count_f, fill=forward_gear_count_f)) +
-# #   geom_density(alpha=.1) +
-# #   theme_minimal() +
-# #   labs(x=expression(z[gear]))
+# ggplot(ds, aes(x=weight_gear_z, color=forward_gear_count_f, fill=forward_gear_count_f)) +
+#   geom_density(alpha=.1) +
+#   theme_minimal() +
+#   labs(x=expression(z[gear]))
 #
 # # ---- covid-severity ----------------------------------------------------
 # ggplot(ds_patient, aes(x = latent_risk_1, y = covid_severity, group = factor(gender_concept_id), color = factor(gender_concept_id))) +
