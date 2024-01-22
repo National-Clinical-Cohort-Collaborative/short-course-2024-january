@@ -13,14 +13,14 @@ Assets For Students
 * [Level 0 Workspace](https://unite.nih.gov/workspace/compass/view/ri.compass.main.folder.86a7020f-db30-4fd1-b735-bbaf53512365) (that can be shared to anyone with an Enclave account)
 * [Level 2 Workspace](https://unite.nih.gov/workspace/compass/view/ri.compass.main.folder.713d3259-a7b4-43f4-bbac-d1db215aff8b) (that is open only to students of this course)
 
-| Session                                                                             | Assignments           | Slides         | Recordings           |
-| :---------------------------------------------------------------------------------- | :-------------------- | :------------- | :---------           |
-| [1. Introduction to N3C](sessions/session-1#readme)                                 |                       |                | to be released       |
-| [2. Observational Research, OHDSI Tool, and N3C](sessions/session-2#readme)         |                       |                | to be released       |
-| [3. Analysis Using Synthetic Data](sessions/session-3#readme)                       |                       |                | to be released       |
-| [4. Building an Analytic Dataset<br>Using Shared N3C Resources](sessions/session-4#readme)|                 |                | not available<br>b/c L2 |
-| [5. Analyzing Data Curated from N3C:<br>A Replication Study](sessions/session-5#readme)   |                 |                | not available<br>b/c L2 |
-| [6. N3C Policies and Procedures:<br>From Access to Publication](sessions/session-6#readme)|                 |                | to be released       |
+| Session                                                                                   | Assignments           | Recordings           |
+| :---------------------------------------------------------------------------------------- | :-------------------- | :---------           |
+| [1. Introduction to N3C](sessions/session-1#readme)                                       | [due Jan 25](sessions/session-1/session-1-assignment.pdf) | to be released       |
+| [2. Observational Research, OHDSI Tool, and N3C](sessions/session-2#readme)               |                       | to be released       |
+| [3. Analysis Using Synthetic Data](sessions/session-3#readme)                             | [due Feb 8](sessions/session-3/homework#before-session-3-starts) &<br>[due Feb 15](sessions/session-3/homework#after-session-3-ends) | to be released  | to be released       |
+| [4. Building an Analytic Dataset<br>Using Shared N3C Resources](sessions/session-4#readme)|                       | not available<br>b/c L2 |
+| [5. Analyzing Data Curated from N3C:<br>A Replication Study](sessions/session-5#readme)   |                       | not available<br>b/c L2 |
+| [6. N3C Policies and Procedures:<br>From Access to Publication](sessions/session-6#readme)|                       | to be released       |
 
 Assets For Instructors
 -------
