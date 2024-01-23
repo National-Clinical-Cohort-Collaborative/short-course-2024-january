@@ -672,6 +672,26 @@ Notes:
     >  ...
     ```
 
+1.  This error probably means you need to remind the Enclave that input data frame is a Transform input:
+
+    ```
+    ```
+
+    In other words, there is nothing written to the Logs.
+    Click on the red "Failed" exclamation icon to see something like
+
+    ```
+    No schema found for dataset
+
+    A schema could not be found for dataset ri.foundry.main.dataset.9d73cfce-77fd-43bd-80af-e879ea84476b. Confirm the input dataset was built and contains a valid schema.
+
+    Details:
+
+    Executing job failed.
+    Error: Failed to extract input.: {recordId=..., inputTableAlias=pt_parquet}
+    com.palantir.logsafe.exceptions.SafeRuntimeException: Failed to extract input.:
+    ```
+
 1.  This error probably means you didn't execute `library(magrittr)` and you'r running an older version of R:
     Remember when you're debugging code in the console,
     `load_packages()` needs to be run separately.

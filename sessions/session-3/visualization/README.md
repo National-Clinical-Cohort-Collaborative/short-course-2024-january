@@ -110,3 +110,48 @@ Session 3](../homework#create-the-graphs-1-code-workbook).
       return(NULL) # The transform needs to return a dataset (even if it's a null dataset)
     }
     ```
+
+
+## Create R Transform: `g_year_age_boxplot`
+
+1.  Similar to the steps for `g_calc_age_covid`, but use the following code.
+1.  Notice this returns a small dataset, instead of nothing.
+    But whatever you do, please return something in the last line.
+    The debugging process is very frustrating otherwise.
+
+    ```r
+    g_year_age_boxplot <- function(pt_parquet) {
+      load_packages()
+      assert_transform_object(pt_parquet)
+
+      ds <-
+        pt_parquet |>
+        from_parquet() |>
+        dplyr::select(
+          age   = calc_age_covid,
+          period_first_covid_dx,
+        ) #|>
+        # dplyr::mutate(
+        # year_f  = factor(year)
+        # )
+
+      g <-
+        ggplot(ds, aes(x = period_first_covid_dx, y = age)) +
+        geom_boxplot()
+
+      print(g)
+
+      # Return something, preferably the dataset underneath the graph.
+      #    Don't end with `print()`.
+      return(ds)
+    }
+    ```
+
+## Resources
+
+* [ggplot2 website](https://ggplot2.tidyverse.org/reference/)
+* [*ggplot2: Elegant Graphics for Data Analysis*](https://www.amazon.com/ggplot2-Elegant-Graphics-Data-Analysis/dp/331924275X/) by Hadley Wickham
+* [*R Graphics Cookbook, 2nd edition*](https://r-graphics.org/) by Winston Chang
+* See [N3C resources](../../../background/assets.md) we've listed, especially
+    * The [Languages Section](https://unite.nih.gov/workspace/documentation/product/code-workbook/languages) in the Palantir Foundary/Enclave documentation
+    * [N3C Training](https://unite.nih.gov/workspace/slate/documents/training)
