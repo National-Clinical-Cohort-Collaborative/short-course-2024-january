@@ -540,7 +540,7 @@ Notes:
 1.  In the input list, select `pt` and change it from "R data.frame" to
     "Spark dataframe". We'll explicitly convert it with code.
 
-1.  Find a collapsed panel in the lower right corner called "Variables".
+1.  Find a collapsed panel in the lower right corner of the Console called "Variables".
     Change `pt` from "R data.frame" to "Spark dataframe".
 
 1.  Periodically check that these last two settings don't revert back to
