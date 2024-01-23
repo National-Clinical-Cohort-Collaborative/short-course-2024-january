@@ -57,10 +57,10 @@ so refer to that if you forgot some steps.
 1. Rename it `validation-1` and
 1. Choose the "r4-high-driver-memory" environment.
 
-### Create the `analysis-1` Code Workbook
+### Create the `modeling-1` Code Workbook
 
 1. Follow the same steps as `manipulation-1`, except
-1. Rename it `analysis-1` and
+1. Rename it `modeling-1` and
 1. Choose the "r4-high-driver-memory" environment.
 
 

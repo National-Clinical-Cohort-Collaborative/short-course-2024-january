@@ -450,7 +450,7 @@ Notes:
 
     ``` r
     load_packages <- function () {
-      library(magrittr)
+      # library(magrittr) # If R <4.1
       requireNamespace("arrow")
       requireNamespace("dplyr")
       requireNamespace("tidyr")
