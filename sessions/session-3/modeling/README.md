@@ -138,5 +138,108 @@ That you created already in the [assignments leading into Session 3](../homework
       m |>
         broom::tidy()
     }
+    ```
+
+
+## Create R Transform: `m_covid_moderate_3`
+
+1.  This transform uses the [emmeans](https://github.com/rvlenth/emmeans) package
+    to produce the predicted values and errors, then graphs them.
+
+1.  Create a new transform and follow the same steps as `m_covid_moderate_1`,
+    but use the following code:
+
+    ```r
+    m_covid_moderate_3 <- function(pt_parquet) {
+      load_packages()
+      assert_transform_object(pt_parquet)
+
+      outcome_label <- "COVID Moderate or Worse"
+      outcome_name <- "covid_moderate_plus"
+      eq_m  <- "covid_moderate_plus ~ 1 + event_animal + age_cut5" # + period_first_covid_dx"
+      eq_em <- "~ event_animal | age_cut5"
+
+      glm_link      <- "quasibinomial"
+      hat_name      <- "prob" # Logistic regression produces "prob" by emmeans
+
+      ds <-
+        pt_parquet |>
+        from_parquet()
+
+      m <-
+        glm(
+          eq_m,
+          data   = ds,
+          family = glm_link
+        )
+
+      m |>
+        summary() |>
+        print()
+
+      m |>
+        broom::tidy() |>
+        print()
+
+      e <-
+        emmeans::emmeans(
+          m,
+          as.formula(eq_em),
+          data = ds,
+          type = "response"
+        )
+
+      d_predict <-
+        seq_len(nrow(e@linfct)) |>
+        purrr::map_dfr(function(i) as.data.frame(e[i])) |>
+        dplyr::mutate(
+          outcome = outcome_name,
+        ) |>
+        dplyr::select(
+          outcome,
+          event_animal,
+          age_cut5,
+          y_hat       = !!rlang::ensym(hat_name),
+          se          = SE,
+          ci_lower    = asymp.LCL,
+          ci_upper    = asymp.UCL
+        )
+      print(d_predict)
+
+      glyph <- "label"
+      g <-
+        d_predict |>
+        ggplot(
+          aes(x = age_cut5, y = y_hat, group = event_animal, color = event_animal, fill = event_animal)
+        ) +
+        geom_line(size = 1, key_glyph = glyph) +
+        geom_ribbon(aes(ymin = ci_lower, ymax = ci_upper), color = NA, key_glyph = glyph, alpha = .15) +
+        geom_point(size = 3, shape = 21, key_glyph = glyph) +
+        # guides(color = guide_legend(nrow = 1, override.aes = list(size = 6))) +
+        # guides(fill  = guide_legend(nrow = 1, override.aes = list(alpha = 1))) +
+        theme_minimal(base_size = 20) +
+        theme(legend.position = "none") +
+        # theme(legend.position = c(0.5, 1), legend.justification = c(0.5, 1)) +
+        # theme(legend.title     = element_text(color = palette_asthma_dark[["title"]])) +
+        # theme(strip.background = element_rect(fill  = palette_asthma_dark[["title"]], color = NA)) +
+        # theme(strip.text       = element_text(color = "gray97"                  , face = "bold")) +
+        # theme(axis.title       = element_text(color = palette_asthma_dark[["title"]], face = "bold")) +
+        # theme(plot.title = element_text(color = palette_asthma_dark[["title"]], face = "bold")) +
+        theme(panel.grid.major.x = element_blank()) +
+        theme(panel.grid.major.y = element_line(color = "gray97")) +
+        theme(panel.grid.minor.y = element_blank()) +
+        labs(
+          x     = NULL, #"Tx Category",
+          y     = NULL, #outcome_label,
+          color = "Asthma Category",
+          fill  = "Asthma Category",
+          title = outcome_label #main_title
+        )
+
+      print(g)
+
+      d_predict
+    }
+
 
     ```
