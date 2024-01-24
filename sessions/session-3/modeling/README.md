@@ -99,3 +99,44 @@ That you created already in the [assignments leading into Session 3](../homework
       arrow::read_parquet(path)
     }
     ```
+
+## Create R Transform: `m_covid_moderate_1`
+
+1.  Click the `pt_parquet` transform, then click the blue plus button, then select "R code".
+1.  Click the gray plus button (above the code), and click the observation transform.
+1.  Change the new transform's name from "unnamed" to `m_covid_moderate_1`.
+1.  Toggle the "Save as dataset" on.
+1.  A 2nd name pops up for the transform.
+    Keep the pair of names consistent (eg, `m_covid_moderate_1` also).
+1.  Caution: keep the name *very* unique.
+1.  Verify that you have one input: `pt_parquet`. The color is orange.
+1.  Verify its type is "Transform input" in both places.
+1.  Replace the code with
+
+    ```r
+    m_covid_moderate_1 <- function(pt_parquet) {
+      load_packages()
+      assert_transform_object(pt_parquet)
+
+      eq <- "covid_moderate_plus ~ 1 + event_animal"
+
+      ds <-
+        pt_parquet |>
+        from_parquet()
+
+      m <-
+        glm(
+          eq,
+          data   = ds,
+          family = "binomial"
+        )
+
+      m |>
+        summary() |>
+        print()
+
+      m |>
+        broom::tidy()
+    }
+
+    ```
