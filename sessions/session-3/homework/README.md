@@ -101,10 +101,18 @@ So don't add unnecessary packages.
     1.  Link to your group's manuscript & supplement drafts
     1.  Concept sets used or discussed
 1.  Describe the workflow among code workbooks.  For Session 3, the order is
-    1.  manipulation-1
-    1.  graphs-1
-    1.  validation-1
-    1.  modeling-1
+    1.  `manipulation-1`
+    1.  `graphs-1`
+    1.  `validation-1`
+    1.  `modeling-1`
+1.  For this class, some important resources are
+    1.  Our class's GitHub [file repository](https://github.com/National-COVID-Cohort-Collaborative/short-course-2024-january)
+    1.  The dataset simulated for this Session, which is stored in the Enclave.
+        I like including both the
+        * direct link:
+          <https://unite.nih.gov/workspace/compass/view/ri.compass.main.folder.32f8e987-c58c-44a0-bff8-8b8fb3d15805>
+        * spelled-out path:
+          `N3C Training Area/Group Exercises/Introduction to Real World Data Analysis for COVID-19 Research, Spring 2024/analysis-with-synthetic-data/`
 
 **Resources**
 
@@ -112,8 +120,8 @@ So don't add unnecessary packages.
   N3C*](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/)
   - [Section 8.4.3 Code
     Workbooks](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/chapters/tools.html#sec-tools-apps-workbook)
-* [N3C Office Hours](https://covid.cd2h.org/support/) on Tuesdays &
-  Thursdays
+* [N3C Office Hours](https://covid.cd2h.org/support/) on Tuesdays & Thursdays
+* [OMOP tables](https://ohdsi.github.io/CommonDataModel/cdm53.html)
 
 After Session 3 Ends
 ------------------------------
