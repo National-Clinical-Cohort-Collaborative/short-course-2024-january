@@ -1,0 +1,143 @@
+﻿Table,Table Type,Field,Datatype,Required,Primary Key,Foreign Key,FK Table,FK Domain,Exclude
+PERSON,Clinical Data,person_id,integer,Yes,Yes,No,,,
+PERSON,Clinical Data,gender_concept_id,integer,Yes,No,Yes,CONCEPT,Gender,
+PERSON,Clinical Data,year_of_birth,integer,Yes,No,No,,,
+PERSON,Clinical Data,month_of_birth,integer,No,No,No,,,Y
+PERSON,Clinical Data,day_of_birth,integer,No,No,No,,,Y
+PERSON,Clinical Data,race_concept_id,integer,Yes,No,Yes,CONCEPT,Race,
+PERSON,Clinical Data,ethnicity_concept_id,integer,Yes,No,Yes,CONCEPT,Ethnicity,
+PERSON,Clinical Data,location_id,integer,No,No,Yes,LOCATION,,
+PERSON,Clinical Data,provider_id,integer,No,No,Yes,PROVIDER,,
+PERSON,Clinical Data,care_site_id,integer,No,No,Yes,CARE_SITE,,
+OBSERVATION_PERIOD,Clinical Data,observation_period_id,integer,Yes,Yes,No,,,
+OBSERVATION_PERIOD,Clinical Data,person_id,integer,Yes,No,Yes,PERSON,,
+OBSERVATION_PERIOD,Clinical Data,observation_period_start_date,date,Yes,No,No,,,
+OBSERVATION_PERIOD,Clinical Data,observation_period_end_date,date,Yes,No,No,,,
+OBSERVATION_PERIOD,Clinical Data,period_type_concept_id,integer,Yes,No,Yes,CONCEPT,Type Concept,
+VISIT_OCCURRENCE,Clinical Data,visit_occurrence_id,integer,Yes,Yes,No,,,
+VISIT_OCCURRENCE,Clinical Data,person_id,integer,Yes,No,Yes,PERSON,,
+VISIT_OCCURRENCE,Clinical Data,visit_concept_id,integer,Yes,No,Yes,CONCEPT,Visit,
+VISIT_OCCURRENCE,Clinical Data,visit_start_date,date,Yes,No,No,,,
+VISIT_OCCURRENCE,Clinical Data,visit_start_datetime,datetime,No,No,No,,,Y
+VISIT_OCCURRENCE,Clinical Data,visit_end_date,date,Yes,No,No,,,Y
+VISIT_OCCURRENCE,Clinical Data,visit_end_datetime,datetime,No,No,No,,,Y
+VISIT_OCCURRENCE,Clinical Data,visit_type_concept_id,Integer,Yes,No,Yes,CONCEPT,Type Concept,
+VISIT_OCCURRENCE,Clinical Data,provider_id,integer,No,No,Yes,PROVIDER,,
+VISIT_OCCURRENCE,Clinical Data,care_site_id,integer,No,No,Yes,CARE_SITE,,
+VISIT_OCCURRENCE,Clinical Data,visit_source_value,varchar(50),No,No,No,,,Y
+VISIT_OCCURRENCE,Clinical Data,visit_source_concept_id,integer,No,No,Yes,CONCEPT,,Y
+VISIT_OCCURRENCE,Clinical Data,admitting_source_concept_id,integer,No,No,Yes,CONCEPT,Visit,Y
+VISIT_OCCURRENCE,Clinical Data,admitting_source_value,varchar(50),No,No,No,,,Y
+VISIT_OCCURRENCE,Clinical Data,discharge_to_concept_id,integer,No,No,Yes,CONCEPT,Visit,
+VISIT_OCCURRENCE,Clinical Data,discharge_to_source_value,varchar(50),No,No,No,,,Y
+VISIT_OCCURRENCE,Clinical Data,preceding_visit_occurrence_id,integer,No,No,Yes,VISIT_OCCURRENCE,,Y
+CONDITION_OCCURRENCE,Clinical Data,condition_occurrence_id,integer,Yes,Yes,No,,,
+CONDITION_OCCURRENCE,Clinical Data,person_id,integer,Yes,No,Yes,PERSON,,
+CONDITION_OCCURRENCE,Clinical Data,condition_concept_id,integer,Yes,No,Yes,CONCEPT,Condition,
+CONDITION_OCCURRENCE,Clinical Data,condition_start_date,date,Yes,No,No,,,
+CONDITION_OCCURRENCE,Clinical Data,condition_start_datetime,datetime,No,No,No,,,Y
+CONDITION_OCCURRENCE,Clinical Data,condition_end_date,date,No,No,No,,,
+CONDITION_OCCURRENCE,Clinical Data,condition_end_datetime,datetime,No,No,No,,,Y
+CONDITION_OCCURRENCE,Clinical Data,condition_type_concept_id,integer,Yes,No,Yes,CONCEPT,Type Concept,
+CONDITION_OCCURRENCE,Clinical Data,condition_status_concept_id,integer,No,No,Yes,CONCEPT,Condition Status,
+CONDITION_OCCURRENCE,Clinical Data,stop_reason,varchar(20),No,No,No,,,Y
+CONDITION_OCCURRENCE,Clinical Data,provider_id,integer,No,No,Yes,PROVIDER,,
+CONDITION_OCCURRENCE,Clinical Data,visit_occurrence_id,integer,No,No,Yes,VISIT_OCCURRENCE,,
+DRUG_OCCURRENCE,Clinical Data,drug_exposure_id,integer,Yes,Yes,No,,,
+DRUG_OCCURRENCE,Clinical Data,person_id,integer,Yes,No,Yes,PERSON,,
+DRUG_OCCURRENCE,Clinical Data,drug_concept_id,integer,Yes,No,Yes,CONCEPT,Drug,
+DRUG_OCCURRENCE,Clinical Data,drug_exposure_start_date,date,Yes,No,No,,,
+DRUG_OCCURRENCE,Clinical Data,drug_exposure_start_datetime,datetime,No,No,No,,,Y
+DRUG_OCCURRENCE,Clinical Data,drug_exposure_end_datetime,datetime,No,No,No,,,Y
+DRUG_OCCURRENCE,Clinical Data,drug_exposure_end_date,date,No,No,No,,,
+DRUG_OCCURRENCE,Clinical Data,drug_type_concept_id,integer,Yes,No,Yes,CONCEPT,Type Concept,
+DRUG_OCCURRENCE,Clinical Data,stop_reason,varchar(20),No,No,No,,,Y
+DRUG_OCCURRENCE,Clinical Data,refills,integer,No,No,No,,,Y
+DRUG_OCCURRENCE,Clinical Data,quantity,float,No,No,No,,,Y
+DRUG_OCCURRENCE,Clinical Data,days_supply,integer,No,No,No,,,Y
+DRUG_OCCURRENCE,Clinical Data,sig,varchar(MAX),No,No,No,,,Y
+DRUG_OCCURRENCE,Clinical Data,route_concept_id,integer,No,No,Yes,CONCEPT,Route,
+DRUG_OCCURRENCE,Clinical Data,lot_number,varchar(50),No,No,No,,,Y
+DRUG_OCCURRENCE,Clinical Data,provider_id,integer,No,No,Yes,PROVIDER,,
+DRUG_OCCURRENCE,Clinical Data,visit_occurrence_id,integer,No,No,Yes,VISIT_OCCURRENCE,,
+DEVICE_EXPOSURE,Clinical Data,device_exposure_id,integer,Yes,Yes,No,,,
+DEVICE_EXPOSURE,Clinical Data,person_id,integer,Yes,No,Yes,PERSON,,
+DEVICE_EXPOSURE,Clinical Data,device_concept_id,integer,Yes,No,Yes,CONCEPT,Device,
+DEVICE_EXPOSURE,Clinical Data,device_exposure_start_date,date,Yes,No,No,,,
+DEVICE_EXPOSURE,Clinical Data,device_exposure_start_datetime,datetime,No,No,No,,,Y
+DEVICE_EXPOSURE,Clinical Data,device_exposure_end_date,date,No,No,No,,,
+DEVICE_EXPOSURE,Clinical Data,device_exposure_end_datetime,datetime,No,No,No,,,Y
+DEVICE_EXPOSURE,Clinical Data,device_type_concept_id,integer,Yes,No,Yes,CONCEPT,Type Concept,
+DEVICE_EXPOSURE,Clinical Data,unique_device_id,varchar(50),No,No,No,,,Y
+DEVICE_EXPOSURE,Clinical Data,quantity,integer,No,No,No,,,Y
+DEVICE_EXPOSURE,Clinical Data,provider_id,integer,No,No,Yes,PROVIDER,,
+DEVICE_EXPOSURE,Clinical Data,visit_occurrence_id,integer,No,No,Yes,VISIT_OCCURRENCE,,
+MEASUREMENT,Clinical Data,measurement_id,integer,Yes,Yes,No,,,
+MEASUREMENT,Clinical Data,person_id,integer,Yes,No,Yes,PERSON,,
+MEASUREMENT,Clinical Data,measurement_concept_id,integer,Yes,No,Yes,CONCEPT,Measurement,
+MEASUREMENT,Clinical Data,measurement_date,date,Yes,No,No,,,
+MEASUREMENT,Clinical Data,measurement_datetime,datetime,No,No,No,,,Y
+MEASUREMENT,Clinical Data,measurement_time,varchar(10),No,No,No,,,Y
+MEASUREMENT,Clinical Data,measurement_type_concept_id,integer,Yes,No,Yes,CONCEPT,Type Concept,
+MEASUREMENT,Clinical Data,operator_concept_id,integer,No,No,Yes,CONCEPT,,Y
+MEASUREMENT,Clinical Data,value_as_number,float,No,No,No,,,Y
+MEASUREMENT,Clinical Data,value_as_concept_id,integer,No,No,Yes,CONCEPT,,
+MEASUREMENT,Clinical Data,unit_concept_id,integer,No,No,Yes,CONCEPT,Unit,
+MEASUREMENT,Clinical Data,range_low,float,No,No,No,,,Y
+MEASUREMENT,Clinical Data,range_high,float,No,No,No,,,Y
+MEASUREMENT,Clinical Data,provider_id,integer,No,No,Yes,PROVIDER,,
+MEASUREMENT,Clinical Data,visit_occurrence_id,integer,No,No,Yes,VISIT_OCCURRENCE,,
+DEATH,Clinical Data,person_id,integer,Yes,No,Yes,PERSON,,
+DEATH,Clinical Data,death_date,date,Yes,No,No,,,
+DEATH,Clinical Data,death_datetime,datetime,No,No,No,,,Y
+DEATH,Clinical Data,death_type_concept_id,integer,No,No,Yes,CONCEPT,Type Concept,
+DEATH,Clinical Data,cause_concept_id,integer,No,No,Yes,CONCEPT,,
+LOCATION,Health System,location_id,integer,Yes,Yes,No,,,
+LOCATION,Health System,address_1,varchar(50),No,No,No,,,
+LOCATION,Health System,address_2,varchar(50),No,No,No,,,Y
+LOCATION,Health System,city,varchar(50),No,No,No,,,
+LOCATION,Health System,state,varchar(2),No,No,No,,,
+LOCATION,Health System,zip,varchar(9),No,No,No,,,
+LOCATION,Health System,county,varchar(20),No,No,No,,,Y
+CARE_SITE,Health System,care_site_id,integer,Yes,Yes,No,,,
+CARE_SITE,Health System,care_site_name,varchar(255),No,No,No,,,Y
+CARE_SITE,Health System,place_of_service_concept_id,integer,No,No,Yes,CONCEPT,,
+CARE_SITE,Health System,location_id,integer,No,No,Yes,LOCATION,,
+PROVIDER,Health System,provider_id,integer,Yes,Yes,No,,,
+PROVIDER,Health System,provider_name,varchar(255),No,No,No,,,Y
+PROVIDER,Health System,npi,varchar(20),No,No,No,,,Y
+PROVIDER,Health System,dea,varchar(20),No,No,No,,,Y
+PROVIDER,Health System,specialty_concept_id,integer,No,No,Yes,CONCEPT,,
+PROVIDER,Health System,care_site_id,integer,No,No,Yes,CARE_SITE,,
+PROVIDER,Health System,year_of_birth,integer,No,No,No,,,
+PROVIDER,Health System,gender_concept_id,integer,No,No,Yes,CONCEPT,Gender,
+CONCEPT,Vocabulary,concept_id,integer,Yes,Yes,No,,,
+CONCEPT,Vocabulary,concept_name,varchar(255),Yes,No,No,,,
+CONCEPT,Vocabulary,domain_id,varchar(20),Yes,No,Yes,DOMAIN,,
+CONCEPT,Vocabulary,vocabulary_id,varchar(20),Yes,No,Yes,VOCABULARY,,
+CONCEPT,Vocabulary,concept_class_id,varchar(20),Yes,No,Yes,CONCEPT_CLASS,,
+CONCEPT,Vocabulary,standard_concept,varchar(1),No,No,No,,,
+CONCEPT,Vocabulary,concept_code,varchar(50),Yes,No,No,,,
+CONCEPT,Vocabulary,valid_start_date,date,Yes,No,No,,,Y
+CONCEPT,Vocabulary,valid_end_date,date,Yes,No,No,,,Y
+CONCEPT,Vocabulary,invalid_reason,varchar(1),No,No,No,,,Y
+VOCABULARY,Vocabulary,vocabulary_id,varchar(20),Yes,Yes,No,,,
+VOCABULARY,Vocabulary,vocabulary_name,varchar(255),Yes,No,No,,,
+VOCABULARY,Vocabulary,vocabulary_reference,varchar(255),Yes,No,No,,,
+VOCABULARY,Vocabulary,vocabulary_version,varchar(255),No,No,No,,,
+VOCABULARY,Vocabulary,vocabulary_concept_id,integer,Yes,No,Yes,CONCEPT,,
+DOMAIN,Vocabulary,domain_id,varchar(20),Yes,Yes,No,,,
+DOMAIN,Vocabulary,domain_name,varchar(255),Yes,No,No,,,
+DOMAIN,Vocabulary,domain_concept_id,integer,Yes,No,Yes,CONCEPT,,
+CONCEPT_RELATIONSHIP,Vocabulary,concept_id_1,integer,Yes,No,Yes,CONCEPT,,
+CONCEPT_RELATIONSHIP,Vocabulary,concept_id_2,integer,Yes,No,Yes,CONCEPT,,
+CONCEPT_RELATIONSHIP,Vocabulary,relationship_id,varchar(20),Yes,No,Yes,RELATIONSHIP,,
+CONCEPT_RELATIONSHIP,Vocabulary,valid_start_date,date,Yes,No,No,,,Y
+CONCEPT_RELATIONSHIP,Vocabulary,valid_end_date,date,Yes,No,No,,,Y
+CONCEPT_RELATIONSHIP,Vocabulary,invalid_reason,varchar(1),No,No,No,,,Y
+RELATIONSHIP,Vocabulary,relationship_id,varchar(20),Yes,Yes,No,,,
+RELATIONSHIP,Vocabulary,relationship_name,varchar(255),Yes,No,No,,,
+RELATIONSHIP,Vocabulary,is_hierarchical,varchar(1),Yes,No,No,,,
+RELATIONSHIP,Vocabulary,defines_ancestry,varchar(1),Yes,No,No,,,
+RELATIONSHIP,Vocabulary,reverse_relationship_id,varchar(20),Yes,No,No,,,
+RELATIONSHIP,Vocabulary,relationship_concept_id,integer,Yes,No,Yes,CONCEPT,,

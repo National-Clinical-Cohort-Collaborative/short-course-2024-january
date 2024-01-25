@@ -1,0 +1,71 @@
+﻿vocabulary_id,vocabulary_name,vocabulary_reference,vocabulary_version,vocabulary_concept_id
+ABMS,Provider Specialty (American Board of Medical Specialties),http://www.abms.org/member-boards/specialty-subspecialty-certificates,2018-06-26 ABMS,45756746
+ATC,WHO Anatomic Therapeutic Chemical Classification,http://www.whocc.no/atc_ddd_index/,RxNorm 20200504,44819117
+CDM,OMOP Common DataModel,https://github.com/OHDSI/CommonDataModel,CDM v6.0.2,32485
+CMS Place of Service,Place of Service Codes for Professional Claims (CMS),http://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/PhysicianFeeSched/downloads//Website_POS_database.pdf,2009-01-11,44819110
+Cohort Type,OMOP Cohort Type,OMOP generated,NULL,44819234
+Concept Class,OMOP Concept Class,OMOP generated,NULL,44819233
+Condition Status,OMOP Condition Status,OMOP generated,NULL,32887
+Condition Type,OMOP Condition Occurrence Type,OMOP generated,NULL,44819127
+Cost,OMOP Cost,OMOP generated,NULL,581457
+Cost Type,OMOP Cost Type,OMOP generated,NULL,5029
+CPT4,Current Procedural Terminology version 4 (AMA),http://www.nlm.nih.gov/research/umls/licensedcontent/umlsknowledgesources.html,2020 Release,44819100
+Currency,International Currency Symbol (ISO 4217),http://www.iso.org/iso/home/standards/currency_codes.htm,2008,44819153
+CVX,CDC Vaccine Administered CVX (NCIRD),https://www2a.cdc.gov/vaccines/iis/iisstandards/vaccines.asp?rpt=cvx,CVX Code Set 2021-01-26,581400
+Death Type,OMOP Death Type,OMOP generated,NULL,44819135
+Device Type,OMOP Device Type,OMOP generated,NULL,44819151
+Domain,OMOP Domain,OMOP generated,NULL,44819147
+DRG,Diagnosis-related group (CMS),http://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/AcuteInpatientPPS/Acute-Inpatient-Files-for-Download.html,2011-18-02,44819130
+Drug Type,OMOP Drug Exposure Type,OMOP generated,NULL,44819126
+Episode,OMOP Episode,OMOP generated,Episode 20201014,32523
+Ethnicity,OMOP Ethnicity,OMOP generated,NULL,44819134
+Gender,OMOP Gender,OMOP generated,NULL,44819108
+HCPCS,Healthcare Common Procedure Coding System (CMS),http://www.nlm.nih.gov/research/umls/licensedcontent/umlsknowledgesources.html,2020 Alpha Numeric HCPCS File,44819101
+ICD10,"International Classification of Diseases, Tenth Revision (WHO)",http://www.who.int/classifications/icd/icdonlineversions/en/,2020 Release,44819124
+ICD10CM,"International Classification of Diseases, Tenth Revision, Clinical Modification (NCHS)",http://www.cdc.gov/nchs/icd/icd10cm.htm,ICD10CM FY2021 code descriptions,44819098
+ICD10PCS,ICD-10 Procedure Coding System (CMS),http://www.cms.gov/Medicare/Coding/ICD10/index.html,ICD10PCS 2021,44819125
+ICD9CM,"International Classification of Diseases, Ninth Revision, Clinical Modification, Volume 1 and 2 (NCHS)",http://www.cms.gov/Medicare/Coding/ICD9ProviderDiagnosticCodes/codes.html,ICD9CM v32 master descriptions,5046
+ICD9Proc,"International Classification of Diseases, Ninth Revision, Clinical Modification, Volume 3 (NCHS)",http://www.cms.gov/Medicare/Coding/ICD9ProviderDiagnosticCodes/codes.html,ICD9CM v32 master descriptions,44819099
+ICDO3,"International Classification of Diseases for Oncology, Third Edition (WHO)",https://seer.cancer.gov/icd-o-3/,ICDO3 SEER Site/Histology Released 06/2020,581426
+Korean Revenue Code,Korean Revenue Code,OMOP generated,NULL,32724
+Language,OMOP Language,OMOP generated,Language 20221030,33069
+LOINC,Logical Observation Identifiers Names and Codes (Regenstrief Institute),http://loinc.org/downloads/loinc,2.68,44819102
+Meas Type,OMOP Measurement Type,OMOP generated,NULL,44819152
+Medicare Specialty,Medicare provider/supplier specialty codes (CMS),http://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/MedicareProviderSupEnroll/Taxonomy.html,2018-06-26 Specialty,44819138
+Metadata,Metadata,OMOP generated,NULL,32675
+NAACCR,Data Standards & Data Dictionary Volume II (NAACCR),http://datadictionary.naaccr.org/?c=10,NAACCR v18,32642
+NDC,National Drug Code (FDA and manufacturers),"http://www.nlm.nih.gov/research/umls/rxnorm/docs/rxnormfiles.html, http://www.fda.gov/downloads/Drugs/DevelopmentApprovalProcess/UCM070838.zip",NDC 20210328,44819105
+Nebraska Lexicon,Nebraska Lexicon,https://www.unmc.edu/pathology-research/bioinformatics/campbell/tdc.html,Nebraska Lexicon 20190816,32757
+None,OMOP Standardized Vocabularies,OMOP generated,v5.0 02-APR-21,44819096
+Note Type,OMOP Note Type,OMOP generated,NULL,44819146
+NUCC,National Uniform Claim Committee Health Care Provider Taxonomy Code Set (NUCC),http://www.nucc.org/index.php?option=com_content&view=article&id=107&Itemid=132,2018-06-26 NUCC,44819137
+Obs Period Type,OMOP Observation Period Type,OMOP generated,NULL,44819149
+Observation Type,OMOP Observation Type,OMOP generated,NULL,44819129
+OMOP Extension,OMOP Extension (OHDSI),OMOP generated,OMOP Extension 20210402,32758
+OSM,OpenStreetMap,"https://www.openstreetmap.org/copyright/en, https://wambachers-osm.website/boundaries/",OSM Release 2019-02-21,32541
+PCORNet,National Patient-Centered Clinical Research Network (PCORI),OMOP generated,NULL,44819148
+PHDSC,Source of Payment Typology (PHDSC),http://www.phdsc.org/standards/payer-typology-source.asp,Version 3.0,32473
+Plan,"Health Plan - contract to administer healthcare transactions by the payer, facilitated by the sponsor",OMOP generated,NULL,32471
+Plan Stop Reason,Plan Stop Reason - Reason for termination of the Health Plan,OMOP generated,NULL,32474
+Procedure Type,OMOP Procedure Occurrence Type,OMOP generated,NULL,44819128
+Race,Race and Ethnicity Code Set (USBC),http://www.cdc.gov/nchs/data/dvs/Race_Ethnicity_CodeSet.pdf,Version 1.0,44819109
+Relationship,OMOP Relationship,OMOP generated,NULL,44819235
+Revenue Code,UB04/CMS1450 Revenue Codes (CMS),http://www.mpca.net/?page=ERC_finance,2010 Release,44819133
+RxNorm,RxNorm (NLM),http://www.nlm.nih.gov/research/umls/rxnorm/docs/rxnormfiles.html,RxNorm 20210104,44819104
+RxNorm Extension,RxNorm Extension (OHDSI),OMOP generated,RxNorm Extension 2021-02-12,252
+SNOMED,Systematic Nomenclature of Medicine - Clinical Terms (IHTSDO),http://www.nlm.nih.gov/research/umls/licensedcontent/umlsknowledgesources.html,2020-07-31 SNOMED CT International Edition; 2020-09-01 SNOMED CT US Edition; 2020-10-28 SNOMED CT UK Edition,44819097
+SOPT,Source of Payment Typology (PHDSC),https://www.nahdo.org/sopt,SOPT Version 9.2,32473
+Specimen Type,OMOP Specimen Type,OMOP generated,NULL,581376
+SPL,Structured Product Labeling (FDA),http://www.fda.gov/Drugs/InformationOnDrugs/ucm142438.htm,NDC 20210328,44819140
+Sponsor,Sponsor - institution or individual financing healthcare transactions,OMOP generated,NULL,32472
+Type Concept,OMOP Type Concept,OMOP generated,Type Concept 20210212,32808
+UB04 Point of Origin,UB04 Claim Source Inpatient Admission Code (CMS),https://www.resdac.org/cms-data/variables/Claim-Source-Inpatient-Admission-Code,NULL,32045
+UB04 Pri Typ of Adm,UB04 Claim Inpatient Admission Type Code (CMS),https://www.resdac.org/cms-data/variables/Claim-Inpatient-Admission-Type-Code,NULL,32046
+UB04 Pt dis status,UB04 Patient Discharge Status Code (CMS),https://www.resdac.org/cms-data/variables/patient-discharge-status-code,NULL,32047
+UB04 Typ bill,UB04 Type of Bill - Institutional (USHIK),https://ushik.ahrq.gov/ViewItemDetails?&system=apcd&itemKey=196987000,NULL,32044
+UCUM,Unified Code for Units of Measure (Regenstrief Institute),http://aurora.regenstrief.org/~ucum/ucum.html#section-Alphabetic-Index,Version 1.8.2,44819107
+US Census,United States Census Bureau,https://www.census.gov/geo/maps-data/data/tiger-cart-boundary.html,US Census 2017 Release,32570
+VA Class,VA National Drug File Class (VA),http://www.nlm.nih.gov/research/umls/rxnorm/docs/rxnormfiles.html,RxNorm 20211101,44819122
+Visit,OMOP Visit,OMOP generated,NULL,44819119
+Visit Type,OMOP Visit Type,OMOP generated,NULL,44819150
+Vocabulary,OMOP Vocabulary,OMOP generated,NULL,44819232
