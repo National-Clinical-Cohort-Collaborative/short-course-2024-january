@@ -10,22 +10,25 @@ Before Session 3 Starts
 ------------------------------
 
 Before Session 3,
-please.
-Then create four Code Workbooks.
-
+please complete the reading list and
+then create four Code Workbooks.
 
 ### Reading
 
-*  Reread G2N3C's [Section 8.4.3](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/chapters/tools.html#sec-tools-apps-workbook) that focuses on Code Workbooks
-*  Brush up your SQL.  If you don't have an intro book available, I recommend lessons 1-12 of the interactive [SQLBolt](https://sqlbolt.com/).
-*  Read the OMOP & N3C documentation for a few important tables we'll use in Session 3:
-   *  OMOP's [`person`](https://ohdsi.github.io/CommonDataModel/cdm60.html#PERSON)
-   *  OMOP's [`observation`](https://ohdsi.github.io/CommonDataModel/cdm60.html#OBSERVATION)
-   *  OMOP's [`condition_occurrence`](https://ohdsi.github.io/CommonDataModel/cdm60.html#CONDITION_OCCURRENCE)
-   *  N3C's [covid patients](https://unite.nih.gov/workspace/module/view/latest/ri.workshop.main.module.3ab34203-d7f3-482e-adbd-f4113bfd1a2b?id=KO-BE5C652&view=focus) fact table assembled by the [logic liaisons](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/chapters/support.html#sec-support-liaisons-logic)
-      *  Read the first part carefully (about two pages).
-      *  For the sake of Session 3, you can skim starting at the variable definitions in the "DATA DICTIONARY" section.
-         But when you use it in a real analysis in a few weeks/months, please the whole document carefully.
+* Reread G2N3C's [Section 8.4.3](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/chapters/tools.html#sec-tools-apps-workbook) that focuses on Code Workbooks
+* Brush up your SQL.  If you don't have an intro book available, I recommend lessons 1-12 of the interactive [SQLBolt](https://sqlbolt.com/).
+* Brush up your R or Python.  We won't be programming a lot during class, but you'll need to know enough to follow the rough approach.
+  Common recommendations include:
+  * [*R for Data Science*, 2E](https://r4ds.hadley.nz/)
+  * [*Python for Data Analysis*, 3E](https://wesmckinney.com/book/)
+* Read the OMOP & N3C documentation for a few important tables we'll use in Session 3:
+  * OMOP's [`person`](https://ohdsi.github.io/CommonDataModel/cdm60.html#PERSON)
+  * OMOP's [`observation`](https://ohdsi.github.io/CommonDataModel/cdm60.html#OBSERVATION)
+  * OMOP's [`condition_occurrence`](https://ohdsi.github.io/CommonDataModel/cdm60.html#CONDITION_OCCURRENCE)
+  * N3C's [covid patients](https://unite.nih.gov/workspace/module/view/latest/ri.workshop.main.module.3ab34203-d7f3-482e-adbd-f4113bfd1a2b?id=KO-BE5C652&view=focus) fact table assembled by the [logic liaisons](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/chapters/support.html#sec-support-liaisons-logic)
+    * Read the first part carefully (about two pages).
+    * For the sake of Session 3, you can skim starting at the variable definitions in the "DATA DICTIONARY" section.
+      But when you use it in a real analysis in a few weeks/months, please the whole document carefully.
 
 ### Log into the Enclave and create your personal directory for this class.
 
@@ -101,19 +104,27 @@ So don't add unnecessary packages.
     1.  Link to your group's manuscript & supplement drafts
     1.  Concept sets used or discussed
 1.  Describe the workflow among code workbooks.  For Session 3, the order is
-    1.  manipulation-1
-    1.  graphs-1
-    1.  validation-1
-    1.  modeling-1
+    1.  `manipulation-1`
+    1.  `graphs-1`
+    1.  `validation-1`
+    1.  `modeling-1`
+1.  For this class, some important resources are
+    1.  Our class's GitHub [file repository](https://github.com/National-COVID-Cohort-Collaborative/short-course-2024-january)
+    1.  The dataset simulated for this Session, which is stored in the Enclave.
+        I like including both the
+        * direct link:
+          <https://unite.nih.gov/workspace/compass/view/ri.compass.main.folder.32f8e987-c58c-44a0-bff8-8b8fb3d15805>
+        * spelled-out path:
+          `N3C Training Area/Group Exercises/Introduction to Real World Data Analysis for COVID-19 Research, Spring 2024/analysis-with-synthetic-data/`
 
 **Resources**
 
-- [*The Researcher's Guide to
+* [*The Researcher's Guide to
   N3C*](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/)
   - [Section 8.4.3 Code
     Workbooks](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/chapters/tools.html#sec-tools-apps-workbook)
-- [N3C Office Hours](https://covid.cd2h.org/support/) on Tuesdays &
-  Thursdays
+* [N3C Office Hours](https://covid.cd2h.org/support/) on Tuesdays & Thursdays
+* [OMOP tables](https://ohdsi.github.io/CommonDataModel/cdm53.html)
 
 After Session 3 Ends
 ------------------------------
