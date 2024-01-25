@@ -51,29 +51,6 @@ That you created already in the [assignments leading into Session 3](../homework
     }
 
     # ---- IO --------------
-    to_rds <- function(d, assert_data_frame = TRUE) {
-      if (assert_data_frame) assert_r_data_frame(d)
-      output    <- new.output()
-      output_fs <- output$fileSystem()
-      saveRDS(d, output_fs$get_path("data.rds", 'w'))
-
-      if (assert_data_frame) {
-        stat <-
-          sprintf(
-            "%i_cols-by-%.1f_krows",
-            ncol(d),
-            nrow(d) / 1000
-          )
-        # Write a dummy dataset with a meaningful file name.
-        write.csv(mtcars, output_fs$get_path(stat, 'w'))
-      }
-    }
-    from_rds <- function(data) {
-      fs   <- data$fileSystem()
-      path <- fs$get_path("data.rds", 'r')
-      readRDS(path)
-    }
-
     to_parquet <- function(d, assert_data_frame = TRUE) {
       if (assert_data_frame) assert_r_data_frame(d)
       output    <- new.output()

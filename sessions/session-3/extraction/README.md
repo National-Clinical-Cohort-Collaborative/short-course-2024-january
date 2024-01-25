@@ -474,29 +474,6 @@ Notes:
     }
 
     # ---- IO --------------
-    to_rds <- function(d, assert_data_frame = TRUE) {
-      if (assert_data_frame) assert_r_data_frame(d)
-      output    <- new.output()
-      output_fs <- output$fileSystem()
-      saveRDS(d, output_fs$get_path("data.rds", 'w'))
-
-      if (assert_data_frame) {
-        stat <-
-          sprintf(
-            "%i_cols-by-%.1f_krows",
-            ncol(d),
-            nrow(d) / 1000
-          )
-        # Write a dummy dataset with a meaningful file name.
-        write.csv(mtcars, output_fs$get_path(stat, 'w'))
-      }
-    }
-    from_rds <- function(data) {
-      fs   <- data$fileSystem()
-      path <- fs$get_path("data.rds", 'r')
-      readRDS(path)
-    }
-
     to_parquet <- function(d, assert_data_frame = TRUE) {
       if (assert_data_frame) assert_r_data_frame(d)
       output    <- new.output()
@@ -726,3 +703,77 @@ Notes:
     1.  "intermediate": gray (#999999)
     1.  "outcome": orange (#FB9E00)
     1.  "diagnostic": cyan (#73D8FF)
+
+## Extra Code
+
+Here are some snippets that we won't need for this session,
+but may be helpful in your projects.
+
+### Save as an rds instead of parquet
+
+If for some reason the [arrow](https://arrow.apache.org/docs/r/)
+package isn't available in your R installation
+and you don't need interoperatibility with other languages
+
+`pt_rds` node:
+```r
+pt_rds <- function(pt) {
+  load_packages()
+  assert_spark_data_frame(pt)
+
+  # ---- retrieve -----------------
+  ds <-
+    pt |>
+    SparkR::arrange("pt_index") |>
+    SparkR::collect() |>
+    tibble::as_tibble() |>
+    prepare_dataset()
+
+  # ---- verify-values -----------------
+  nrow(ds)
+  dplyr::n_distinct(ds$pt_index)
+
+  # ---- persist -----------------
+  ds |>
+    to_rds()
+}
+```
+
+`pt_rds_peek` node
+
+```r
+pt_rds_peek <- function(pt_rds) {
+  load_packages()
+  assert_transform_object(pt_rds)
+
+  pt_rds |>
+    from_rds()
+}
+```
+
+In the "IO" section of Global Code:
+
+```r
+to_rds <- function(d, assert_data_frame = TRUE) {
+  if (assert_data_frame) assert_r_data_frame(d)
+  output    <- new.output()
+  output_fs <- output$fileSystem()
+  saveRDS(d, output_fs$get_path("data.rds", 'w'))
+
+  if (assert_data_frame) {
+    stat <-
+      sprintf(
+        "%i_cols-by-%.1f_krows",
+        ncol(d),
+        nrow(d) / 1000
+      )
+    # Write a dummy dataset with a meaningful file name.
+    write.csv(mtcars, output_fs$get_path(stat, 'w'))
+  }
+}
+from_rds <- function(data) {
+  fs   <- data$fileSystem()
+  path <- fs$get_path("data.rds", 'r')
+  readRDS(path)
+}
+```
