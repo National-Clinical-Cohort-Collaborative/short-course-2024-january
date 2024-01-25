@@ -1,6 +1,6 @@
 ---
 title: Descriptives Report 1
-date: "Date: 2024-01-21"
+date: "Date: 2024-01-25"
 output:
   # radix::radix_article: # radix is a newer alternative that has some advantages over `html_document`.
   html_document:
@@ -43,7 +43,7 @@ Summary {.tabset .tabset-fade .tabset-pills}
 Notes
 ---------------------------------------------------------------------------
 
-1. The current report covers 91 patients, with 3 unique values for `data_partner_id`.
+1. The current report covers 911 patients, with 3 unique values for `data_partner_id`.
 
 
 Unanswered Questions
@@ -56,7 +56,7 @@ Answered Questions
 Univariate
 ===========================================================================
 
-![](figure-png/marginals-1.png)<!-- -->![](figure-png/marginals-2.png)<!-- -->![](figure-png/marginals-3.png)<!-- -->![](figure-png/marginals-4.png)<!-- -->![](figure-png/marginals-5.png)<!-- -->![](figure-png/marginals-6.png)<!-- -->![](figure-png/marginals-7.png)<!-- -->![](figure-png/marginals-8.png)<!-- -->![](figure-png/marginals-9.png)<!-- -->![](figure-png/marginals-10.png)<!-- -->![](figure-png/marginals-11.png)<!-- -->![](figure-png/marginals-12.png)<!-- -->![](figure-png/marginals-13.png)<!-- -->![](figure-png/marginals-14.png)<!-- -->
+![](figure-png/marginals-1.png)<!-- -->![](figure-png/marginals-2.png)<!-- -->![](figure-png/marginals-3.png)<!-- -->![](figure-png/marginals-4.png)<!-- -->![](figure-png/marginals-5.png)<!-- -->![](figure-png/marginals-6.png)<!-- -->![](figure-png/marginals-7.png)<!-- -->![](figure-png/marginals-8.png)<!-- -->![](figure-png/marginals-9.png)<!-- -->![](figure-png/marginals-10.png)<!-- -->![](figure-png/marginals-11.png)<!-- -->![](figure-png/marginals-12.png)<!-- -->![](figure-png/marginals-13.png)<!-- -->![](figure-png/marginals-14.png)<!-- -->![](figure-png/marginals-15.png)<!-- -->![](figure-png/marginals-16.png)<!-- -->![](figure-png/marginals-17.png)<!-- -->
 
 
 Multivariate
@@ -113,7 +113,7 @@ For the sake of documentation and reproducibility, the current report was render
      collate  en_US.UTF-8
      ctype    en_US.UTF-8
      tz       America/Chicago
-     date     2024-01-21
+     date     2024-01-25
      rstudio  2023.12.0+369 Ocean Storm (desktop)
      pandoc   3.1.11 @ /usr/bin/ (via rmarkdown)
     
@@ -163,27 +163,35 @@ For the sake of documentation and reproducibility, the current report was render
      jsonlite          1.8.8      2023-12-04 [1] CRAN (R 4.3.1)
      knitr           * 1.45       2023-10-30 [1] CRAN (R 4.3.1)
      labeling          0.4.3      2023-08-29 [1] CRAN (R 4.3.1)
+     lattice           0.22-5     2023-10-24 [1] CRAN (R 4.3.1)
      lifecycle         1.0.4      2023-11-07 [1] CRAN (R 4.3.1)
      lubridate         1.9.3      2023-09-27 [1] CRAN (R 4.3.1)
      magrittr          2.0.3      2022-03-30 [1] CRAN (R 4.3.1)
+     Matrix            1.6-5      2024-01-11 [1] CRAN (R 4.3.1)
      memoise           2.0.1      2021-11-26 [1] CRAN (R 4.3.1)
      methods         * 4.3.1      2023-08-02 [4] local
+     mgcv              1.9-1      2023-12-21 [1] CRAN (R 4.3.1)
      munsell           0.5.0      2018-06-12 [1] CRAN (R 4.3.1)
+     nlme              3.1-164    2023-11-27 [1] CRAN (R 4.3.1)
      OuhscMunge        0.2.0.9016 2024-01-14 [1] local
-     parallel          4.3.1      2023-08-02 [4] local
      pillar            1.9.0      2023-03-22 [1] CRAN (R 4.3.1)
      pkgconfig         2.0.3      2019-09-22 [1] CRAN (R 4.3.1)
+     pkgload           1.3.4      2024-01-16 [1] CRAN (R 4.3.1)
+     png               0.1-8      2022-11-29 [1] CRAN (R 4.3.1)
      proto             1.0.0      2016-10-29 [1] CRAN (R 4.3.1)
      purrr             1.0.2      2023-08-10 [1] CRAN (R 4.3.1)
      R6                2.5.1      2021-08-19 [1] CRAN (R 4.3.1)
+     Rcpp              1.0.12     2024-01-09 [1] CRAN (R 4.3.1)
      readr             2.1.5      2024-01-10 [1] CRAN (R 4.3.1)
+     reticulate        1.34.0     2023-10-12 [1] CRAN (R 4.3.1)
      rlang             1.1.3      2024-01-10 [1] CRAN (R 4.3.1)
      rmarkdown         2.25       2023-09-18 [1] CRAN (R 4.3.1)
-     RSQLite         * 2.3.4      2023-12-08 [1] CRAN (R 4.3.1)
+     RSQLite         * 2.3.5      2024-01-21 [1] CRAN (R 4.3.1)
      rstudioapi        0.15.0     2023-07-07 [1] CRAN (R 4.3.1)
      sass              0.4.8      2023-12-06 [1] CRAN (R 4.3.1)
      scales            1.3.0      2023-11-28 [1] CRAN (R 4.3.1)
      sessioninfo       1.2.2      2021-12-06 [1] CRAN (R 4.3.1)
+     splines           4.3.1      2023-08-02 [4] local
      sqldf             0.4-11     2017-06-28 [1] CRAN (R 4.3.1)
      stats           * 4.3.1      2023-08-02 [4] local
      TabularManifest   0.2.1      2023-11-15 [1] Github (Melinae/TabularManifest@bcb12f7)
@@ -214,4 +222,4 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 
-Report rendered by wibeasley at 2024-01-21, 13:53 -0600 in 5 seconds.
+Report rendered by wibeasley at 2024-01-25, 09:42 -0600 in 5 seconds.

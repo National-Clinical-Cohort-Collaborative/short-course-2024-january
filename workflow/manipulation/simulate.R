@@ -27,7 +27,7 @@ requireNamespace("checkmate"    ) # For asserting conditions meet expected patte
 config                         <- config::get()
 set.seed(453)
 
-pt_count       <- 100
+pt_count       <- 1000
 # possible_date_offset    <- 30:120   # Add between 30 & 120 days to Jan 1, to get the exact visit date.
 
 # "p" stands for probability
