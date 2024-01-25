@@ -9,7 +9,11 @@ Assets For Students
 * This GitHub public repo:<br><https://github.com/National-COVID-Cohort-Collaborative/short-course-2024-january>
 * [Syllabus](background/syllabus/Student%20Syllabus%20Short%20Course%202024.pdf)
 * *The Researcher's Guide to N3C*: <https://covid.cd2h.org/guide-to-n3c>
-* *The Book of OHDSI*: <https://ohdsi.github.io/TheBookOfOhdsi>
+* OHDSI Resources:
+  * *The Book of OHDSI*: <https://ohdsi.github.io/TheBookOfOhdsi>
+  * OMOP table structure: <https://ohdsi.github.io/CommonDataModel/cdm53.html>
+  * Athena to view OMOP concepts: <https://athena.ohdsi.org/search-terms/terms>
+  * Atlas to view concept sets: <https://atlas-demo.ohdsi.org/#/home>
 * [Level 0 Workspace](https://unite.nih.gov/workspace/compass/view/ri.compass.main.folder.86a7020f-db30-4fd1-b735-bbaf53512365) (that can be shared to anyone with an Enclave account)
 * [Level 2 Workspace](https://unite.nih.gov/workspace/compass/view/ri.compass.main.folder.713d3259-a7b4-43f4-bbac-d1db215aff8b) (that is open only to students of this course)
 
