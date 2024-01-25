@@ -10,22 +10,22 @@ Before Session 3 Starts
 ------------------------------
 
 Before Session 3,
-please.
-Then create four Code Workbooks.
+please complete the reading list and
+then create four Code Workbooks.
 
 
 ### Reading
 
-*  Reread G2N3C's [Section 8.4.3](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/chapters/tools.html#sec-tools-apps-workbook) that focuses on Code Workbooks
-*  Brush up your SQL.  If you don't have an intro book available, I recommend lessons 1-12 of the interactive [SQLBolt](https://sqlbolt.com/).
-*  Read the OMOP & N3C documentation for a few important tables we'll use in Session 3:
-   *  OMOP's [`person`](https://ohdsi.github.io/CommonDataModel/cdm60.html#PERSON)
-   *  OMOP's [`observation`](https://ohdsi.github.io/CommonDataModel/cdm60.html#OBSERVATION)
-   *  OMOP's [`condition_occurrence`](https://ohdsi.github.io/CommonDataModel/cdm60.html#CONDITION_OCCURRENCE)
-   *  N3C's [covid patients](https://unite.nih.gov/workspace/module/view/latest/ri.workshop.main.module.3ab34203-d7f3-482e-adbd-f4113bfd1a2b?id=KO-BE5C652&view=focus) fact table assembled by the [logic liaisons](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/chapters/support.html#sec-support-liaisons-logic)
-      *  Read the first part carefully (about two pages).
-      *  For the sake of Session 3, you can skim starting at the variable definitions in the "DATA DICTIONARY" section.
-         But when you use it in a real analysis in a few weeks/months, please the whole document carefully.
+* Reread G2N3C's [Section 8.4.3](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/chapters/tools.html#sec-tools-apps-workbook) that focuses on Code Workbooks
+* Brush up your SQL.  If you don't have an intro book available, I recommend lessons 1-12 of the interactive [SQLBolt](https://sqlbolt.com/).
+* Read the OMOP & N3C documentation for a few important tables we'll use in Session 3:
+  * OMOP's [`person`](https://ohdsi.github.io/CommonDataModel/cdm60.html#PERSON)
+  * OMOP's [`observation`](https://ohdsi.github.io/CommonDataModel/cdm60.html#OBSERVATION)
+  * OMOP's [`condition_occurrence`](https://ohdsi.github.io/CommonDataModel/cdm60.html#CONDITION_OCCURRENCE)
+  * N3C's [covid patients](https://unite.nih.gov/workspace/module/view/latest/ri.workshop.main.module.3ab34203-d7f3-482e-adbd-f4113bfd1a2b?id=KO-BE5C652&view=focus) fact table assembled by the [logic liaisons](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/chapters/support.html#sec-support-liaisons-logic)
+    * Read the first part carefully (about two pages).
+    * For the sake of Session 3, you can skim starting at the variable definitions in the "DATA DICTIONARY" section.
+      But when you use it in a real analysis in a few weeks/months, please the whole document carefully.
 
 ### Log into the Enclave and create your personal directory for this class.
 
@@ -108,11 +108,11 @@ So don't add unnecessary packages.
 
 **Resources**
 
-- [*The Researcher's Guide to
+* [*The Researcher's Guide to
   N3C*](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/)
   - [Section 8.4.3 Code
     Workbooks](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/chapters/tools.html#sec-tools-apps-workbook)
-- [N3C Office Hours](https://covid.cd2h.org/support/) on Tuesdays &
+* [N3C Office Hours](https://covid.cd2h.org/support/) on Tuesdays &
   Thursdays
 
 After Session 3 Ends
