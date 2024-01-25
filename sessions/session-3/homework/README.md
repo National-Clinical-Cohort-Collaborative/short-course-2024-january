@@ -9,11 +9,29 @@ Session 3 has two assignments:
 Before Session 3 Starts
 ------------------------------
 
-Before Session 3, please create four Code Workbooks.
-The first three steps resemble the [Week 1 Assignment](https://github.com/National-COVID-Cohort-Collaborative/short-course-2024-january/blob/main/sessions/session-1/session-1-assignment.pdf)
-so refer to that if you forgot some steps.
+Before Session 3,
+please.
+Then create four Code Workbooks.
+
+
+### Reading
+
+*  Reread G2N3C's [Section 8.4.3](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/chapters/tools.html#sec-tools-apps-workbook) that focuses on Code Workbooks
+*  Brush up your SQL.  If you don't have an intro book available, I recommend lessons 1-12 of the interactive [SQLBolt](https://sqlbolt.com/).
+*  Read the OMOP & N3C documentation for a few important tables we'll use in Session 3:
+   *  OMOP's [`person`](https://ohdsi.github.io/CommonDataModel/cdm60.html#PERSON)
+   *  OMOP's [`observation`](https://ohdsi.github.io/CommonDataModel/cdm60.html#OBSERVATION)
+   *  OMOP's [`condition_occurrence`](https://ohdsi.github.io/CommonDataModel/cdm60.html#CONDITION_OCCURRENCE)
+   *  N3C's [covid patients](https://unite.nih.gov/workspace/module/view/latest/ri.workshop.main.module.3ab34203-d7f3-482e-adbd-f4113bfd1a2b?id=KO-BE5C652&view=focus) fact table assembled by the [logic liaisons](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/chapters/support.html#sec-support-liaisons-logic)
+      *  Read the first part carefully (about two pages).
+      *  For the sake of Session 3, you can skim starting at the variable definitions in the "DATA DICTIONARY" section.
+         But when you use it in a real analysis in a few weeks/months, please the whole document carefully.
 
 ### Log into the Enclave and create your personal directory for this class.
+
+The section resembles the [Week 1 Assignment](https://github.com/National-COVID-Cohort-Collaborative/short-course-2024-january/blob/main/sessions/session-1/session-1-assignment.pdf)
+so refer to that if you forgot some steps.
+
 1.  Log in to the Enclave, with MFA.
 1.  In our class's [L0
     workspace](https://unite.nih.gov/workspace/compass/view/ri.compass.main.folder.86a7020f-db30-4fd1-b735-bbaf53512365),
@@ -21,7 +39,7 @@ so refer to that if you forgot some steps.
     (if it doesn't already exist).
     For directory & file names, I like [kebab
     case](https://www.freecodecamp.org/news/snake-case-vs-camel-case-vs-pascal-case-vs-kebab-case-whats-the-difference/#kebab-case)
-     (eg, "will-beasley", jerrod-anzalone", "james-cheng").
+    (eg, "will-beasley", jerrod-anzalone", "james-cheng").
 
 ### Create the `manipulation-1` Code Workbook
 
@@ -70,6 +88,23 @@ so refer to that if you forgot some steps.
 Note: when you customize an environment, it takes longer to build.
 And there's a chance the package versions don't resolve correctly.
 So don't add unnecessary packages.
+
+### Crate a README Notepad document
+
+1.  In the root of your personal directory
+    (eg, `Users/will-beasley`)
+1.  Add a new "Notepad document"
+1.  When it opens, rename it to "README"
+1.  Add important info and links to help connect different things, like
+    1.  Non-Enclave locations your group uses like Google Drive & a GitHub repo
+    1.  Link to your group's meeting notes (eg, in Google Docs)
+    1.  Link to your group's manuscript & supplement drafts
+    1.  Concept sets used or discussed
+1.  Describe the workflow among code workbooks.  For Session 3, the order is
+    1.  manipulation-1
+    1.  graphs-1
+    1.  validation-1
+    1.  modeling-1
 
 **Resources**
 
