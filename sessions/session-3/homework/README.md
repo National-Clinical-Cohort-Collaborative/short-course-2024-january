@@ -13,11 +13,14 @@ Before Session 3,
 please complete the reading list and
 then create four Code Workbooks.
 
-
 ### Reading
 
 * Reread G2N3C's [Section 8.4.3](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/chapters/tools.html#sec-tools-apps-workbook) that focuses on Code Workbooks
 * Brush up your SQL.  If you don't have an intro book available, I recommend lessons 1-12 of the interactive [SQLBolt](https://sqlbolt.com/).
+* Brush up your R or Python.  We won't be programming a lot during class, but you'll need to know enough to follow the rough approach.
+  Common recommendations include:
+  * [*R for Data Science*, 2E](https://r4ds.hadley.nz/)
+  * [*Python for Data Analysis*, 3E](https://wesmckinney.com/book/)
 * Read the OMOP & N3C documentation for a few important tables we'll use in Session 3:
   * OMOP's [`person`](https://ohdsi.github.io/CommonDataModel/cdm60.html#PERSON)
   * OMOP's [`observation`](https://ohdsi.github.io/CommonDataModel/cdm60.html#OBSERVATION)
