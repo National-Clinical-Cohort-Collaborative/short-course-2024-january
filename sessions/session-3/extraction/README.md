@@ -450,7 +450,7 @@ Notes:
 
     ``` r
     load_packages <- function () {
-      library(magrittr)
+      # library(magrittr) # If R <4.1
       requireNamespace("arrow")
       requireNamespace("dplyr")
       requireNamespace("tidyr")
@@ -474,29 +474,6 @@ Notes:
     }
 
     # ---- IO --------------
-    to_rds <- function(d, assert_data_frame = TRUE) {
-      if (assert_data_frame) assert_r_data_frame(d)
-      output    <- new.output()
-      output_fs <- output$fileSystem()
-      saveRDS(d, output_fs$get_path("data.rds", 'w'))
-
-      if (assert_data_frame) {
-        stat <-
-          sprintf(
-            "%i_cols-by-%.1f_krows",
-            ncol(d),
-            nrow(d) / 1000
-          )
-        # Write a dummy dataset with a meaningful file name.
-        write.csv(mtcars, output_fs$get_path(stat, 'w'))
-      }
-    }
-    from_rds <- function(data) {
-      fs   <- data$fileSystem()
-      path <- fs$get_path("data.rds", 'r')
-      readRDS(path)
-    }
-
     to_parquet <- function(d, assert_data_frame = TRUE) {
       if (assert_data_frame) assert_r_data_frame(d)
       output    <- new.output()
@@ -529,7 +506,7 @@ Notes:
         and (b) produce clear error messages if an R package isn't
         available.
 
-## Create R Transform `pt_rds`
+## Create R Transform `pt_parquet`
 
 1.  We'll cover R code later in the session. For now, just copy some
     code into a new R transform to make things easier later.
@@ -540,7 +517,7 @@ Notes:
 1.  In the input list, select `pt` and change it from "R data.frame" to
     "Spark dataframe". We'll explicitly convert it with code.
 
-1.  Find a collapsed panel in the lower right corner called "Variables".
+1.  Find a collapsed panel in the lower right corner of the Console called "Variables".
     Change `pt` from "R data.frame" to "Spark dataframe".
 
 1.  Periodically check that these last two settings don't revert back to
@@ -549,16 +526,16 @@ Notes:
 1.  Paste in the following code:
 
     ``` r
-    pt_rds <- function(pt) {
+    pt_parquet <- function(pt) {
       load_packages()
       assert_spark_data_frame(pt)
 
       # ---- retrieve -----------------
       ds <-
-        pt %>%
-        SparkR::arrange("pt_index") %>%
-        SparkR::collect() %>%
-        tibble::as_tibble() %>%
+        pt |>
+        SparkR::arrange("pt_index") |>
+        SparkR::collect() |>
+        tibble::as_tibble() |>
         prepare_dataset()
 
       # ---- verify-values -----------------
@@ -566,15 +543,15 @@ Notes:
       dplyr::n_distinct(ds$pt_index)
 
       # ---- persist -----------------
-      ds %>%
-        to_rds()
+      ds |>
+        to_parquet()
     }
     ```
 
 1.  Toggle the "Save as dataset" on.
 
 1.  A 2nd name pops up for the transform.
-    Keep the pair of names consistent (eg, `pt_rds` also).
+    Keep the pair of names consistent (eg, `pt_parquet` also).
 
 1.  Click blue "Run" button.
 
@@ -582,40 +559,36 @@ Notes:
 
 1.  Click the blue Run/Preview like we have.
 
-    This is the real way of doing it, and the resulting product is
-    saved.
+    This is the real way of doing it, and the resulting product is saved.
 
-1.  Select the code you want to execute, and click click [ctrl +
-    shift + enter].
+1.  Select the code you want to execute, and click click [ctrl + shift + enter].
 
     This is how you can debug small sections of code and iteratively
     developed focused sections faster.
 
-    This runs code in the "Console" panel, which is acts kinda
-    independently.
+    This runs code in the "Console" panel, which is acts kinda independently.
 
-    Note that the first time you run something in the console, execute
-    `load_packages()` by itself.
+    Note that the first time you run something in the console,
+    execute `load_packages()` by itself.
 
-## Peek at Retrieved rds
+## Peek at Retrieved parquet file
 
-1.  Create an R transform downstream of `pt_rds`.
+1.  Create an R transform downstream of `pt_parquet`.
 
 1.  Follow the previous steps, but:
 
     1.  Change the type to "R transform" (instead of "Spark dataframe").
-    1.  Don't save the dataset. The Preview mode is adequate for our
-        diagnostic needs.
+    1.  Don't save the dataset. The Preview mode is adequate for our diagnostic needs.
 
 1.  Paste in the following code:
 
     ``` r
-    pt_rds_peek <- function(pt_rds) {
+    pt_parquet_peek <- function(pt_parquet) {
       load_packages()
-      assert_transform_object(pt_rds)
+      assert_transform_object(pt_parquet)
 
-      pt_rds |>
-        from_rds()
+      pt_parquet |>
+        from_parquet()
     }
     ```
 
@@ -625,19 +598,19 @@ Notes:
 
 1.  In the preview mode, only the top 50 records are returned.
 
-## Benefits of an Rds File
+## Benefits of a Parquet File
 
 1.  The `pt` transform has one row per patient and will be the dataset
-    used in all downstream analyses in this session. (Hint, code it as
-    an "outcome" node in tonight's assignment.)
+    used in all downstream analyses in this session.
+    (Hint, color code it as an "outcome" node in tonight's assignment.)
 1.  We'll later benefit if we spend some time now to create an
-    R-flavored dataset.
+    analysis-minded dataset.
 1.  A few analysis tasks benefit by adding decorations to a Spark table.
     that has several benefits:
     1.  [R factors](https://r4ds.hadley.nz/factors.html) are important
         when the analysis models include categorical variables
         (eg, `covid_severity`).
-    1.  R factors designate when a number should be treated like a category
+    1.  R factors designate that a number should be treated like a category
         (eg, `data_partner_id`)
     1.  It's kinda expensive translating a Spark
         [DataFrame](https://spark.apache.org/docs/latest/sql-programming-guide.html)
@@ -645,10 +618,14 @@ Notes:
         data.frame](https://www.r-tutor.com/r-introduction/data-frame).
         Do this once, and recall the saved data.frame in later
         workbooks.
-1.  A saved/serialized/persisted data.frame is called an [rds
-    file](https://stat.ethz.ch/R-manual/R-devel/library/base/html/readRDS.html).
+    1. parquet files can be read quickly by R, Python, & Spark consumers.
 1.  One line of code restores the data.frame exactly as it was saved.
     You don't have to specify the variables' data types or the factor levels.
+1.  An [rds](https://stat.ethz.ch/R-manual/R-devel/library/base/html/readRDS.html)
+    file is similar to a parquet file.
+    It is a saved/serialized/persisted data.frame.
+1.  A parquet file has all the benefits of an "rds" file,
+    but can be easily fed to Spark or Python code downstream.
 
 **References**
 
@@ -663,16 +640,41 @@ Notes:
 
 1.  This error probably means you need to remind the Enclave that input data frame is a Spark DataFrame:
 
-        >  Error in function (classes, fdef, mtable) :
-        unable to find an inherited method for function 'arrange' for signature '"data.frame", "character"'
+    ```
+    >  Error in function (classes, fdef, mtable) :
+    unable to find an inherited method for function 'arrange' for signature '"data.frame", "character"'
 
-        >  traceback:
-        >  pt %>% SparkR::arrange("pt_index")
-        >  ...
+    >  traceback:
+    >  pt %>% SparkR::arrange("pt_index")
+    >  ...
+    ```
 
-1.  This error probably means you didn't execute `library(magrittr)`.
+1.  This error probably means you need to remind the Enclave that input data frame is a Transform input:
+
+    ```
+    ```
+
+    In other words, there is nothing written to the Logs.
+    Click on the red "Failed" exclamation icon to see something like
+
+    ```
+    No schema found for dataset
+
+    A schema could not be found for dataset ri.foundry.main.dataset.9d73cfce-77fd-43bd-80af-e879ea84476b. Confirm the input dataset was built and contains a valid schema.
+
+    Details:
+
+    Executing job failed.
+    Error: Failed to extract input.: {recordId=..., inputTableAlias=pt_parquet}
+    com.palantir.logsafe.exceptions.SafeRuntimeException: Failed to extract input.:
+    ```
+
+1.  This error probably means you didn't execute `library(magrittr)` and you'r running an older version of R:
     Remember when you're debugging code in the console,
     `load_packages()` needs to be run separately.
+
+    ```
+    ```
 
 1.  If you modify the Global Code, either
 
@@ -701,3 +703,77 @@ Notes:
     1.  "intermediate": gray (#999999)
     1.  "outcome": orange (#FB9E00)
     1.  "diagnostic": cyan (#73D8FF)
+
+## Extra Code
+
+Here are some snippets that we won't need for this session,
+but may be helpful in your projects.
+
+### Save as an rds instead of parquet
+
+If for some reason the [arrow](https://arrow.apache.org/docs/r/)
+package isn't available in your R installation
+and you don't need interoperatibility with other languages
+
+`pt_rds` node:
+```r
+pt_rds <- function(pt) {
+  load_packages()
+  assert_spark_data_frame(pt)
+
+  # ---- retrieve -----------------
+  ds <-
+    pt |>
+    SparkR::arrange("pt_index") |>
+    SparkR::collect() |>
+    tibble::as_tibble() |>
+    prepare_dataset()
+
+  # ---- verify-values -----------------
+  nrow(ds)
+  dplyr::n_distinct(ds$pt_index)
+
+  # ---- persist -----------------
+  ds |>
+    to_rds()
+}
+```
+
+`pt_rds_peek` node
+
+```r
+pt_rds_peek <- function(pt_rds) {
+  load_packages()
+  assert_transform_object(pt_rds)
+
+  pt_rds |>
+    from_rds()
+}
+```
+
+In the "IO" section of Global Code:
+
+```r
+to_rds <- function(d, assert_data_frame = TRUE) {
+  if (assert_data_frame) assert_r_data_frame(d)
+  output    <- new.output()
+  output_fs <- output$fileSystem()
+  saveRDS(d, output_fs$get_path("data.rds", 'w'))
+
+  if (assert_data_frame) {
+    stat <-
+      sprintf(
+        "%i_cols-by-%.1f_krows",
+        ncol(d),
+        nrow(d) / 1000
+      )
+    # Write a dummy dataset with a meaningful file name.
+    write.csv(mtcars, output_fs$get_path(stat, 'w'))
+  }
+}
+from_rds <- function(data) {
+  fs   <- data$fileSystem()
+  path <- fs$get_path("data.rds", 'r')
+  readRDS(path)
+}
+```

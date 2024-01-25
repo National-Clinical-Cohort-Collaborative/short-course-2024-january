@@ -1,6 +1,6 @@
 ---
 title: (Latent) Descriptives Report 1
-date: "Date: 2024-01-21"
+date: "Date: 2024-01-25"
 output:
   # radix::radix_article: # radix is a newer alternative that has some advantages over `html_document`.
   html_document:
@@ -43,7 +43,7 @@ Summary {.tabset .tabset-fade .tabset-pills}
 Notes
 ---------------------------------------------------------------------------
 
-1. The current report covers 100 patients, with 3 unique values for `data_partner_id`.
+1. The current report covers 1000 patients, with 3 unique values for `data_partner_id`.
 
 
 Unanswered Questions
@@ -97,9 +97,9 @@ Correlation Matrixes
 
 |                                 | latent<br>risk<br>1| calc<br>age<br>covid| calc<br>outbreak<br>lag<br>years|
 |:--------------------------------|-------------------:|--------------------:|--------------------------------:|
-|latent<br>risk<br>1              |               1.000|                0.579|                           -0.153|
-|calc<br>age<br>covid             |               0.579|                1.000|                            0.115|
-|calc<br>outbreak<br>lag<br>years |              -0.153|                0.115|                            1.000|
+|latent<br>risk<br>1              |               1.000|                0.634|                           -0.143|
+|calc<br>age<br>covid             |               0.634|                1.000|                            0.016|
+|calc<br>outbreak<br>lag<br>years |              -0.143|                0.016|                            1.000|
 
 
 Models
@@ -122,13 +122,13 @@ lm(formula = latent_risk_1 ~ 1, data = ds_patient)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--4.6882 -0.9865  0.1987  1.2047  3.6497 
+-5.4952 -1.2404 -0.0032  1.2763  6.6968 
 
 Coefficients:
             Estimate Std. Error t value Pr(>|t|)
-(Intercept)   1.2932     0.1769   7.311 6.94e-11
+(Intercept)  1.10617    0.05447   20.31   <2e-16
 
-Residual standard error: 1.769 on 99 degrees of freedom
+Residual standard error: 1.722 on 999 degrees of freedom
 ```
 
 ```
@@ -142,16 +142,16 @@ lm(formula = latent_risk_1 ~ 1 + calc_outbreak_lag_years, data = ds_patient)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--4.9286 -0.9597  0.1932  1.2990  3.6090 
+-5.7534 -1.2079  0.0111  1.2012  6.4568 
 
 Coefficients:
                         Estimate Std. Error t value Pr(>|t|)
-(Intercept)               1.9887     0.4871   4.083 9.09e-05
-calc_outbreak_lag_years  -0.4064     0.2655  -1.531    0.129
+(Intercept)               1.6949     0.1400  12.107  < 2e-16
+calc_outbreak_lag_years  -0.3632     0.0797  -4.557 5.83e-06
 
-Residual standard error: 1.757 on 98 degrees of freedom
-Multiple R-squared:  0.02335,	Adjusted R-squared:  0.01339 
-F-statistic: 2.343 on 1 and 98 DF,  p-value: 0.129
+Residual standard error: 1.706 on 998 degrees of freedom
+Multiple R-squared:  0.02039,	Adjusted R-squared:  0.0194 
+F-statistic: 20.77 on 1 and 998 DF,  p-value: 5.826e-06
 ```
 
 ```
@@ -165,16 +165,16 @@ lm(formula = latent_risk_1 ~ 1 + calc_age_covid, data = ds_patient)
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--4.5738 -0.8105 -0.0186  0.9764  3.7543 
+-3.9340 -0.9132  0.0188  0.9309  4.2699 
 
 Coefficients:
                 Estimate Std. Error t value Pr(>|t|)
-(Intercept)    -0.387711   0.279607  -1.387    0.169
-calc_age_covid  0.036155   0.005143   7.030 2.78e-10
+(Intercept)    -0.643332   0.079675  -8.074 1.94e-15
+calc_age_covid  0.039993   0.001546  25.876  < 2e-16
 
-Residual standard error: 1.449 on 98 degrees of freedom
-Multiple R-squared:  0.3353,	Adjusted R-squared:  0.3285 
-F-statistic: 49.43 on 1 and 98 DF,  p-value: 2.782e-10
+Residual standard error: 1.333 on 998 degrees of freedom
+Multiple R-squared:  0.4015,	Adjusted R-squared:  0.4009 
+F-statistic: 669.6 on 1 and 998 DF,  p-value: < 2.2e-16
 ```
 
 ```
@@ -189,17 +189,17 @@ lm(formula = latent_risk_1 ~ 1 + calc_outbreak_lag_years + calc_age_covid,
 
 Residuals:
     Min      1Q  Median      3Q     Max 
--4.4210 -0.8781  0.0072  1.0068  3.3205 
+-4.2044 -0.8783 -0.0038  0.9045  4.1004 
 
 Coefficients:
                          Estimate Std. Error t value Pr(>|t|)
-(Intercept)              0.549032   0.433284   1.267  0.20814
-calc_outbreak_lag_years -0.590468   0.213323  -2.768  0.00676
-calc_age_covid           0.037743   0.005009   7.535 2.58e-11
+(Intercept)             -0.019859   0.125337  -0.158    0.874
+calc_outbreak_lag_years -0.388767   0.061104  -6.362 3.02e-10
+calc_age_covid           0.040145   0.001516  26.481  < 2e-16
 
-Residual standard error: 1.403 on 97 degrees of freedom
-Multiple R-squared:  0.3839,	Adjusted R-squared:  0.3712 
-F-statistic: 30.22 on 2 and 97 DF,  p-value: 6.273e-11
+Residual standard error: 1.307 on 997 degrees of freedom
+Multiple R-squared:  0.4249,	Adjusted R-squared:  0.4237 
+F-statistic: 368.3 on 2 and 997 DF,  p-value: < 2.2e-16
 ```
 
 ### latent risk 1 -final
@@ -207,9 +207,9 @@ F-statistic: 30.22 on 2 and 97 DF,  p-value: 6.273e-11
 
 |                        | Estimate| Std. Error| t value| Pr(>&#124;t&#124;)|
 |:-----------------------|--------:|----------:|-------:|------------------:|
-|(Intercept)             |     0.55|       0.43|    1.27|               0.21|
-|calc_outbreak_lag_years |    -0.59|       0.21|   -2.77|               0.01|
-|calc_age_covid          |     0.04|       0.01|    7.53|               0.00|
+|(Intercept)             |    -0.02|       0.13|   -0.16|               0.87|
+|calc_outbreak_lag_years |    -0.39|       0.06|   -6.36|               0.00|
+|calc_age_covid          |     0.04|       0.00|   26.48|               0.00|
 
 
 
@@ -232,7 +232,7 @@ For the sake of documentation and reproducibility, the current report was render
      collate  en_US.UTF-8
      ctype    en_US.UTF-8
      tz       America/Chicago
-     date     2024-01-21
+     date     2024-01-25
      rstudio  2023.12.0+369 Ocean Storm (desktop)
      pandoc   3.1.11 @ /usr/bin/ (via rmarkdown)
     
@@ -293,16 +293,19 @@ For the sake of documentation and reproducibility, the current report was render
      munsell           0.5.0      2018-06-12 [1] CRAN (R 4.3.1)
      nlme              3.1-164    2023-11-27 [1] CRAN (R 4.3.1)
      OuhscMunge        0.2.0.9016 2024-01-14 [1] local
-     parallel          4.3.1      2023-08-02 [4] local
      pillar            1.9.0      2023-03-22 [1] CRAN (R 4.3.1)
      pkgconfig         2.0.3      2019-09-22 [1] CRAN (R 4.3.1)
+     pkgload           1.3.4      2024-01-16 [1] CRAN (R 4.3.1)
+     png               0.1-8      2022-11-29 [1] CRAN (R 4.3.1)
      proto             1.0.0      2016-10-29 [1] CRAN (R 4.3.1)
      purrr             1.0.2      2023-08-10 [1] CRAN (R 4.3.1)
      R6                2.5.1      2021-08-19 [1] CRAN (R 4.3.1)
+     Rcpp              1.0.12     2024-01-09 [1] CRAN (R 4.3.1)
      readr             2.1.5      2024-01-10 [1] CRAN (R 4.3.1)
+     reticulate        1.34.0     2023-10-12 [1] CRAN (R 4.3.1)
      rlang             1.1.3      2024-01-10 [1] CRAN (R 4.3.1)
      rmarkdown         2.25       2023-09-18 [1] CRAN (R 4.3.1)
-     RSQLite         * 2.3.4      2023-12-08 [1] CRAN (R 4.3.1)
+     RSQLite         * 2.3.5      2024-01-21 [1] CRAN (R 4.3.1)
      rstudioapi        0.15.0     2023-07-07 [1] CRAN (R 4.3.1)
      sass              0.4.8      2023-12-06 [1] CRAN (R 4.3.1)
      scales            1.3.0      2023-11-28 [1] CRAN (R 4.3.1)
@@ -338,4 +341,4 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 
-Report rendered by wibeasley at 2024-01-21, 13:53 -0600 in 16 seconds.
+Report rendered by wibeasley at 2024-01-25, 09:42 -0600 in 13 seconds.

@@ -57,12 +57,19 @@ so refer to that if you forgot some steps.
 1. Rename it `validation-1` and
 1. Choose the "r4-high-driver-memory" environment.
 
-### Create the `analysis-1` Code Workbook
+### Create the `modeling-1` Code Workbook
 
-1. Follow the same steps as `manipulation-1`, except
-1. Rename it `analysis-1` and
-1. Choose the "r4-high-driver-memory" environment.
+1.  Follow the same steps as `manipulation-1`, except
+1.  Rename it `modeling-1` and
+1.  Choose the "r4-high-driver-memory" environment.
+1.  *Before* clicking "Update environment", add one additional packages:
+    1. Click "Customize Profile"
+    1. Search for "r-emmeans" and click the green plus button
+1.  Click the blue "Update Environment" button.
 
+Note: when you customize an environment, it takes longer to build.
+And there's a chance the package versions don't resolve correctly.
+So don't add unnecessary packages.
 
 **Resources**
 

@@ -68,7 +68,7 @@ TabularManifest::histogram_discrete(  ds, variable_name="covid_dead")
 # }
 
 # # ---- latent-risk-1 ------------------------------------------------------------
-# g1 <-
+g1 <-
   ds |>
   ggplot(aes(
     x = calc_age_covid,
@@ -107,8 +107,8 @@ TabularManifest::histogram_discrete(  ds, variable_name="covid_dead")
 g1
 
 # g1 %+% aes(color=NULL)
-g1 %+% aes(x = birth_date)
-g1 %+% aes(x = calc_outbreak_lag_years)
+# g1 %+% aes(x = birth_date)
+g1 %+% aes(x = period_first_covid_dx)
 g1 %+% aes(x = covid_date)
 #
 # ggplot(ds, aes(x=weight_gear_z, color=forward_gear_count_f, fill=forward_gear_count_f)) +
