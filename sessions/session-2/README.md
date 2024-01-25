@@ -2,7 +2,7 @@ Observational Research, OHDSI Tools, and N3C
 ============
 
 Files:
-* Slides: [OHDSI, OMOP, and Standard Vocabularies](session-2-concept-sets.pdf), Jerrod Anzalone
+* Slides: [OHDSI, OMOP, and Standard Vocabularies](omop-standard-vocabs.pdf.pdf), Jerrod Anzalone
 * Slides: [Concept Sets](session-2-concept-sets.pdf), Shawn O'Neil
 * [In-Class Exercise](session2_exercises.docx)
 * [Assignment 2](session-2-assignment.pdf)
