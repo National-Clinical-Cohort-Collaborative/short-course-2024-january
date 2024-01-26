@@ -105,7 +105,7 @@ ds_site <-
   dplyr::mutate(
     covid_start_site      = config$covid_start_nation + runif(site_count, min = 0, max = 45),
     site_relative_size    = round(rchisq(site_count, 5)               , 4),
-    site_int              = round(rbeta(site_count, 4.4, 4.4) - .5    , 4),
+    site_int              = round(rbeta(site_count, .4, .4) - .5    , 4),
     site_slope            = round(rbeta(site_count, .4, 1.4) - .1     , 4),
 
     school_close = covid_start_site + runif(site_count, min = 0, max = 45),
