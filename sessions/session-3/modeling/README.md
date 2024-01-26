@@ -195,8 +195,8 @@ That you created already in the [assignments leading into Session 3](../homework
         # guides(color = guide_legend(nrow = 1, override.aes = list(size = 6))) +
         # guides(fill  = guide_legend(nrow = 1, override.aes = list(alpha = 1))) +
         theme_minimal(base_size = 20) +
-        theme(legend.position = "none") +
-        # theme(legend.position = c(0.5, 1), legend.justification = c(0.5, 1)) +
+        # theme(legend.position = "none") +
+        theme(legend.position = c(0, 1), legend.justification = c(0, 1)) +
         # theme(legend.title     = element_text(color = palette_asthma_dark[["title"]])) +
         # theme(strip.background = element_rect(fill  = palette_asthma_dark[["title"]], color = NA)) +
         # theme(strip.text       = element_text(color = "gray97"                  , face = "bold")) +
