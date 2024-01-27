@@ -37,13 +37,20 @@ p_gender <- c("8532" = .6, "8507" = .4) # male & female; https://athena.ohdsi.or
 # "u" stands for universe
 # u_birth_date <- seq.Date(as.Date("1930-01-01"), as.Date("2017-12-31"), by = "day")
 
-# OuhscMunge::readr_spec_aligned(config$path_metadata_concept_simulate) #remotes::install_github("OuhscBbmc/OuhscMunge")
-# col_types_concept_simulate <- readr::cols_only(
-#   `category`                      = readr::col_character(),
-#   `concept_id`                    = readr::col_integer(),
-#   `concept_name`                  = readr::col_character(),
-#   `probability_within_category`   = readr::col_double()
-# )
+# OuhscMunge::readr_spec_aligned(config$path_metadata_concept_malnutrition) #remotes::install_github("OuhscBbmc/OuhscMunge")
+col_types_concept <- readr::cols_only(
+  `concept_id`                    = readr::col_integer(),
+  `concept_name`                  = readr::col_character(),
+  `concept_code`                  = readr::col_integer(),
+  # `domain_id`                     = readr::col_character(),
+  # `vocabulary_id`                 = readr::col_character(),
+  # `concept_class_id`              = readr::col_character(),
+  # `standard_concept`              = readr::col_character(),
+  # `invalid_reason`                = readr::col_logical(),
+  # `valid_start_date`              = readr::col_character(),
+  # `valid_end_date`                = readr::col_character(),
+  `probability_within_category`   = readr::col_double()
+)
 
 manifest_severity_covid <- function (x) {
   cut(
@@ -64,6 +71,21 @@ manifest_obs_animal <- function (x) {
     x       = x,
     breaks  = c(-Inf,     0,     2,   Inf),
     labels  = c(  "Peck by bird", "Butted by animal", "No Event")
+  )
+}
+manifest_malnutrition <- function (x) {
+  threshold <- 2.5 # About 25% will have malnutrition
+  dxs <-
+    sample(
+      x       = ds_concept_malnutrition$concept_id,
+      size    = length(x),
+      replace = TRUE,
+      prob    = ds_concept_malnutrition$probability_within_category
+    )
+  dplyr::if_else(
+    threshold < x,
+    dxs,
+    NA_integer_
   )
 }
 
@@ -90,12 +112,23 @@ ds_nation_count <- retrieve_duckdb("SELECT * FROM date_nation_latent")
 checkmate::assert_tibble(ds_concept       , min.rows = 4)
 checkmate::assert_tibble(ds_nation_count  , min.rows = 4)
 
-# ds_concept_simulate <- readr::read_csv(config$path_metadata_concept_simulate, col_types = col_types_concept_simulate)
+ds_concept_malnutrition <- readr::read_csv(config$path_metadata_concept_malnutrition, col_types = col_types_concept)
 
 # ---- tweak-data --------------------------------------------------------------
-ds_concept <-
-  ds_concept |>
-  tibble::as_tibble()
+ds_concept_malnutrition <-
+  ds_concept_malnutrition |>
+  dplyr::mutate(
+    condition_source_value_type_1 = sprintf("%s (snomed %i)", concept_name, concept_code),
+    condition_source_value_type_2 = sprintf("[snomed %i] %s", concept_code, concept_name),
+    condition_source_value_type_3 = sprintf("%s"            , concept_name),
+  ) |>
+  dplyr::select(
+    concept_id,
+    condition_source_value_type_1,
+    condition_source_value_type_2,
+    condition_source_value_type_3,
+    probability_within_category,
+  )
 
 # ---- site --------------------------------------------------------------------
 ds_site <-
@@ -174,7 +207,12 @@ ds_person <-
   dplyr::mutate(
     latent_risk_4   = latent_risk_1 + rnorm(pt_count, sd = .3),
     latent_risk_4   = round(latent_risk_4, 3),
-    obs_animal         = manifest_obs_animal(latent_risk_4 + rnorm(pt_count, sd = .8)),
+    obs_animal      = manifest_obs_animal(latent_risk_4 + rnorm(pt_count, sd = .8)),
+  ) |>
+  dplyr::mutate(
+    latent_risk_5   = latent_risk_1 + rnorm(pt_count, sd = .3),
+    latent_risk_5   = round(latent_risk_5, 3),
+    dx_malnutrition = manifest_malnutrition(latent_risk_5 + rnorm(pt_count, sd = .8)),
   ) |>
   dplyr::mutate(
     race_concept_id           = 0L,
@@ -207,9 +245,11 @@ ds_person <-
     latent_risk_2_slope,
     latent_risk_3,
     latent_risk_4,
+    latent_risk_5,
     covid_severity,
     dx_bird,
     obs_animal,
+    dx_malnutrition,
     calc_outbreak_lag_years,
     calc_age_covid,
     length_of_stay,
@@ -235,6 +275,71 @@ summary(glm(covid_severity ~ 1 + calc_outbreak_lag_years + calc_age_covid, famil
 # dob2 <- boundary_date - 40000 * x
 # hist(lubridate::year(dob2))
 
+
+# ---- condition_occurrence ----------------------------------------------------------------------
+ds_condition <-
+  ds_person |>
+  dplyr::select(
+    person_id,
+    data_partner_id,
+    covid_date,
+    dx_malnutrition,
+  ) |>
+  dplyr::mutate(
+    condition_source_type = as.integer(data_partner_id %% 3)
+  ) |>
+  dplyr::inner_join(ds_concept_malnutrition, by = c("dx_malnutrition" = "concept_id")) |>
+  dplyr::mutate(
+    lag_start             = as.integer(rchisq(dplyr::n(), 10)),
+    lag_end               = as.integer(rchisq(dplyr::n(), 20)),
+    end_censored          = sample(c(TRUE, FALSE), replace = TRUE, prob = c(.6, .4), size = dplyr::n()),
+
+    condition_start_date  = covid_date - lubridate::days(lag_start),
+    condition_end_date    = condition_start_date + lubridate::days(lag_end),
+    condition_end_date    = dplyr::if_else(end_censored, condition_end_date, NA),
+  ) |>
+  dplyr::mutate(
+    # Add site heterogeneity for `condition_end_date`
+    condition_end_date =
+      dplyr::case_match(
+        condition_source_type,
+        1L ~ condition_start_date,                        # no duration
+        2L ~ condition_end_date,                          # good
+        0L ~ condition_start_date - lubridate::days(10)   # precedes start
+      )
+  ) |>
+  dplyr::mutate(
+    # Add site heterogeneity for `condition_source_value`
+    condition_source_value =
+      dplyr::case_match(
+        condition_source_type,
+        1L ~ condition_source_value_type_1,
+        2L ~ condition_source_value_type_2,
+        0L ~ condition_source_value_type_3
+      )
+  ) |>
+  dplyr::mutate(
+    # Add site heterogeneity for `condition_type_concept_id`
+    condition_type_concept_id =
+      dplyr::case_match(
+        condition_source_type,
+        1L ~ 32840L, # EHR problem list
+        2L ~ 32817L, # EHR
+        0L ~ 32816L  # Dental claim
+      )
+  ) |>
+  dplyr::select(
+    # observation_id,
+    person_id,
+    condition_concept_id  = dx_malnutrition,
+    condition_start_date,
+    condition_end_date,
+    condition_type_concept_id,
+    condition_source_value,
+    data_partner_id,
+  ) |>
+  dplyr::arrange(person_id, condition_start_date, condition_end_date, condition_concept_id) |>
+  tibble::rowid_to_column("condition_occurrence_id")
 
 # ---- obs ----------------------------------------------------------------------
 ds_observation_signal <-
@@ -390,8 +495,10 @@ ds_patient_hidden <-
     latent_risk_2_slope,
     latent_risk_3,
     latent_risk_4,
+    latent_risk_5,
     dx_bird,
     obs_animal,
+    dx_malnutrition,
   )
 
 # ---- save-to-disk ------------------------------------------------------------
@@ -399,6 +506,7 @@ ds_patient_hidden <-
 if (config$produce_csv) {
   fs::dir_create(fs::path_dir(config$path_csv_site))                            # Ensure containing directory exists
   readr::write_csv(ds_site            , config$path_csv_site)
+  readr::write_csv(ds_condition       , config$path_csv_condition_occurrence)
   readr::write_csv(ds_observation     , config$path_csv_observation)
   readr::write_csv(ds_person_slim     , config$path_csv_person)
   readr::write_csv(ds_patient_ll      , config$path_csv_patient_ll)
@@ -408,6 +516,7 @@ if (config$produce_csv) {
 if (config$produce_rds) {
   fs::dir_create(fs::path_dir(config$path_rds_site))                            # Ensure containing directory exists
   readr::write_rds(ds_site            , config$path_rds_site              , compress = "gz")
+  readr::write_rds(ds_condition       , config$path_rds_condition_occurrence, compress = "gz")
   readr::write_rds(ds_observation     , config$path_rds_observation       , compress = "gz")
   readr::write_rds(ds_person_slim     , config$path_rds_person            , compress = "gz")
   readr::write_rds(ds_patient_ll      , config$path_rds_patient_ll        , compress = "gz")
@@ -416,6 +525,7 @@ if (config$produce_rds) {
 
 if (config$produce_duckdb) {
   truncate_and_load_table_duckdb(ds_site          , "site_latent")
+  truncate_and_load_table_duckdb(ds_condition     , "condition_occurrence")
   truncate_and_load_table_duckdb(ds_observation   , "observation")
   truncate_and_load_table_duckdb(ds_person_slim   , "person")
   truncate_and_load_table_duckdb(ds_patient_ll    , "patient_ll")
@@ -425,6 +535,7 @@ if (config$produce_duckdb) {
 if (config$produce_parquet) {
   fs::dir_create(fs::path_dir(config$path_parquet_site))                        # Ensure containing directory exists
   arrow::write_parquet(ds_site                    , config$path_parquet_site)
+  arrow::write_parquet(ds_condition               , config$path_parquet_condition_occurrence)
   arrow::write_parquet(ds_observation             , config$path_parquet_observation)
   arrow::write_parquet(ds_person_slim             , config$path_parquet_person)
   arrow::write_parquet(ds_patient_ll              , config$path_parquet_patient_ll)
@@ -433,6 +544,7 @@ if (config$produce_parquet) {
 
 if (config$produce_sqlite) {
   truncate_and_load_table_sqlite(ds_site          , "site_latent")
+  truncate_and_load_table_sqlite(ds_condition     , "condition_occurrence")
   truncate_and_load_table_sqlite(ds_observation   , "observation")
   truncate_and_load_table_sqlite(ds_person_slim   , "person")
   truncate_and_load_table_sqlite(ds_patient_ll    , "patient_ll")

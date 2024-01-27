@@ -1,0 +1,276 @@
+condition_occurrence_id,person_id,condition_concept_id,condition_start_date,condition_end_date,condition_type_concept_id,condition_source_value,data_partner_id
+1,10001,4096196,2020-12-15,2021-01-09,32817,[snomed 190603003] Mild protein-calorie malnutrition (weight for age 75-89 percent of standard),2
+2,10004,4029268,2021-03-03,2021-03-03,32840,Marasmic kwashiorkor (snomed 238109004),1
+3,10006,4029268,2021-03-19,2021-04-05,32817,[snomed 238109004] Marasmic kwashiorkor,2
+4,10018,4156515,2022-12-10,2022-12-26,32817,[snomed 272588001] Malnutrition (calorie),2
+5,10024,432593,2020-04-08,2020-04-23,32817,[snomed 58262005] Kwashiorkor,2
+6,10026,4101278,2020-11-25,2020-12-13,32817,[snomed 190606006] Moderate protein energy malnutrition,2
+7,10030,4029268,2022-01-02,2022-01-02,32840,Marasmic kwashiorkor (snomed 238109004),1
+8,10034,4098458,2020-11-08,2020-11-08,32840,Moderate protein-calorie malnutrition (weight for age 60-74 percent of standard) (snomed 190602008),1
+9,10036,432593,2020-10-16,2020-10-16,32840,Kwashiorkor (snomed 58262005),1
+10,10037,4105263,2022-07-01,2022-08-10,32817,[snomed 281583001] Nutritional wasting,2
+11,10038,4276360,2020-12-14,2020-12-04,32816,Undernutrition,3
+12,10039,4101278,2020-11-03,2020-11-11,32817,[snomed 190606006] Moderate protein energy malnutrition,2
+13,10040,4101278,2022-01-12,2022-02-01,32817,[snomed 190606006] Moderate protein energy malnutrition,2
+14,10048,4029268,2021-12-27,2022-02-03,32817,[snomed 238109004] Marasmic kwashiorkor,2
+15,10052,432593,2021-12-12,2021-12-12,32840,Kwashiorkor (snomed 58262005),1
+16,10053,435227,2021-02-02,2021-01-23,32816,Nutritional deficiency disorder,3
+17,10054,4156515,2020-11-02,2020-11-13,32817,[snomed 272588001] Malnutrition (calorie),2
+18,10055,4029268,2020-03-08,2020-04-03,32817,[snomed 238109004] Marasmic kwashiorkor,2
+19,10056,4029268,2020-11-23,2020-11-13,32816,Marasmic kwashiorkor,3
+20,10061,4028220,2020-04-04,NA,32817,[snomed 13365009] Malnutrition following gastrointestinal surgery,2
+21,10062,4029268,2021-12-26,2021-12-16,32816,Marasmic kwashiorkor,3
+22,10063,4028220,2020-11-27,2020-12-16,32817,[snomed 13365009] Malnutrition following gastrointestinal surgery,2
+23,10069,432593,2021-12-16,2021-12-06,32816,Kwashiorkor,3
+24,10081,4276360,2020-12-04,2020-12-04,32840,Undernutrition (snomed 65404009),1
+25,10084,4029268,2022-10-29,NA,32817,[snomed 238109004] Marasmic kwashiorkor,2
+26,10087,4096196,2021-11-04,2021-11-18,32817,[snomed 190603003] Mild protein-calorie malnutrition (weight for age 75-89 percent of standard),2
+27,10088,4123542,2021-03-24,2021-04-07,32817,[snomed 288517002] Wasting disease,2
+28,10093,4029268,2021-12-31,2021-12-21,32816,Marasmic kwashiorkor,3
+29,10097,4098458,2020-12-01,NA,32817,[snomed 190602008] Moderate protein-calorie malnutrition (weight for age 60-74 percent of standard),2
+30,10098,432593,2021-05-19,2021-06-06,32817,[snomed 58262005] Kwashiorkor,2
+31,10100,4029268,2022-12-30,NA,32817,[snomed 238109004] Marasmic kwashiorkor,2
+32,10102,4029268,2021-12-19,2022-01-06,32817,[snomed 238109004] Marasmic kwashiorkor,2
+33,10104,4029268,2021-09-12,2021-09-02,32816,Marasmic kwashiorkor,3
+34,10109,4028220,2021-12-18,NA,32817,[snomed 13365009] Malnutrition following gastrointestinal surgery,2
+35,10111,436078,2021-12-27,2021-12-17,32816,Malnutrition of moderate degree (Gomez: 60 percent to less than 75 percent of standard weight),3
+36,10113,443082,2022-04-24,2022-04-24,32840,Starvation (snomed 212968006),1
+37,10118,443082,2021-09-23,2021-10-14,32817,[snomed 212968006] Starvation,2
+38,10121,432593,2021-11-12,2021-12-02,32817,[snomed 58262005] Kwashiorkor,2
+39,10127,4337279,2021-10-30,2021-10-30,32840,Semi-starvation (snomed 87091005),1
+40,10132,436078,2021-12-04,2021-12-25,32817,[snomed 77091003] Malnutrition of moderate degree (Gomez: 60 percent to less than 75 percent of standard weight),2
+41,10133,4233565,2020-12-02,2021-01-03,32817,[snomed 360549009] Severe protein-calorie malnutrition (Gomez: less than 60 percent of standard weight),2
+42,10135,4101278,2020-12-06,NA,32817,[snomed 190606006] Moderate protein energy malnutrition,2
+43,10142,4101278,2020-11-16,2020-12-01,32817,[snomed 190606006] Moderate protein energy malnutrition,2
+44,10144,4156515,2021-12-09,2022-01-06,32817,[snomed 272588001] Malnutrition (calorie),2
+45,10145,4029268,2021-02-14,NA,32817,[snomed 238109004] Marasmic kwashiorkor,2
+46,10157,443082,2020-07-21,2020-07-11,32816,Starvation,3
+47,10163,4029268,2021-08-02,2021-08-27,32817,[snomed 238109004] Marasmic kwashiorkor,2
+48,10165,4029268,2021-09-13,2021-09-13,32840,Marasmic kwashiorkor (snomed 238109004),1
+49,10167,4156515,2022-05-09,2022-04-29,32816,Malnutrition (calorie),3
+50,10169,4029268,2020-07-18,2020-07-29,32817,[snomed 238109004] Marasmic kwashiorkor,2
+51,10172,4029268,2021-12-17,NA,32817,[snomed 238109004] Marasmic kwashiorkor,2
+52,10176,4156515,2020-05-29,2020-06-27,32817,[snomed 272588001] Malnutrition (calorie),2
+53,10177,4233565,2020-11-16,NA,32817,[snomed 360549009] Severe protein-calorie malnutrition (Gomez: less than 60 percent of standard weight),2
+54,10178,4105263,2020-12-03,2020-12-22,32817,[snomed 281583001] Nutritional wasting,2
+55,10179,443082,2021-11-11,2021-11-01,32816,Starvation,3
+56,10189,4029268,2020-12-13,2020-12-03,32816,Marasmic kwashiorkor,3
+57,10193,4029268,2020-11-07,NA,32817,[snomed 238109004] Marasmic kwashiorkor,2
+58,10197,4029268,2022-05-02,NA,32817,[snomed 238109004] Marasmic kwashiorkor,2
+59,10200,4029268,2022-01-01,2022-01-21,32817,[snomed 238109004] Marasmic kwashiorkor,2
+60,10206,4028220,2021-09-10,2021-08-31,32816,Malnutrition following gastrointestinal surgery,3
+61,10207,433163,2020-12-11,NA,32817,[snomed 238107002] Deficiency of macronutrients,2
+62,10209,4156515,2021-03-15,2021-03-28,32817,[snomed 272588001] Malnutrition (calorie),2
+63,10218,4029268,2020-11-09,2020-11-21,32817,[snomed 238109004] Marasmic kwashiorkor,2
+64,10221,433163,2020-11-23,2020-12-12,32817,[snomed 238107002] Deficiency of macronutrients,2
+65,10228,435227,2021-11-04,NA,32817,[snomed 70241007] Nutritional deficiency disorder,2
+66,10229,4276360,2020-11-24,2021-01-05,32817,[snomed 65404009] Undernutrition,2
+67,10230,4105263,2021-12-03,2021-12-21,32817,[snomed 281583001] Nutritional wasting,2
+68,10235,4029268,2021-11-09,2021-11-09,32840,Marasmic kwashiorkor (snomed 238109004),1
+69,10242,4096196,2020-11-15,2020-11-30,32817,[snomed 190603003] Mild protein-calorie malnutrition (weight for age 75-89 percent of standard),2
+70,10245,4123542,2022-01-05,2022-01-05,32840,Wasting disease (snomed 288517002),1
+71,10247,4029268,2022-05-11,2022-05-20,32817,[snomed 238109004] Marasmic kwashiorkor,2
+72,10253,4101278,2020-11-12,NA,32817,[snomed 190606006] Moderate protein energy malnutrition,2
+73,10254,4029268,2022-01-01,NA,32817,[snomed 238109004] Marasmic kwashiorkor,2
+74,10255,4276360,2020-11-08,NA,32817,[snomed 65404009] Undernutrition,2
+75,10257,435227,2021-08-24,NA,32817,[snomed 70241007] Nutritional deficiency disorder,2
+76,10259,437832,2020-12-15,2021-01-10,32817,[snomed 77702009] Malnutrition of mild degree (Gomez: 75 percent to less than 90 percent of standard weight),2
+77,10264,4101278,2021-12-02,NA,32817,[snomed 190606006] Moderate protein energy malnutrition,2
+78,10268,4105263,2022-05-22,2022-06-12,32817,[snomed 281583001] Nutritional wasting,2
+79,10270,4029268,2021-12-10,2021-12-29,32817,[snomed 238109004] Marasmic kwashiorkor,2
+80,10274,4123542,2021-07-23,2021-07-13,32816,Wasting disease,3
+81,10276,432593,2022-06-14,2022-06-27,32817,[snomed 58262005] Kwashiorkor,2
+82,10277,4123542,2020-11-01,2020-11-16,32817,[snomed 288517002] Wasting disease,2
+83,10279,4029268,2021-10-18,2021-10-27,32817,[snomed 238109004] Marasmic kwashiorkor,2
+84,10280,4029268,2020-10-27,2020-11-06,32817,[snomed 238109004] Marasmic kwashiorkor,2
+85,10281,432593,2021-12-05,2021-12-18,32817,[snomed 58262005] Kwashiorkor,2
+86,10284,4029268,2021-12-31,2022-01-21,32817,[snomed 238109004] Marasmic kwashiorkor,2
+87,10287,4105263,2020-10-27,NA,32817,[snomed 281583001] Nutritional wasting,2
+88,10289,433163,2021-08-22,2021-09-02,32817,[snomed 238107002] Deficiency of macronutrients,2
+89,10290,432593,2021-12-05,2021-12-20,32817,[snomed 58262005] Kwashiorkor,2
+90,10293,433163,2021-11-10,2021-11-27,32817,[snomed 238107002] Deficiency of macronutrients,2
+91,10296,443082,2021-10-22,NA,32817,[snomed 212968006] Starvation,2
+92,10297,4029268,2022-01-08,2021-12-29,32816,Marasmic kwashiorkor,3
+93,10311,4029268,2022-12-09,2022-12-09,32840,Marasmic kwashiorkor (snomed 238109004),1
+94,10312,4029268,2021-12-21,2022-01-17,32817,[snomed 238109004] Marasmic kwashiorkor,2
+95,10315,4029268,2022-01-03,2022-01-03,32840,Marasmic kwashiorkor (snomed 238109004),1
+96,10318,4029268,2020-12-09,2020-12-25,32817,[snomed 238109004] Marasmic kwashiorkor,2
+97,10319,433163,2021-12-21,2022-01-10,32817,[snomed 238107002] Deficiency of macronutrients,2
+98,10321,4156515,2021-12-13,2021-12-26,32817,[snomed 272588001] Malnutrition (calorie),2
+99,10324,4029268,2020-06-05,2020-06-05,32840,Marasmic kwashiorkor (snomed 238109004),1
+100,10329,4029268,2020-11-23,NA,32817,[snomed 238109004] Marasmic kwashiorkor,2
+101,10334,432593,2020-11-16,2020-12-02,32817,[snomed 58262005] Kwashiorkor,2
+102,10335,4029268,2021-12-17,2022-01-06,32817,[snomed 238109004] Marasmic kwashiorkor,2
+103,10341,4029268,2020-12-05,2020-12-17,32817,[snomed 238109004] Marasmic kwashiorkor,2
+104,10344,4276360,2020-12-15,2020-12-22,32817,[snomed 65404009] Undernutrition,2
+105,10345,4105263,2020-06-05,2020-07-02,32817,[snomed 281583001] Nutritional wasting,2
+106,10349,4123542,2021-12-04,2021-12-04,32840,Wasting disease (snomed 288517002),1
+107,10374,4029268,2020-11-29,2020-11-29,32840,Marasmic kwashiorkor (snomed 238109004),1
+108,10375,443082,2021-12-17,NA,32817,[snomed 212968006] Starvation,2
+109,10376,435227,2021-02-25,2021-02-15,32816,Nutritional deficiency disorder,3
+110,10379,4098458,2022-01-15,2022-01-05,32816,Moderate protein-calorie malnutrition (weight for age 60-74 percent of standard),3
+111,10380,4029268,2021-12-03,NA,32817,[snomed 238109004] Marasmic kwashiorkor,2
+112,10383,432593,2021-12-26,2022-01-24,32817,[snomed 58262005] Kwashiorkor,2
+113,10388,432593,2022-01-22,2022-02-20,32817,[snomed 58262005] Kwashiorkor,2
+114,10391,433163,2021-06-29,2021-07-22,32817,[snomed 238107002] Deficiency of macronutrients,2
+115,10392,432593,2020-11-07,2020-11-07,32840,Kwashiorkor (snomed 58262005),1
+116,10398,4233565,2020-11-28,NA,32817,[snomed 360549009] Severe protein-calorie malnutrition (Gomez: less than 60 percent of standard weight),2
+117,10399,437832,2020-11-01,2020-12-05,32817,[snomed 77702009] Malnutrition of mild degree (Gomez: 75 percent to less than 90 percent of standard weight),2
+118,10406,4029268,2020-07-14,NA,32817,[snomed 238109004] Marasmic kwashiorkor,2
+119,10407,4156515,2021-12-31,2022-01-23,32817,[snomed 272588001] Malnutrition (calorie),2
+120,10418,4028220,2021-08-04,2021-08-04,32840,Malnutrition following gastrointestinal surgery (snomed 13365009),1
+121,10424,4028220,2022-01-13,2022-01-27,32817,[snomed 13365009] Malnutrition following gastrointestinal surgery,2
+122,10426,436078,2020-06-28,2020-07-20,32817,[snomed 77091003] Malnutrition of moderate degree (Gomez: 60 percent to less than 75 percent of standard weight),2
+123,10428,4098458,2021-12-21,2021-12-21,32840,Moderate protein-calorie malnutrition (weight for age 60-74 percent of standard) (snomed 190602008),1
+124,10429,433163,2022-08-11,2022-08-01,32816,Deficiency of macronutrients,3
+125,10430,4123542,2020-04-06,NA,32817,[snomed 288517002] Wasting disease,2
+126,10434,4029268,2021-12-07,2021-12-26,32817,[snomed 238109004] Marasmic kwashiorkor,2
+127,10435,4029268,2022-10-12,2022-10-02,32816,Marasmic kwashiorkor,3
+128,10436,4029268,2020-03-31,2020-04-19,32817,[snomed 238109004] Marasmic kwashiorkor,2
+129,10437,432593,2021-12-12,2022-01-18,32817,[snomed 58262005] Kwashiorkor,2
+130,10438,4096196,2020-11-22,NA,32817,[snomed 190603003] Mild protein-calorie malnutrition (weight for age 75-89 percent of standard),2
+131,10446,432593,2021-12-24,2022-01-11,32817,[snomed 58262005] Kwashiorkor,2
+132,10447,433163,2021-09-08,NA,32817,[snomed 238107002] Deficiency of macronutrients,2
+133,10457,4337279,2021-12-29,2022-02-01,32817,[snomed 87091005] Semi-starvation,2
+134,10460,4029268,2021-12-17,2021-12-07,32816,Marasmic kwashiorkor,3
+135,10461,432593,2020-10-23,NA,32817,[snomed 58262005] Kwashiorkor,2
+136,10462,432593,2020-11-23,NA,32817,[snomed 58262005] Kwashiorkor,2
+137,10463,4029268,2021-02-26,2021-02-26,32840,Marasmic kwashiorkor (snomed 238109004),1
+138,10465,4337279,2020-11-26,2020-12-10,32817,[snomed 87091005] Semi-starvation,2
+139,10468,4337279,2022-10-20,2022-10-10,32816,Semi-starvation,3
+140,10475,432593,2020-03-16,NA,32817,[snomed 58262005] Kwashiorkor,2
+141,10481,4029268,2020-12-12,2021-01-04,32817,[snomed 238109004] Marasmic kwashiorkor,2
+142,10483,4028220,2020-11-22,2020-12-01,32817,[snomed 13365009] Malnutrition following gastrointestinal surgery,2
+143,10487,4337279,2020-10-23,NA,32817,[snomed 87091005] Semi-starvation,2
+144,10490,4029268,2021-08-29,2021-08-29,32840,Marasmic kwashiorkor (snomed 238109004),1
+145,10492,4029268,2020-06-20,NA,32817,[snomed 238109004] Marasmic kwashiorkor,2
+146,10493,4029268,2020-12-07,NA,32817,[snomed 238109004] Marasmic kwashiorkor,2
+147,10494,4101278,2022-01-03,2022-01-21,32817,[snomed 190606006] Moderate protein energy malnutrition,2
+148,10497,433163,2021-12-03,NA,32817,[snomed 238107002] Deficiency of macronutrients,2
+149,10498,432593,2021-08-04,2021-07-25,32816,Kwashiorkor,3
+150,10499,4028220,2021-08-09,2021-08-23,32817,[snomed 13365009] Malnutrition following gastrointestinal surgery,2
+151,10511,432593,2021-11-09,NA,32817,[snomed 58262005] Kwashiorkor,2
+152,10512,4029268,2021-12-05,2021-11-25,32816,Marasmic kwashiorkor,3
+153,10513,4029268,2021-10-24,NA,32817,[snomed 238109004] Marasmic kwashiorkor,2
+154,10515,4233565,2020-11-18,NA,32817,[snomed 360549009] Severe protein-calorie malnutrition (Gomez: less than 60 percent of standard weight),2
+155,10516,432593,2021-12-20,2022-01-05,32817,[snomed 58262005] Kwashiorkor,2
+156,10517,432593,2020-12-01,NA,32817,[snomed 58262005] Kwashiorkor,2
+157,10519,4233565,2021-12-22,2021-12-22,32840,Severe protein-calorie malnutrition (Gomez: less than 60 percent of standard weight) (snomed 360549009),1
+158,10521,4029268,2020-11-21,2020-11-11,32816,Marasmic kwashiorkor,3
+159,10523,4098458,2021-03-23,NA,32817,[snomed 190602008] Moderate protein-calorie malnutrition (weight for age 60-74 percent of standard),2
+160,10534,432593,2020-11-29,2020-12-29,32817,[snomed 58262005] Kwashiorkor,2
+161,10535,4098458,2021-08-30,2021-09-24,32817,[snomed 190602008] Moderate protein-calorie malnutrition (weight for age 60-74 percent of standard),2
+162,10538,4028220,2021-12-19,NA,32817,[snomed 13365009] Malnutrition following gastrointestinal surgery,2
+163,10539,4098458,2022-12-24,2022-12-24,32840,Moderate protein-calorie malnutrition (weight for age 60-74 percent of standard) (snomed 190602008),1
+164,10541,432593,2022-01-02,NA,32817,[snomed 58262005] Kwashiorkor,2
+165,10542,432593,2021-12-12,2021-12-02,32816,Kwashiorkor,3
+166,10543,4096196,2020-03-08,2020-02-27,32816,Mild protein-calorie malnutrition (weight for age 75-89 percent of standard),3
+167,10544,433163,2022-03-29,NA,32817,[snomed 238107002] Deficiency of macronutrients,2
+168,10553,4123542,2020-11-21,2020-12-01,32817,[snomed 288517002] Wasting disease,2
+169,10559,437832,2021-08-28,2021-08-28,32840,Malnutrition of mild degree (Gomez: 75 percent to less than 90 percent of standard weight) (snomed 77702009),1
+170,10560,432593,2021-12-21,2022-01-23,32817,[snomed 58262005] Kwashiorkor,2
+171,10566,435227,2020-11-07,2020-11-30,32817,[snomed 70241007] Nutritional deficiency disorder,2
+172,10569,432593,2021-11-28,2021-12-17,32817,[snomed 58262005] Kwashiorkor,2
+173,10571,4276360,2021-12-19,2021-12-19,32840,Undernutrition (snomed 65404009),1
+174,10572,435227,2021-11-03,2021-11-03,32840,Nutritional deficiency disorder (snomed 70241007),1
+175,10573,4233565,2021-05-13,2021-05-31,32817,[snomed 360549009] Severe protein-calorie malnutrition (Gomez: less than 60 percent of standard weight),2
+176,10582,433163,2020-11-18,2020-12-11,32817,[snomed 238107002] Deficiency of macronutrients,2
+177,10584,4101278,2021-08-20,2021-09-09,32817,[snomed 190606006] Moderate protein energy malnutrition,2
+178,10586,4029268,2021-03-24,2021-04-06,32817,[snomed 238109004] Marasmic kwashiorkor,2
+179,10592,436078,2021-12-29,2022-01-18,32817,[snomed 77091003] Malnutrition of moderate degree (Gomez: 60 percent to less than 75 percent of standard weight),2
+180,10597,4233565,2020-11-21,2020-12-09,32817,[snomed 360549009] Severe protein-calorie malnutrition (Gomez: less than 60 percent of standard weight),2
+181,10600,432593,2021-11-04,2021-11-13,32817,[snomed 58262005] Kwashiorkor,2
+182,10601,4028220,2021-08-02,2021-08-11,32817,[snomed 13365009] Malnutrition following gastrointestinal surgery,2
+183,10603,4337279,2020-10-22,2020-10-12,32816,Semi-starvation,3
+184,10609,4029268,2020-11-28,2020-11-18,32816,Marasmic kwashiorkor,3
+185,10617,4029268,2020-12-07,2020-12-07,32840,Marasmic kwashiorkor (snomed 238109004),1
+186,10629,432593,2021-12-13,2022-01-06,32817,[snomed 58262005] Kwashiorkor,2
+187,10644,4233565,2021-12-13,2021-12-03,32816,Severe protein-calorie malnutrition (Gomez: less than 60 percent of standard weight),3
+188,10646,4029268,2020-11-27,NA,32817,[snomed 238109004] Marasmic kwashiorkor,2
+189,10647,4029268,2020-10-16,2020-10-27,32817,[snomed 238109004] Marasmic kwashiorkor,2
+190,10648,436078,2020-11-02,NA,32817,[snomed 77091003] Malnutrition of moderate degree (Gomez: 60 percent to less than 75 percent of standard weight),2
+191,10650,4029268,2020-06-27,NA,32817,[snomed 238109004] Marasmic kwashiorkor,2
+192,10656,4029268,2021-12-25,NA,32817,[snomed 238109004] Marasmic kwashiorkor,2
+193,10658,4029268,2022-06-19,2022-07-15,32817,[snomed 238109004] Marasmic kwashiorkor,2
+194,10659,432593,2021-11-20,2021-12-03,32817,[snomed 58262005] Kwashiorkor,2
+195,10661,432593,2021-09-11,2021-09-19,32817,[snomed 58262005] Kwashiorkor,2
+196,10665,4276360,2020-12-23,NA,32817,[snomed 65404009] Undernutrition,2
+197,10667,4029268,2020-12-03,2021-01-04,32817,[snomed 238109004] Marasmic kwashiorkor,2
+198,10668,4123542,2021-12-31,NA,32817,[snomed 288517002] Wasting disease,2
+199,10670,4101278,2020-11-12,2020-12-04,32817,[snomed 190606006] Moderate protein energy malnutrition,2
+200,10683,4098458,2021-03-18,2021-03-18,32840,Moderate protein-calorie malnutrition (weight for age 60-74 percent of standard) (snomed 190602008),1
+201,10687,4123542,2021-07-25,2021-07-15,32816,Wasting disease,3
+202,10688,443082,2020-12-03,2020-12-03,32840,Starvation (snomed 212968006),1
+203,10691,4029268,2020-12-16,2021-01-05,32817,[snomed 238109004] Marasmic kwashiorkor,2
+204,10692,4276360,2021-12-21,2021-12-21,32840,Undernutrition (snomed 65404009),1
+205,10693,4029268,2021-10-11,NA,32817,[snomed 238109004] Marasmic kwashiorkor,2
+206,10694,432593,2021-07-12,NA,32817,[snomed 58262005] Kwashiorkor,2
+207,10695,437832,2022-01-19,NA,32817,[snomed 77702009] Malnutrition of mild degree (Gomez: 75 percent to less than 90 percent of standard weight),2
+208,10699,4029268,2021-12-28,NA,32817,[snomed 238109004] Marasmic kwashiorkor,2
+209,10700,4029268,2020-12-03,2020-12-22,32817,[snomed 238109004] Marasmic kwashiorkor,2
+210,10701,4029268,2022-09-15,2022-09-15,32840,Marasmic kwashiorkor (snomed 238109004),1
+211,10703,433163,2021-08-18,NA,32817,[snomed 238107002] Deficiency of macronutrients,2
+212,10720,432593,2021-11-09,2021-10-30,32816,Kwashiorkor,3
+213,10722,4029268,2021-08-30,NA,32817,[snomed 238109004] Marasmic kwashiorkor,2
+214,10724,437832,2020-04-11,NA,32817,[snomed 77702009] Malnutrition of mild degree (Gomez: 75 percent to less than 90 percent of standard weight),2
+215,10732,432593,2021-02-27,NA,32817,[snomed 58262005] Kwashiorkor,2
+216,10734,4101278,2022-07-14,NA,32817,[snomed 190606006] Moderate protein energy malnutrition,2
+217,10735,4028220,2022-11-11,NA,32817,[snomed 13365009] Malnutrition following gastrointestinal surgery,2
+218,10739,4029268,2021-09-14,2021-09-28,32817,[snomed 238109004] Marasmic kwashiorkor,2
+219,10740,4029268,2021-12-24,2022-01-05,32817,[snomed 238109004] Marasmic kwashiorkor,2
+220,10741,4101278,2020-11-09,2020-12-03,32817,[snomed 190606006] Moderate protein energy malnutrition,2
+221,10742,4276360,2021-12-23,2022-01-07,32817,[snomed 65404009] Undernutrition,2
+222,10748,437832,2020-05-10,NA,32817,[snomed 77702009] Malnutrition of mild degree (Gomez: 75 percent to less than 90 percent of standard weight),2
+223,10750,4156515,2021-03-20,2021-03-10,32816,Malnutrition (calorie),3
+224,10752,437832,2021-11-20,NA,32817,[snomed 77702009] Malnutrition of mild degree (Gomez: 75 percent to less than 90 percent of standard weight),2
+225,10763,432593,2020-11-13,2020-11-30,32817,[snomed 58262005] Kwashiorkor,2
+226,10781,4029268,2020-06-05,2020-06-05,32840,Marasmic kwashiorkor (snomed 238109004),1
+227,10782,4276360,2020-11-23,2020-11-13,32816,Undernutrition,3
+228,10783,437832,2021-12-08,NA,32817,[snomed 77702009] Malnutrition of mild degree (Gomez: 75 percent to less than 90 percent of standard weight),2
+229,10785,4337279,2022-01-08,NA,32817,[snomed 87091005] Semi-starvation,2
+230,10787,4101278,2021-08-27,2021-09-21,32817,[snomed 190606006] Moderate protein energy malnutrition,2
+231,10789,432593,2020-06-25,2020-07-13,32817,[snomed 58262005] Kwashiorkor,2
+232,10791,4029268,2020-09-10,2020-09-10,32840,Marasmic kwashiorkor (snomed 238109004),1
+233,10793,4028220,2020-03-23,2020-04-20,32817,[snomed 13365009] Malnutrition following gastrointestinal surgery,2
+234,10795,432593,2020-11-24,NA,32817,[snomed 58262005] Kwashiorkor,2
+235,10820,443082,2020-11-01,2020-11-01,32840,Starvation (snomed 212968006),1
+236,10821,4029268,2022-04-01,NA,32817,[snomed 238109004] Marasmic kwashiorkor,2
+237,10825,435227,2022-02-15,2022-03-02,32817,[snomed 70241007] Nutritional deficiency disorder,2
+238,10829,4101278,2021-11-07,2021-10-28,32816,Moderate protein energy malnutrition,3
+239,10830,4029268,2020-07-20,2020-07-20,32840,Marasmic kwashiorkor (snomed 238109004),1
+240,10835,436078,2020-05-12,NA,32817,[snomed 77091003] Malnutrition of moderate degree (Gomez: 60 percent to less than 75 percent of standard weight),2
+241,10838,4028220,2020-11-20,NA,32817,[snomed 13365009] Malnutrition following gastrointestinal surgery,2
+242,10839,4029268,2020-11-22,2020-11-22,32840,Marasmic kwashiorkor (snomed 238109004),1
+243,10842,432593,2020-10-25,2020-10-25,32840,Kwashiorkor (snomed 58262005),1
+244,10843,433163,2022-07-04,2022-07-19,32817,[snomed 238107002] Deficiency of macronutrients,2
+245,10850,4029268,2022-12-09,2022-11-29,32816,Marasmic kwashiorkor,3
+246,10855,4029268,2021-12-06,2021-12-06,32840,Marasmic kwashiorkor (snomed 238109004),1
+247,10859,443082,2021-12-03,NA,32817,[snomed 212968006] Starvation,2
+248,10871,4029268,2021-12-27,NA,32817,[snomed 238109004] Marasmic kwashiorkor,2
+249,10884,432593,2020-10-25,NA,32817,[snomed 58262005] Kwashiorkor,2
+250,10886,4276360,2020-11-15,2020-12-02,32817,[snomed 65404009] Undernutrition,2
+251,10902,4029268,2020-11-08,2020-11-08,32840,Marasmic kwashiorkor (snomed 238109004),1
+252,10903,4156515,2021-12-20,NA,32817,[snomed 272588001] Malnutrition (calorie),2
+253,10906,437832,2022-01-06,2021-12-27,32816,Malnutrition of mild degree (Gomez: 75 percent to less than 90 percent of standard weight),3
+254,10907,433163,2021-11-20,2021-11-10,32816,Deficiency of macronutrients,3
+255,10911,436078,2020-07-24,2020-07-24,32840,Malnutrition of moderate degree (Gomez: 60 percent to less than 75 percent of standard weight) (snomed 77091003),1
+256,10912,432593,2020-08-02,2020-08-25,32817,[snomed 58262005] Kwashiorkor,2
+257,10913,4029268,2022-07-08,2022-07-26,32817,[snomed 238109004] Marasmic kwashiorkor,2
+258,10915,4098458,2020-10-28,NA,32817,[snomed 190602008] Moderate protein-calorie malnutrition (weight for age 60-74 percent of standard),2
+259,10918,4096196,2020-06-13,2020-07-08,32817,[snomed 190603003] Mild protein-calorie malnutrition (weight for age 75-89 percent of standard),2
+260,10921,436078,2020-11-17,2020-11-17,32840,Malnutrition of moderate degree (Gomez: 60 percent to less than 75 percent of standard weight) (snomed 77091003),1
+261,10926,4029268,2022-01-14,2022-02-04,32817,[snomed 238109004] Marasmic kwashiorkor,2
+262,10933,443082,2022-07-13,NA,32817,[snomed 212968006] Starvation,2
+263,10934,4029268,2022-01-13,NA,32817,[snomed 238109004] Marasmic kwashiorkor,2
+264,10935,432593,2022-12-03,NA,32817,[snomed 58262005] Kwashiorkor,2
+265,10958,433163,2020-02-19,2020-02-09,32816,Deficiency of macronutrients,3
+266,10967,436078,2020-11-26,2020-11-16,32816,Malnutrition of moderate degree (Gomez: 60 percent to less than 75 percent of standard weight),3
+267,10972,4029268,2020-07-25,2020-07-15,32816,Marasmic kwashiorkor,3
+268,10977,4101278,2022-10-14,2022-11-03,32817,[snomed 190606006] Moderate protein energy malnutrition,2
+269,10979,4096196,2020-11-16,2020-11-06,32816,Mild protein-calorie malnutrition (weight for age 75-89 percent of standard),3
+270,10986,4029268,2021-12-03,NA,32817,[snomed 238109004] Marasmic kwashiorkor,2
+271,10989,4028220,2021-12-25,2021-12-15,32816,Malnutrition following gastrointestinal surgery,3
+272,10991,432593,2021-11-15,2021-11-05,32816,Kwashiorkor,3
+273,10994,4123542,2020-11-14,2020-12-03,32817,[snomed 288517002] Wasting disease,2
+274,10997,432593,2021-08-09,NA,32817,[snomed 58262005] Kwashiorkor,2
+275,11000,432593,2020-12-06,NA,32817,[snomed 58262005] Kwashiorkor,2

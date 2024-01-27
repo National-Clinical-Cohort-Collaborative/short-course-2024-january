@@ -5,6 +5,7 @@ default:
   # path_ss_county                 : "data-public/metadata/ss-county.csv"
   path_metadata_concept            : "data-public/metadata/concept.csv"
   path_metadata_concept_simulate   : "data-public/metadata/concept-to-simulate.csv"
+  path_metadata_concept_malnutrition: "data-public/metadata/concept-malnutrition.csv"
 
   # Central Database (produced by Ellis lanes).
   path_database_duckdb             : "data-public/derived/duckdb/db.duckdb"
@@ -12,18 +13,21 @@ default:
 
   # ---- Simulated-ready datasets (consumed by scribes).
   path_csv_site                    : "data-public/derived/csv/site_latent.csv"
+  path_csv_condition_occurrence    : "data-public/derived/csv/condition_occurrence.csv"
   path_csv_observation             : "data-public/derived/csv/observation.csv"
   path_csv_person                  : "data-public/derived/csv/person.csv"
   path_csv_patient_ll              : "data-public/derived/csv/patient_ll.csv"
   path_csv_patient_hidden          : "data-public/derived/csv/patient_latent.csv"
 
   path_parquet_site                : "data-public/derived/parquet/site_latent.parquet"
+  path_parquet_condition_occurrence: "data-public/derived/parquet/condition_occurrence.csv"
   path_parquet_observation         : "data-public/derived/parquet/observation.parquet"
   path_parquet_person              : "data-public/derived/parquet/person.parquet"
   path_parquet_patient_ll          : "data-public/derived/parquet/patient_ll.parquet"
   path_parquet_patient_hidden      : "data-public/derived/parquet/patient_latent.parquet"
 
   path_rds_site                    : "data-public/derived/rds/site_latent.rds"
+  path_rds_condition_occurrence    : "data-public/derived/rds/condition_occurrence.csv"
   path_rds_observation             : "data-public/derived/rds/observation.rds"
   path_rds_person                  : "data-public/derived/rds/person.rds"
   path_rds_patient_ll              : "data-public/derived/rds/patient_ll.rds"

@@ -64,12 +64,12 @@ Univariate
 `patient` table
 ---------------------------------------------------------------------------
 
-![](figure-png/marginals-patient-1.png)<!-- -->![](figure-png/marginals-patient-2.png)<!-- -->![](figure-png/marginals-patient-3.png)<!-- -->![](figure-png/marginals-patient-4.png)<!-- -->![](figure-png/marginals-patient-5.png)<!-- -->![](figure-png/marginals-patient-6.png)<!-- -->![](figure-png/marginals-patient-7.png)<!-- -->
+![](figure-png/marginals-patient-1.png)<!-- -->![](figure-png/marginals-patient-2.png)<!-- -->![](figure-png/marginals-patient-3.png)<!-- -->![](figure-png/marginals-patient-4.png)<!-- -->![](figure-png/marginals-patient-5.png)<!-- -->![](figure-png/marginals-patient-6.png)<!-- -->![](figure-png/marginals-patient-7.png)<!-- -->![](figure-png/marginals-patient-8.png)<!-- -->
 
 `patient_latent` table
 ---------------------------------------------------------------------------
 
-![](figure-png/marginals-patient_latent-1.png)<!-- -->![](figure-png/marginals-patient_latent-2.png)<!-- -->![](figure-png/marginals-patient_latent-3.png)<!-- -->![](figure-png/marginals-patient_latent-4.png)<!-- -->
+![](figure-png/marginals-patient_latent-1.png)<!-- -->![](figure-png/marginals-patient_latent-2.png)<!-- -->![](figure-png/marginals-patient_latent-3.png)<!-- -->![](figure-png/marginals-patient_latent-4.png)<!-- -->![](figure-png/marginals-patient_latent-5.png)<!-- -->![](figure-png/marginals-patient_latent-6.png)<!-- -->
 
 `site_latent` table
 ---------------------------------------------------------------------------
@@ -339,4 +339,4 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 
-Report rendered by wibea at 2024-01-26, 12:38 -0600 in 6 seconds.
+Report rendered by wibea at 2024-01-26, 18:05 -0600 in 5 seconds.

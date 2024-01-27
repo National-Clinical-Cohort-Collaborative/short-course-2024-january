@@ -32,6 +32,8 @@ CREATE TABLE patient_latent (
   latent_risk_2_slope             float            not null,
   latent_risk_3                   float            not null,
   latent_risk_4                   float            not null,
+  latent_risk_5                   float            not null,
   dx_bird                         dx_bird          not null,
   obs_animal                      obs_animal       not null,
+  dx_malnutrition                 int,
 );

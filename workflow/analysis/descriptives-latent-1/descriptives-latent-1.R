@@ -24,6 +24,7 @@ ds_patient        <- arrow::read_parquet(config$path_analysis_pt_2_parquet) # 'd
 # ds_patient        <- readr::read_rds(config$path_analysis_pt_2_rds) # 'ds' stands for 'datasets'
 
 # ---- tweak-data --------------------------------------------------------------
+# OuhscMunge::column_rename_headstart(ds_patient)
 ds_patient <-
   ds_patient |>
   # dplyr::left_join(ds_patient           , by = "person_id") |>
@@ -51,6 +52,7 @@ ds_patient <-
     covid_date,
     covid_severity,
     dx_bird,
+    dx_malnutrition,
     calc_outbreak_lag_years,
     calc_age_covid,
     length_of_stay,
@@ -58,6 +60,8 @@ ds_patient <-
     latent_risk_2_int,
     latent_risk_2_slope,
     latent_risk_3,
+    latent_risk_4,
+    latent_risk_5,
     school_close,
     school_closed_duration,
     school_reopen,
@@ -94,6 +98,7 @@ TabularManifest::histogram_discrete(  ds_patient, "data_partner_id")
 TabularManifest::histogram_date(      ds_patient, "covid_date"           , bin_unit = "week")
 TabularManifest::histogram_discrete(  ds_patient, "covid_severity")
 TabularManifest::histogram_discrete(  ds_patient, "dx_bird")
+TabularManifest::histogram_discrete(  ds_patient, "dx_malnutrition")
 TabularManifest::histogram_continuous(ds_patient, "calc_outbreak_lag_years" , rounded_digits = 1)
 TabularManifest::histogram_continuous(ds_patient, "calc_age_covid"          , rounded_digits = 1)
 TabularManifest::histogram_continuous(ds_patient, "length_of_stay"          , rounded_digits = 1)
@@ -103,6 +108,8 @@ TabularManifest::histogram_continuous(ds_patient, "latent_risk_1"           , ro
 TabularManifest::histogram_continuous(ds_patient, "latent_risk_2_int"       , rounded_digits = 1)
 TabularManifest::histogram_continuous(ds_patient, "latent_risk_2_slope"     , rounded_digits = 1)
 TabularManifest::histogram_continuous(ds_patient, "latent_risk_3"           , rounded_digits = 1)
+TabularManifest::histogram_continuous(ds_patient, "latent_risk_4"           , rounded_digits = 1)
+TabularManifest::histogram_continuous(ds_patient, "latent_risk_5"           , rounded_digits = 1)
 
 # ---- marginals-site_latent -------------------------------------------------
 TabularManifest::histogram_date(      ds_patient, "school_close"            , bin_unit = "week")
