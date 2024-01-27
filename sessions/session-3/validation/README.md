@@ -123,6 +123,8 @@ Notes:
       load_packages()
       assert_spark_data_frame(condition_occurrence)
 
+      # Define which data_partners you want to isolate
+      #   (remember there are 70+ in the real dataset)
       partners_to_inspect <- c(1, 2, 3)
 
       # ---- retrieve -----------------
@@ -142,12 +144,12 @@ Notes:
         geom_density() +
         theme_minimal()
 
-  print(g)
+    print(g)
 
-  # Return top 100 rows for just previewing
-  ds |>
-    dplyr::slice(1:100)
-    }
+    # Return top 100 rows for just previewing
+    ds |>
+      dplyr::slice(1:100)
+      }
     ```
 ## Create R Transform: `g_start_end_by_partner`
 
