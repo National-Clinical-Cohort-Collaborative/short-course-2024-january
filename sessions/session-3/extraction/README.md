@@ -139,8 +139,7 @@ Session 3](../homework#create-the-manipulation-1-code-workbook).
 Notes:
 
 1.  The simulated `observation` table mimics OMOP's
-    [`observation`](https://ohdsi.github.io/CommonDataModel/cdm60.html#OBSERVATION)
-    table.
+    [`observation`](https://ohdsi.github.io/CommonDataModel/cdm60.html#OBSERVATION) table.
 1.  The simulated `patient_ll` table mimics the Logic Liaison's
     [`LOGIC_LIAISON_Covid_19_Patient_Summary_Facts_Table_LDS_`](https://unite.nih.gov/workspace/module/view/latest/ri.workshop.main.module.3ab34203-d7f3-482e-adbd-f4113bfd1a2b?id=KO-BE5C652&view=focus)
     table.
@@ -150,11 +149,9 @@ Notes:
 1.  Click the `patient_ll` transform, then click the blue plus button,
     then select "SQL code".
 
-1.  Click the gray plus button (above the code), and click the
-    `observation` transform.
+1.  Click the gray plus button (above the code), and click the `observation` transform.
 
-1.  Change the new transform's name from "unnamed" to
-    `pt_observation_preceding`.
+1.  Change the new transform's name from "unnamed" to `pt_observation_preceding`.
 
 1.  Click "Save as dataset", so it's toggled blue.
 
