@@ -141,7 +141,7 @@ Notes:
     ```
 
 1.  Click the blue "Run" (or "Preview" button)
-1.  Hover over the transform; click the "<i class="fa-solid fa-magnifying-glass-plus"></i> View image" button.
+1.  Hover over the transform; click the "<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/magnifying-glass-plus.svg width="15"> View image" button.
 1.  Verify graph looks like:
 
     [![g_duration](images/g-duration.png)](images/g-duration.png)
@@ -194,7 +194,7 @@ Notes:
     ```
 
 1.  Click the blue "Run" (or "Preview" button)
-1.  Hover over the transform; click the "<i class="fa-solid fa-magnifying-glass-plus"></i> View image" button.
+1.  Hover over the transform; click the "<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/magnifying-glass-plus.svg width="15"> View image" button.
 1.  Verify graph looks like:
 
     [![g_start_end_by_partner](images/g-duration-by-partner.png)](images/g-duration-by-partner.png)
@@ -255,7 +255,7 @@ Notes:
     ```
 
 1.  Click the blue "Run" (or "Preview" button)
-1.  Hover over the transform; click the "<i class="fa-solid fa-magnifying-glass-plus"></i> View image" button.
+1.  Hover over the transform; click the "<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/magnifying-glass-plus.svg width="15"> View image" button.
 1.  Verify graph looks like:
 
     [![g_start_end_by_partner](images/g-start-end-by-partner.png)](images/g-start-end-by-partner.png)
