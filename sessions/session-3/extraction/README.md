@@ -161,7 +161,7 @@ Notes:
 1.  Verify that you have two inputs: `patient_ll` & `observation`. The
     colors are orange & purple, but the order doesn't matter.
 
-1.  Replace the code in the "<i class="fa-solid fa-code"></i> Logic" panel with
+1.  Replace the code in the "<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/code.svg width="15"> Logic" panel with
 
     ``` sql
     WITH obs_before as (
@@ -246,7 +246,7 @@ Notes:
 1.  Verify that you have two inputs: `patient_ll` & `pt`. The
     colors are orange & purple, but the order doesn't matter.
 
-1.  Replace the code in the "<i class="fa-solid fa-code"></i> Logic" panel with
+1.  Replace the code in the "<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/code.svg width="15"> Logic" panel with
 
     ``` sql
     SELECT
@@ -281,7 +281,7 @@ Notes:
 
 1.  Instead start simple, and gradually add complexity.
 
-1.  Replace the code in the "<i class="fa-solid fa-code"></i> Logic" panel with
+1.  Replace the code in the "<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/code.svg width="15"> Logic" panel with
 
     ``` sql
     SELECT

@@ -88,7 +88,7 @@ That you created already in the [assignments leading into Session 3](../homework
 1.  Caution: keep the name *very* unique.
 1.  Verify that you have one input: `pt_parquet`. The color is orange.
 1.  Verify its type is "Transform input" in both places.
-1.  Replace the code in the "<i class="fa-solid fa-code"></i> Logic" panel with
+1.  Replace the code in the "<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/code.svg width="15"> Logic" panel with
 
     ```r
     m_covid_moderate_1 <- function(pt_parquet) {
