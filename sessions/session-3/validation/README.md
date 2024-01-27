@@ -144,12 +144,12 @@ Notes:
         geom_density() +
         theme_minimal()
 
-    print(g)
+      print(g)
 
-    # Return top 100 rows for just previewing
-    ds |>
-      dplyr::slice(1:100)
-      }
+      # Return top 100 rows for just previewing
+      ds |>
+        dplyr::slice(1:100)
+    }
     ```
 ## Create R Transform: `g_start_end_by_partner`
 
