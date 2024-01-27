@@ -90,7 +90,7 @@ That you created already in the [assignments leading into Session 3](../homework
     (For example, "Input or upstream dataset must be built before being used in the console: {tableName=calc_age_covid}").
 1.  Verify that you have one input: `pt_parquet`. The color is orange.
 1.  Verify its type is "Transform input" in both places.
-1.  Replace the code with
+1.  Replace the code in the "<i class="fa-solid fa-code"></i> Logic" panel with
 
     ```r
     g_calc_age_covid <- function(pt_parquet) {
@@ -114,7 +114,7 @@ That you created already in the [assignments leading into Session 3](../homework
 
 ## Improve `g_calc_age_covid`
 
-1. Replace the
+1.  Replace the code in the "<i class="fa-solid fa-code"></i> Logic" panel with
 
     ```r
     g_calc_age_covid <- function(pt_parquet) {

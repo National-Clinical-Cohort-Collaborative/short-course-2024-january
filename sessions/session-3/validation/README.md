@@ -105,6 +105,47 @@ Notes:
     }
     ```
 
+## Create R Transform: `g_duration`
+
+1.  Click the `condition_occurrence` transform, then click the blue plus button, then select "R code".
+1.  Click the gray plus button (above the code), and click the observation transform.
+1.  Change the new transform's name from "unnamed" to `g_duration`.
+1.  Caution: keep the name *very* unique.
+1.  Verify that you have one input: `condition_occurrence`. The color is orange.
+1.  Verify its type is "Spark" in both places.
+1.  Replace the code in the "<i class="fa-solid fa-code"></i> Logic" panel with
+
+    ```r
+    g_duration_by_partner <- function(condition_occurrence) {
+      load_packages()
+      assert_spark_data_frame(condition_occurrence)
+
+      # ---- retrieve -----------------
+      # Defined in the Global Code
+      ds <- retrieve_condition_occurrence(condition_occurrence)
+
+      # ---- graph -----------------
+      g <-
+        ds |>
+        ggplot(aes(x = duration_v2)) +
+        geom_vline(xintercept = 0, color = "gray60", linetype = "83") +
+        geom_density() +
+        theme_minimal(base_size = 20)
+
+      print(g)
+
+      # Return top 100 rows for just previewing
+      ds |>
+        dplyr::slice(1:100)
+    }
+    ```
+
+1.  Click the blue "Run" (or "Preview" button)
+1.  Hover over the transform; click the "<i class="fa-solid fa-magnifying-glass-plus"></i> View image" button.
+1.  Verify graph looks like:
+
+    [![g_duration](images/g-duration.png)](images/g-duration.png)
+
 ## Create R Transform: `g_duration_by_partner`
 
 1.  Click the `condition_occurrence` transform, then click the blue plus button, then select "R code".
@@ -116,7 +157,7 @@ Notes:
 1.  Caution: keep the name *very* unique.
 1.  Verify that you have one input: `condition_occurrence`. The color is orange.
 1.  Verify its type is "Spark" in both places.
-1.  Replace the code with
+1.  Replace the code in the "<i class="fa-solid fa-code"></i> Logic" panel with
 
     ```r
     g_duration_by_partner <- function(condition_occurrence) {
@@ -142,7 +183,7 @@ Notes:
         ggplot(aes(x = duration_v2, color = data_partner_id)) +
         geom_vline(xintercept = 0, color = "gray60", linetype = "83") +
         geom_density() +
-        theme_minimal()
+        theme_minimal(base_size = 20)
 
       print(g)
 
@@ -151,6 +192,13 @@ Notes:
         dplyr::slice(1:100)
     }
     ```
+
+1.  Click the blue "Run" (or "Preview" button)
+1.  Hover over the transform; click the "<i class="fa-solid fa-magnifying-glass-plus"></i> View image" button.
+1.  Verify graph looks like:
+
+    [![g_start_end_by_partner](images/g-duration-by-partner.png)](images/g-duration-by-partner.png)
+
 ## Create R Transform: `g_start_end_by_partner`
 
 1.  Click the `condition_occurrence` transform, then click the blue plus button, then select "R code".
@@ -162,7 +210,7 @@ Notes:
 1.  Caution: keep the name *very* unique.
 1.  Verify that you have one input: `condition_occurrence`. The color is orange.
 1.  Verify its type is "Spark" in both places.
-1.  Replace the code with
+1.  Replace the code in the "<i class="fa-solid fa-code"></i> Logic" panel with
 
     ```r
     g_start_end_by_partner <- function(condition_occurrence) {
@@ -181,19 +229,22 @@ Notes:
           "text",
           x     = min(ds$condition_start_date, na.rm = TRUE),
           y     = mean(ds$condition_end_date , na.rm = TRUE),
-          label = "'end' follows the 'start'\n(ie, good)",
+          label = "'end' follows the 'start'\n(ie, plausible)",
           hjust = 0
         ) +
         annotate( # Add a label at the center-bottom to orient reader faster
           "text",
           x     = mean(ds$condition_start_date, na.rm = TRUE),
           y     = min(ds$condition_end_date , na.rm = TRUE),
-          label = "'start' follows the 'end'\n(ie, bad)",
+          label = "'start' follows the 'end'\n(ie, not possible)",
           vjust = 0
         ) +
         geom_abline(color = "gray60", linetype = "83") +
-        geom_point() +
-        theme_minimal()
+        geom_point(
+          shape   = 21,
+          size    = 4
+        ) +
+        theme_minimal(base_size = 20)
 
       print(g)
 
@@ -202,3 +253,9 @@ Notes:
         dplyr::slice(1:100)
     }
     ```
+
+1.  Click the blue "Run" (or "Preview" button)
+1.  Hover over the transform; click the "<i class="fa-solid fa-magnifying-glass-plus"></i> View image" button.
+1.  Verify graph looks like:
+
+    [![g_start_end_by_partner](images/g-start-end-by-partner.png)](images/g-start-end-by-partner.png)
