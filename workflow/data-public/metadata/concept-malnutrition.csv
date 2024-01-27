@@ -1,0 +1,18 @@
+﻿concept_id,concept_name,concept_code,domain_id,vocabulary_id,concept_class_id,standard_concept,invalid_reason,valid_start_date,valid_end_date,probability_within_category
+4096196,Mild protein-calorie malnutrition (weight for age 75-89 percent of standard),190603003,Condition,SNOMED,Clinical Finding,S,,2099-12-31,2002-01-31,1
+437832,Malnutrition of mild degree (Gomez: 75 percent to less than 90 percent of standard weight),77702009,Condition,SNOMED,Clinical Finding,S,,2099-12-31,2002-01-31,1
+432593,Kwashiorkor,58262005,Condition,SNOMED,Clinical Finding,S,,2099-12-31,2002-01-31,5
+4029268,Marasmic kwashiorkor,238109004,Condition,SNOMED,Clinical Finding,S,,2099-12-31,2002-01-31,8
+4028220,Malnutrition following gastrointestinal surgery,13365009,Condition,SNOMED,Clinical Finding,S,,2099-12-31,2002-01-31,1
+4101278,Moderate protein energy malnutrition,190606006,Condition,SNOMED,Clinical Finding,S,,2099-12-31,2002-01-31,1
+4337279,Semi-starvation,87091005,Condition,SNOMED,Clinical Finding,S,,2099-12-31,2002-01-31,1
+4098458,Moderate protein-calorie malnutrition (weight for age 60-74 percent of standard),190602008,Condition,SNOMED,Clinical Finding,S,,2099-12-31,2002-01-31,1
+4105263,Nutritional wasting,281583001,Condition,SNOMED,Clinical Finding,S,,2099-12-31,2002-01-31,1
+4123542,Wasting disease,288517002,Condition,SNOMED,Clinical Finding,S,,2099-12-31,2002-01-31,1
+4156515,Malnutrition (calorie),272588001,Condition,SNOMED,Clinical Finding,S,,2099-12-31,2002-01-31,1
+443082,Starvation,212968006,Condition,SNOMED,Clinical Finding,S,,2099-12-31,2002-01-31,1
+433163,Deficiency of macronutrients,238107002,Condition,SNOMED,Clinical Finding,S,,2099-12-31,2002-01-31,1
+4233565,Severe protein-calorie malnutrition (Gomez: less than 60 percent of standard weight),360549009,Condition,SNOMED,Clinical Finding,S,,2099-12-31,2002-01-31,1
+4276360,Undernutrition,65404009,Condition,SNOMED,Clinical Finding,S,,2099-12-31,2002-01-31,1
+436078,Malnutrition of moderate degree (Gomez: 60 percent to less than 75 percent of standard weight),77091003,Condition,SNOMED,Clinical Finding,S,,2099-12-31,2002-01-31,1
+435227,Nutritional deficiency disorder,70241007,Condition,SNOMED,Clinical Finding,S,,2099-12-31,2002-01-31,1

@@ -43,6 +43,7 @@ CREATE TABLE observation(
   observation_concept_id          int          not null,
   observation_date                date             null,
 );
+-- Adapted from https://github.com/Smart-PACER-Registry/omopv5_4_setup/blob/main/CommonDataModel-5.4.0/inst/ddl/5.4/postgresql/OMOPCDM_postgresql_5.4_ddl.sql
 -- CREATE TABLE observation(
 --   observation_id                  bigint       primary key,
 --   person_id                       bigint       not null,
@@ -67,4 +68,32 @@ CREATE TABLE observation(
 --   value_as_datetime               datetime2(0)     null
 -- );
 
--- Adapted from https://github.com/Smart-PACER-Registry/omopv5_4_setup/blob/main/CommonDataModel-5.4.0/inst/ddl/5.4/postgresql/OMOPCDM_postgresql_5.4_ddl.sql
+CREATE TABLE condition_occurrence (
+  condition_occurrence_id          integer      primary key,
+  person_id                        integer      not null,
+  condition_concept_id             integer      not null,
+  condition_start_date             date         not null,
+  condition_end_date               date,
+  condition_type_concept_id        integer      not null,
+  condition_source_value           varchar(50),
+  data_partner_id                  integer      not null,
+);
+-- https://github.com/OHDSI/CommonDataModel/blob/main/inst/ddl/5.4/duckdb/OMOPCDM_duckdb_5.4_ddl.sql
+-- CREATE TABLE condition_occurrence (
+--   condition_occurrence_id          integer      primary key,
+--   person_id                        integer      not null,
+--   condition_concept_id             integer      not null,
+--   condition_start_date             date         not null,
+--   condition_start_datetime         timestamp,
+--   condition_end_date               date,
+--   condition_end_datetime           timestamp,
+--   condition_type_concept_id        integer      not null,
+--   condition_status_concept_id      integer,
+--   stop_reason                      varchar(20),
+--   provider_id                      integer,
+--   visit_occurrence_id              integer,
+--   visit_detail_id                  integer,
+--   condition_source_value           varchar(50),
+--   condition_source_concept_id      integer,
+--   condition_status_source_value    varchar(50),
+-- );

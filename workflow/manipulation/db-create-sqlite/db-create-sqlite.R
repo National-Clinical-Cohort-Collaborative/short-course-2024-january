@@ -33,6 +33,8 @@ path_ddl <-
     "manipulation/db-create-sqlite/date_nation_latent-create.sql",
     "manipulation/db-create-sqlite/site_latent-drop.sql",
     "manipulation/db-create-sqlite/site_latent-create.sql",
+    "manipulation/db-create-sqlite/condition_occurrence-drop.sql",
+    "manipulation/db-create-sqlite/condition_occurrence-create.sql",
     "manipulation/db-create-sqlite/observation-drop.sql",
     "manipulation/db-create-sqlite/observation-create.sql",
     "manipulation/db-create-sqlite/person-drop.sql",

@@ -24,6 +24,8 @@ SELECT
   ,pt.covid_date
   ,pt.covid_severity
   ,pth.dx_bird
+  ,pth.obs_animal
+  ,pth.dx_malnutrition
   ,pt.calc_outbreak_lag_years
   ,pt.calc_age_covid
   ,pt.length_of_stay
@@ -31,6 +33,8 @@ SELECT
   ,pth.latent_risk_2_int
   ,pth.latent_risk_2_slope
   ,pth.latent_risk_3
+  ,pth.latent_risk_4
+  ,pth.latent_risk_5
   ,st.school_close
   ,st.school_closed_duration
   ,st.school_reopen

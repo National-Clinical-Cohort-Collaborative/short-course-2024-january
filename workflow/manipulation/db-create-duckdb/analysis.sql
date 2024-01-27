@@ -24,6 +24,8 @@ CREATE TABLE analysis_patient(
   covid_date                      date             not null,
   covid_severity                  covid_severity   not null,
   dx_bird                         dx_bird          not null,
+  obs_animal                      obs_animal       not null,
+  dx_malnutrition                 int,
   calc_outbreak_lag_years         float            not null,
   calc_age_covid                  float            not null,
   length_of_stay                  integer          not null,
@@ -31,6 +33,8 @@ CREATE TABLE analysis_patient(
   latent_risk_2_int               float            not null,
   latent_risk_2_slope             float            not null,
   latent_risk_3                   float            not null,
+  latent_risk_4                   float            not null,
+  latent_risk_5                   float            not null,
   school_close                    date             not null,
   school_closed_duration          integer          not null,
   school_reopen                   date             not null

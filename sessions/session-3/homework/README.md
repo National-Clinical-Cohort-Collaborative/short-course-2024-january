@@ -16,6 +16,7 @@ then create four Code Workbooks.
 ### Reading
 
 * Reread G2N3C's [Section 8.4.3](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/chapters/tools.html#sec-tools-apps-workbook) that focuses on Code Workbooks
+* Watch the video (??need link??)
 * Brush up your SQL.  If you don't have an intro book available, I recommend lessons 1-12 of the interactive [SQLBolt](https://sqlbolt.com/).
 * Brush up your R or Python.  We won't be programming a lot during class, but you'll need to know enough to follow the rough approach.
   Common recommendations include:
@@ -128,3 +129,48 @@ So don't add unnecessary packages.
 
 After Session 3 Ends
 ------------------------------
+
+### Create & Successfully Run Workbooks & Transforms
+
+### Assignments & Questions for `manipulation-1`
+
+1. Incorporate the `condition_occurrence` table.
+
+### Assignments & Questions for `graphs-1`
+
+1.  Which `data_partner` has the *lowest* prevalence of moderate (or worse) covid?  How can you tell?
+1.  Which `data_partner` has the *highest* prevalence of moderate (or worse) covid?  How can you tell?
+1.  The `data_partner` with the highest prevalence of developing moderate covid does not necessarily mean
+    their providers are doing the worst job taking care of their patients.
+    Why?
+    What are some confounds you can think of?
+    How could you start to control for these confounds?
+1.  Improve cosmetically (eg, better axis labels)
+1.  Improve the graphs in some way, even if it's just a cosmetic improvement. QQQ Give them more direction QQQ
+    What did you change and how did you do it?
+
+    qqq let them decide between R or Python for their assignment qqq
+
+### Assignments & Questions for `validation-1`
+
+1.  Describe the relationship between `data_partner_id` and `condition_source_value`.
+    Why could explain this pattern?
+1.  Describe the relationship between `data_partner_id`, `condition_start_date`, and `condition_end_date`.
+    Why could explain this pattern?
+1.  Inspect `condition_end_date`.
+    What is fishy about it?
+    What are some mitigation approaches for this specific scenario of
+
+### Assignments & Questions for `modeling-1`
+
+1.  Interpret the coefficients of `m_covid_moderate_3`.  Should be 3-6 sentences.
+1.  Improve the model (for `covid_moderate_plus`) in some way.
+    What did you change and how did you do it?
+1.  Write a hypothesis for a new outcome variable.
+    Develop a model for it and describe the results.
+
+### question during prep
+
+1.  what concept set should I add (ideally builds on something you guys have done)
+1.  add more comments for code, and tell them about the sections they don't need ot understand --fairy dust
+1.  add @image svg
