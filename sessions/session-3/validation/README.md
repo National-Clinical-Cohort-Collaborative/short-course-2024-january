@@ -259,3 +259,9 @@ Notes:
 1.  Verify graph looks like:
 
     <a href="images/g-start-end-by-partner.png"><img src="images/g-start-end-by-partner.png" alt="g-start-end-by-partner" style="width: 400px;"/></a>
+
+## Transforms within `validation-1`
+
+If you followed this document, your workbook will resemble this image.
+
+[![!validation-1](images/validation-1.png)](images/validation-1.png)

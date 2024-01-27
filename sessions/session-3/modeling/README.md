@@ -116,9 +116,38 @@ That you created already in the [assignments leading into Session 3](../homework
         broom::tidy()
     }
     ```
+1.  Click the blue "Run" (or "Preview" button)
+1.  Verify the [<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/table.svg width="15"> Preview] panel looks like:
+
+    <a href="images/m-covid-moderate-1-preview.png"><img src="images/m-covid-moderate-1-preview.png" alt="m-covid-moderate-1-preview" style="width: 400px;"/></a>
+1.  Verify the [<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/terminal.svg width="15"> Logs] panel looks like:
+    <a href="images/m-covid-moderate-1-logs.png"><img src="images/m-covid-moderate-1-logs.png" alt="m-covid-moderate-1-logs" style="width: 400px;"/></a>
 
 
-## Create R Transform: `m_covid_moderate_3`
+## Create R Transform: `m_covid_moderate_2a`
+
+1.  Click the `pt_parquet` transform, then click the blue plus button, then select "R code".
+1.  Click the gray plus button (above the code), and click the observation transform.
+1.  Change the new transform's name from "unnamed" to `m_covid_moderate_2a`.
+1.  Toggle the "Save as dataset" on.
+1.  A 2nd name pops up for the transform.
+    Keep the pair of names consistent (eg, `m_covid_moderate_2a` also).
+1.  Caution: keep the name *very* unique.
+1.  Verify that you have one input: `pt_parquet`. The color is orange.
+1.  Verify its type is "Transform input" in both places.
+1.  Add more predictors to the model by using the same code as `m_covid_moderate_1` except for the `eq` variable:
+
+    ```r
+    eq <- "covid_moderate_plus ~ 1 + event_animal + age_cut5 + period_first_covid_dx"
+    ```
+1.  Click the blue "Run" (or "Preview" button)
+1.  Verify the [<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/table.svg width="15"> Preview] panel looks like:
+
+    <a href="images/m-covid-moderate-2a-preview.png"><img src="images/m-covid-moderate-2a-preview.png" alt="m-covid-moderate-2a-preview" style="width: 400px;"/></a>
+1.  Verify the [<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/terminal.svg width="15"> Logs] panel looks like:
+    <a href="images/m-covid-moderate-2a-logs.png"><img src="images/m-covid-moderate-2a-logs.png" alt="m-covid-moderate-2a-logs" style="width: 400px;"/></a>
+
+## Create R Transform: `m_covid_moderate_2b`
 
 1.  This transform uses the [emmeans](https://github.com/rvlenth/emmeans) package
     to produce the predicted values and errors, then graphs them.
@@ -217,6 +246,16 @@ That you created already in the [assignments leading into Session 3](../homework
 
       d_predict
     }
-
-
     ```
+1.  Click the blue "Run" (or "Preview" button)
+1.  Verify the [<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/table.svg width="15"> Preview] panel looks like:
+
+    <a href="images/m-covid-moderate-2b-preview.png"><img src="images/m-covid-moderate-2b-preview.png" alt="m-covid-moderate-2b-preview" style="width: 400px;"/></a>
+1.  Verify the [<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/terminal.svg width="15"> Logs] panel looks like:
+    <a href="images/m-covid-moderate-2b-logs.png"><img src="images/m-covid-moderate-2b-logs.png" alt="m-covid-moderate-2b-logs" style="width: 400px;"/></a>
+
+## Transforms within `modeling-1`
+
+If you followed this document, your workbook will resemble this image.
+
+[![!modeling-1](images/modeling-1.png)](images/modeling-1.png)

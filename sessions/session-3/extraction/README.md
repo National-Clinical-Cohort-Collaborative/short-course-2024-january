@@ -694,7 +694,7 @@ Notes:
     advantageous to breakup bigger challenges into smaller ones.
 1.  Color code the workbooks transforms. Think which parts belong to
     what category.
-    1.  "omop source": dark purple (#7B64FF)
+    1.  "omop source": medium purple (#7B64FF)
     1.  "n3c derived": light purple (#AEA1FF)
     1.  "metadata": olive green (#B0BC00)
     1.  "intermediate": gray (#999999)
@@ -774,3 +774,9 @@ from_rds <- function(data) {
   readRDS(path)
 }
 ```
+
+## Transforms within `manipulation-1`
+
+If you followed this document, your workbook will resemble this image.
+
+[![!manipulation-1](images/manipulation-1.png)](images/manipulation-1.png)

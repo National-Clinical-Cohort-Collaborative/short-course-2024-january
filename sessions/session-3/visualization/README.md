@@ -132,7 +132,7 @@ That you created already in the [assignments leading into Session 3](../homework
           y = covid_moderate_plus,
           group = data_partner_id,
           color = data_partner_id
-        #   fill = data_partner_id
+          # fill = data_partner_id
         )) +
         geom_smooth(
           mapping = aes(group = NA, color = NULL, fill = NULL),
@@ -166,6 +166,12 @@ That you created already in the [assignments leading into Session 3](../homework
       return(NULL) # The transform needs to return a dataset (even if it's a null dataset)
     }
     ```
+
+1.  Click the blue "Run" (or "Preview" button)
+1.  Hover over the transform; click the "<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/magnifying-glass-plus.svg width="15"> View image" button.
+1.  Verify graph looks like:
+
+    <a href="images/g-calc-age-covid.png"><img src="images/g-calc-age-covid.png" alt="g-calc-age-covid" style="width: 400px;"/></a>
 
 
 ## Create R Transform: `g_year_age_boxplot`
@@ -202,6 +208,18 @@ That you created already in the [assignments leading into Session 3](../homework
       return(ds)
     }
     ```
+
+1.  Click the blue "Run" (or "Preview" button)
+1.  Hover over the transform; click the "<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/magnifying-glass-plus.svg width="15"> View image" button.
+1.  Verify graph looks like:
+
+    <a href="images/g-year-age-boxplot.png"><img src="images/g-year-age-boxplot.png" alt="g-year-age-boxplot" style="width: 400px;"/></a>
+
+## Transforms within `graphs-1`
+
+If you followed this document, your workbook will resemble this image.
+
+[![!graphs-1](images/graphs-1.png)](images/graphs-1.png)
 
 ## Resources
 
