@@ -40,26 +40,36 @@ Notes:
     ``` r
     load_packages <- function () {
       # library(magrittr) # If R <4.1
+      # Throw an error if one of these packages are missing
       requireNamespace("arrow")
       requireNamespace("dplyr")
       requireNamespace("tidyr")
     }
 
-    # ---- Specific to this Workbook -----------
+    # ---- Code Specific to this Workbook -----------
     retrieve_condition_occurrence <- function(node) {
-    condition_occurrence |>
-      SparkR::arrange("condition_occurrence_id") |>
-      SparkR::mutate(
-        # https://spark.apache.org/docs/2.0.2/api/R/datediff.html
-        duration_v1 = datediff(condition_occurrence$condition_end_date, condition_occurrence$condition_start_date)
-      ) |>
-      SparkR::collect() |> # Cross from the Spark world into the R world
-      tibble::as_tibble() |>
-      dplyr::mutate(
-        data_partner_id = factor(data_partner_id),
-        # https://stat.ethz.ch/R-manual/R-devel/library/base/html/difftime.html
-        duration_v2 = as.integer(difftime(condition_start_date, condition_end_date, units = "day"))
-      )
+      condition_occurrence |>
+        SparkR::arrange("condition_occurrence_id") |>
+        SparkR::mutate(
+          # https://spark.apache.org/docs/2.0.2/api/R/datediff.html
+          duration_v1 =
+            datediff(
+              condition_occurrence$condition_end_date,
+              condition_occurrence$condition_start_date
+            )
+        ) |>
+        SparkR::collect() |> # Cross from the Spark world into the R world
+        tibble::as_tibble() |>
+        dplyr::mutate(
+          data_partner_id = factor(data_partner_id),
+          # https://stat.ethz.ch/R-manual/R-devel/library/base/html/difftime.html
+          duration_v2 =
+            as.integer(difftime(
+              condition_start_date,
+              condition_end_date,
+              units = "day"
+            ))
+        )
     }
 
     # ---- Asserts -----------
@@ -105,6 +115,47 @@ Notes:
     }
     ```
 
+## Create R Transform: `g_duration`
+
+1.  Click the `condition_occurrence` transform, then click the blue plus button, then select "R code".
+1.  Click the gray plus button (above the code), and click the observation transform.
+1.  Change the new transform's name from "unnamed" to `g_duration`.
+1.  Caution: keep the name *very* unique.
+1.  Verify that you have one input: `condition_occurrence`. The color is orange.
+1.  Verify its type is "Spark" in both places.
+1.  Replace the code in the "<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/code.svg width="15"> Logic" panel with
+
+    ```r
+    g_duration_by_partner <- function(condition_occurrence) {
+      load_packages()
+      assert_spark_data_frame(condition_occurrence)
+
+      # ---- retrieve -----------------
+      # Defined in the Global Code
+      ds <- retrieve_condition_occurrence(condition_occurrence)
+
+      # ---- graph -----------------
+      g <-
+        ds |>
+        ggplot(aes(x = duration_v2)) +
+        geom_vline(xintercept = 0, color = "gray60", linetype = "83") +
+        geom_density() +
+        theme_minimal(base_size = 20)
+
+      print(g)
+
+      # Return top 100 rows for just previewing
+      ds |>
+        dplyr::slice(1:100)
+    }
+    ```
+
+1.  Click the blue "Run" (or "Preview" button)
+1.  Hover over the transform; click the "<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/magnifying-glass-plus.svg width="15"> View image" button.
+1.  Verify graph looks like:
+
+    <a href="images/g-duration.png"><img src="images/g-duration.png" alt="g-duration" style="width: 400px;"/></a>
+
 ## Create R Transform: `g_duration_by_partner`
 
 1.  Click the `condition_occurrence` transform, then click the blue plus button, then select "R code".
@@ -116,7 +167,7 @@ Notes:
 1.  Caution: keep the name *very* unique.
 1.  Verify that you have one input: `condition_occurrence`. The color is orange.
 1.  Verify its type is "Spark" in both places.
-1.  Replace the code with
+1.  Replace the code in the "<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/code.svg width="15"> Logic" panel with
 
     ```r
     g_duration_by_partner <- function(condition_occurrence) {
@@ -142,7 +193,7 @@ Notes:
         ggplot(aes(x = duration_v2, color = data_partner_id)) +
         geom_vline(xintercept = 0, color = "gray60", linetype = "83") +
         geom_density() +
-        theme_minimal()
+        theme_minimal(base_size = 20)
 
       print(g)
 
@@ -151,6 +202,13 @@ Notes:
         dplyr::slice(1:100)
     }
     ```
+
+1.  Click the blue "Run" (or "Preview" button)
+1.  Hover over the transform; click the "<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/magnifying-glass-plus.svg width="15"> View image" button.
+1.  Verify graph looks like:
+
+    <a href="images/g-duration-by-partner.png"><img src="images/g-duration-by-partner.png" alt="g-duration-by-partner" style="width: 400px;"/></a>
+
 ## Create R Transform: `g_start_end_by_partner`
 
 1.  Click the `condition_occurrence` transform, then click the blue plus button, then select "R code".
@@ -162,7 +220,7 @@ Notes:
 1.  Caution: keep the name *very* unique.
 1.  Verify that you have one input: `condition_occurrence`. The color is orange.
 1.  Verify its type is "Spark" in both places.
-1.  Replace the code with
+1.  Replace the code in the "<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/code.svg width="15"> Logic" panel with
 
     ```r
     g_start_end_by_partner <- function(condition_occurrence) {
@@ -181,19 +239,22 @@ Notes:
           "text",
           x     = min(ds$condition_start_date, na.rm = TRUE),
           y     = mean(ds$condition_end_date , na.rm = TRUE),
-          label = "'end' follows the 'start'\n(ie, good)",
+          label = "'end' follows the 'start'\n(ie, plausible)",
           hjust = 0
         ) +
         annotate( # Add a label at the center-bottom to orient reader faster
           "text",
           x     = mean(ds$condition_start_date, na.rm = TRUE),
           y     = min(ds$condition_end_date , na.rm = TRUE),
-          label = "'start' follows the 'end'\n(ie, bad)",
+          label = "'start' follows the 'end'\n(ie, not possible)",
           vjust = 0
         ) +
         geom_abline(color = "gray60", linetype = "83") +
-        geom_point() +
-        theme_minimal()
+        geom_point(
+          shape   = 21,
+          size    = 4
+        ) +
+        theme_minimal(base_size = 20)
 
       print(g)
 
@@ -202,3 +263,15 @@ Notes:
         dplyr::slice(1:100)
     }
     ```
+
+1.  Click the blue "Run" (or "Preview" button)
+1.  Hover over the transform; click the "<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/magnifying-glass-plus.svg width="15"> View image" button.
+1.  Verify graph looks like:
+
+    <a href="images/g-start-end-by-partner.png"><img src="images/g-start-end-by-partner.png" alt="g-start-end-by-partner" style="width: 400px;"/></a>
+
+## Transforms within `validation-1`
+
+If you followed this document, your workbook will resemble this image.
+
+[![validation-1](images/validation-1.png)](images/validation-1.png)

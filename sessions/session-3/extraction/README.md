@@ -161,7 +161,7 @@ Notes:
 1.  Verify that you have two inputs: `patient_ll` & `observation`. The
     colors are orange & purple, but the order doesn't matter.
 
-1.  Replace the code with
+1.  Replace the code in the "<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/code.svg width="15"> Logic" panel with
 
     ``` sql
     WITH obs_before as (
@@ -246,7 +246,7 @@ Notes:
 1.  Verify that you have two inputs: `patient_ll` & `pt`. The
     colors are orange & purple, but the order doesn't matter.
 
-1.  Replace the code with
+1.  Replace the code in the "<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/code.svg width="15"> Logic" panel with
 
     ``` sql
     SELECT
@@ -281,7 +281,7 @@ Notes:
 
 1.  Instead start simple, and gradually add complexity.
 
-1.  Replace the code with
+1.  Replace the code in the "<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/code.svg width="15"> Logic" panel with
 
     ``` sql
     SELECT
@@ -291,7 +291,7 @@ Notes:
       ,p.covid_date
       ,p.calc_age_covid
       ,p.length_of_stay
-      ,po.event_animal
+      ,coalesce(po.event_animal, 'No Event Documented')         as event_animal
       ,po.dx_days_before_covid
       ,case
         when p.covid_date is null         then null
@@ -451,6 +451,71 @@ Notes:
       requireNamespace("arrow")
       requireNamespace("dplyr")
       requireNamespace("tidyr")
+    }
+
+    # ---- Code Specific to this Workbook -----------
+    prepare_dataset <- function(d) {
+      d |>
+        tibble::as_tibble() |>
+        dplyr::mutate(
+          data_partner_id        = factor(data_partner_id),
+          period_first_covid_dx  = factor_period(period_first_covid_dx),
+          covid_severity         = factor_severity(covid_severity),
+          age_cut5               = factor_age(age_cut5),
+          event_animal           = factor_event_animal(event_animal),
+        ) |>
+        dplyr::mutate(
+          # gender_male            = as.integer(gender_male),
+          # smoking_ever           = as.integer(smoking_ever),
+          covid_mild_plus        = as.integer(covid_mild_plus),
+          covid_moderate_plus    = as.integer(covid_moderate_plus),
+          covid_severe_plus      = as.integer(covid_severe_plus),
+          covid_dead             = as.integer(covid_dead),
+        )
+    }
+    factor_event_animal <- function (x) {
+      factor(
+        x,
+        levels = c(
+          "No Event Documented", # Reference level for models
+          "Butted by animal",
+          "Peck by bird"
+        )
+      )
+    }
+    factor_period <- function (x) {
+      factor(
+        x,
+        levels = c(
+          # "2020H1",
+          "2020H2",
+          "2021H1", "2021H2",
+          "2022H1", "2022H2"
+        )
+      )
+    }
+    factor_severity <- function(x) {
+      factor(
+        x,
+        levels = c(
+          "none",
+          "mild",
+          "moderate",
+          "severe",
+          "death"
+        )
+      )
+    }
+    factor_age <- function(x) {
+      factor(
+        x,
+        levels = c(
+          "2-18",
+          "19-50",
+          "51-75",
+          "76+"
+        )
+      )
     }
 
     # ---- Asserts -----------
@@ -629,9 +694,11 @@ Notes:
 - [Specify Reference Factor Level in Linear Regression in
   R](https://statisticsglobe.com/specify-reference-factor-level-in-linear-regression-in-r)
 
-## Remarks on Architecture
+## Remarks on Architecture within a Codebook
 
 1.  SQL/PySpark vs R/Python vs
+
+## Remarks on Architecture between Codebooks
 
 ## Troubleshooting Tips
 
@@ -666,13 +733,6 @@ Notes:
     com.palantir.logsafe.exceptions.SafeRuntimeException: Failed to extract input.:
     ```
 
-1.  This error probably means you didn't execute `library(magrittr)` and you'r running an older version of R:
-    Remember when you're debugging code in the console,
-    `load_packages()` needs to be run separately.
-
-    ```
-    ```
-
 1.  If you modify the Global Code, either
 
     1.  Click the "Reset console" button or
@@ -694,7 +754,7 @@ Notes:
     advantageous to breakup bigger challenges into smaller ones.
 1.  Color code the workbooks transforms. Think which parts belong to
     what category.
-    1.  "omop source": dark purple (#7B64FF)
+    1.  "omop source": medium purple (#7B64FF)
     1.  "n3c derived": light purple (#AEA1FF)
     1.  "metadata": olive green (#B0BC00)
     1.  "intermediate": gray (#999999)
@@ -713,6 +773,7 @@ package isn't available in your R installation
 and you don't need interoperatibility with other languages
 
 `pt_rds` node:
+
 ```r
 pt_rds <- function(pt) {
   load_packages()
@@ -774,3 +835,16 @@ from_rds <- function(data) {
   readRDS(path)
 }
 ```
+
+## Transforms within `manipulation-1`
+
+If you followed this document, your workbook will resemble this image.
+
+[![manipulation-1](images/manipulation-1.png)](images/manipulation-1.png)
+
+## Resources
+
+* Palantir Foundry Documentation
+  * [R transforms](https://unite.nih.gov/docs/foundry/code-workbook/workbooks-languages/#r-transforms)
+  * [Conversion between Spark and R dataframes](https://unite.nih.gov/docs/foundry/code-workbook/workbooks-languages/#conversion-between-spark-and-r-dataframes)
+  * [R troubleshooting](https://unite.nih.gov/docs/foundry/code-workbook/workbooks-languages/#r-troubleshooting)

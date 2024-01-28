@@ -29,10 +29,27 @@ That you created already in the [assignments leading into Session 3](../homework
     ``` r
     load_packages <- function () {
       # library(magrittr) # If R <4.1
+      library(ggplot2)
       requireNamespace("arrow")
       requireNamespace("dplyr")
-      requireNamespace("tidyr")
+      requireNamespace("broom")
     }
+
+    # ---- Code Specific to this Workbook -----------
+    #CC0 palette from http://colrd.com/palette/50906/
+    palette_event_dark   <-
+      c(
+        "Butted by animal"    = "#004c66",
+        "Peck by bird"        = "#7f0000",
+        "No Event Documented" = "#3f3f3f"
+      )
+
+    palette_event_light  <-
+      c(
+        "Butted by animal"    = "#0099cc",
+        "Peck by bird"        = "#ff4444",
+        "No Event Documented" = "#a1a1a1"
+      )
 
     # ---- Asserts -----------
     assert_r_data_frame <- function(x) {
@@ -88,7 +105,7 @@ That you created already in the [assignments leading into Session 3](../homework
 1.  Caution: keep the name *very* unique.
 1.  Verify that you have one input: `pt_parquet`. The color is orange.
 1.  Verify its type is "Transform input" in both places.
-1.  Replace the code with
+1.  Replace the code in the "<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/code.svg width="15"> Logic" panel with
 
     ```r
     m_covid_moderate_1 <- function(pt_parquet) {
@@ -116,9 +133,43 @@ That you created already in the [assignments leading into Session 3](../homework
         broom::tidy()
     }
     ```
+1.  Click the blue "Run" (or "Preview" button)
 
+1.  Verify the [<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/table.svg width="15"> Preview] panel looks like:
 
-## Create R Transform: `m_covid_moderate_3`
+    <a href="images/m-covid-moderate-1-preview.png"><img src="images/m-covid-moderate-1-preview.png" alt="m-covid-moderate-1-preview" style="width: 400px;"/></a>
+
+1.  Verify the [<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/terminal.svg width="15"> Logs] panel looks like:
+
+    <a href="images/m-covid-moderate-1-logs.png"><img src="images/m-covid-moderate-1-logs.png" alt="m-covid-moderate-1-logs" style="width: 400px;"/></a>
+
+## Create R Transform: `m_covid_moderate_2a`
+
+1.  Click the `pt_parquet` transform, then click the blue plus button, then select "R code".
+1.  Click the gray plus button (above the code), and click the observation transform.
+1.  Change the new transform's name from "unnamed" to `m_covid_moderate_2a`.
+1.  Toggle the "Save as dataset" on.
+1.  A 2nd name pops up for the transform.
+    Keep the pair of names consistent (eg, `m_covid_moderate_2a` also).
+1.  Caution: keep the name *very* unique.
+1.  Verify that you have one input: `pt_parquet`. The color is orange.
+1.  Verify its type is "Transform input" in both places.
+1.  Add more predictors to the model by using the same code as `m_covid_moderate_1` except for the `eq` variable:
+
+    ```r
+    eq <- "covid_moderate_plus ~ 1 + event_animal + age_cut5 + period_first_covid_dx"
+    ```
+1.  Click the blue "Run" (or "Preview" button)
+1.
+1.  Verify the [<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/table.svg width="15"> Preview] panel looks like:
+
+    <a href="images/m-covid-moderate-2a-preview.png"><img src="images/m-covid-moderate-2a-preview.png" alt="m-covid-moderate-2a-preview" style="width: 400px;"/></a>
+
+1.  Verify the [<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/terminal.svg width="15"> Logs] panel looks like:
+
+    <a href="images/m-covid-moderate-2a-logs.png"><img src="images/m-covid-moderate-2a-logs.png" alt="m-covid-moderate-2a-logs" style="width: 400px;"/></a>
+
+## Create R Transform: `m_covid_moderate_2b`
 
 1.  This transform uses the [emmeans](https://github.com/rvlenth/emmeans) package
     to produce the predicted values and errors, then graphs them.
@@ -127,13 +178,13 @@ That you created already in the [assignments leading into Session 3](../homework
     but use the following code:
 
     ```r
-    m_covid_moderate_3 <- function(pt_parquet) {
+    m_covid_moderate_2b <- function(pt_parquet) {
       load_packages()
       assert_transform_object(pt_parquet)
 
       outcome_label <- "COVID Moderate or Worse"
       outcome_name <- "covid_moderate_plus"
-      eq_m  <- "covid_moderate_plus ~ 1 + event_animal + age_cut5" # + period_first_covid_dx"
+      eq_m  <- "covid_moderate_plus ~ 1 + event_animal + age_cut5 + period_first_covid_dx"
       eq_em <- "~ event_animal | age_cut5"
 
       glm_link      <- "quasibinomial"
@@ -183,7 +234,7 @@ That you created already in the [assignments leading into Session 3](../homework
         )
       print(d_predict)
 
-      glyph <- "label"
+      glyph <- "rect"
       g <-
         d_predict |>
         ggplot(
@@ -192,24 +243,24 @@ That you created already in the [assignments leading into Session 3](../homework
         geom_line(size = 1, key_glyph = glyph) +
         geom_ribbon(aes(ymin = ci_lower, ymax = ci_upper), color = NA, key_glyph = glyph, alpha = .15) +
         geom_point(size = 3, shape = 21, key_glyph = glyph) +
-        # guides(color = guide_legend(nrow = 1, override.aes = list(size = 6))) +
-        # guides(fill  = guide_legend(nrow = 1, override.aes = list(alpha = 1))) +
+        scale_x_discrete(expand = expansion(mult = 0.05)) +
+        scale_y_continuous(labels = scales::percent_format()) +
+        scale_color_manual(values = palette_event_dark) +
+        scale_fill_manual( values = palette_event_light) +
+        coord_cartesian(ylim = c(0, 1)) +
+        guides(color = guide_legend(override.aes = list(size = 6) , reverse = TRUE)) +
+        guides(fill  = guide_legend(override.aes = list(alpha = 1), reverse = TRUE)) +
         theme_minimal(base_size = 20) +
         # theme(legend.position = "none") +
         theme(legend.position = c(0, 1), legend.justification = c(0, 1)) +
-        # theme(legend.title     = element_text(color = palette_asthma_dark[["title"]])) +
-        # theme(strip.background = element_rect(fill  = palette_asthma_dark[["title"]], color = NA)) +
-        # theme(strip.text       = element_text(color = "gray97"                  , face = "bold")) +
-        # theme(axis.title       = element_text(color = palette_asthma_dark[["title"]], face = "bold")) +
-        # theme(plot.title = element_text(color = palette_asthma_dark[["title"]], face = "bold")) +
         theme(panel.grid.major.x = element_blank()) +
         theme(panel.grid.major.y = element_line(color = "gray97")) +
         theme(panel.grid.minor.y = element_blank()) +
         labs(
-          x     = NULL, #"Tx Category",
-          y     = NULL, #outcome_label,
-          color = "Asthma Category",
-          fill  = "Asthma Category",
+          x     = "Patient Age", #"Tx Category",
+          y     = "Probability of Developing\nModerate Covid or Worse", #outcome_label,
+          color = "Event",
+          fill  = "Event",
           title = outcome_label #main_title
         )
 
@@ -217,6 +268,23 @@ That you created already in the [assignments leading into Session 3](../homework
 
       d_predict
     }
-
-
     ```
+1.  Click the blue "Run" (or "Preview" button)
+
+1.  Verify the [<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/table.svg width="15"> Preview] panel looks like:
+
+    <a href="images/m-covid-moderate-2b-preview.png"><img src="images/m-covid-moderate-2b-preview.png" alt="m-covid-moderate-2b-preview" style="width: 400px;"/></a>
+
+1.  Verify the [<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/terminal.svg width="15"> Logs] panel looks like:
+
+    <a href="images/m-covid-moderate-2b-logs.png"><img src="images/m-covid-moderate-2b-logs.png" alt="m-covid-moderate-2b-logs" style="width: 400px;"/></a>
+
+1.  Verify the [<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/chart-line.svg width="15"> Visualizations] panel looks like:
+
+    <a href="images/m-covid-moderate-2b-graph.png"><img src="images/m-covid-moderate-2b-graph.png" alt="m-covid-moderate-2b-graph" style="width: 400px;"/></a>
+
+## Transforms within `modeling-1`
+
+If you followed this document, your workbook will resemble this image.
+
+[![modeling-1](images/modeling-1.png)](images/modeling-1.png)
