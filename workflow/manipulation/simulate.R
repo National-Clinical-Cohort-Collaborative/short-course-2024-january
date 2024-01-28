@@ -69,8 +69,8 @@ manifest_severity_dx_bird <- function (x) {
 manifest_obs_animal <- function (x) {
   cut(
     x       = x,
-    breaks  = c(-Inf,     0,     2,   Inf),
-    labels  = c(  "Peck by bird", "Butted by animal", "No Event")
+    breaks  = c(-Inf,       0,                  2,              Inf),
+    labels  = c(  "No Event", "Butted by animal", "Peck by bird")
   )
 }
 manifest_malnutrition <- function (x) {
