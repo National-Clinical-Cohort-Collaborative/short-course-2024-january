@@ -630,9 +630,11 @@ Notes:
 - [Specify Reference Factor Level in Linear Regression in
   R](https://statisticsglobe.com/specify-reference-factor-level-in-linear-regression-in-r)
 
-## Remarks on Architecture
+## Remarks on Architecture within a Codebook
 
 1.  SQL/PySpark vs R/Python vs
+
+## Remarks on Architecture between Codebooks
 
 ## Troubleshooting Tips
 
@@ -665,13 +667,6 @@ Notes:
     Executing job failed.
     Error: Failed to extract input.: {recordId=..., inputTableAlias=pt_parquet}
     com.palantir.logsafe.exceptions.SafeRuntimeException: Failed to extract input.:
-    ```
-
-1.  This error probably means you didn't execute `library(magrittr)` and you'r running an older version of R:
-    Remember when you're debugging code in the console,
-    `load_packages()` needs to be run separately.
-
-    ```
     ```
 
 1.  If you modify the Global Code, either
@@ -714,6 +709,7 @@ package isn't available in your R installation
 and you don't need interoperatibility with other languages
 
 `pt_rds` node:
+
 ```r
 pt_rds <- function(pt) {
   load_packages()
@@ -781,3 +777,10 @@ from_rds <- function(data) {
 If you followed this document, your workbook will resemble this image.
 
 [![manipulation-1](images/manipulation-1.png)](images/manipulation-1.png)
+
+## Resources
+
+* Palantir Foundry Documentation
+  * [R transforms](https://unite.nih.gov/docs/foundry/code-workbook/workbooks-languages/#r-transforms)
+  * [Conversion between Spark and R dataframes](https://unite.nih.gov/docs/foundry/code-workbook/workbooks-languages/#conversion-between-spark-and-r-dataframes)
+  * [R troubleshooting](https://unite.nih.gov/docs/foundry/code-workbook/workbooks-languages/#r-troubleshooting)
