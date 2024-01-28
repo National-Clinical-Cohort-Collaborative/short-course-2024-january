@@ -291,7 +291,7 @@ Notes:
       ,p.covid_date
       ,p.calc_age_covid
       ,p.length_of_stay
-      ,po.event_animal
+      ,coalesce(po.event_animal, 'No Event Documented')         as event_animal
       ,po.dx_days_before_covid
       ,case
         when p.covid_date is null         then null
@@ -448,10 +448,74 @@ Notes:
     ``` r
     load_packages <- function () {
       # library(magrittr) # If R <4.1
-      # Throw an error if one of these packages are missing
       requireNamespace("arrow")
       requireNamespace("dplyr")
       requireNamespace("tidyr")
+    }
+
+    # ---- Code Specific to this Workbook -----------
+    prepare_dataset <- function(d) {
+      d |>
+        tibble::as_tibble() |>
+        dplyr::mutate(
+          data_partner_id        = factor(data_partner_id),
+          period_first_covid_dx  = factor_period(period_first_covid_dx),
+          covid_severity         = factor_severity(covid_severity),
+          age_cut5               = factor_age(age_cut5),
+          event_animal           = factor_event_animal(event_animal),
+        ) |>
+        dplyr::mutate(
+          # gender_male            = as.integer(gender_male),
+          # smoking_ever           = as.integer(smoking_ever),
+          covid_mild_plus        = as.integer(covid_mild_plus),
+          covid_moderate_plus    = as.integer(covid_moderate_plus),
+          covid_severe_plus      = as.integer(covid_severe_plus),
+          covid_dead             = as.integer(covid_dead),
+        )
+    }
+    factor_event_animal <- function (x) {
+      factor(
+        x,
+        levels = c(
+          "No Event Documented", # Reference level for models
+          "Butted by animal",
+          "Peck by bird"
+        )
+      )
+    }
+    factor_period <- function (x) {
+      factor(
+        x,
+        levels = c(
+          # "2020H1",
+          "2020H2",
+          "2021H1", "2021H2",
+          "2022H1", "2022H2"
+        )
+      )
+    }
+    factor_severity <- function(x) {
+      factor(
+        x,
+        levels = c(
+          "none",
+          "mild",
+          "moderate",
+          "severe",
+          "death"
+        )
+      )
+    }
+    factor_age <- function(x) {
+      factor(
+        x,
+        levels = c(
+          "2-18",
+          "19-50",
+          "51-75",
+          "76+"
+        )
+      )
     }
 
     # ---- Asserts -----------
