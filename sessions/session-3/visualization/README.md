@@ -28,6 +28,7 @@ That you created already in the [assignments leading into Session 3](../homework
     ``` r
     load_packages <- function () {
       # library(magrittr) # If R <4.1
+      # Throw an error if one of these packages are missing
       requireNamespace("arrow")
       requireNamespace("dplyr")
       requireNamespace("tidyr")
@@ -219,7 +220,7 @@ That you created already in the [assignments leading into Session 3](../homework
 
 If you followed this document, your workbook will resemble this image.
 
-[![!graphs-1](images/graphs-1.png)](images/graphs-1.png)
+[![graphs-1](images/graphs-1.png)](images/graphs-1.png)
 
 ## Resources
 
@@ -227,5 +228,5 @@ If you followed this document, your workbook will resemble this image.
 * [*ggplot2: Elegant Graphics for Data Analysis*](https://www.amazon.com/ggplot2-Elegant-Graphics-Data-Analysis/dp/331924275X/) by Hadley Wickham
 * [*R Graphics Cookbook, 2nd edition*](https://r-graphics.org/) by Winston Chang
 * See [N3C resources](../../../background/assets.md) we've listed, especially
-    * The [Languages Section](https://unite.nih.gov/workspace/documentation/product/code-workbook/languages) in the Palantir Foundary/Enclave documentation
+    * The [Languages Section](https://unite.nih.gov/workspace/documentation/product/code-workbook/languages) in the Palantir Foundry/Enclave documentation
     * [N3C Training](https://unite.nih.gov/workspace/slate/documents/training)

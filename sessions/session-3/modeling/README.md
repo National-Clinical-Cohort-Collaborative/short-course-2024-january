@@ -29,6 +29,7 @@ That you created already in the [assignments leading into Session 3](../homework
     ``` r
     load_packages <- function () {
       # library(magrittr) # If R <4.1
+      # Throw an error if one of these packages are missing
       requireNamespace("arrow")
       requireNamespace("dplyr")
       requireNamespace("tidyr")
@@ -117,12 +118,14 @@ That you created already in the [assignments leading into Session 3](../homework
     }
     ```
 1.  Click the blue "Run" (or "Preview" button)
+
 1.  Verify the [<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/table.svg width="15"> Preview] panel looks like:
 
     <a href="images/m-covid-moderate-1-preview.png"><img src="images/m-covid-moderate-1-preview.png" alt="m-covid-moderate-1-preview" style="width: 400px;"/></a>
-1.  Verify the [<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/terminal.svg width="15"> Logs] panel looks like:
-    <a href="images/m-covid-moderate-1-logs.png"><img src="images/m-covid-moderate-1-logs.png" alt="m-covid-moderate-1-logs" style="width: 400px;"/></a>
 
+1.  Verify the [<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/terminal.svg width="15"> Logs] panel looks like:
+
+    <a href="images/m-covid-moderate-1-logs.png"><img src="images/m-covid-moderate-1-logs.png" alt="m-covid-moderate-1-logs" style="width: 400px;"/></a>
 
 ## Create R Transform: `m_covid_moderate_2a`
 
@@ -141,10 +144,13 @@ That you created already in the [assignments leading into Session 3](../homework
     eq <- "covid_moderate_plus ~ 1 + event_animal + age_cut5 + period_first_covid_dx"
     ```
 1.  Click the blue "Run" (or "Preview" button)
+1.
 1.  Verify the [<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/table.svg width="15"> Preview] panel looks like:
 
     <a href="images/m-covid-moderate-2a-preview.png"><img src="images/m-covid-moderate-2a-preview.png" alt="m-covid-moderate-2a-preview" style="width: 400px;"/></a>
+
 1.  Verify the [<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/terminal.svg width="15"> Logs] panel looks like:
+
     <a href="images/m-covid-moderate-2a-logs.png"><img src="images/m-covid-moderate-2a-logs.png" alt="m-covid-moderate-2a-logs" style="width: 400px;"/></a>
 
 ## Create R Transform: `m_covid_moderate_2b`
@@ -248,14 +254,17 @@ That you created already in the [assignments leading into Session 3](../homework
     }
     ```
 1.  Click the blue "Run" (or "Preview" button)
+
 1.  Verify the [<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/table.svg width="15"> Preview] panel looks like:
 
     <a href="images/m-covid-moderate-2b-preview.png"><img src="images/m-covid-moderate-2b-preview.png" alt="m-covid-moderate-2b-preview" style="width: 400px;"/></a>
+
 1.  Verify the [<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/terminal.svg width="15"> Logs] panel looks like:
+
     <a href="images/m-covid-moderate-2b-logs.png"><img src="images/m-covid-moderate-2b-logs.png" alt="m-covid-moderate-2b-logs" style="width: 400px;"/></a>
 
 ## Transforms within `modeling-1`
 
 If you followed this document, your workbook will resemble this image.
 
-[![!modeling-1](images/modeling-1.png)](images/modeling-1.png)
+[![modeling-1](images/modeling-1.png)](images/modeling-1.png)

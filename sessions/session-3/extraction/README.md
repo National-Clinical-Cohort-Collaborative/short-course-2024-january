@@ -448,6 +448,7 @@ Notes:
     ``` r
     load_packages <- function () {
       # library(magrittr) # If R <4.1
+      # Throw an error if one of these packages are missing
       requireNamespace("arrow")
       requireNamespace("dplyr")
       requireNamespace("tidyr")
@@ -779,4 +780,4 @@ from_rds <- function(data) {
 
 If you followed this document, your workbook will resemble this image.
 
-[![!manipulation-1](images/manipulation-1.png)](images/manipulation-1.png)
+[![manipulation-1](images/manipulation-1.png)](images/manipulation-1.png)

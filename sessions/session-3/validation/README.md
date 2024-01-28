@@ -40,26 +40,36 @@ Notes:
     ``` r
     load_packages <- function () {
       # library(magrittr) # If R <4.1
+      # Throw an error if one of these packages are missing
       requireNamespace("arrow")
       requireNamespace("dplyr")
       requireNamespace("tidyr")
     }
 
-    # ---- Specific to this Workbook -----------
+    # ---- Code Specific to this Workbook -----------
     retrieve_condition_occurrence <- function(node) {
-    condition_occurrence |>
-      SparkR::arrange("condition_occurrence_id") |>
-      SparkR::mutate(
-        # https://spark.apache.org/docs/2.0.2/api/R/datediff.html
-        duration_v1 = datediff(condition_occurrence$condition_end_date, condition_occurrence$condition_start_date)
-      ) |>
-      SparkR::collect() |> # Cross from the Spark world into the R world
-      tibble::as_tibble() |>
-      dplyr::mutate(
-        data_partner_id = factor(data_partner_id),
-        # https://stat.ethz.ch/R-manual/R-devel/library/base/html/difftime.html
-        duration_v2 = as.integer(difftime(condition_start_date, condition_end_date, units = "day"))
-      )
+      condition_occurrence |>
+        SparkR::arrange("condition_occurrence_id") |>
+        SparkR::mutate(
+          # https://spark.apache.org/docs/2.0.2/api/R/datediff.html
+          duration_v1 =
+            datediff(
+              condition_occurrence$condition_end_date,
+              condition_occurrence$condition_start_date
+            )
+        ) |>
+        SparkR::collect() |> # Cross from the Spark world into the R world
+        tibble::as_tibble() |>
+        dplyr::mutate(
+          data_partner_id = factor(data_partner_id),
+          # https://stat.ethz.ch/R-manual/R-devel/library/base/html/difftime.html
+          duration_v2 =
+            as.integer(difftime(
+              condition_start_date,
+              condition_end_date,
+              units = "day"
+            ))
+        )
     }
 
     # ---- Asserts -----------
@@ -264,4 +274,4 @@ Notes:
 
 If you followed this document, your workbook will resemble this image.
 
-[![!validation-1](images/validation-1.png)](images/validation-1.png)
+[![validation-1](images/validation-1.png)](images/validation-1.png)
