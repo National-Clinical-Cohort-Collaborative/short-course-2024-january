@@ -77,49 +77,44 @@ You should have created it already in the
 
 ## Inclusion & Exclusion Criteria
 
-1.  Work with the investigators to keep an updated list of the
-    characteristics that make a patient eligible to be included in the
-    analysis.
+1.  Work with the investigators to keep an updated list of the characteristics
+    that make a patient eligible to be included in the analysis.
 
-1.  For today, we'll specify two:
+1.  For today, we'll specify ~2 eligibility criteria:
 
-    1.  Include patients only if 2+ years old at the time of covid
-        onset. (Or if age is unknown.)
-    1.  Exclude patients if they first develop covid before July
-        1, 2020. (Or if onset date is unknown.)
+    1.  Include patients only if 2+ years old at the time of covid onset.
+        (Or if age is unknown.)
+    1.  Exclude patients if they first develop covid before July 1, 2020.
+        (Or if onset date is unknown.)
     1.  Exclude patients if they first develop covid after Dec 31, 2022.
 
-1.  I like to include the criteria in the `pt` transform, which will be
-    one of the final steps in the workbook. Basically calculate the
-    picture for everyone, and then make the decision at the end.
+1.  I like to include the criteria in the `pt` transform,
+    which will be one of the final steps in the workbook.
+    Basically calculate the picture for everyone, and then make the decision at the end.
 
-1.  It may be less computationally efficient in some cases, but I think
-    this approach makes it easier to spot mispecfications.
+    I don't like the criteria to be scattered across 3+ transforms.
+
+1.  It may be less computationally efficient in some cases to scatter,
+    but I think this approach makes it easier to spot misspecifications.
 
 ## Identify Source Tables & their Relationships
 
-- In most EHR research, conceptually start with the database's patient.
+- In most EHR research, conceptually start with the database's patient tablet.
   With OMOP, this table is called
   [`person`](https://ohdsi.github.io/CommonDataModel/cdm60.html#PERSON).
 
-- But with N3C, a talented group of people have faced and addressed many
-  of the problems we'll face. So let's leverage the [Logic
-  Liaisons'](https://covid.cd2h.org/liaisons/) contributions to the N3C
-  Knowledge Store.
+- But with N3C, a talented group of people have faced and addressed many of the problems we'll face.
+  So let's leverage the [Logic Liaisons'](https://covid.cd2h.org/liaisons/)
+  contributions to the N3C Knowledge Store.
 
 **Resources**
 
-- [OMOP Table
-  Structure](https://ohdsi.github.io/CommonDataModel/cdm60.html#Clinical_Data_Tables)
+- [OMOP Table Structure](https://ohdsi.github.io/CommonDataModel/cdm60.html#Clinical_Data_Tables)
 - Logic Liaison Fact Tables
-  - [COVID-19 Diagnosed or Lab Confirmed
-    Patients](https://unite.nih.gov/workspace/module/view/latest/ri.workshop.main.module.3ab34203-d7f3-482e-adbd-f4113bfd1a2b?id=KO-BE5C652&view=focus)
-  - [Combined Variables ALL
-    PATIENTS](https://unite.nih.gov/workspace/module/view/latest/ri.workshop.main.module.3ab34203-d7f3-482e-adbd-f4113bfd1a2b?id=KO-DE908D4&view=focus)
-- [*The Researcher's Guide to
-  N3C*](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/)
-  - [Section 8.3.3 Logic Liaison Fact Tables and
-    Templates](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/chapters/tools.html#sec-tools-store-ll0)
+  - [COVID-19 Diagnosed or Lab Confirmed Patients](https://unite.nih.gov/workspace/module/view/latest/ri.workshop.main.module.3ab34203-d7f3-482e-adbd-f4113bfd1a2b?id=KO-BE5C652&view=focus)
+  - [Combined Variables ALL PATIENTS](https://unite.nih.gov/workspace/module/view/latest/ri.workshop.main.module.3ab34203-d7f3-482e-adbd-f4113bfd1a2b?id=KO-DE908D4&view=focus)
+- [*The Researcher's Guide to N3C*](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/)
+  - [Section 8.3.3 Logic Liaison Fact Tables and Templates](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/chapters/tools.html#sec-tools-store-ll0)
 
 ## Sketch Plan
 
@@ -131,8 +126,8 @@ You should have created it already in the
     Data Analysis for COVID-19 Research, Spring 2024"
 1.  Go to the directory that has the simulated for today's session:
     "analysis-with-synthetic-data"
-1.  Hold \[shift\], click `observation` and `patient_ll`, and click the
-    blue "Select" button.
+1.  Hold \[shift\], click `observation` and `patient_ll`,
+    and click the blue "Select" button.
 
 Notes:
 
@@ -142,7 +137,7 @@ Notes:
     [`LOGIC_LIAISON_Covid_19_Patient_Summary_Facts_Table_LDS_`](https://unite.nih.gov/workspace/module/view/latest/ri.workshop.main.module.3ab34203-d7f3-482e-adbd-f4113bfd1a2b?id=KO-BE5C652&view=focus)
     table.
 
-## First SQL Transform: Isolate Relevant Animal Event
+## Create the First SQL Transform: Isolate Relevant Animal Event
 
 1.  Click the `patient_ll` transform, then click the blue plus button,
     then select "SQL code".
@@ -167,6 +162,9 @@ Notes:
         o.observation_id
         ,o.person_id
         ,o.observation_concept_id
+        -- This case-when block recodes the concept ids into words.
+        --   In a real project, consider using a concept set
+        --   or joining to a metadata table.
         ,case
           when o.observation_concept_id = 4314094 then 'Butted by animal'
           when o.observation_concept_id = 4314097 then 'Peck by bird'
@@ -174,18 +172,28 @@ Notes:
         end                                         as event_animal
         ,o.observation_date
         ,p.covid_date
+        -- Calculate the days between the event and the subsequent covid dx.
         ,datediff(p.covid_date, o.observation_date) as dx_days_before_covid
+        -- Within a pt, create a reverse sequence of ...4, 3, 2, & 1.
+        --   The "1" will be the most recent event before the covid dx.
         ,row_number() over (partition by p.person_id order by o.observation_date desc) as index_within_pt_rev
       FROM patient_ll p
+        -- Take only the patients with a relevant concept id.
         inner join observation o on p.person_id = o.person_id
       WHERE
+        -- Take only events that occur before the covid dx.
         o.observation_date < p.covid_date
         and
+        -- This block is typically replaced by a reference to a concept set.
+        --   Concept sets were covered in Session 2.
         o.observation_concept_id in (
           4314094,
           4314097
         )
     )
+
+    -- Take only the relevant columns.
+    --   Take only the event immediately before the covid dx.
     SELECT
       observation_id
       ,person_id
@@ -199,15 +207,17 @@ Notes:
 
 1.  Click blue "Run" button.
 
-1.  Verify resulting table has 6 columns & 64 rows.
+1.  Verify resulting table has 6 columns & 679 rows.
 
 1.  Notice `pt_observation_preceding` has fewer rows than `patient_ll`.
 
     - Q1: Why?
-    - Q2: Can we use `pt_observation_preceding` directly in the
-      analysis? Why not?
-    - Q3: What rows are missing from `pt_observation_preceding`, and how
-      can we fill in those rows?
+    - Q2: Can we use `pt_observation_preceding` directly in the analysis? Why not?
+    - Q3: What rows are missing from `pt_observation_preceding`,
+      and how can we fill in those rows?
+    - Q4: Suppose the investigators don't want ancient events.
+      ...say only the previous 6 months are relevant.
+      Conceptually, how would we modify the query?
 
 ## Dissecting Previous SQL Code
 
@@ -221,12 +231,12 @@ Notes:
 1.  Second `SELECT` & `FROM` statements
 1.  `WHERE index_within_pt_rev = 1`
 
-## Second SQL Transform: Rejoin with `patient_ll`
+## Create the Second SQL Transform: Rejoin with `patient_ll`
 
 1.  Go back to this table to get
 
-    1.  …patients that didn't have a documented animal event.
-    1.  …useful variables the logic liaisons calculated for us.
+    1.  ...patients that didn't have a documented animal event.
+    1.  ...useful variables the logic liaisons calculated for us.
 
 1.  Click the `patient_ll` transform, then click the blue plus button,
     then select "SQL code" (again).
@@ -241,8 +251,8 @@ Notes:
 1.  A 2nd name pops up for the transform.
     Keep the pair of names consistent (eg, `pt` also).
 
-1.  Verify that you have two inputs: `patient_ll` & `pt`. The
-    colors are orange & purple, but the order doesn't matter.
+1.  Verify that you have two inputs: `patient_ll` & `pt`.
+    The colors are orange & purple, but the order doesn't matter.
 
 1.  Replace the code in the "<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/code.svg width="15"> Logic" panel with
 
@@ -263,7 +273,7 @@ Notes:
 
 1.  Click blue "Run" button.
 
-1.  Verify resulting table has 8 columns & 100 rows.
+1.  Verify resulting table has 8 columns & 1000 rows.
 
 1.  Notice `pt` and `patient_ll` have the same record count.
 
@@ -276,20 +286,23 @@ Notes:
 
 1.  Writing code can be hard. Starting with complex code is almost always slower.
 
-1.  Instead start simple, and gradually add complexity.
+1.  Start simple.  Gradually add complexity.
 
 1.  Replace the code in the "<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/code.svg width="15"> Logic" panel with
 
     ``` sql
     SELECT
+      -- Sequence of 1, 2, 3, 4, ... across patients
       cast(row_number() over (order by p.person_id) as int)     as pt_index
       --,p.person_id
       ,p.data_partner_id
       ,p.covid_date
       ,p.calc_age_covid
       ,p.length_of_stay
-      ,coalesce(po.event_animal, 'No Event Documented')         as event_animal
+      -- If `po.event_animal` return 'No event documented'.
+      ,coalesce(po.event_animal, 'No event documented')         as event_animal
       ,po.dx_days_before_covid
+      -- Bin the dates into 6-month levels
       ,case
         when p.covid_date is null         then null
         when p.covid_date <= '2019-12-31' then 'too early'
@@ -303,6 +316,7 @@ Notes:
         when p.covid_date <= '2023-12-31' then '2023H2'
         else                                   'error'
       end                                                      as period_first_covid_dx
+      -- Bin the age into 5 legit levels.
       ,case
         when p.calc_age_covid is null then 'Unknown'
         when p.calc_age_covid < 0     then 'Unknown'
@@ -346,50 +360,49 @@ Notes:
         else                                     null
       end                                                      as covid_dead
     FROM patient_ll p
+      -- A left join will retain all rows from `patient_ll`,
+      --   even those without an event.
       left  join pt_observation_preceding po on p.person_id = po.person_id
     WHERE
+      -- Must be 2+ years old at covid dx
       2 <= p.calc_age_covid
       and
+      -- covid dx must be within this time window
       p.covid_date between '2020-07-01' and '2022-12-31'
     ```
 
 1.  Click blue "Run" button.
 
-1.  Notice we added inclusion criteria (in the WHERE clause) and more
-    variables (in the SELECT clause).
+1.  Notice we added inclusion criteria (in the WHERE clause) and
+    more variables (in the SELECT clause).
 
-1.  Why do we have fewer records than in the previous iteration of this
-    transform? Is this drop reasonable?
+1.  Why do we have fewer records than in the previous iteration of this transform?
+    Is this drop reasonable?
 
-1.  Even if the drop seems reasonable and the cause seems obvious to
-    you, please make a note of this and notify the investigators at the
-    next meeting. They need to feel their decisions as much as possible.
+1.  Even if the drop seems reasonable and the cause seems obvious to you,
+    please make a note of this and notify the investigators at the next meeting.
+    They need to feel their decisions as much as possible.
 
 ## Strategies for Organizing Transforms
 
-1.  The `pt_observation_preceding` and `pt` transforms could be combined
-    into one transform
-1.  Pros for splitting into well-designed segments that are eventually
-    assembled.
-    1.  Human mind is better an reasoning through one focused piece at a
-        time. Development is easier. Communication to teammates is
-        easier (especially if different grains are involved).
+1.  The `pt_observation_preceding` and `pt` transforms could be combined into one transform
+1.  Pros for splitting into well-designed segments that are eventually assembled.
+    1.  Human mind is better an reasoning through one focused piece at a time.
+        Development is easier.
+        Communication to teammates is easier (especially if different grains are involved).
     1.  Easier to modify later.
-    1.  Database engines can better optimize. This is particularly true
-        for non-N3C databases you might use, like SQL Server, Oracle,
-        Postgres, DuckDB.
+    1.  Database engines can better optimize.
+        This is particularly true for non-N3C databases you might use,
+        like SQL Server, Oracle, Postgres, DuckDB.
 1.  Cons for splitting
     1.  Requires more time if you copy & paste code somewhere.
 
 ## Beauty of CTEs
 
-1.  A [Common Table
-    Expression](https://www.atlassian.com/data/sql/using-common-table-expressions)
-    (CTE) allows you to write sql code that's mode top-to-bottom, and
-    less inside-out.
+1.  A [Common Table Expression](https://www.atlassian.com/data/sql/using-common-table-expressions)
+    (CTE) allows you to write sql code that's mode top-to-bottom, and less inside-out.
 
-1.  Similar cognitive as breaking up complicated monolithic
-    transforms/queries into smaller ones.
+1.  Similar cognitive as breaking up complicated monolithic transforms/queries into smaller ones.
 
 1.  "Subquery style"
 
@@ -426,19 +439,17 @@ Notes:
 
 ## Global Code
 
-1.  The [Global
-    Code](https://www.palantir.com/docs/foundry/code-workbook/workbooks-global-code/)
-    (in a right-hand panel), lets us define variables and functions that
-    are available in all code transforms *in the workbook* (not the
-    workspace). In today's "manipulation-1" workbook, we'll define
-    constants and define helper functions.
+1.  The [Global Code](https://www.palantir.com/docs/foundry/code-workbook/workbooks-global-code/)
+    (in a right-hand panel),
+    lets us define variables and functions that are available in all code transforms *in the workbook*
+    (not the workspace).
+    In today's "manipulation-1" workbook, we'll define constants and define helper functions.
 
-1.  Global Code is essentially copy and pasted before each R transform
-    is executed.
+1.  Global Code is essentially copy and pasted before each R transform is executed.
 
-1.  We recommend that Global Code *defines* functions, but does not
-    *call/execute* functions. In other words, define functions that R
-    transforms can later execute.
+1.  We recommend that Global Code *defines* functions,
+    but does not *call/execute* functions.
+    In other words, define functions that R transforms can later execute.
 
 1.  Paste following into the R tab of the Global Code panel.
 
@@ -560,32 +571,34 @@ Notes:
 
 1.  Some broad-strokes remarks:
 
-    1.  `load_packages()` has two purposes: (a) concisely document to
-        humans what packages should be available in the environment
-        and (b) produce clear error messages if an R package isn't
-        available.
+    1.  `load_packages()` has two purposes:
+        (a) concisely document to humans what packages should be available in the environment and
+        (b) produce clear error messages if an R package isn't available.
 
 ## Create R Transform `pt_parquet`
 
-1.  We'll cover R code later in the session. For now, just copy some
-    code into a new R transform to make things easier later.
+1.  We'll cover R code later in the session.
+    For now, just copy some code into a new R transform to make things easier later.
 
-1.  Click the `pt` transform, then click the blue plus button, then
-    select "R code"
+1.  Click the `pt` transform, then click the blue plus button, then select "R code"
 
 1.  In the input list, select `pt` and change it from "R data.frame" to
-    "Spark dataframe". We'll explicitly convert it with code.
+    "Spark dataframe".
+    We'll explicitly convert it with code.
 
 1.  Find a collapsed panel in the lower right corner of the Console called "Variables".
     Change `pt` from "R data.frame" to "Spark dataframe".
 
-1.  Periodically check that these last two settings don't revert back to
-    their original settings. Especially if something is weird later.
+1.  Periodically check that these last two settings don't revert back to their original settings.
+    Especially if something is weird later.
 
-1.  Paste in the following code:
+1.  Paste in the following code.
+    You don't have to understand each line yet.
+    Big picture: it
 
     ``` r
     pt_parquet <- function(pt) {
+      #
       load_packages()
       assert_spark_data_frame(pt)
 
