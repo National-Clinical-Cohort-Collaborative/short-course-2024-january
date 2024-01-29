@@ -321,3 +321,105 @@ That you created already in the [assignments leading into Session 3](../homework
 If you followed this document, your workbook will resemble this image.
 
 [![modeling-1](images/modeling-1.png)](images/modeling-1.png)
+
+## Advanced: Save dataset or modeling object as an rds file
+
+An rds file can save almost any R object.  It doesn't have to be a rectangular data.frame.
+
+If you're doing complicated things with model output that spans multiple transforms,
+you can save the model object as an rds file,
+and downstream transforms can retrieve it without recalculating anything.
+
+If for some reason the [arrow](https://arrow.apache.org/docs/r/)
+package isn't available in your R installation
+and you don't need interoperatibility with other languages
+
+`pt_rds` node:
+
+```r
+pt_rds <- function(pt) {
+  load_packages()
+  assert_spark_data_frame(pt)
+
+  # ---- retrieve -----------------
+  ds <-
+    pt |>
+    SparkR::arrange("pt_index") |>
+    SparkR::collect() |>
+    tibble::as_tibble() |>
+    prepare_dataset()
+
+  # ---- verify-values -----------------
+  nrow(ds)
+  dplyr::n_distinct(ds$pt_index)
+
+  # ---- persist -----------------
+  ds |>
+    to_rds()
+}
+```
+
+`pt_rds_peek` node
+
+```r
+pt_rds_peek <- function(pt_rds) {
+  load_packages()
+  assert_transform_object(pt_rds)
+
+  pt_rds |>
+    from_rds()
+}
+```
+
+In the "IO" section of Global Code:
+
+```r
+to_rds <- function(d, assert_data_frame = TRUE) {
+  if (assert_data_frame) assert_r_data_frame(d)
+  output    <- new.output()
+  output_fs <- output$fileSystem()
+  saveRDS(d, output_fs$get_path("data.rds", 'w'))
+
+  if (assert_data_frame) {
+    stat <-
+      sprintf(
+        "%i_cols-by-%.1f_krows",
+        ncol(d),
+        nrow(d) / 1000
+      )
+    # Write a dummy dataset with a meaningful file name.
+    write.csv(mtcars, output_fs$get_path(stat, 'w'))
+  }
+}
+from_rds <- function(data) {
+  fs   <- data$fileSystem()
+  path <- fs$get_path("data.rds", 'r')
+  readRDS(path)
+}
+```
+
+## More Advanced: Save intermediate modeling objects as rds files
+
+In some of my code, I'll have a transform calculate the model (eg, regression coefficient)
+and the prediction grid (eg, the plotted points & error bands)
+and save the two objects as separate files within the same transform.
+
+So the near the end of `m_covid_moderate_2b` would have the line
+
+```r
+to_rds_model_and_prediction(m, d_predict)
+```
+
+where this is defined in the Global Code
+
+```r
+to_rds_model_and_prediction <- function(model, d_predict) {
+  message("Writing model & ds_predict to disk.")
+  assert_r_data_frame(d_predict)
+
+  output    <- new.output()
+  output_fs <- output$fileSystem()
+  saveRDS(model     , output_fs$get_path("model.rds", 'w'))
+  saveRDS(d_predict , output_fs$get_path("ds-predict.rds", 'w'))
+}
+```
