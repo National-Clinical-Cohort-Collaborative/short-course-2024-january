@@ -195,9 +195,9 @@ After Session 3 Ends
 ### Assignments & Questions for `validation-1`
 
 1.  Describe the relationship between `data_partner_id` and `condition_source_value`.
-    Why could explain this pattern?
+    What (operation behind the scenes) might explain this pattern?
 1.  Describe the relationship between `data_partner_id`, `condition_start_date`, and `condition_end_date`.
-    Why could explain this pattern?
+    What could explain this pattern?
 1.  Inspect `condition_end_date`.
     What is fishy about it?
     What are some mitigation approaches for this specific scenario?

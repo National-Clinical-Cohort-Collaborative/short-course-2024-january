@@ -3,6 +3,12 @@ Data Validation with Synthetic Data
 
 This is part of the [Analysis with Synthetic Data](../) session.
 
+## On the Chopping Block
+
+If the extraction lesson runs long, I'll breeze through this lesson to make up time.
+
+I might ask you to watch my sequence, and replicate it in your own workbook.
+
 ## Select Input Datasets
 
 1.  Click the blue "Import dataset" button.
@@ -52,6 +58,7 @@ Notes:
       condition_occurrence |>
         SparkR::arrange("condition_occurrence_id") |>
         SparkR::mutate(
+          # Version 1: calculate it in the Spark world
           # https://spark.apache.org/docs/2.0.2/api/R/datediff.html
           duration_v1 =
             datediff(
@@ -63,7 +70,9 @@ Notes:
         tibble::as_tibble() |>
         dplyr::mutate(
           data_partner_id = factor(data_partner_id),
-          # https://stat.ethz.ch/R-manual/R-devel/library/base/html/difftime.html
+
+          # Version 2: calculate it in the R world.
+          #   https://stat.ethz.ch/R-manual/R-devel/library/base/html/difftime.html
           duration_v2 =
             as.integer(difftime(
               condition_start_date,
@@ -141,7 +150,7 @@ Notes:
       g <-
         ds |>
         ggplot(aes(x = duration_v2)) +
-        geom_vline(xintercept = 0, color = "gray60", linetype = "83") +
+        geom_vline(xintercept = 0, color = "gray60", linetype = "83") + # The big change from the previous transform
         geom_density() +
         theme_minimal(base_size = 20)
 
