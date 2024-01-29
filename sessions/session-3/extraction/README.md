@@ -90,6 +90,11 @@ You should have created it already in the
   | "Peck by bird"        | [4314097](https://athena.ohdsi.org/search-terms/terms/4314097)<br>(Observation) |
   | "Butted by animal"    | [4314094](https://athena.ohdsi.org/search-terms/terms/4314094)<br>(Observation) |
 
+* Some more nuanced details of farm life interactions will be postponed until subsequent investigations.
+
+  <a href="https://www.etsy.com/listing/1267137036/anatomy-of-a-goose-poster-bathroom-decor"><img src="assets/goose.avif" alt="duck" height="300"></a>
+
+
 **Resources**
 
 - [ICD10CM codes for Contact with birds (domestic) (wild)](https://www.icd10data.com/ICD10CM/Codes/V00-Y99/W50-W64/W61-#W61.33)
