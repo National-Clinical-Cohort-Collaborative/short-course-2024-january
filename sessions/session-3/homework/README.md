@@ -16,7 +16,9 @@ then create four Code Workbooks.
 ### Reading
 
 * Reread G2N3C's [Section 8.4.3](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/chapters/tools.html#sec-tools-apps-workbook) that focuses on Code Workbooks
-* Watch the video (??need link??)
+* Watch the video [N3C Intro to Code Workbook](https://www.youtube.com/watch?v=s3Htg_ygAbs).
+  There's overlap between this video and Session 3.
+  Session 3 focuses more on analysis, and this video focuses more on mechanics of the Foundry workbooks.
 * Brush up your SQL.  If you don't have an intro book available, I recommend lessons 1-12 of the interactive [SQLBolt](https://sqlbolt.com/).
 * Brush up your R or Python.  We won't be programming a lot during class, but you'll need to know enough to follow the rough approach.
   Common recommendations include:
