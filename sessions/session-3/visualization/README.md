@@ -104,7 +104,7 @@ That you created already in the [assignments leading into Session 3](../homework
 
       ds <-
         pt_parquet |>
-        from_parquet()
+        from_parquet()     # Defined in Global Code
 
       g1 <-
         ds |>
@@ -128,7 +128,7 @@ That you created already in the [assignments leading into Session 3](../homework
 
       ds <-
         pt_parquet |>
-        from_parquet()
+        from_parquet()     # Defined in Global Code
 
       g1 <-
         ds |>
@@ -193,7 +193,7 @@ That you created already in the [assignments leading into Session 3](../homework
 
       ds <-
         pt_parquet |>
-        from_parquet() |>
+        from_parquet() |>     # Defined in Global Code
         dplyr::select(
           age   = calc_age_covid,
           period_first_covid_dx,

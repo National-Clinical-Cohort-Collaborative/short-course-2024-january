@@ -599,7 +599,8 @@ Notes:
 
 1.  Paste in the following code.
     You don't have to understand each line yet.
-    Big picture: it
+    Big picture: it adds R flavoring that facilitates analyses
+    and converts the Spark Dataframe to a file that preserves the flavors.
 
     ``` r
     pt_parquet <- function(pt) {
@@ -637,12 +638,11 @@ Notes:
 
     This is the real way of doing it, and the resulting product is saved.
 
-1.  Select the code you want to execute, and click click [ctrl + shift + enter].
+1.  Select the code you want to execute, and click [ctrl + shift + enter].
 
-    This is how you can debug small sections of code and iteratively
-    developed focused sections faster.
+    This is how you can debug small sections of code and iteratively develop focused sections faster.
 
-    This runs code in the "Console" panel, which is acts kinda independently.
+    This runs code in the "Console" panel, which acts kinda independently.
 
     Note that the first time you run something in the console,
     execute `load_packages()` by itself.
@@ -664,7 +664,7 @@ Notes:
       assert_transform_object(pt_parquet)
 
       pt_parquet |>
-        from_parquet()
+        from_parquet()     # Defined in Global Code
     }
     ```
 
@@ -708,11 +708,39 @@ Notes:
 - [Specify Reference Factor Level in Linear Regression in
   R](https://statisticsglobe.com/specify-reference-factor-level-in-linear-regression-in-r)
 
-## Remarks on Architecture within a Codebook
+## Remarks on Architecture
 
-1.  SQL/PySpark vs R/Python vs
+* Martin Fowler defines *software architecture* as ["things that people perceive as hard to change (later)."](https://martinfowler.com/ieeeSoftware/whoNeedsArchitect.pdf).
 
-## Remarks on Architecture between Codebooks
+* For my approach to N3C workflows, the definition is roughly,
+
+  > deciding when and where to
+  > 1. combine tables,
+  > 1. apply filters, and
+  > 1. save & retrieve intermediate output.
+
+* My goals are
+  1.  What's easiest to communicate to humans
+  1.  What's easiest to isolate & identify my mistakes
+  1.  What's most efficient for the computer to process
+
+## Remarks on Architecture *within a Workbook*
+
+1.  One grain at a time
+1.  One concept at a time
+1.  Where do you want manhole covers to peek inside the pipeline?
+1.  Make things as independent as possible.
+    If you need to change something here, ideally nothing over there needs to change.
+1.  Don't be timid about identifying confusing parts and rearranging to make the flow more clear.
+
+## Remarks on Architecture *between Workbooks*
+
+1.  Each workbook reflects a distinct phase of the project.
+1.  Don't replicate much code across workbooks.
+    If so, consider moving that transformation upstream
+    so all the downstream workbooks can leverage it.
+1.  Use SQL or PySpark for the the high-volume manipulations to produce a small-ish dataset to be analyzed.
+1.  Use R or Python to analyze.
 
 ## Troubleshooting Tips
 
@@ -756,24 +784,12 @@ Notes:
     you'll need to replace use magrittr pipes instead of native pipes
     (ie, change `|>` to `%>%` and execute `library(magrittr)` in `load_packages()`.)
 
-## Assignments
 
-1.  Add a new variable to `pt` from an existing input table.
-1.  ~~Improve the definition of the `event_animal` variable by using a
-    look up table.~~
-1.  Upgrade the `event_animal` code to use codeset qqq.
-    1.  Replace the WHERE clause …qqq
-1.  Incorporate a new input table into `pt`.
-1.  List three areas outside software development where it's
-    advantageous to breakup bigger challenges into smaller ones.
-1.  Color code the workbooks transforms. Think which parts belong to
-    what category.
-    1.  "omop source": medium purple (#7B64FF)
-    1.  "n3c derived": light purple (#AEA1FF)
-    1.  "metadata": olive green (#B0BC00)
-    1.  "intermediate": gray (#999999)
-    1.  "outcome": orange (#FB9E00)
-    1.  "diagnostic": cyan (#73D8FF)
+## Transforms within `manipulation-1`
+
+If you followed this document, your workbook will resemble this image.
+
+[![manipulation-1](images/manipulation-1.png)](images/manipulation-1.png)
 
 ## Extra Code
 
@@ -849,12 +865,6 @@ from_rds <- function(data) {
   readRDS(path)
 }
 ```
-
-## Transforms within `manipulation-1`
-
-If you followed this document, your workbook will resemble this image.
-
-[![manipulation-1](images/manipulation-1.png)](images/manipulation-1.png)
 
 ## Resources
 

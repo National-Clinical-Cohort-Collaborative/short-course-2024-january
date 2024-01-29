@@ -119,7 +119,7 @@ That you created already in the [assignments leading into Session 3](../homework
 
       ds <-
         pt_parquet |>
-        from_parquet()
+        from_parquet()     # Defined in Global Code
 
       m <-
         glm(
@@ -195,7 +195,7 @@ That you created already in the [assignments leading into Session 3](../homework
 
       ds <-
         pt_parquet |>
-        from_parquet()
+        from_parquet()     # Defined in Global Code
 
       m <-
         glm(

@@ -142,6 +142,11 @@ After Session 3 Ends
 
 ### Assignments & Questions for `manipulation-1`
 
+1.  List three areas outside software development where it's
+    advantageous to breakup bigger challenges into smaller ones.
+
+1.  Add a new variable to `pt` from an existing input table.
+
 1.  Incorporate the `condition_occurrence` table.
     We suggest something like:
     1.  Import the dataset (from the same location as the session's other simulated datasets).
@@ -150,6 +155,20 @@ After Session 3 Ends
     1.  In the `pt` transform, include relevant column(s) in the SELECT clause.
     1.  In the `prepare_dataset()` function, add any R flavoring that would aid the analysis later.
         (Remember this function is not defined in any specific transform.  Where did we put it?)
+
+1.  Color code the workbooks transforms. Think which parts belong to
+    what category.
+    1.  "omop source": medium purple (#7B64FF)
+    1.  "n3c derived": light purple (#AEA1FF)
+    1.  "metadata": olive green (#B0BC00)
+    1.  "intermediate": gray (#999999)
+    1.  "outcome": orange (#FB9E00)
+    1.  "diagnostic": cyan (#73D8FF)
+
+**Optional and Superduper Advanced Assignment**
+1.  ~~Improve the definition of the `event_animal` variable by using a
+    look up table.~~
+1.  Upgrade the `event_animal` code to use codeset.
 
 ### Assignments & Questions for `graphs-1`
 
