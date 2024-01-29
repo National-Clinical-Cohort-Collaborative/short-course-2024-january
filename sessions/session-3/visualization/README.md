@@ -3,6 +3,12 @@ Data Visualization with Synthetic Data
 
 This is part of the [Analysis with Synthetic Data](../) session.
 
+## Expectations for the Visualization Lesson
+
+* We're assuming that you already know how to graph in your preferred language of R or Python.
+* Here are the important adaptations you'll need to make when graphing in the Enclave
+  (instead of something like RStudio).
+
 ## Open the "graphs-1" Code Workbook in the Foundry
 
 That you created already in the [assignments leading into Session 3](../homework#create-the-graphs-1-code-workbook).
@@ -115,7 +121,6 @@ That you created already in the [assignments leading into Session 3](../homework
       return(NULL) # The transform needs to return a dataset (even if it's a null dataset)
     }
     ```
-
 
 ## Improve `g_calc_age_covid`
 
@@ -234,3 +239,4 @@ If you followed this document, your workbook will resemble this image.
 * See [N3C resources](../../../background/assets.md) we've listed, especially
     * The [Languages Section](https://unite.nih.gov/workspace/documentation/product/code-workbook/languages) in the Palantir Foundry/Enclave documentation
     * [N3C Training](https://unite.nih.gov/workspace/slate/documents/training)
+* An example of Python graphing code is referenced in the homework.
