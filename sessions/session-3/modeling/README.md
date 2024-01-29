@@ -58,7 +58,8 @@ That you created already in the [assignments leading into Session 3](../homework
     }
 
     # ---- Code Specific to this Workbook -----------
-    #CC0 palette from http://colrd.com/palette/50906/
+    # CC0 palette from http://colrd.com/palette/50906/
+    # These left-hand labels must exactly match the factor levels (case-sensitive)
     palette_event_dark   <-
       c(
         "Butted by animal"    = "#004c66",
@@ -136,12 +137,14 @@ That you created already in the [assignments leading into Session 3](../homework
       load_packages()
       assert_transform_object(pt_parquet)
 
+      # Covid will be predicted by an intercept and the most recent event
       eq <- "covid_moderate_plus ~ 1 + event_animal"
 
       ds <-
         pt_parquet |>
         from_parquet()     # Defined in Global Code
 
+      # A basic logistic model
       m <-
         glm(
           eq,
@@ -149,10 +152,12 @@ That you created already in the [assignments leading into Session 3](../homework
           family = "binomial"
         )
 
+      # Print the model details to the log
       m |>
         summary() |>
         print()
 
+      # Save the regression coefficients as a dataset
       m |>
         broom::tidy()
     }
@@ -181,10 +186,11 @@ That you created already in the [assignments leading into Session 3](../homework
 1.  Add more predictors to the model by using the same code as `m_covid_moderate_1` except for the `eq` variable:
 
     ```r
+    # Covid will be predicted by an intercept and the right-hand variables
     eq <- "covid_moderate_plus ~ 1 + event_animal + age_cut5 + period_first_covid_dx"
     ```
 1.  Click the blue "Run" (or "Preview" button)
-1.
+
 1.  Verify the [<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/table.svg width="15"> Preview] panel looks like:
 
     <a href="images/m-covid-moderate-2a-preview.png"><img src="images/m-covid-moderate-2a-preview.png" alt="m-covid-moderate-2a-preview" style="width: 400px;"/></a>
@@ -199,7 +205,9 @@ That you created already in the [assignments leading into Session 3](../homework
     to produce the predicted values and errors, then graphs them.
 
 1.  Create a new transform and follow the same steps as `m_covid_moderate_1`,
-    but use the following code:
+    but use the following code.
+    This transform is pretty advanced so we won't go into details,
+    but I wanted to show a high-end product that's possible with these tools.
 
     ```r
     m_covid_moderate_2b <- function(pt_parquet) {
