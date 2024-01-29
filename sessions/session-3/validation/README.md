@@ -3,6 +3,31 @@ Data Validation with Synthetic Data
 
 This is part of the [Analysis with Synthetic Data](../) session.
 
+## Expectations for the Validation Lesson
+
+If the extraction lesson runs long, I'll breeze through this lesson to make up time.
+
+I might ask you to watch my sequence, and replicate it in your own workbook.
+
+## !! Real Analyses Must be Approved to Leave the Enclave !!
+
+<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/triangle-exclamation.svg width="15"> <img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/triangle-exclamation.svg width="15"> <img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/triangle-exclamation.svg width="15">
+
+If you're following this document outside of class,
+don't forget all analytical output (like tables, graphs, models, & screenshots)
+*must be approved* before it's exported from the Enclave.
+We'll discuss details later in Session 6.
+
+Remember Session 3 uses only synthetic/fake data.
+Therefore no patients can potentially be exposed by this handout.
+
+But when you start working with real Level 2 or Level 3 data,
+you must follow the procedures described in
+[Session 6](https://github.com/National-COVID-Cohort-Collaborative/short-course-2024-january/tree/main/sessions/session-6#readme) and
+the [Publishing and Sharing Your Work](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/chapters/publishing.html) chapter of [*G2N3C*](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/).
+
+<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/triangle-exclamation.svg width="15"> <img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/triangle-exclamation.svg width="15"> <img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/triangle-exclamation.svg width="15">
+
 ## Select Input Datasets
 
 1.  Click the blue "Import dataset" button.
@@ -39,6 +64,7 @@ Notes:
 
     ``` r
     load_packages <- function () {
+      # Load all fxs within these packages
       # library(magrittr) # If R <4.1
       # Throw an error if one of these packages are missing
       requireNamespace("arrow")
@@ -51,6 +77,7 @@ Notes:
       condition_occurrence |>
         SparkR::arrange("condition_occurrence_id") |>
         SparkR::mutate(
+          # Version 1: calculate it in the Spark world
           # https://spark.apache.org/docs/2.0.2/api/R/datediff.html
           duration_v1 =
             datediff(
@@ -62,7 +89,9 @@ Notes:
         tibble::as_tibble() |>
         dplyr::mutate(
           data_partner_id = factor(data_partner_id),
-          # https://stat.ethz.ch/R-manual/R-devel/library/base/html/difftime.html
+
+          # Version 2: calculate it in the R world.
+          #   https://stat.ethz.ch/R-manual/R-devel/library/base/html/difftime.html
           duration_v2 =
             as.integer(difftime(
               condition_start_date,
@@ -73,6 +102,7 @@ Notes:
     }
 
     # ---- Asserts -----------
+    # These functions try to return helpful error messages for misspecifications
     assert_r_data_frame <- function(x) {
       if (!inherits(x, "data.frame")) {
         stop("The dataset is not an 'R data.frame`; convert it.")
@@ -90,6 +120,7 @@ Notes:
     }
 
     # ---- IO --------------
+    # Convert between R data.frames and parquet files.
     to_parquet <- function(d, assert_data_frame = TRUE) {
       if (assert_data_frame) assert_r_data_frame(d)
       output    <- new.output()
@@ -138,7 +169,7 @@ Notes:
       g <-
         ds |>
         ggplot(aes(x = duration_v2)) +
-        geom_vline(xintercept = 0, color = "gray60", linetype = "83") +
+        geom_vline(xintercept = 0, color = "gray60", linetype = "83") + # The big change from the previous transform
         geom_density() +
         theme_minimal(base_size = 20)
 

@@ -3,6 +3,27 @@ Data Modeling with Synthetic Data
 
 This is part of the [Analysis with Synthetic Data](../) session.
 
+## Expectations for the Modeling Lesson
+
+## !! Real Analyses Must be Approved to Leave the Enclave !!
+
+<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/triangle-exclamation.svg width="15"> <img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/triangle-exclamation.svg width="15"> <img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/triangle-exclamation.svg width="15">
+
+If you're following this document outside of class,
+don't forget all analytical output (like tables, graphs, models, & screenshots)
+*must be approved* before it's exported from the Enclave.
+We'll discuss details later in Session 6.
+
+Remember Session 3 uses only synthetic/fake data.
+Therefore no patients can potentially be exposed by this handout.
+
+But when you start working with real Level 2 or Level 3 data,
+you must follow the procedures described in
+[Session 6](https://github.com/National-COVID-Cohort-Collaborative/short-course-2024-january/tree/main/sessions/session-6#readme) and
+the [Publishing and Sharing Your Work](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/chapters/publishing.html) chapter of [*G2N3C*](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/).
+
+<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/triangle-exclamation.svg width="15"> <img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/triangle-exclamation.svg width="15"> <img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/triangle-exclamation.svg width="15">
+
 ## Open the "modeling-1" Code Workbook in the Foundry
 
 That you created already in the [assignments leading into Session 3](../homework#create-the-graphs-1-code-workbook).
@@ -18,7 +39,6 @@ That you created already in the [assignments leading into Session 3](../homework
 1.  Go to "workbook-output/manipulation-1/" directory.
 1.  Select `pt_parquet`.
 
-
 ## Global Code
 
 1.  See the Global Code explanation in the
@@ -28,15 +48,18 @@ That you created already in the [assignments leading into Session 3](../homework
 
     ``` r
     load_packages <- function () {
-      # library(magrittr) # If R <4.1
+      # Load all fxs within these packages
       library(ggplot2)
+      # library(magrittr) # If R <4.1
+      # Throw an error if one of these packages are missing
       requireNamespace("arrow")
       requireNamespace("dplyr")
       requireNamespace("broom")
     }
 
     # ---- Code Specific to this Workbook -----------
-    #CC0 palette from http://colrd.com/palette/50906/
+    # CC0 palette from http://colrd.com/palette/50906/
+    # These left-hand labels must exactly match the factor levels (case-sensitive)
     palette_event_dark   <-
       c(
         "Butted by animal"    = "#004c66",
@@ -52,6 +75,7 @@ That you created already in the [assignments leading into Session 3](../homework
       )
 
     # ---- Asserts -----------
+    # These functions try to return helpful error messages for misspecifications
     assert_r_data_frame <- function(x) {
       if (!inherits(x, "data.frame")) {
         stop("The dataset is not an 'R data.frame`; convert it.")
@@ -69,6 +93,7 @@ That you created already in the [assignments leading into Session 3](../homework
     }
 
     # ---- IO --------------
+    # Convert between R data.frames and parquet files.
     to_parquet <- function(d, assert_data_frame = TRUE) {
       if (assert_data_frame) assert_r_data_frame(d)
       output    <- new.output()
@@ -112,12 +137,14 @@ That you created already in the [assignments leading into Session 3](../homework
       load_packages()
       assert_transform_object(pt_parquet)
 
+      # Covid will be predicted by an intercept and the most recent event
       eq <- "covid_moderate_plus ~ 1 + event_animal"
 
       ds <-
         pt_parquet |>
-        from_parquet()
+        from_parquet()     # Defined in Global Code
 
+      # A basic logistic model
       m <-
         glm(
           eq,
@@ -125,10 +152,12 @@ That you created already in the [assignments leading into Session 3](../homework
           family = "binomial"
         )
 
+      # Print the model details to the log
       m |>
         summary() |>
         print()
 
+      # Save the regression coefficients as a dataset
       m |>
         broom::tidy()
     }
@@ -157,10 +186,11 @@ That you created already in the [assignments leading into Session 3](../homework
 1.  Add more predictors to the model by using the same code as `m_covid_moderate_1` except for the `eq` variable:
 
     ```r
+    # Covid will be predicted by an intercept and the right-hand variables
     eq <- "covid_moderate_plus ~ 1 + event_animal + age_cut5 + period_first_covid_dx"
     ```
 1.  Click the blue "Run" (or "Preview" button)
-1.
+
 1.  Verify the [<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/table.svg width="15"> Preview] panel looks like:
 
     <a href="images/m-covid-moderate-2a-preview.png"><img src="images/m-covid-moderate-2a-preview.png" alt="m-covid-moderate-2a-preview" style="width: 400px;"/></a>
@@ -175,7 +205,9 @@ That you created already in the [assignments leading into Session 3](../homework
     to produce the predicted values and errors, then graphs them.
 
 1.  Create a new transform and follow the same steps as `m_covid_moderate_1`,
-    but use the following code:
+    but use the following code.
+    This transform is pretty advanced so we won't go into details,
+    but I wanted to show a high-end product that's possible with these tools.
 
     ```r
     m_covid_moderate_2b <- function(pt_parquet) {
@@ -192,7 +224,7 @@ That you created already in the [assignments leading into Session 3](../homework
 
       ds <-
         pt_parquet |>
-        from_parquet()
+        from_parquet()     # Defined in Global Code
 
       m <-
         glm(
@@ -264,6 +296,7 @@ That you created already in the [assignments leading into Session 3](../homework
           title = outcome_label #main_title
         )
 
+      # image: svg
       print(g)
 
       d_predict
@@ -288,3 +321,105 @@ That you created already in the [assignments leading into Session 3](../homework
 If you followed this document, your workbook will resemble this image.
 
 [![modeling-1](images/modeling-1.png)](images/modeling-1.png)
+
+## Advanced: Save dataset or modeling object as an rds file
+
+An rds file can save almost any R object.  It doesn't have to be a rectangular data.frame.
+
+If you're doing complicated things with model output that spans multiple transforms,
+you can save the model object as an rds file,
+and downstream transforms can retrieve it without recalculating anything.
+
+If for some reason the [arrow](https://arrow.apache.org/docs/r/)
+package isn't available in your R installation
+and you don't need interoperatibility with other languages
+
+`pt_rds` node:
+
+```r
+pt_rds <- function(pt) {
+  load_packages()
+  assert_spark_data_frame(pt)
+
+  # ---- retrieve -----------------
+  ds <-
+    pt |>
+    SparkR::arrange("pt_index") |>
+    SparkR::collect() |>
+    tibble::as_tibble() |>
+    prepare_dataset()
+
+  # ---- verify-values -----------------
+  nrow(ds)
+  dplyr::n_distinct(ds$pt_index)
+
+  # ---- persist -----------------
+  ds |>
+    to_rds()
+}
+```
+
+`pt_rds_peek` node
+
+```r
+pt_rds_peek <- function(pt_rds) {
+  load_packages()
+  assert_transform_object(pt_rds)
+
+  pt_rds |>
+    from_rds()
+}
+```
+
+In the "IO" section of Global Code:
+
+```r
+to_rds <- function(d, assert_data_frame = TRUE) {
+  if (assert_data_frame) assert_r_data_frame(d)
+  output    <- new.output()
+  output_fs <- output$fileSystem()
+  saveRDS(d, output_fs$get_path("data.rds", 'w'))
+
+  if (assert_data_frame) {
+    stat <-
+      sprintf(
+        "%i_cols-by-%.1f_krows",
+        ncol(d),
+        nrow(d) / 1000
+      )
+    # Write a dummy dataset with a meaningful file name.
+    write.csv(mtcars, output_fs$get_path(stat, 'w'))
+  }
+}
+from_rds <- function(data) {
+  fs   <- data$fileSystem()
+  path <- fs$get_path("data.rds", 'r')
+  readRDS(path)
+}
+```
+
+## More Advanced: Save intermediate modeling objects as rds files
+
+In some of my code, I'll have a transform calculate the model (eg, regression coefficient)
+and the prediction grid (eg, the plotted points & error bands)
+and save the two objects as separate files within the same transform.
+
+So the near the end of `m_covid_moderate_2b` would have the line
+
+```r
+to_rds_model_and_prediction(m, d_predict)
+```
+
+where this is defined in the Global Code
+
+```r
+to_rds_model_and_prediction <- function(model, d_predict) {
+  message("Writing model & ds_predict to disk.")
+  assert_r_data_frame(d_predict)
+
+  output    <- new.output()
+  output_fs <- output$fileSystem()
+  saveRDS(model     , output_fs$get_path("model.rds", 'w'))
+  saveRDS(d_predict , output_fs$get_path("ds-predict.rds", 'w'))
+}
+```

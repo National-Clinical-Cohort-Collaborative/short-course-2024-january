@@ -3,6 +3,31 @@ Data Visualization with Synthetic Data
 
 This is part of the [Analysis with Synthetic Data](../) session.
 
+## Expectations for the Visualization Lesson
+
+* We're assuming that you already know how to graph in your preferred language of R or Python.
+* Here are the important adaptations you'll need to make when graphing in the Enclave
+  (instead of something like RStudio).
+
+## !! Real Analyses Must be Approved to Leave the Enclave !!
+
+<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/triangle-exclamation.svg width="15"> <img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/triangle-exclamation.svg width="15"> <img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/triangle-exclamation.svg width="15">
+
+If you're following this document outside of class,
+don't forget all analytical output (like tables, graphs, models, & screenshots)
+*must be approved* before it's exported from the Enclave.
+We'll discuss details later in Session 6.
+
+Remember Session 3 uses only synthetic/fake data.
+Therefore no patients can potentially be exposed by this handout.
+
+But when you start working with real Level 2 or Level 3 data,
+you must follow the procedures described in
+[Session 6](https://github.com/National-COVID-Cohort-Collaborative/short-course-2024-january/tree/main/sessions/session-6#readme) and
+the [Publishing and Sharing Your Work](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/chapters/publishing.html) chapter of [*G2N3C*](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/).
+
+<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/triangle-exclamation.svg width="15"> <img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/triangle-exclamation.svg width="15"> <img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/triangle-exclamation.svg width="15">
+
 ## Open the "graphs-1" Code Workbook in the Foundry
 
 That you created already in the [assignments leading into Session 3](../homework#create-the-graphs-1-code-workbook).
@@ -27,6 +52,8 @@ That you created already in the [assignments leading into Session 3](../homework
 
     ``` r
     load_packages <- function () {
+      # Load all fxs within these packages
+      library(ggplot2)
       # library(magrittr) # If R <4.1
       # Throw an error if one of these packages are missing
       requireNamespace("arrow")
@@ -35,6 +62,7 @@ That you created already in the [assignments leading into Session 3](../homework
     }
 
     # ---- Asserts -----------
+    # These functions try to return helpful error messages for misspecifications
     assert_r_data_frame <- function(x) {
       if (!inherits(x, "data.frame")) {
         stop("The dataset is not an 'R data.frame`; convert it.")
@@ -52,6 +80,7 @@ That you created already in the [assignments leading into Session 3](../homework
     }
 
     # ---- IO --------------
+    # Convert between R data.frames and parquet files.
     to_parquet <- function(d, assert_data_frame = TRUE) {
       if (assert_data_frame) assert_r_data_frame(d)
       output    <- new.output()
@@ -100,7 +129,7 @@ That you created already in the [assignments leading into Session 3](../homework
 
       ds <-
         pt_parquet |>
-        from_parquet()
+        from_parquet()     # Defined in Global Code
 
       g1 <-
         ds |>
@@ -111,7 +140,6 @@ That you created already in the [assignments leading into Session 3](../homework
       return(NULL) # The transform needs to return a dataset (even if it's a null dataset)
     }
     ```
-
 
 ## Improve `g_calc_age_covid`
 
@@ -124,7 +152,7 @@ That you created already in the [assignments leading into Session 3](../homework
 
       ds <-
         pt_parquet |>
-        from_parquet()
+        from_parquet()     # Defined in Global Code
 
       g1 <-
         ds |>
@@ -189,7 +217,7 @@ That you created already in the [assignments leading into Session 3](../homework
 
       ds <-
         pt_parquet |>
-        from_parquet() |>
+        from_parquet() |>     # Defined in Global Code
         dplyr::select(
           age   = calc_age_covid,
           period_first_covid_dx,
@@ -230,3 +258,4 @@ If you followed this document, your workbook will resemble this image.
 * See [N3C resources](../../../background/assets.md) we've listed, especially
     * The [Languages Section](https://unite.nih.gov/workspace/documentation/product/code-workbook/languages) in the Palantir Foundry/Enclave documentation
     * [N3C Training](https://unite.nih.gov/workspace/slate/documents/training)
+* An example of Python graphing code is referenced in the homework.
