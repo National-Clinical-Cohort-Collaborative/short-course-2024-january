@@ -14,7 +14,7 @@ I might ask you to watch my sequence, and replicate it in your own workbook.
 <img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/triangle-exclamation.svg width="15"> <img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/triangle-exclamation.svg width="15"> <img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/triangle-exclamation.svg width="15">
 
 If you're following this document outside of class,
-don't forget all analytical output (like tables, graphs, & models)
+don't forget all analytical output (like tables, graphs, models, & screenshots)
 *must be approved* before it's exported from the Enclave.
 We'll discuss details later in Session 6.
 
