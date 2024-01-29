@@ -62,8 +62,8 @@ so refer to that if you forgot some steps.
         click "profile-high-driver-cores-and-memory-*minimal*".
 
         (Remarks that will make sense later:
-        \#1 For workbooks that rely on R, we'll chose "r4-high-driver-memory".
-        \#2 We're using small datasets this session; use more memory for real projects,
+        \#1 For workbooks that rely on R, we'll choose "r4-high-driver-memory".
+        \#2 We're using small datasets in this session; for real projects that use more memory, we would choose environments 
         such as "profile-high-driver-cores-and-memory".)
     1.  Click the blue "Update Environment" button.
     1.  Wait a few minutes, or go back to the directory screen and continue creating workbooks.
@@ -138,7 +138,7 @@ After Session 3 Ends
 1.  You don't have to understand every line of code, but try to understand the big picture.
 1.  For each input dataset and each transform that produces a table, write down the table's *grain*.
 
-    (For the `modeling-1` transforms, chose between the unconventional grains "coefficient" and "plotted point".)
+    (For the `modeling-1` transforms, choose between the unconventional grains "coefficient" and "plotted point".)
 
 ### Assignments & Questions for `manipulation-1`
 
@@ -180,8 +180,8 @@ After Session 3 Ends
     What are some confounds you can think of?
     How could you start to control for these confounds?
 1.  Improve cosmetically (eg, better axis labels with ggplot's `labs()` function)
-1.  Improve the graphs in some way, even if it's just a cosmetic improvement.
-    (If you can't think of something)
+1.  Improve the graphs in some way, even if it's just a cosmetic improvement
+    (if you can't think of something).
     What did you change and how did you do it?
 
 1.  Feel free to graph with Python instead of R.  (Or both)
