@@ -18,7 +18,6 @@ That you created already in the [assignments leading into Session 3](../homework
 1.  Go to "workbook-output/manipulation-1/" directory.
 1.  Select `pt_parquet`.
 
-
 ## Global Code
 
 1.  See the Global Code explanation in the
@@ -264,6 +263,7 @@ That you created already in the [assignments leading into Session 3](../homework
           title = outcome_label #main_title
         )
 
+      # image: svg
       print(g)
 
       d_predict

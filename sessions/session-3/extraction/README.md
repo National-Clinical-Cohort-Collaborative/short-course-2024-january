@@ -31,8 +31,9 @@ This is part of the [Analysis with Synthetic Data](../) session.
 
 ## Open the "manipulation-1" Code Workbook in the Foundry Enclave
 
-That you created already in the [assignments leading into
-Session 3](../homework#create-the-manipulation-1-code-workbook).
+Open `manipulation-1` workbook in your personal directory.
+You should have created it already in the
+[assignments leading into Session 3](../homework#create-the-manipulation-1-code-workbook).
 
 ## Challenge for Today's Session –1st Try
 
@@ -50,22 +51,20 @@ Session 3](../homework#create-the-manipulation-1-code-workbook).
   <img src="assets/image-from-rawpixel-id-8929027-svg.svg" alt="chicken" height="200">
   <img src="assets/image-from-rawpixel-id-6770236-svg.svg" alt="duck" height="200">
 
-- In OMOP, ICD codes are translated to SNOMED codes, and can lose some
-  granularity.
+- In OMOP, ICD codes are translated to SNOMED codes (as we discussed in Session 2), and can lose some
+  granularity/fidelity.
 
   | ICD<br>Description    | SNOMED<br>Description     |                                                OMOP Concept ID<br>(OMOP Domain) |
   |:----------------------|:--------------------------|--------------------------------------------------------------------------------:|
   | "pecked by chicken"   | "Peck by bird"            | [4314097](https://athena.ohdsi.org/search-terms/terms/4314097)<br>(Observation) |
   | "struck by a chicken" | "Contact with chicken"    | [1575676](https://athena.ohdsi.org/search-terms/terms/1575676)<br>(Observation) |
-  | "struck by a duck"    | "Injury caused by animal" |     [438039](https://athena.ohdsi.org/search-terms/terms/438039)<br>(Condition) |
+  | "struck by a duck"    | "Injury caused by animal" | [438039](https://athena.ohdsi.org/search-terms/terms/438039)<br>(Condition) |
 
 ## Challenge for Today's Session –2nd Try
 
-- Talk to PI and revise hypothesis so it can be addressed by an OMOP
-  dataset.
+- Talk to PI and revise hypothesis so it can be addressed by an OMOP dataset.
 
-- The group decides to step back and address the associations of being
-  pecked or butted
+- The group decides to step back and address the associations of being pecked or butted
 
   | SNOMED<br>Description |                                                OMOP Concept ID<br>(OMOP Domain) |
   |:----------------------|--------------------------------------------------------------------------------:|
@@ -74,8 +73,7 @@ Session 3](../homework#create-the-manipulation-1-code-workbook).
 
 **Resources**
 
-- [ICD10CM codes for Contact with birds (domestic)
-  (wild)](https://www.icd10data.com/ICD10CM/Codes/V00-Y99/W50-W64/W61-#W61.33)
+- [ICD10CM codes for Contact with birds (domestic) (wild)](https://www.icd10data.com/ICD10CM/Codes/V00-Y99/W50-W64/W61-#W61.33)
 
 ## Inclusion & Exclusion Criteria
 
@@ -276,8 +274,7 @@ Notes:
 
 ## Improve `pt` transform
 
-1.  Writing code can be hard. Starting with complex code is almost
-    always slower.
+1.  Writing code can be hard. Starting with complex code is almost always slower.
 
 1.  Instead start simple, and gradually add complexity.
 
