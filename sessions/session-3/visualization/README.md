@@ -27,6 +27,8 @@ That you created already in the [assignments leading into Session 3](../homework
 
     ``` r
     load_packages <- function () {
+      # Load all fxs within these packages
+      library(ggplot2)
       # library(magrittr) # If R <4.1
       # Throw an error if one of these packages are missing
       requireNamespace("arrow")
@@ -35,6 +37,7 @@ That you created already in the [assignments leading into Session 3](../homework
     }
 
     # ---- Asserts -----------
+    # These functions try to return helpful error messages for misspecifications
     assert_r_data_frame <- function(x) {
       if (!inherits(x, "data.frame")) {
         stop("The dataset is not an 'R data.frame`; convert it.")
@@ -52,6 +55,7 @@ That you created already in the [assignments leading into Session 3](../homework
     }
 
     # ---- IO --------------
+    # Convert between R data.frames and parquet files.
     to_parquet <- function(d, assert_data_frame = TRUE) {
       if (assert_data_frame) assert_r_data_frame(d)
       output    <- new.output()

@@ -455,7 +455,9 @@ Notes:
 
     ``` r
     load_packages <- function () {
+      # Load all fxs within these packages
       # library(magrittr) # If R <4.1
+      # Throw an error if one of these packages are missing
       requireNamespace("arrow")
       requireNamespace("dplyr")
       requireNamespace("tidyr")
@@ -466,6 +468,7 @@ Notes:
       d |>
         tibble::as_tibble() |>
         dplyr::mutate(
+          # Custom 'factor_*' functions are defined below
           data_partner_id        = factor(data_partner_id),
           period_first_covid_dx  = factor_period(period_first_covid_dx),
           covid_severity         = factor_severity(covid_severity),
@@ -527,6 +530,7 @@ Notes:
     }
 
     # ---- Asserts -----------
+    # These functions try to return helpful error messages for misspecifications
     assert_r_data_frame <- function(x) {
       if (!inherits(x, "data.frame")) {
         stop("The dataset is not an 'R data.frame`; convert it.")
@@ -544,6 +548,7 @@ Notes:
     }
 
     # ---- IO --------------
+    # Convert between R data.frames and parquet files.
     to_parquet <- function(d, assert_data_frame = TRUE) {
       if (assert_data_frame) assert_r_data_frame(d)
       output    <- new.output()
@@ -598,25 +603,24 @@ Notes:
 
     ``` r
     pt_parquet <- function(pt) {
-      #
-      load_packages()
-      assert_spark_data_frame(pt)
+      load_packages()               # Defined in Global Code
+      assert_spark_data_frame(pt)   # Make sure it's specified correctly
 
       # ---- retrieve -----------------
       ds <-
         pt |>
-        SparkR::arrange("pt_index") |>
-        SparkR::collect() |>
-        tibble::as_tibble() |>
-        prepare_dataset()
+        SparkR::arrange("pt_index") |>   # Sort by the index
+        SparkR::collect() |>             # Cross from Spark to the R world
+        tibble::as_tibble() |>           # Slight improvement
+        prepare_dataset()                # Defined in Global Code
 
       # ---- verify-values -----------------
-      nrow(ds)
-      dplyr::n_distinct(ds$pt_index)
+      nrow(ds)                           # Peek at row count
+      dplyr::n_distinct(ds$pt_index)     # Peek at pt count
 
       # ---- persist -----------------
       ds |>
-        to_parquet()
+        to_parquet()                     # Defined in Global Code
     }
     ```
 
