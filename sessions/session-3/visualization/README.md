@@ -9,6 +9,29 @@ This is part of the [Analysis with Synthetic Data](../) session.
 * Here are the important adaptations you'll need to make when graphing in the Enclave
   (instead of something like RStudio).
 
+## Real Analyses Must be Approved to Leave the Enclave!
+
+<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/triangle-exclamation.svg width="15">
+<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/triangle-exclamation.svg width="15">
+<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/triangle-exclamation.svg width="15">
+
+If you're following this document outside of class,
+don't forget all analytical output (like tables, graphs, & models)
+*must be approved* before it's exported from the Enclave.
+We'll discuss details later in Session 6.
+
+Remember Session 3 uses only synthetic/fake data.
+Therefore no patients can potentially be exposed by this handout.
+
+But when you start working with real Level 2 or Level 3 data,
+you must follow the procedures described in
+[Session 6](https://github.com/National-COVID-Cohort-Collaborative/short-course-2024-january/tree/main/sessions/session-6#readme) and
+the [Publishing and Sharing Your Work](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/chapters/publishing.html) chapter of [*G2N3C*](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/).
+
+<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/triangle-exclamation.svg width="15">
+<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/triangle-exclamation.svg width="15">
+<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/triangle-exclamation.svg width="15">
+
 ## Open the "graphs-1" Code Workbook in the Foundry
 
 That you created already in the [assignments leading into Session 3](../homework#create-the-graphs-1-code-workbook).
