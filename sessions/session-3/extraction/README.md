@@ -166,7 +166,7 @@ Notes:
 1.  Click the `patient_ll` transform, then click the blue plus button,
     then select "SQL code".
 
-1.  Click the gray plus button (above the code), and click the `observation` transform.
+1.  Click the gray plus ("+") button (next to "Inputs", above the code), and click the `observation` transform.
 
 1.  Change the new transform's name from "unnamed" to `pt_observation_preceding`.
 
@@ -266,7 +266,7 @@ Notes:
     then select "SQL code" (again).
 
 1.  Click the gray plus button (above the code), and click the
-    `observation` transform.
+    `pt_observation_preceding` transform.
 
 1.  Change the new transform's name from "unnamed" to `pt`.
 
@@ -275,7 +275,7 @@ Notes:
 1.  A 2nd name pops up for the transform.
     Keep the pair of names consistent (eg, `pt` also).
 
-1.  Verify that you have two inputs: `patient_ll` & `pt`.
+1.  Verify that you have two inputs: `patient_ll` & `pt_observation_preceding`.
     The colors are orange & purple, but the order doesn't matter.
 
 1.  Replace the code in the "<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/code.svg width="15"> Logic" panel with
@@ -615,7 +615,7 @@ Notes:
     "Spark dataframe".
     We'll explicitly convert it with code.
 
-1.  Find a collapsed panel in the lower right corner of the Console called "Variables".
+1.  Find a collapsed panel in the lower right corner of the Console (which is next to Global Code) called "Variables".
     Change `pt` from "R data.frame" to "Spark dataframe".
 
 1.  Periodically check that these last two settings don't revert back to their original settings.
@@ -675,9 +675,11 @@ Notes:
 
 1.  Create an R transform downstream of `pt_parquet`.
 
+1.  Name it  `pt_parquet_peek`.
+
 1.  Follow the previous steps, but:
 
-    1.  Change the type to "R transform" (instead of "Spark dataframe").
+    1.  Change the `pt_parquet` type to "R Transform input" (instead of "Spark dataframe").
     1.  Don't save the dataset. The Preview mode is adequate for our diagnostic needs.
 
 1.  Paste in the following code:
@@ -696,7 +698,7 @@ Notes:
 
 1.  Verify the operation was successful and the columns look right.
 
-1.  In the preview mode, only the top 50 records are returned.
+1.  In the preview mode (between "Inputs" and "Visualizations" at the bottom), only the top 50 records are returned.
 
 ## Benefits of a Parquet File
 
