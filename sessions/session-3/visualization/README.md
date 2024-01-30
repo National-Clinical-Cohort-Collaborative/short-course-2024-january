@@ -140,6 +140,7 @@ That you created already in the [assignments leading into Session 3](../homework
       return(NULL) # The transform needs to return a dataset (even if it's a null dataset)
     }
     ```
+1.  Click on "Visualizations" (between "Preview" and "Logs" at the bottom) to see what it looks like.
 
 ## Improve `g_calc_age_covid`
 
