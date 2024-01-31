@@ -122,7 +122,6 @@ That you created already in the [assignments leading into Session 3](../homework
 ## Create R Transform: `m_covid_moderate_1`
 
 1.  Click the `pt_parquet` transform, then click the blue plus button, then select "R code".
-1.  Click the gray plus button (above the code), and click the observation transform.
 1.  Change the new transform's name from "unnamed" to `m_covid_moderate_1`.
 1.  Toggle the "Save as dataset" on.
 1.  A 2nd name pops up for the transform.
@@ -175,7 +174,6 @@ That you created already in the [assignments leading into Session 3](../homework
 ## Create R Transform: `m_covid_moderate_2a`
 
 1.  Click the `pt_parquet` transform, then click the blue plus button, then select "R code".
-1.  Click the gray plus button (above the code), and click the observation transform.
 1.  Change the new transform's name from "unnamed" to `m_covid_moderate_2a`.
 1.  Toggle the "Save as dataset" on.
 1.  A 2nd name pops up for the transform.
