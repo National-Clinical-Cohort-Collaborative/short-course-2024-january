@@ -492,7 +492,6 @@ Notes:
       d |>
         tibble::as_tibble() |>
         dplyr::mutate(
-          # Custom 'factor_*' functions are defined below
           data_partner_id        = factor(data_partner_id),
           period_first_covid_dx  = factor_period(period_first_covid_dx),
           covid_severity         = factor_severity(covid_severity),
@@ -512,7 +511,7 @@ Notes:
       factor(
         x,
         levels = c(
-          "No Event Documented", # Reference level for models
+          "No event documented", # Reference level for models
           "Butted by animal",
           "Peck by bird"
         )
