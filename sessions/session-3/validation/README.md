@@ -149,7 +149,6 @@ Notes:
 ## Create R Transform: `g_duration`
 
 1.  Click the `condition_occurrence` transform, then click the blue plus button, then select "R code".
-1.  Click the gray plus button (above the code), and click the observation transform.
 1.  Change the new transform's name from "unnamed" to `g_duration`.
 1.  Caution: keep the name *very* unique.
 1.  Verify that you have one input: `condition_occurrence`. The color is orange.
@@ -190,7 +189,6 @@ Notes:
 ## Create R Transform: `g_duration_by_partner`
 
 1.  Click the `condition_occurrence` transform, then click the blue plus button, then select "R code".
-1.  Click the gray plus button (above the code), and click the observation transform.
 1.  Change the new transform's name from "unnamed" to `g_duration_by_partner`.
 1.  Toggle the "Save as dataset" on.
 1.  A 2nd name pops up for the transform.
@@ -243,7 +241,6 @@ Notes:
 ## Create R Transform: `g_start_end_by_partner`
 
 1.  Click the `condition_occurrence` transform, then click the blue plus button, then select "R code".
-1.  Click the gray plus button (above the code), and click the observation transform.
 1.  Change the new transform's name from "unnamed" to `g_start_end_by_partner`.
 1.  Toggle the "Save as dataset" on.
 1.  A 2nd name pops up for the transform.
