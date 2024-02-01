@@ -1,9 +1,20 @@
 Data Modeling with Synthetic Data
 ================
 
+## Purpose of the `modeling-1` Workbook
+
+Produce [inferential statistical models](https://dictionary.apa.org/inferential-statistics)
+that help people
+* understand the patterns within the data source and
+* test research hypotheses.
+
 This is part of the [Analysis with Synthetic Data](../) session.
 
 ## Expectations for the Modeling Lesson
+
+* We're assuming that you already know how to run basic models in your preferred language of R or Python.
+* Here are the important adaptations you'll need to make when modeling in the Enclave
+  (instead of something like RStudio).
 
 ## !! Real Analyses Must be Approved to Leave the Enclave !!
 

@@ -3,8 +3,13 @@
 
 Feb 1, 2024
 
-Combining multiple OMOP tables into a single R data frame that can be
-analyzed.
+## Purpose of the `manipulation-1` Workbook
+
+Combine multiple
+[OMOP](https://ohdsi.github.io/CommonDataModel/cdm60.html)
+and
+[LL](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/chapters/support.html#sec-support-liaisons)
+tables into a single R data frame that can be analyzed.
 
 This is part of the [Analysis with Synthetic Data](../) session.
 
@@ -481,6 +486,7 @@ Notes:
     load_packages <- function () {
       # Load all fxs within these packages
       # library(magrittr) # If R <4.1
+      # library(ggplot2) # Uncomment if you use graphs to peek in this workbook.
       # Throw an error if one of these packages are missing
       requireNamespace("arrow")
       requireNamespace("dplyr")
