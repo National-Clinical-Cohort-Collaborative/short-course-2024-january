@@ -164,27 +164,18 @@ Notes:
 1.  Replace the code in the "<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/code.svg width="15"> Logic" panel with
 
     ```r
-    g_duration_by_partner <- function(condition_occurrence) {
+    g_duration <- function(condition_occurrence) {
       load_packages()
       assert_spark_data_frame(condition_occurrence)
-
-      # Define which data_partners you want to isolate
-      #   (remember there are 70+ in the real dataset)
-      partners_to_inspect <- c(1, 2, 3)
 
       # ---- retrieve -----------------
       # Defined in the Global Code
       ds <- retrieve_condition_occurrence(condition_occurrence)
 
-      # ---- tweak -----------------
-      ds <-
-        ds |>
-        dplyr::filter(data_partner_id %in% partners_to_inspect)
-
       # ---- graph -----------------
       g <-
         ds |>
-        ggplot(aes(x = duration_v2, color = data_partner_id)) + # The big change from the previous transform
+        ggplot(aes(x = duration_v2)) +
         geom_vline(xintercept = 0, color = "gray60", linetype = "83") +
         geom_density() +
         theme_minimal(base_size = 20)
