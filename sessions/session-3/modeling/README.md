@@ -64,14 +64,14 @@ That you created already in the [assignments leading into Session 3](../homework
       c(
         "Butted by animal"    = "#004c66",
         "Peck by bird"        = "#7f0000",
-        "No Event Documented" = "#3f3f3f"
+        "No event documented" = "#3f3f3f"
       )
 
     palette_event_light  <-
       c(
         "Butted by animal"    = "#0099cc",
         "Peck by bird"        = "#ff4444",
-        "No Event Documented" = "#a1a1a1"
+        "No event documented" = "#a1a1a1"
       )
 
     # ---- Asserts -----------
