@@ -159,21 +159,30 @@ Notes:
     g_duration_by_partner <- function(condition_occurrence) {
       load_packages()
       assert_spark_data_frame(condition_occurrence)
-
+      
+      # Define which data_partners you want to isolate 
+      #   (remember there are 70+ in the real dataset)
+      partners_to_inspect <- c(1, 2, 3)
+      
       # ---- retrieve -----------------
       # Defined in the Global Code
       ds <- retrieve_condition_occurrence(condition_occurrence)
-
-      # ---- graph -----------------
-      g <-
+      
+      # ---- tweak -----------------
+      ds <-
         ds |>
-        ggplot(aes(x = duration_v2)) +
-        geom_vline(xintercept = 0, color = "gray60", linetype = "83") + # The big change from the previous transform
+        dplyr::filter(data_partner_id %in% partners_to_inspect)
+      
+      # ---- graph -----------------
+      g <- 
+        ds |>
+        ggplot(aes(x = duration_v2, color = data_partner_id)) + # The big change from the previous transform
+        geom_vline(xintercept = 0, color = "gray60", linetype = "83") +
         geom_density() +
         theme_minimal(base_size = 20)
-
+      
       print(g)
-
+      
       # Return top 100 rows for just previewing
       ds |>
         dplyr::slice(1:100)
