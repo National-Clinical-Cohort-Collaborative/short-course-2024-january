@@ -1,9 +1,25 @@
 Data Validation with Synthetic Data
 ===============
 
+## Purpose of the `validation-1` Workbook
+
+Inspect the data sources to identify problems.  Hopefully none are found.
+If problems are found in the validation phase,
+the research team typically decides:
+
+1.  if there is an easy fix to correct/clean the data, and/or
+1.  if the research question needs to be modified to better suit the data source (similar to how we modified our hypothesis in the previous hour), and/or
+1.  what needs to be clearly stated in the "Limitations" section of your future manuscript.
+
 This is part of the [Analysis with Synthetic Data](../) session.
 
 ## Expectations for the Validation Lesson
+
+You become more comfortable probing the data source.
+This includes
+
+1. generating ideas that need to be inspected, and
+1. learning tools that can efficiently isolate trouble spots and reveal fishy looking patterns.
 
 If the extraction lesson runs long, I'll breeze through this lesson to make up time.
 
@@ -72,7 +88,7 @@ Notes:
       requireNamespace("dplyr")
       requireNamespace("tidyr")
     }
-    
+
     # ---- Specific to this Workbook -----------
     retrieve_condition_occurrence <- function(node) {
       condition_occurrence |>
@@ -80,19 +96,19 @@ Notes:
         SparkR::mutate(
           # Version 1: calculate it in the Spark world
           #   https://spark.apache.org/docs/2.0.2/api/R/datediff.html
-          duration_v1 = datediff(condition_occurrence$condition_end_date, condition_occurrence$condition_start_date) 
+          duration_v1 = datediff(condition_occurrence$condition_end_date, condition_occurrence$condition_start_date)
         ) |>
         SparkR::collect() |> # Cross from the Spark world into the R world
         tibble::as_tibble() |>
         dplyr::mutate(
           data_partner_id = factor(data_partner_id),
-    
+
           # Version 2: calculate it in the R world.
           #   https://stat.ethz.ch/R-manual/R-devel/library/base/html/difftime.html
           duration_v2 = as.integer(difftime(condition_end_date, condition_start_date, units = "day"))
         )
     }
-    
+
     # ---- Asserts -----------
     # These functions try to return helpful error messages for misspecifications
     assert_r_data_frame <- function(x) {
@@ -110,7 +126,7 @@ Notes:
         stop("The dataset is not a 'FoundryTransformInput`; convert it.")
       }
     }
-    
+
     # ---- IO --------------
     # Convert between R data.frames and parquet files.
     to_parquet <- function(d, assert_data_frame = TRUE) {
@@ -121,7 +137,7 @@ Notes:
         x    = d,
         sink = output_fs$get_path("parquet", 'w')
       )
-    
+
       stat <-
         sprintf(
           "%i_cols-by-%.1f_krows",
@@ -151,30 +167,30 @@ Notes:
     g_duration_by_partner <- function(condition_occurrence) {
       load_packages()
       assert_spark_data_frame(condition_occurrence)
-      
-      # Define which data_partners you want to isolate 
+
+      # Define which data_partners you want to isolate
       #   (remember there are 70+ in the real dataset)
       partners_to_inspect <- c(1, 2, 3)
-      
+
       # ---- retrieve -----------------
       # Defined in the Global Code
       ds <- retrieve_condition_occurrence(condition_occurrence)
-      
+
       # ---- tweak -----------------
       ds <-
         ds |>
         dplyr::filter(data_partner_id %in% partners_to_inspect)
-      
+
       # ---- graph -----------------
-      g <- 
+      g <-
         ds |>
         ggplot(aes(x = duration_v2, color = data_partner_id)) + # The big change from the previous transform
         geom_vline(xintercept = 0, color = "gray60", linetype = "83") +
         geom_density() +
         theme_minimal(base_size = 20)
-      
+
       print(g)
-      
+
       # Return top 100 rows for just previewing
       ds |>
         dplyr::slice(1:100)
