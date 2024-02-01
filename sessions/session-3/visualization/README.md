@@ -1,6 +1,10 @@
 Data Visualization with Synthetic Data
 ==================
 
+## Purpose of the `visualization-1` Workbook
+
+Produce graphs that help people better understand the patterns within the data source.
+
 This is part of the [Analysis with Synthetic Data](../) session.
 
 ## Expectations for the Visualization Lesson
