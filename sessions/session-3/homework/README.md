@@ -212,10 +212,12 @@ After Session 3 Ends
 1.  Write a hypothesis for a new outcome variable.
     Develop a model for it and describe the results.
 
+<!--
 ### question during prep
 
 1.  add more comments for code, and tell them about the sections they don't need ot understand --fairy dust
 1.  add @image svg
+-->
 
 ## !! Real Analyses Must be Approved to Leave the Enclave !!
 
