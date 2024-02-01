@@ -65,42 +65,34 @@ Notes:
     ``` r
     load_packages <- function () {
       # Load all fxs within these packages
+      library(ggplot2)
       # library(magrittr) # If R <4.1
       # Throw an error if one of these packages are missing
       requireNamespace("arrow")
       requireNamespace("dplyr")
       requireNamespace("tidyr")
     }
-
-    # ---- Code Specific to this Workbook -----------
+    
+    # ---- Specific to this Workbook -----------
     retrieve_condition_occurrence <- function(node) {
       condition_occurrence |>
         SparkR::arrange("condition_occurrence_id") |>
         SparkR::mutate(
           # Version 1: calculate it in the Spark world
-          # https://spark.apache.org/docs/2.0.2/api/R/datediff.html
-          duration_v1 =
-            datediff(
-              condition_occurrence$condition_end_date,
-              condition_occurrence$condition_start_date
-            )
+          #   https://spark.apache.org/docs/2.0.2/api/R/datediff.html
+          duration_v1 = datediff(condition_occurrence$condition_end_date, condition_occurrence$condition_start_date) 
         ) |>
         SparkR::collect() |> # Cross from the Spark world into the R world
         tibble::as_tibble() |>
         dplyr::mutate(
           data_partner_id = factor(data_partner_id),
-
+    
           # Version 2: calculate it in the R world.
           #   https://stat.ethz.ch/R-manual/R-devel/library/base/html/difftime.html
-          duration_v2 =
-            as.integer(difftime(
-              condition_start_date,
-              condition_end_date,
-              units = "day"
-            ))
+          duration_v2 = as.integer(difftime(condition_end_date, condition_start_date, units = "day"))
         )
     }
-
+    
     # ---- Asserts -----------
     # These functions try to return helpful error messages for misspecifications
     assert_r_data_frame <- function(x) {
@@ -118,7 +110,7 @@ Notes:
         stop("The dataset is not a 'FoundryTransformInput`; convert it.")
       }
     }
-
+    
     # ---- IO --------------
     # Convert between R data.frames and parquet files.
     to_parquet <- function(d, assert_data_frame = TRUE) {
@@ -129,7 +121,7 @@ Notes:
         x    = d,
         sink = output_fs$get_path("parquet", 'w')
       )
-
+    
       stat <-
         sprintf(
           "%i_cols-by-%.1f_krows",
