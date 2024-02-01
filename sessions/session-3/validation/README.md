@@ -164,7 +164,7 @@ Notes:
 1.  Replace the code in the "<img src=https://raw.githubusercontent.com/FortAwesome/Font-Awesome/6.x/svgs/solid/code.svg width="15"> Logic" panel with
 
     ```r
-    g_duration_by_partner <- function(condition_occurrence) {
+    g_duration <- function(condition_occurrence) {
       load_packages()
       assert_spark_data_frame(condition_occurrence)
 
