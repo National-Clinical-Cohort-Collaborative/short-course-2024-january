@@ -1,6 +1,10 @@
 Building an Analytic Dataset Using Shared N3C Resources
 ============
 
+Material
+------------------------------
+* Building an Analytic Dataset Using Shared N3C Resources ([pdf](building-an-analytic-dataset-using-n3c-tools.pdf) & [pptx](Building%20an%20Analytic%20Dataset%20Using%20N3C%20Tools.pptx))
+
 
 Homework Before Session 4 Starts
 ------------------------------
@@ -28,3 +32,9 @@ Homework Before Session 4 Starts
     as demonstrated by Andrea at the end of session 3.
 
     <a href="images/review-table.png"><img src="images/review-table.png" alt="review-table" style="width: 400px;"/></a>
+
+Instructors who developed the curriculum and/or presented the material:
+------------------------------
+
+* [Johanna Loomba](https://github.com/JohannaLoomba) -- Slides (1st hour)
+* [Andrea Zhou](https://github.com/agz5de) -- Demo (2nd hour)
