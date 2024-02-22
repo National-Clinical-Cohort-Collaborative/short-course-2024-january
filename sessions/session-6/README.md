@@ -16,7 +16,20 @@ N3C Policies and Procedures: From Access to Publication
   * Use the [docx](n3c-sample-publication.docx) as a starting point for your writing later
     (click the "View raw" link on the next page to download it)
 
+* Resources for future learning
+  * [_The Researcher’s Guide to N3C: A National Resource for Analyzing Real-World Health Data_](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/)
+
+    We hope this book serves as the first stop to learn about N3C.
+    In other words, all the relevant N3C resources distributed across the internet are listed in
+    this book and placed into the larger context.
+
+    Now that students have invested 12+ hours into N3C, we humbly invite your perspective.
+    If you see something missing or something that can be added, please follow the suggestions in the
+    [How to Contribute](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/#sec-welcome-contribute)
+    section.
+
+  * The [Assets for Students](../../README.md#assets-for-students) section on this course's homepage
 
 ## For Instructors
 
-The session 6 documents are hosted [here](https://drive.google.com/drive/folders/1ZrD_2OjscWNZLthUS5Ahr-sAtENXJaHT).
+The session 6 source documents are hosted [here](https://drive.google.com/drive/folders/1ZrD_2OjscWNZLthUS5Ahr-sAtENXJaHT).

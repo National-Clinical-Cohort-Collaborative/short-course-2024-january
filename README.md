@@ -8,7 +8,9 @@ Assets For Students
 
 * This GitHub public repo:<br><https://github.com/National-COVID-Cohort-Collaborative/short-course-2024-january>
 * [Syllabus](background/syllabus/Student%20Syllabus%20Short%20Course%202024.pdf)
-* *The Researcher's Guide to N3C*: <https://covid.cd2h.org/guide-to-n3c>
+* N3C Resources
+  * *The Researcher's Guide to N3C*: <https://covid.cd2h.org/guide-to-n3c>
+  * N3C YouTube Channel: <https://www.youtube.com/channel/UC-_3k5lsVb8g4yqSHAraC_Q>
 * OHDSI Resources:
   * *The Book of OHDSI*: <https://ohdsi.github.io/TheBookOfOhdsi>
   * OMOP table structure: <https://ohdsi.github.io/CommonDataModel/cdm53.html>
