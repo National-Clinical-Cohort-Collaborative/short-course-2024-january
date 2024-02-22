@@ -4,6 +4,7 @@ N3C Policies and Procedures: From Access to Publication
 ## Slides
 
 * [Analysis Finishing and Export](session_6-analysis_finish_export.pdf) (Shawn O'Neil)
+* The likely future of N3C, including tenants (Shawn O'Neil)
 * [N3C Publication Committee Overview](session-6-publication-committee-overview.pdf) (Jerrod Anzalone)
 * [Recap & Course Overview](session-6-recap-sharon.pdf) (Sharon Patrick)
 
