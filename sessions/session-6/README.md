@@ -31,6 +31,14 @@ N3C Policies and Procedures: From Access to Publication
     [How to Contribute](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/#sec-welcome-contribute)
     section.
 
+    Check in periodically, as N3C evolves and materials are added and updated.
+
+    For example, [Chris Roeder](https://github.com/chrisroederucdenver) (who is here today)
+    has dedicated a lot of time this month to push through the new
+    [Machine Learning](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/chapters/ml.html) chapter.
+    Enjoy it.  Like many of _G2N3C_'s chapters,
+    it describes and references a lot of advanced material that we couldn't squeeze into this short course.
+
   * The [Assets for Students](../../README.md#assets-for-students) section on this course's homepage
 
 ## For Instructors
