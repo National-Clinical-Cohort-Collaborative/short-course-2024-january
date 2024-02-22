@@ -7,8 +7,8 @@ N3C Policies and Procedures: From Access to Publication
 1. Kahoot Challenge <https://kahoot.it/challenge/e0ed72e5-880b-424c-a500-8924746ca182_1708621443526>
 1. [Analysis Finishing and Export](session_6-analysis_finish_export.pdf) (Shawn O'Neil)
 1. [N3C Publication Committee Overview](session-6-publication-committee-overview.pdf) (Jerrod Anzalone)
-1. The likely future of N3C, including tenants (Shawn O'Neil)
 1. [G2N3C](https://national-covid-cohort-collaborative.github.io/guide-to-n3c-v1/) (Will Beasley)
+1. The likely future of N3C (including tenants) and closing (Shawn O'Neil)
 
 
 ## Materials for your future N3C project
