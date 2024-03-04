@@ -26,7 +26,7 @@ Assets For Students
 | [3. Analysis Using Synthetic Data](sessions/session-3#readme)                             | pre-work: [due Feb 1](sessions/session-3/homework#before-session-3-starts) &<br>post-work: [due Feb 8](sessions/session-3/homework#after-session-3-ends) | [Echo360 Recording](https://echo360.org/media/e1d6afac-cee3-4ddf-a557-86af9438e28b/public) |
 | [4. Building an Analytic Dataset<br>Using Shared N3C Resources](sessions/session-4#readme)| pre-work: [due Feb 8](sessions/session-4#homework-before-session-4-starts) | [Echo360 Recording](https://echo360.org/media/2ea4aecb-0ebb-4575-974b-0ef9aaeabccb/public) |
 | [5. Analyzing Data Curated from N3C:<br>A Replication Study](sessions/session-5#readme)   |                       | not available<br>b/c L2 |
-| [6. N3C Policies and Procedures:<br>From Access to Publication](sessions/session-6#readme)|                       | to be released       |
+| [6. N3C Policies and Procedures:<br>From Access to Publication](sessions/session-6#readme)|                       | [Echo360 Recording](https://echo360.org/media/ed6ccbd9-9e7b-48aa-a3c7-d6c2920ff4a5/public) |
 
 Assets For Instructors
 -------
