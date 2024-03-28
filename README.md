@@ -19,14 +19,16 @@ Assets For Students
 * [Level 0 Workspace](https://unite.nih.gov/workspace/compass/view/ri.compass.main.folder.86a7020f-db30-4fd1-b735-bbaf53512365) (that can be shared to anyone with an Enclave account)
 * [Level 2 Workspace](https://unite.nih.gov/workspace/compass/view/ri.compass.main.folder.713d3259-a7b4-43f4-bbac-d1db215aff8b) (that is open only to students of this course)
 
-| Session                                                                                   | Assignments           | Recordings           |
+| Session                                                                                   | Assignments           | Recordings^*           |
 | :---------------------------------------------------------------------------------------- | :-------------------- | :---------           |
-| [1. Introduction to N3C](sessions/session-1#readme)                                       | post-work: [due Jan 25](sessions/session-1/session-1-assignment.pdf) | [Echo360 Recording](https://echo360.org/media/38283e97-35b2-4456-8c36-70e8271556d6/public) |
-| [2. Vocabularies, OHDSI Tools, and N3C](sessions/session-2#readme)                        | post-work: [due Feb 1](sessions/session-2/session-2-assignment.pdf) | [Echo360 Recording](https://echo360.org/media/44a80d99-c21f-4f67-99bd-56caf97ccb4c/public) |
-| [3. Analysis Using Synthetic Data](sessions/session-3#readme)                             | pre-work: [due Feb 1](sessions/session-3/homework#before-session-3-starts) &<br>post-work: [due Feb 8](sessions/session-3/homework#after-session-3-ends) | [Echo360 Recording](https://echo360.org/media/e1d6afac-cee3-4ddf-a557-86af9438e28b/public) |
-| [4. Building an Analytic Dataset<br>Using Shared N3C Resources](sessions/session-4#readme)| pre-work: [due Feb 8](sessions/session-4#homework-before-session-4-starts) | [Echo360 Recording](https://echo360.org/media/2ea4aecb-0ebb-4575-974b-0ef9aaeabccb/public) |
-| [5. Analyzing Data Curated from N3C:<br>A Replication Study](sessions/session-5#readme)   |                       | not available<br>b/c L2 |
-| [6. N3C Policies and Procedures:<br>From Access to Publication](sessions/session-6#readme)|                       | [Echo360 Recording](https://echo360.org/media/ed6ccbd9-9e7b-48aa-a3c7-d6c2920ff4a5/public) |
+| [1. Introduction to N3C](sessions/session-1#readme)                                       | post-work: [due Jan 25](sessions/session-1/session-1-assignment.pdf) |  |
+| [2. Vocabularies, OHDSI Tools, and N3C](sessions/session-2#readme)                        | post-work: [due Feb 1](sessions/session-2/session-2-assignment.pdf) |  |
+| [3. Analysis Using Synthetic Data](sessions/session-3#readme)                             | pre-work: [due Feb 1](sessions/session-3/homework#before-session-3-starts) &<br>post-work: [due Feb 8](sessions/session-3/homework#after-session-3-ends) | |
+| [4. Building an Analytic Dataset<br>Using Shared N3C Resources](sessions/session-4#readme)| pre-work: [due Feb 8](sessions/session-4#homework-before-session-4-starts) |  |
+| [5. Analyzing Data Curated from N3C:<br>A Replication Study](sessions/session-5#readme)   |                       |  |
+| [6. N3C Policies and Procedures:<br>From Access to Publication](sessions/session-6#readme)|                       |  |
+
+* Live class sessions are not consented for public use, enquire for access
 
 Assets For Instructors
 -------
